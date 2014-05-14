@@ -27,7 +27,7 @@ acl_registry.register(chronotope_default_acl, Chronotope)
 # application startup initialization
 def initialize_chronotope(config, global_config, local_config):
     # add translation
-    config.add_translation_dirs('chronotope:locale/')
+    config.add_translation_dirs('chronotope:locales/')
 
     # static resources
     config.add_view('chronotope.browser.static_resources',

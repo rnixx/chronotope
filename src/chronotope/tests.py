@@ -13,6 +13,7 @@ layer = testing.ChronotopeLayer()
 
 
 TESTFILES = [
+    'model/app.rst',
 ]
 
 

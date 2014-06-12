@@ -5,24 +5,24 @@ from cone.app.security import acl_registry
 from chronotope.security import chronotope_default_acl
 from chronotope.sql import initialize_sql
 from chronotope.model import Chronotope
-from chronotope.browser import static_resources
+#from chronotope.browser import static_resources
 
 
 logger = logging.getLogger('chronotope')
 
 # css resources
-cone.app.cfg.merged.css.public.append((static_resources, 'chronotope.css'))
+cone.app.cfg.css.public.append('chronotope-static/chronotope.css')
 
 # js resources
 cone.app.cfg.js.public.append(
     'http://cdn.tortuga.squarewave.at/osm/latest/OpenLayers.js')
-cone.app.cfg.merged.js.public.append((static_resources, 'chronotope.js'))
+cone.app.cfg.js.public.append('chronotope-static/chronotope.js')
 
 # hide livesearch
-cone.app.cfg.layout.livesearch = False
+#cone.app.cfg.layout.livesearch = False
 
 # no settings node needed
-del cone.app.root.factories['settings']
+#del cone.app.root.factories['settings']
 
 # plugin entry
 cone.app.register_plugin('chronotope', Chronotope)

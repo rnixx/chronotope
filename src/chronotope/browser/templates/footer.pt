@@ -1,0 +1,9 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+           omit-tag="True">
+  <div id="footer">
+    <p>
+      Copyright (c) 2014
+      <a href="http://www.squarewave.at/">Squarewave Computing</a>.
+    </p>
+  </div>
+</tal:block>

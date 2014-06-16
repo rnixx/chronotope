@@ -7,8 +7,12 @@ from sqlalchemy.orm import (
     sessionmaker,
     scoped_session,
 )
+from sqlalchemy.ext.declarative import declarative_base
 from pyramid.threadlocal import get_current_request
 from cone.app.model import BaseNode
+
+
+Base = declarative_base()
 
 
 DBSession = scoped_session(sessionmaker())

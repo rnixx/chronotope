@@ -5,12 +5,21 @@ from sqlalchemy import (
     Float,
     String,
     DateTime,
+    ForeignKey,
 )
+from sqlalchemy.orm import relationship
 from pyramid.i18n import TranslationStringFactory
 from ..sql import Base
 
 
 _ = TranslationStringFactory('chronotope')
+
+
+occasion_facility_references = Table(
+        'occasion_facility_references', Base.metadata,
+    Column('occasion_id', Integer, ForeignKey('occasion.id')),
+    Column('facility_id', Integer, ForeignKey('facility.id'))
+)
 
 
 class Occasion(Base):
@@ -24,4 +33,7 @@ class Occasion(Base):
     description = Column(String)
     duration_from = Column(DateTime)
     duration_to = Column(DateTime)
-    #facility = Column()
+    facility = relationship(
+        "Facility",
+        secondary=occasion_facility_references,
+        backref="parents")

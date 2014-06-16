@@ -4,7 +4,7 @@ from sqlalchemy import engine_from_config
 from cone.app.security import acl_registry
 from chronotope.security import chronotope_default_acl
 from chronotope.sql import initialize_sql
-from chronotope.model import Chronotope
+from chronotope import model
 #from chronotope.browser import static_resources
 
 
@@ -25,10 +25,10 @@ cone.app.cfg.js.public.append('chronotope-static/chronotope.js')
 #del cone.app.root.factories['settings']
 
 # plugin entry
-cone.app.register_plugin('chronotope', Chronotope)
+cone.app.register_plugin('chronotope', model.Chronotope)
 
 # register ACL's for nodes
-acl_registry.register(chronotope_default_acl, Chronotope)
+acl_registry.register(chronotope_default_acl, model.Chronotope)
 
 
 # application startup initialization

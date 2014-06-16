@@ -130,6 +130,7 @@ def make_app(next_app, global_conf, **local_conf):
     """
     from chronotope import sql
     engine = engine_from_config(local_conf, prefix='sqlalchemy.')
+    sql.Base.metadata.create_all(engine)
     maker = sessionmaker(bind=engine)
     sql.session_key = local_conf.get('session_key', sql.session_key)
     return Session(next_app, maker, sql.session_key)

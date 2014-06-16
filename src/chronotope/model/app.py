@@ -16,7 +16,7 @@ class Chronotope(BaseNode):
     def properties(self):
         props = Properties()
         props.in_navtree = True
-        props.icon = 'chronotope-static/images/chronotope_16_16.png'
+        props.icon = 'icon-globe'
         return props
 
     @instance_property

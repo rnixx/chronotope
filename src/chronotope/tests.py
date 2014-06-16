@@ -14,6 +14,10 @@ layer = testing.ChronotopeLayer()
 
 TESTFILES = [
     'model/app.rst',
+    'model/location.rst',
+    'model/facility.rst',
+    'model/occasion.rst',
+    'model/attachment.rst',
 ]
 
 

@@ -18,4 +18,4 @@ from chronotope.model.occasion import (
     Occasion,
     Occasions,
 )
-from chronotope.model.app import Chronotope
+from chronotope.model.chronotope import Chronotope

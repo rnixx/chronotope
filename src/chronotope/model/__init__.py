@@ -50,8 +50,8 @@ class Chronotope(FactoryNode):
 
     @instance_property
     def metadata(self):
-        metadata = Metadata()
-        metadata.title = _('chronotope_node', default=u'Chronotope')
-        metadata.description = _('chronotope_node_description',
-                                 default=u'Chronotope - Time has come today')
-        return metadata
+        md = Metadata()
+        md.title = _('chronotope_label', default=u'Chronotope')
+        md.description = _('chronotope_description',
+                           default=u'Chronotope - Time has come today')
+        return md

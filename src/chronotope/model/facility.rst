@@ -70,7 +70,7 @@ Facility keys::
     >>> facilities.keys()
     ['1fbc0e0a-94bb-4726-bccb-5d1e17041123']
 
-Facility node from facilitys node::
+Facility node from facilities node::
 
     >>> facility = facilities['1fbc0e0a-94bb-4726-bccb-5d1e17041123']
     >>> facility

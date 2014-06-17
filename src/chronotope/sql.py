@@ -109,6 +109,11 @@ class SQLTableNode(BaseNode):
         session.add(value.record)
 
     def __getitem__(self, name):
+        # if name no UUID, raise KeyError
+        try:
+            uuid.UUID(name)
+        except ValueError:
+            raise KeyError(name)
         session = get_session(get_current_request())
         query = session.query(self.record_class)
         # always expect uid attribute as primary key

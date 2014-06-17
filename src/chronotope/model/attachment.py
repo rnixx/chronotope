@@ -28,6 +28,7 @@ from chronotope.sql import (
 from chronotope.model import (
     LocationRecord,
     FacilityRecord,
+    OccasionRecord,
 )
 
 
@@ -48,6 +49,13 @@ attachment_facility_references = Table(
 )
 
 
+attachment_occasion_references = Table(
+        'attachment_occasion_references', Base.metadata,
+    Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
+    Column('occasion_uid', GUID, ForeignKey('occasion.uid'))
+)
+
+
 class AttachmentRecord(Base):
     __tablename__ = 'attachment'
     uid = Column(GUID, primary_key=True)
@@ -65,12 +73,17 @@ class AttachmentRecord(Base):
         FacilityRecord,
         secondary=attachment_facility_references,
         backref='attachment')
+    occasion = relationship(
+        OccasionRecord,
+        secondary=attachment_occasion_references,
+        backref='attachment')
 
 
 class AttachmentAttributes(SQLRowNodeAttributes):
     columns = [
         'uid', 'creator', 'created', 'modified', 'title',
         'attachment_type', 'payload', 'location', 'facility',
+        'occasion',
     ]
 
 

@@ -72,7 +72,7 @@ Create facilities::
     >>> facility2.attrs['location'].append(location2.record)
     >>> facilities['a23d5cae-0ec5-40fd-969c-02e08f6d2dd7'] = facility2
 
-Check references and back references::
+Check references and back references of facility to location reference::
 
     >>> facility1.record.location
     [<chronotope.model.location.LocationRecord object at ...>]
@@ -88,12 +88,127 @@ Check references and back references::
     >>> location2.record.facility
     [<chronotope.model.facility.FacilityRecord object at ...>]
 
+Create occasions::
 
-104f3451-8895-47a2-918d-6c420394aaec
-7cb5828f-2821-424f-a734-88a8ec07d266
-cd6fabd0-5d4f-4e3b-a053-0315d147a0b7
-7e964f01-56b9-40c8-a2f0-ac6aa53fa0e6
-88eda192-1f55-4f21-949b-60c6762b5d09
-2687cb6a-c1eb-4ff7-a410-19bd5836349a
-e5e6eede-6a5e-4c23-9da3-a1bd2c272fd0
-dcd08dce-c646-447a-9dd0-47596b51733e
+    >>> occasions = chronotope['occasions']
+
+    >>> occasion1 = Occasion()
+    >>> occasion1.attrs['creator'] = u'manager'
+    >>> occasion1.attrs['created'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> occasion1.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> occasion1.attrs['title'] = u'Some occasion'
+    >>> occasion1.attrs['description'] = u'Occasion description'
+    >>> occasion1.attrs['duration_from'] = datetime.datetime(2010, 01, 01, 0, 0)
+    >>> occasion1.attrs['duration_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> occasion1.attrs['facility'].append(facility1.record)
+    >>> occasions['104f3451-8895-47a2-918d-6c420394aaec'] = occasion1
+
+    >>> occasion2 = Occasion()
+    >>> occasion2.attrs['creator'] = u'manager'
+    >>> occasion2.attrs['created'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> occasion2.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> occasion2.attrs['title'] = u'Other occasion'
+    >>> occasion2.attrs['description'] = u'Other occasion description'
+    >>> occasion2.attrs['duration_from'] = datetime.datetime(2010, 01, 01, 0, 0)
+    >>> occasion2.attrs['duration_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> occasion2.attrs['facility'].append(facility1.record)
+    >>> occasion2.attrs['facility'].append(facility2.record)
+    >>> occasions['7cb5828f-2821-424f-a734-88a8ec07d266'] = occasion2
+
+Check references and back references of occasion to facility reference::
+
+    >>> occasion1.record.facility
+    [<chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> occasion2.record.facility
+    [<chronotope.model.facility.FacilityRecord object at ...>, 
+    <chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> facility1.record.occasion
+    [<chronotope.model.occasion.OccasionRecord object at ...>, 
+    <chronotope.model.occasion.OccasionRecord object at ...>]
+
+    >>> facility2.record.occasion
+    [<chronotope.model.occasion.OccasionRecord object at ...>]
+
+Create attachments::
+
+    >>> attachments = chronotope['attachments']
+
+    >>> attachment1 = Attachment()
+    >>> attachment1.attrs['creator'] = u'manager'
+    >>> attachment1.attrs['created'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> attachment1.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> attachment1.attrs['title'] = u'Some attachment'
+    >>> attachment1.attrs['attachment_type'] = u'text'
+    >>> attachment1.attrs['payload'] = 'Some Text'
+    >>> attachment1.attrs['location'].append(location1.record)
+    >>> attachment1.attrs['facility'].append(facility1.record)
+    >>> attachment1.attrs['facility'].append(facility2.record)
+    >>> attachment1.attrs['occasion'].append(occasion1.record)
+    >>> attachments['cd6fabd0-5d4f-4e3b-a053-0315d147a0b7'] = attachment1
+
+    >>> attachment2 = Attachment()
+    >>> attachment2.attrs['creator'] = u'manager'
+    >>> attachment2.attrs['created'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> attachment2.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> attachment2.attrs['title'] = u'Other attachment'
+    >>> attachment2.attrs['attachment_type'] = u'text'
+    >>> attachment2.attrs['payload'] = 'Other Text'
+    >>> attachment2.attrs['location'].append(location1.record)
+    >>> attachment2.attrs['location'].append(location2.record)
+    >>> attachment2.attrs['facility'].append(facility1.record)
+    >>> attachment2.attrs['occasion'].append(occasion2.record)
+    >>> attachments['7e964f01-56b9-40c8-a2f0-ac6aa53fa0e6'] = attachment2
+
+Check references and back references of attachment to location reference::
+
+    >>> attachment1.record.location
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> attachment2.record.location
+    [<chronotope.model.location.LocationRecord object at ...>, 
+    <chronotope.model.location.LocationRecord object at ...>]
+
+    >>> location1.record.attachment
+    [<chronotope.model.attachment.AttachmentRecord object at ...>, 
+    <chronotope.model.attachment.AttachmentRecord object at ...>]
+
+    >>> location2.record.attachment
+    [<chronotope.model.attachment.AttachmentRecord object at ...>]
+
+Check references and back references of attachment to facility reference::
+
+    >>> attachment1.record.location
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> attachment2.record.location
+    [<chronotope.model.location.LocationRecord object at ...>, 
+    <chronotope.model.location.LocationRecord object at ...>]
+
+    >>> facility1.record.attachment
+    [<chronotope.model.attachment.AttachmentRecord object at ...>, 
+    <chronotope.model.attachment.AttachmentRecord object at ...>]
+
+    >>> facility2.record.attachment
+    [<chronotope.model.attachment.AttachmentRecord object at ...>]
+
+Check references and back references of attachment to occasion reference::
+
+    >>> attachment1.record.occasion
+    [<chronotope.model.occasion.OccasionRecord object at ...>]
+
+    >>> attachment2.record.occasion
+    [<chronotope.model.occasion.OccasionRecord object at ...>]
+
+    >>> occasion1.record.attachment
+    [<chronotope.model.attachment.AttachmentRecord object at ...>]
+
+    >>> occasion2.record.attachment
+    [<chronotope.model.attachment.AttachmentRecord object at ...>]
+
+Commit::
+
+    >>> from chronotope.sql import get_session
+    >>> session = get_session(layer.current_request)
+    >>> session.commit()

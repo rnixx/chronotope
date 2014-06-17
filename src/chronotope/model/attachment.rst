@@ -107,6 +107,9 @@ Attachment node attributes::
     >>> attachment.attrs['facility']
     []
 
+    >>> attachment.attrs['occasion']
+    []
+
 Attachment props::
 
     >>> props = attachment.properties

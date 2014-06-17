@@ -54,9 +54,10 @@ class OccasionRecord(Base):
 
 
 class OccasionAttributes(SQLRowNodeAttributes):
-    _keys = ['uid', 'creator', 'created', 'modified',
-             'title', 'description', 'duration_from', 'duration_to',
-             'facility']
+    columns = [
+        'uid', 'creator', 'created', 'modified', 'title', 'description',
+        'duration_from', 'duration_to', 'facility',
+    ]
 
 
 class Occasion(SQLRowNode):

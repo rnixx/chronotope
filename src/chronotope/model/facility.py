@@ -55,9 +55,10 @@ class FacilityRecord(Base):
 
 
 class FacilityAttributes(SQLRowNodeAttributes):
-    _keys = ['uid', 'creator', 'created', 'modified',
-             'title', 'description', 'exists_from', 'exists_to',
-             'category', 'location']
+    columns = [
+        'uid', 'creator', 'created', 'modified', 'title', 'description',
+        'exists_from', 'exists_to', 'category', 'location',
+    ]
 
 
 class Facility(SQLRowNode):

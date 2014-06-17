@@ -94,20 +94,6 @@ class GUID(TypeDecorator):
             return uuid.UUID(value)
 
 
-class ReadMappingRecord(object):
-
-    def __getitem__(self, name):
-        if hasattr(self, name):
-            return getattr(self, name)
-        raise KeyError(name)
-
-    def get(self, name, default=None):
-        try:
-            return self[name]
-        except KeyError:
-            return default
-
-
 class SQLTableNode(BaseNode):
     record_class = None
     child_factory = None
@@ -139,7 +125,7 @@ class SQLTableNode(BaseNode):
 
 
 class SQLRowNodeAttributes(NodeAttributes):
-    _keys = list()
+    columns = list()
 
     def __init__(self, name, parent, record):
         NodeAttributes.__init__(self, name, parent)
@@ -160,10 +146,10 @@ class SQLRowNodeAttributes(NodeAttributes):
         raise NotImplementedError
 
     def __iter__(self):
-        return iter(self._keys)
+        return iter(self.columns)
 
     def __contains__(self, name):
-        return name in self._keys
+        return name in self.columns
 
 
 class SQLRowNode(BaseNode):

@@ -68,8 +68,10 @@ class AttachmentRecord(Base):
 
 
 class AttachmentAttributes(SQLRowNodeAttributes):
-    _keys = ['uid', 'creator', 'created', 'modified', 'title',
-             'attachment_type', 'payload', 'location', 'facility']
+    columns = [
+        'uid', 'creator', 'created', 'modified', 'title',
+        'attachment_type', 'payload', 'location', 'facility',
+    ]
 
 
 class Attachment(SQLRowNode):

@@ -42,8 +42,10 @@ class LocationRecord(Base):
 
 
 class LocationAttributes(SQLRowNodeAttributes):
-    _keys = ['uid', 'creator', 'created', 'modified',
-             'lat', 'lon', 'street', 'zip', 'city', 'country']
+    columns = [
+        'uid', 'creator', 'created', 'modified',
+        'lat', 'lon', 'street', 'zip', 'city', 'country',
+    ]
 
 
 class Location(SQLRowNode):

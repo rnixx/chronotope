@@ -48,3 +48,10 @@ Locations metadata::
 
     >>> md.description
     u'locations_description'
+
+``__setitem__`` is not implemented::
+
+    >>> locations['1'] = object()
+    Traceback (most recent call last):
+      ...
+    NotImplementedError: ``__setitem__`` is not implemented.

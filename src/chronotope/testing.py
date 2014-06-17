@@ -11,16 +11,17 @@ from chronotope.sql import initialize_sql
 class ChronotopeLayer(Security):
 
     def setUp(self, args=None):
+        super(ChronotopeLayer, self).setUp()
         pyramid_zcml.zcml_configure('configure.zcml', 'chronotope')
         self.tempdir = tempfile.mkdtemp()
         self.init_sql()
 
     def tearDown(self):
-        super(Security, self).tearDown()
+        super(ChronotopeLayer, self).tearDown()
         shutil.rmtree(self.tempdir)
 
     def new_request(self):
-        request = super(Security, self).new_request()
+        request = super(ChronotopeLayer, self).new_request()
         request.environ['cone.sql.session'] = self.sql_session
         return request
 

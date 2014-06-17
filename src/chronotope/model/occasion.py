@@ -17,11 +17,12 @@ from cone.app.model import (
     NodeInfo,
     registerNodeInfo,
 )
-from ..sql import (
+from chronotope.sql import (
     Base,
     SQLRowNodeAttributes,
     SQLRowNode,
 )
+from chronotope.model import FacilityRecord
 
 
 _ = TranslationStringFactory('chronotope')
@@ -46,9 +47,9 @@ class OccasionRecord(Base):
     duration_from = Column(DateTime)
     duration_to = Column(DateTime)
     facility = relationship(
-        "Facility",
+        FacilityRecord,
         secondary=occasion_facility_references,
-        backref="parents")
+        backref='occasion')
 
 
 class OccasionAttributes(SQLRowNodeAttributes):
@@ -115,6 +116,9 @@ class Occasions(BaseNode):
     def __getitem__(self, name):
         # traversal expects KeyError before looking up views.
         raise KeyError(name)
+
+    def __setitem__(self, name, value):
+        raise NotImplementedError(u'``__setitem__`` is not implemented.')
 
     def __delitem__(self, name):
         pass

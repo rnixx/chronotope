@@ -15,7 +15,7 @@ from cone.app.model import (
     NodeInfo,
     registerNodeInfo,
 )
-from ..sql import (
+from chronotope.sql import (
     Base,
     SQLRowNodeAttributes,
     SQLRowNode,
@@ -103,6 +103,9 @@ class Locations(BaseNode):
     def __getitem__(self, name):
         # traversal expects KeyError before looking up views.
         raise KeyError(name)
+
+    def __setitem__(self, name, value):
+        raise NotImplementedError(u'``__setitem__`` is not implemented.')
 
     def __delitem__(self, name):
         pass

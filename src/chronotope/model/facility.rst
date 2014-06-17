@@ -48,3 +48,10 @@ Facilities metadata::
 
     >>> md.description
     u'facilities_description'
+
+``__setitem__`` is not implemented::
+
+    >>> facilities['1'] = object()
+    Traceback (most recent call last):
+      ...
+    NotImplementedError: ``__setitem__`` is not implemented.

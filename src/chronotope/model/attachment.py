@@ -5,10 +5,12 @@ from sqlalchemy import (
     Float,
     String,
     DateTime,
+    LargeBinary,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship
 from node.utils import instance_property
+from pyramid.threadlocal import get_current_request
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
     BaseNode,
@@ -17,10 +19,15 @@ from cone.app.model import (
     NodeInfo,
     registerNodeInfo,
 )
-from ..sql import (
+from chronotope.sql import (
     Base,
     SQLRowNodeAttributes,
     SQLRowNode,
+    get_session,
+)
+from chronotope.model import (
+    LocationRecord,
+    FacilityRecord,
 )
 
 
@@ -49,16 +56,16 @@ class AttachmentRecord(Base):
     created = Column(DateTime)
     modified = Column(DateTime)
     title = Column(String)
-    attachment_type = Column(String)
-    #payload = Column()
+    attachment_type = Column(String) # 'text', 'file' or 'image'
+    payload = Column(LargeBinary)
     location = relationship(
-        "Location",
+        LocationRecord,
         secondary=attachment_location_references,
-        backref="parents")
+        backref='attachment')
     facility = relationship(
-        "Facility",
+        FacilityRecord,
         secondary=attachment_facility_references,
-        backref="parents")
+        backref='attachment')
 
 
 class AttachmentAttributes(SQLRowNodeAttributes):
@@ -122,8 +129,16 @@ class Attachments(BaseNode):
         return md
 
     def __getitem__(self, name):
-        # traversal expects KeyError before looking up views.
-        raise KeyError(name)
+        session = get_session(get_current_request())
+        query = session.query(AttachmentRecord)
+        record = query.filter(AttachmentRecord.id == name).first()
+        if record is None:
+            # traversal expects KeyError before looking up views.
+            raise KeyError(name)
+        return Attachment(name, self, record)
+
+    def __setitem__(self, name, value):
+        raise NotImplementedError(u'``__setitem__`` is not implemented.')
 
     def __delitem__(self, name):
         pass

@@ -6,14 +6,26 @@ from sqlalchemy import (
     String,
     DateTime,
 )
+from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
-from ..sql import Base
+from cone.app.model import (
+    BaseNode,
+    Properties,
+    Metadata,
+    NodeInfo,
+    registerNodeInfo,
+)
+from ..sql import (
+    Base,
+    SQLRowNodeAttributes,
+    SQLRowNode,
+)
 
 
 _ = TranslationStringFactory('chronotope')
 
 
-class Location(Base):
+class LocationRecord(Base):
     __tablename__ = 'location'
     id = Column(Integer, primary_key=True)
     uid = Column(String)
@@ -26,3 +38,78 @@ class Location(Base):
     zip = Column(String)
     city = Column(String)
     country = Column(String)
+
+
+class LocationAttributes(SQLRowNodeAttributes):
+    _keys = ['id', 'uid', 'creator', 'created', 'modified',
+             'lat', 'lon', 'street', 'zip', 'city', 'country']
+
+
+class Location(SQLRowNode):
+    node_info_name = 'location'
+
+    def record_factory(self):
+        return LocationRecord()
+
+    def attributes_factory(self, name, parent):
+        return LocationAttributes(name, parent, self.record)
+
+    @instance_property
+    def properties(self):
+        props = Properties()
+        props.action_up = True
+        props.action_view = True
+        props.action_delete = True
+        return props
+
+    @instance_property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('location_label', default='Location')
+        md.description = _('location_description', default='A location')
+        return md
+
+
+info = NodeInfo()
+info.title = _('location_label', default='Location')
+info.description = _('location_description', default='A location')
+info.node = Location
+info.addables = []
+info.icon = 'icon-screenshot'
+registerNodeInfo('location', info)
+
+
+class Locations(BaseNode):
+    node_info_name = 'locations'
+
+    @instance_property
+    def properties(self):
+        props = Properties()
+        props.in_navtree = True
+        props.action_up = True
+        props.action_add = True
+        return props
+
+    @instance_property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('locations_label', default='Locations')
+        md.description = \
+            _('locations_description', default='Container for Locations')
+        return md
+
+    def __getitem__(self, name):
+        pass
+
+    def __delitem__(self, name):
+        pass
+
+
+info = NodeInfo()
+info.title = _('locations_label', default='Locations')
+info.description = \
+    _('locations_description', default='Container for Locations')
+info.node = Locations
+info.addables = ['location']
+info.icon = 'icon-folder-open'
+registerNodeInfo('locations', info)

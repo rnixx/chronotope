@@ -13,10 +13,9 @@ from cone.app.model import BaseNode
 
 
 Base = declarative_base()
-
-
 DBSession = scoped_session(sessionmaker())
-metadata = MetaData()
+#metadata = MetaData()
+metadata = Base.metadata
 
 
 def initialize_sql(engine):

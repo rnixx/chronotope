@@ -1,16 +1,31 @@
+from odict import odict
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
-    BaseNode,
+    FactoryNode,
     Properties,
     Metadata,
+)
+from chronotope.model import (
+    Locations,
+    Facilities,
+    Occasions,
+    Attachments,
 )
 
 
 _ = TranslationStringFactory('chronotope')
 
 
-class Chronotope(BaseNode):
+child_factories = odict()
+child_factories['locations'] = Locations
+child_factories['facilities'] = Facilities
+child_factories['occasions'] = Occasions
+child_factories['attachments'] = Attachments
+
+
+class Chronotope(FactoryNode):
+    factories = child_factories
 
     @instance_property
     def properties(self):

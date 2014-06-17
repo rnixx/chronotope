@@ -8,8 +8,20 @@ from sqlalchemy import (
     ForeignKey,
 )
 from sqlalchemy.orm import relationship
+from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
-from ..sql import Base
+from cone.app.model import (
+    BaseNode,
+    Properties,
+    Metadata,
+    NodeInfo,
+    registerNodeInfo,
+)
+from ..sql import (
+    Base,
+    SQLRowNodeAttributes,
+    SQLRowNode,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -22,7 +34,7 @@ facility_location_references = Table(
 )
 
 
-class Facility(Base):
+class FacilityRecord(Base):
     __tablename__ = 'facility'
     id = Column(Integer, primary_key=True)
     uid = Column(String)
@@ -38,3 +50,79 @@ class Facility(Base):
         "Location",
         secondary=facility_location_references,
         backref="parents")
+
+
+class FacilityAttributes(SQLRowNodeAttributes):
+    _keys = ['id', 'uid', 'creator', 'created', 'modified',
+             'title', 'description', 'exists_from', 'exists_to',
+             'category', 'location']
+
+
+class Facility(SQLRowNode):
+    node_info_name = 'facility'
+
+    def record_factory(self):
+        return FacilityRecord()
+
+    def attributes_factory(self, name, parent):
+        return FacilityAttributes(name, parent, self.record)
+
+    @instance_property
+    def properties(self):
+        props = Properties()
+        props.action_up = True
+        props.action_view = True
+        props.action_delete = True
+        return props
+
+    @instance_property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('facility_label', default='Facility')
+        md.description = _('facility_description', default='A Facility')
+        return md
+
+
+info = NodeInfo()
+info.title = _('facility_label', default='Facility')
+info.description = _('facility_description', default='A Facility')
+info.node = Facility
+info.addables = []
+info.icon = 'icon-home'
+registerNodeInfo('facility', info)
+
+
+class Facilities(BaseNode):
+    node_info_name = 'facilities'
+
+    @instance_property
+    def properties(self):
+        props = Properties()
+        props.in_navtree = True
+        props.action_up = True
+        props.action_add = True
+        return props
+
+    @instance_property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('facilities_label', default='Facilities')
+        md.description = \
+            _('facilities_description', default='Container for Facilities')
+        return md
+
+    def __getitem__(self, name):
+        pass
+
+    def __delitem__(self, name):
+        pass
+
+
+info = NodeInfo()
+info.title = _('facilities_label', default='Facilities')
+info.description = \
+    _('facilities_description', default='Container for Facilities')
+info.node = Facilities
+info.addables = ['facility']
+info.icon = 'icon-folder-open'
+registerNodeInfo('facilities', info)

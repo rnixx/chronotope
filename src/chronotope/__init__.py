@@ -1,3 +1,4 @@
+import os
 import logging
 import cone.app
 from sqlalchemy import engine_from_config
@@ -18,11 +19,12 @@ cone.app.cfg.js.public.append(
     'http://cdn.tortuga.squarewave.at/osm/latest/OpenLayers.js')
 cone.app.cfg.js.public.append('chronotope-static/chronotope.js')
 
-# hide livesearch
-#cone.app.cfg.layout.livesearch = False
+if not os.environ.get('CHRONOTOPE_TESTRUN', False):
+    # hide livesearch
+    cone.app.cfg.layout.livesearch = False
 
-# no settings node needed
-#del cone.app.root.factories['settings']
+    # no settings node needed
+    del cone.app.root.factories['settings']
 
 # plugin entry
 cone.app.register_plugin('chronotope', model.Chronotope)

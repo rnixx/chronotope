@@ -1,5 +1,21 @@
+from chronotope.model.attachment import (
+    AttachmentRecord,
+    Attachment,
+    Attachments,
+)
+from chronotope.model.facility import (
+    FacilityRecord,
+    Facility,
+    Facilities,
+)
+from chronotope.model.location import (
+    LocationRecord,
+    Location,
+    Locations,
+)
+from chronotope.model.occasion import (
+    OccasionRecord,
+    Occasion,
+    Occasions,
+)
 from chronotope.model.app import Chronotope
-from chronotope.model.attachment import Attachment
-from chronotope.model.facility import Facility
-from chronotope.model.location import Location
-from chronotope.model.occasion import Occasion

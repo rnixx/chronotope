@@ -19,6 +19,8 @@ from cone.app.model import (
 )
 from chronotope.sql import (
     Base,
+    GUID,
+    SQLTableNode,
     SQLRowNodeAttributes,
     SQLRowNode,
 )
@@ -30,15 +32,14 @@ _ = TranslationStringFactory('chronotope')
 
 occasion_facility_references = Table(
         'occasion_facility_references', Base.metadata,
-    Column('occasion_id', Integer, ForeignKey('occasion.id')),
-    Column('facility_id', Integer, ForeignKey('facility.id'))
+    Column('occasion_uid', GUID, ForeignKey('occasion.uid')),
+    Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )
 
 
 class OccasionRecord(Base):
     __tablename__ = 'occasion'
-    id = Column(Integer, primary_key=True)
-    uid = Column(String)
+    uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
@@ -53,7 +54,7 @@ class OccasionRecord(Base):
 
 
 class OccasionAttributes(SQLRowNodeAttributes):
-    _keys = ['id', 'uid', 'creator', 'created', 'modified',
+    _keys = ['uid', 'creator', 'created', 'modified',
              'title', 'description', 'duration_from', 'duration_to',
              'facility']
 
@@ -92,8 +93,10 @@ info.icon = 'icon-calendar'
 registerNodeInfo('occasion', info)
 
 
-class Occasions(BaseNode):
+class Occasions(SQLTableNode):
     node_info_name = 'occasions'
+    record_class = OccasionRecord
+    child_factory = Occasion
 
     @instance_property
     def properties(self):
@@ -112,16 +115,6 @@ class Occasions(BaseNode):
         md.description = \
             _('occasions_description', default='Container for Occasions')
         return md
-
-    def __getitem__(self, name):
-        # traversal expects KeyError before looking up views.
-        raise KeyError(name)
-
-    def __setitem__(self, name, value):
-        raise NotImplementedError(u'``__setitem__`` is not implemented.')
-
-    def __delitem__(self, name):
-        pass
 
 
 info = NodeInfo()

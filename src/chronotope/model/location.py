@@ -17,6 +17,8 @@ from cone.app.model import (
 )
 from chronotope.sql import (
     Base,
+    GUID,
+    SQLTableNode,
     SQLRowNodeAttributes,
     SQLRowNode,
 )
@@ -27,8 +29,7 @@ _ = TranslationStringFactory('chronotope')
 
 class LocationRecord(Base):
     __tablename__ = 'location'
-    id = Column(Integer, primary_key=True)
-    uid = Column(String)
+    uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
@@ -41,7 +42,7 @@ class LocationRecord(Base):
 
 
 class LocationAttributes(SQLRowNodeAttributes):
-    _keys = ['id', 'uid', 'creator', 'created', 'modified',
+    _keys = ['uid', 'creator', 'created', 'modified',
              'lat', 'lon', 'street', 'zip', 'city', 'country']
 
 
@@ -79,8 +80,10 @@ info.icon = 'icon-screenshot'
 registerNodeInfo('location', info)
 
 
-class Locations(BaseNode):
+class Locations(SQLTableNode):
     node_info_name = 'locations'
+    record_class = LocationRecord
+    child_factory = Location
 
     @instance_property
     def properties(self):
@@ -99,16 +102,6 @@ class Locations(BaseNode):
         md.description = \
             _('locations_description', default='Container for Locations')
         return md
-
-    def __getitem__(self, name):
-        # traversal expects KeyError before looking up views.
-        raise KeyError(name)
-
-    def __setitem__(self, name, value):
-        raise NotImplementedError(u'``__setitem__`` is not implemented.')
-
-    def __delitem__(self, name):
-        pass
 
 
 info = NodeInfo()

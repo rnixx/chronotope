@@ -1,9 +1,6 @@
 chronotope.model.facility
 =========================
 
-Facilities
-----------
-
 Facilities node::
 
     >>> from cone.app import get_root

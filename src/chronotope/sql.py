@@ -1,3 +1,4 @@
+import uuid
 from node.behaviors import NodeAttributes
 from sqlalchemy import (
     engine_from_config,
@@ -7,6 +8,11 @@ from sqlalchemy.orm import (
     sessionmaker,
     scoped_session,
 )
+from sqlalchemy.types import (
+    TypeDecorator,
+    CHAR,
+)
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from pyramid.threadlocal import get_current_request
 from cone.app.model import BaseNode
@@ -53,6 +59,41 @@ class Session(object):
             pass
 
 
+class GUID(TypeDecorator):
+    """Platform-independent GUID type.
+
+    Uses Postgresql's UUID type, otherwise uses
+    CHAR(32), storing as stringified hex values.
+
+    http://docs.sqlalchemy.org/en/rel_0_8/core/types.html#backend-agnostic-guid-type
+    """
+    impl = CHAR
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == 'postgresql':
+            return dialect.type_descriptor(UUID())
+        else:
+            return dialect.type_descriptor(CHAR(32))
+
+    def process_bind_param(self, value, dialect):
+        if value is None:
+            return value
+        elif dialect.name == 'postgresql':
+            return str(value)
+        else:
+            if not isinstance(value, uuid.UUID):
+                return "%.32x" % uuid.UUID(value)
+            else:
+                # hexstring
+                return "%.32x" % value
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return value
+        else:
+            return uuid.UUID(value)
+
+
 class ReadMappingRecord(object):
 
     def __getitem__(self, name):
@@ -67,9 +108,37 @@ class ReadMappingRecord(object):
             return default
 
 
+class SQLTableNode(BaseNode):
+    record_class = None
+    child_factory = None
+
+    def __setitem__(self, name, value):
+        # XXX
+        raise NotImplementedError(u'``__setitem__`` is not implemented.')
+
+    def __getitem__(self, name):
+        session = get_session(get_current_request())
+        query = session.query(self.record_class)
+        # always expect uid attribute as primary key
+        record = query.filter(self.record_class.uid == name).first()
+        if record is None:
+            # traversal expects KeyError before looking up views.
+            raise KeyError(name)
+        return self.child_factory(name, self, record)
+
+    def __delitem__(self, name):
+        child = self[name]
+        session = get_session(get_current_request())
+        session.delete(child.record)
+        session.commit()
+
+    def __iter__(self):
+        session = get_session(get_current_request())
+        for recid in session.query(self.record_class.uid).all():
+            yield str(recid[0])
+
+
 class SQLRowNodeAttributes(NodeAttributes):
-    """Class representing attributes of an SQLNode.
-    """
     _keys = list()
 
     def __init__(self, name, parent, record):

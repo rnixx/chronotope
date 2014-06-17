@@ -19,6 +19,8 @@ from cone.app.model import (
 )
 from chronotope.sql import (
     Base,
+    GUID,
+    SQLTableNode,
     SQLRowNodeAttributes,
     SQLRowNode,
 )
@@ -30,15 +32,14 @@ _ = TranslationStringFactory('chronotope')
 
 facility_location_references = Table(
         'facility_location_references', Base.metadata,
-    Column('facility_id', Integer, ForeignKey('facility.id')),
-    Column('location_id', Integer, ForeignKey('location.id'))
+    Column('facility_uid', GUID, ForeignKey('facility.uid')),
+    Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 
 
 class FacilityRecord(Base):
     __tablename__ = 'facility'
-    id = Column(Integer, primary_key=True)
-    uid = Column(String)
+    uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
@@ -54,7 +55,7 @@ class FacilityRecord(Base):
 
 
 class FacilityAttributes(SQLRowNodeAttributes):
-    _keys = ['id', 'uid', 'creator', 'created', 'modified',
+    _keys = ['uid', 'creator', 'created', 'modified',
              'title', 'description', 'exists_from', 'exists_to',
              'category', 'location']
 
@@ -93,8 +94,10 @@ info.icon = 'icon-home'
 registerNodeInfo('facility', info)
 
 
-class Facilities(BaseNode):
+class Facilities(SQLTableNode):
     node_info_name = 'facilities'
+    record_class = FacilityRecord
+    child_factory = Facility
 
     @instance_property
     def properties(self):
@@ -113,16 +116,6 @@ class Facilities(BaseNode):
         md.description = \
             _('facilities_description', default='Container for Facilities')
         return md
-
-    def __getitem__(self, name):
-        # traversal expects KeyError before looking up views.
-        raise KeyError(name)
-
-    def __setitem__(self, name, value):
-        raise NotImplementedError(u'``__setitem__`` is not implemented.')
-
-    def __delitem__(self, name):
-        pass
 
 
 info = NodeInfo()

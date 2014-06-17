@@ -1,9 +1,6 @@
 chronotope.model.attachment
 ===========================
 
-Attachments
------------
-
 Attachments node::
 
     >>> from cone.app import get_root
@@ -72,7 +69,7 @@ Get session::
 Create attachment record::
 
     >>> attachment = AttachmentRecord()
-    >>> attachment.uid = str(uuid.uuid4())
+    >>> attachment.uid = uuid.UUID('b495eefd-bb92-4108-88c4-e04c82efe0a7')
     >>> attachment.creator = 'manager'
     >>> attachment.created = datetime.datetime(2014, 06, 01, 0, 0)
     >>> attachment.modified = datetime.datetime(2014, 06, 01, 0, 0)
@@ -89,22 +86,27 @@ Add attachment record to database::
     >>> attachment_records
     [<chronotope.model.attachment.AttachmentRecord object at ...>]
 
-    >>> attachment_records[0].id
-    1
+    >>> attachment_records[0].uid
+    UUID('b495eefd-bb92-4108-88c4-e04c82efe0a7')
+
+Check keys::
+
+    >>> attachments.keys()
+    ['b495eefd-bb92-4108-88c4-e04c82efe0a7']
 
 Get attachment node from attachments node::
 
-    >>> attachment_node = attachments['1']
+    >>> attachment_node = attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7']
     >>> attachment_node
-    <Attachment object '1' at ...>
+    <Attachment object 'b495eefd-bb92-4108-88c4-e04c82efe0a7' at ...>
 
 Check attachment node attrs::
 
-    >>> attachment_node.attrs['id']
-    1
+    >>> attachment_node.__name__
+    'b495eefd-bb92-4108-88c4-e04c82efe0a7'
 
     >>> attachment_node.attrs['uid']
-    u'...'
+    UUID('b495eefd-bb92-4108-88c4-e04c82efe0a7')
 
     >>> attachment_node.attrs['creator']
     u'manager'
@@ -130,9 +132,13 @@ Check attachment node attrs::
     >>> attachment_node.attrs['facility']
     []
 
-Access inexisting attachment node::
+Delete attachment record::
 
-    >>> attachments['2']
+    >>> del attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7']
+    >>> attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7']
     Traceback (most recent call last):
       ...
-    KeyError: '2'
+    KeyError: 'b495eefd-bb92-4108-88c4-e04c82efe0a7'
+
+    >>> attachments.keys()
+    []

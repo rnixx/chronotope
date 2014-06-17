@@ -10,7 +10,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from node.utils import instance_property
-from pyramid.threadlocal import get_current_request
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
     BaseNode,
@@ -21,9 +20,10 @@ from cone.app.model import (
 )
 from chronotope.sql import (
     Base,
+    GUID,
+    SQLTableNode,
     SQLRowNodeAttributes,
     SQLRowNode,
-    get_session,
 )
 from chronotope.model import (
     LocationRecord,
@@ -36,22 +36,21 @@ _ = TranslationStringFactory('chronotope')
 
 attachment_location_references = Table(
         'attachment_location_references', Base.metadata,
-    Column('attachment_id', Integer, ForeignKey('attachment.id')),
-    Column('location_id', Integer, ForeignKey('location.id'))
+    Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
+    Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 
 
 attachment_facility_references = Table(
         'attachment_facility_references', Base.metadata,
-    Column('attachment_id', Integer, ForeignKey('attachment.id')),
-    Column('facility_id', Integer, ForeignKey('facility.id'))
+    Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
+    Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )
 
 
 class AttachmentRecord(Base):
     __tablename__ = 'attachment'
-    id = Column(Integer, primary_key=True)
-    uid = Column(String)
+    uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
@@ -69,7 +68,7 @@ class AttachmentRecord(Base):
 
 
 class AttachmentAttributes(SQLRowNodeAttributes):
-    _keys = ['id', 'uid', 'creator', 'created', 'modified', 'title',
+    _keys = ['uid', 'creator', 'created', 'modified', 'title',
              'attachment_type', 'payload', 'location', 'facility']
 
 
@@ -107,8 +106,10 @@ info.icon = 'icon-file'
 registerNodeInfo('attachment', info)
 
 
-class Attachments(BaseNode):
+class Attachments(SQLTableNode):
     node_info_name = 'attachments'
+    record_class = AttachmentRecord
+    child_factory = Attachment
 
     @instance_property
     def properties(self):
@@ -127,21 +128,6 @@ class Attachments(BaseNode):
         md.description = \
             _('attachments_description', default='Container for Attachments')
         return md
-
-    def __getitem__(self, name):
-        session = get_session(get_current_request())
-        query = session.query(AttachmentRecord)
-        record = query.filter(AttachmentRecord.id == name).first()
-        if record is None:
-            # traversal expects KeyError before looking up views.
-            raise KeyError(name)
-        return Attachment(name, self, record)
-
-    def __setitem__(self, name, value):
-        raise NotImplementedError(u'``__setitem__`` is not implemented.')
-
-    def __delitem__(self, name):
-        pass
 
 
 info = NodeInfo()

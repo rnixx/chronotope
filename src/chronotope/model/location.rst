@@ -1,9 +1,6 @@
 chronotope.model.location
 =========================
 
-Locations
----------
-
 Locations node::
 
     >>> from cone.app import get_root

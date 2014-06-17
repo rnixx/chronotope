@@ -1,9 +1,6 @@
 chronotope.model.occasion
 =========================
 
-Occasions
----------
-
 Occasions node::
 
     >>> from cone.app import get_root

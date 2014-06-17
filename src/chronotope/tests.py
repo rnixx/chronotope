@@ -18,6 +18,7 @@ TESTFILES = [
     'model/facility.rst',
     'model/occasion.rst',
     'model/attachment.rst',
+    'model/relations.rst',
 ]
 
 

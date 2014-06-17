@@ -99,8 +99,14 @@ class SQLTableNode(BaseNode):
     child_factory = None
 
     def __setitem__(self, name, value):
-        # XXX
-        raise NotImplementedError(u'``__setitem__`` is not implemented.')
+        name = uuid.UUID(name)
+        attrs = value.attrs
+        if not attrs['uid']:
+            attrs['uid'] = name
+        if name != attrs['uid']:
+            raise ValueError('Node name must equal Node uid.')
+        session = get_session(get_current_request())
+        session.add(value.record)
 
     def __getitem__(self, name):
         session = get_session(get_current_request())
@@ -116,12 +122,15 @@ class SQLTableNode(BaseNode):
         child = self[name]
         session = get_session(get_current_request())
         session.delete(child.record)
-        session.commit()
 
     def __iter__(self):
         session = get_session(get_current_request())
         for recid in session.query(self.record_class.uid).all():
             yield str(recid[0])
+
+    def __call__(self):
+        session = get_session(get_current_request())
+        session.commit()
 
 
 class SQLRowNodeAttributes(NodeAttributes):

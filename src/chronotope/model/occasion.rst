@@ -45,10 +45,3 @@ Occasions metadata::
 
     >>> md.description
     u'occasions_description'
-
-``__setitem__`` is not implemented::
-
-    >>> occasions['1'] = object()
-    Traceback (most recent call last):
-      ...
-    NotImplementedError: ``__setitem__`` is not implemented.

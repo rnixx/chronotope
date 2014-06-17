@@ -15,6 +15,7 @@ class ChronotopeLayer(Security):
         pyramid_zcml.zcml_configure('configure.zcml', 'chronotope')
         self.tempdir = tempfile.mkdtemp()
         self.init_sql()
+        self.new_request()
 
     def tearDown(self):
         super(ChronotopeLayer, self).tearDown()

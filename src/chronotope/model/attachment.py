@@ -87,6 +87,7 @@ class Attachment(SQLRowNode):
     def properties(self):
         props = Properties()
         props.action_up = True
+        props.action_up_tile = 'listing'
         props.action_view = True
         props.action_delete = True
         return props

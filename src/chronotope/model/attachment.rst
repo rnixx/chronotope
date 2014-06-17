@@ -46,91 +46,96 @@ Attachments metadata::
     >>> md.description
     u'attachments_description'
 
-``__setitem__`` is not implemented::
+Create and add Attachment Node::
 
-    >>> attachments['1'] = object()
-    Traceback (most recent call last):
-      ...
-    NotImplementedError: ``__setitem__`` is not implemented.
-
-Instead attachments are created using SQLAlchemy API directly::
-
-    >>> import uuid
     >>> import datetime
-    >>> from chronotope.sql import get_session
-    >>> from chronotope.model import AttachmentRecord
+    >>> from chronotope.model import Attachment
 
-Get session::
+    >>> attachment = Attachment()
+    >>> attachment.attrs['creator'] = u'manager'
+    >>> attachment.attrs['created'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> attachment.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> attachment.attrs['title'] = u'Some attachment'
+    >>> attachment.attrs['attachment_type'] = u'text'
+    >>> attachment.attrs['payload'] = 'Some Text'
+    >>> attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7'] = attachment
 
-    >>> session = get_session(layer.new_request())
-    >>> session
-    <sqlalchemy.orm.session.Session object at ...>
+Commit::
 
-Create attachment record::
+    >>> attachments()
 
-    >>> attachment = AttachmentRecord()
-    >>> attachment.uid = uuid.UUID('b495eefd-bb92-4108-88c4-e04c82efe0a7')
-    >>> attachment.creator = 'manager'
-    >>> attachment.created = datetime.datetime(2014, 06, 01, 0, 0)
-    >>> attachment.modified = datetime.datetime(2014, 06, 01, 0, 0)
-    >>> attachment.title = 'Some attachment'
-    >>> attachment.attachment_type = 'text'
-    >>> attachment.payload = 'Some Text'
-
-Add attachment record to database::
-
-    >>> session.add(attachment)
-    >>> session.commit()
-
-    >>> attachment_records = session.query(AttachmentRecord).all()
-    >>> attachment_records
-    [<chronotope.model.attachment.AttachmentRecord object at ...>]
-
-    >>> attachment_records[0].uid
-    UUID('b495eefd-bb92-4108-88c4-e04c82efe0a7')
-
-Check keys::
+Attachment keys::
 
     >>> attachments.keys()
     ['b495eefd-bb92-4108-88c4-e04c82efe0a7']
 
-Get attachment node from attachments node::
+Attachment node from attachments node::
 
-    >>> attachment_node = attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7']
-    >>> attachment_node
+    >>> attachment = attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7']
+    >>> attachment
     <Attachment object 'b495eefd-bb92-4108-88c4-e04c82efe0a7' at ...>
 
-Check attachment node attrs::
+Attachment node attributes::
 
-    >>> attachment_node.__name__
+    >>> attachment.__name__
     'b495eefd-bb92-4108-88c4-e04c82efe0a7'
 
-    >>> attachment_node.attrs['uid']
+    >>> attachment.attrs['uid']
     UUID('b495eefd-bb92-4108-88c4-e04c82efe0a7')
 
-    >>> attachment_node.attrs['creator']
+    >>> attachment.attrs['creator']
     u'manager'
 
-    >>> attachment_node.attrs['created']
+    >>> attachment.attrs['created']
     datetime.datetime(2014, 6, 1, 0, 0)
 
-    >>> attachment_node.attrs['modified']
+    >>> attachment.attrs['modified']
     datetime.datetime(2014, 6, 1, 0, 0)
 
-    >>> attachment_node.attrs['title']
+    >>> attachment.attrs['title']
     u'Some attachment'
 
-    >>> attachment_node.attrs['attachment_type']
+    >>> attachment.attrs['attachment_type']
     u'text'
 
-    >>> attachment_node.attrs['payload']
+    >>> attachment.attrs['payload']
     'Some Text'
 
-    >>> attachment_node.attrs['location']
+    >>> attachment.attrs['location']
     []
 
-    >>> attachment_node.attrs['facility']
+    >>> attachment.attrs['facility']
     []
+
+Attachment props::
+
+    >>> props = attachment.properties
+    >>> props
+    <cone.app.model.Properties object at ...>
+
+    >>> props.action_up
+    True
+
+    >>> props.action_view
+    True
+
+    >>> props.action_delete
+    True
+
+    >>> props.action_up_tile
+    'listing'
+
+Attachment metadata::
+
+    >>> md = attachment.metadata
+    >>> md
+    <cone.app.model.Metadata object at ...>
+
+    >>> md.title
+    u'attachment_label'
+
+    >>> md.description
+    u'attachment_description'
 
 Delete attachment record::
 

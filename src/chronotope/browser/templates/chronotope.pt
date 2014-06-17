@@ -1,0 +1,9 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+           xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
+           xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+           i18n:domain="cone.time"
+           omit-tag="True">
+
+  <div>Chronotope</div>
+
+</tal:block>

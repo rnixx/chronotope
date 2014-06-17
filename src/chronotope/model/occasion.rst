@@ -13,6 +13,9 @@ Occasions node::
     >>> occasions
     <Occasions object 'occasions' at ...>
 
+    >>> occasions.__parent__
+    <Chronotope object 'chronotope' at ...>
+
 Occasions props::
 
     >>> props = occasions.properties
@@ -25,8 +28,14 @@ Occasions props::
     >>> props.action_up
     True
 
+    >>> props.action_up_tile
+    'content'
+
     >>> props.action_add
     True
+
+    >>> props.default_content_tile
+    'listing'
 
 Occasions metadata::
 

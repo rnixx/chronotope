@@ -87,7 +87,9 @@ class Locations(BaseNode):
         props = Properties()
         props.in_navtree = True
         props.action_up = True
+        props.action_up_tile = 'content'
         props.action_add = True
+        props.default_content_tile = 'listing'
         return props
 
     @instance_property
@@ -99,7 +101,8 @@ class Locations(BaseNode):
         return md
 
     def __getitem__(self, name):
-        pass
+        # traversal expects KeyError before looking up views.
+        raise KeyError(name)
 
     def __delitem__(self, name):
         pass

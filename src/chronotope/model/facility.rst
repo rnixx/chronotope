@@ -13,6 +13,9 @@ Facilities node::
     >>> facilities
     <Facilities object 'facilities' at ...>
 
+    >>> facilities.__parent__
+    <Chronotope object 'chronotope' at ...>
+
 Facilities props::
 
     >>> props = facilities.properties
@@ -25,8 +28,14 @@ Facilities props::
     >>> props.action_up
     True
 
+    >>> props.action_up_tile
+    'content'
+
     >>> props.action_add
     True
+
+    >>> props.default_content_tile
+    'listing'
 
 Facilities metadata::
 

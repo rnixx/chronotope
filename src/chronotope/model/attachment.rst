@@ -13,6 +13,9 @@ Attachments node::
     >>> attachments
     <Attachments object 'attachments' at ...>
 
+    >>> attachments.__parent__
+    <Chronotope object 'chronotope' at ...>
+
 Attachments props::
 
     >>> props = attachments.properties
@@ -25,8 +28,14 @@ Attachments props::
     >>> props.action_up
     True
 
+    >>> props.action_up_tile
+    'content'
+
     >>> props.action_add
     True
+
+    >>> props.default_content_tile
+    'listing'
 
 Attachments metadata::
 

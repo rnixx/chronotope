@@ -31,6 +31,10 @@ cone.app.register_plugin('chronotope', model.Chronotope)
 
 # register ACL's for nodes
 acl_registry.register(chronotope_default_acl, model.Chronotope)
+acl_registry.register(chronotope_default_acl, model.Locations)
+acl_registry.register(chronotope_default_acl, model.Facilities)
+acl_registry.register(chronotope_default_acl, model.Occasions)
+acl_registry.register(chronotope_default_acl, model.Attachments)
 
 
 # application startup initialization

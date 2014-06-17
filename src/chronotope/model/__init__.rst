@@ -9,6 +9,9 @@ Chronotope node::
     >>> chronotope
     <Chronotope object 'chronotope' at ...>
 
+    >>> chronotope.__parent__
+    <AppRoot object 'None' at ...>
+
 Chronotope props::
 
     >>> props = chronotope.properties

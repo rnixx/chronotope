@@ -13,6 +13,9 @@ Locations node::
     >>> locations
     <Locations object 'locations' at ...>
 
+    >>> locations.__parent__
+    <Chronotope object 'chronotope' at ...>
+
 Locations props::
 
     >>> props = locations.properties
@@ -25,8 +28,14 @@ Locations props::
     >>> props.action_up
     True
 
+    >>> props.action_up_tile
+    'content'
+
     >>> props.action_add
     True
+
+    >>> props.default_content_tile
+    'listing'
 
 Locations metadata::
 

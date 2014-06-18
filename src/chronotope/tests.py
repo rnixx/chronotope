@@ -19,6 +19,10 @@ TESTFILES = [
     'model/occasion.rst',
     'model/attachment.rst',
     'model/relations.rst',
+    'browser/location.rst',
+    'browser/facility.rst',
+    'browser/occasion.rst',
+    'browser/attachment.rst',
 ]
 
 

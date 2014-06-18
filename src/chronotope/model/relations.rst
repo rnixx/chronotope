@@ -212,3 +212,37 @@ Commit::
     >>> from chronotope.sql import get_session
     >>> session = get_session(layer.current_request)
     >>> session.commit()
+
+Cleanup::
+
+    >>> chronotope.printtree()
+    <class 'chronotope.model.Chronotope'>: chronotope
+      <class 'chronotope.model.location.Locations'>: locations
+        <class 'chronotope.model.location.Location'>: 4252cd8d...
+        <class 'chronotope.model.location.Location'>: b8f6464b...
+      <class 'chronotope.model.facility.Facilities'>: facilities
+        <class 'chronotope.model.facility.Facility'>: 8a85304c...
+        <class 'chronotope.model.facility.Facility'>: a23d5cae...
+      <class 'chronotope.model.occasion.Occasions'>: occasions
+        <class 'chronotope.model.occasion.Occasion'>: 104f345...
+        <class 'chronotope.model.occasion.Occasion'>: 7cb5828f...
+      <class 'chronotope.model.attachment.Attachments'>: attachments
+        <class 'chronotope.model.attachment.Attachment'>: 7e964f01...
+        <class 'chronotope.model.attachment.Attachment'>: cd6fabd0...
+
+    >>> del locations['b8f6464b-3f62-45ab-b52a-b7906b2d74da']
+    >>> del locations['4252cd8d-ef3e-4b2d-8910-d6bca0b3fab6']
+    >>> del facilities['8a85304c-3f16-44c2-bea1-a774670534d6']
+    >>> del facilities['a23d5cae-0ec5-40fd-969c-02e08f6d2dd7']
+    >>> del occasions['104f3451-8895-47a2-918d-6c420394aaec']
+    >>> del occasions['7cb5828f-2821-424f-a734-88a8ec07d266']
+    >>> del attachments['cd6fabd0-5d4f-4e3b-a053-0315d147a0b7']
+    >>> del attachments['7e964f01-56b9-40c8-a2f0-ac6aa53fa0e6']
+    >>> session.commit()
+
+    >>> chronotope.printtree()
+    <class 'chronotope.model.Chronotope'>: chronotope
+      <class 'chronotope.model.location.Locations'>: locations
+      <class 'chronotope.model.facility.Facilities'>: facilities
+      <class 'chronotope.model.occasion.Occasions'>: occasions
+      <class 'chronotope.model.attachment.Attachments'>: attachments

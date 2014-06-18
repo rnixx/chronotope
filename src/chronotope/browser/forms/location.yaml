@@ -1,0 +1,58 @@
+factory: form
+name: locationform
+props:
+    action: context.form_action
+widgets:
+- lat:
+    factory: field:label:error:number
+    value: expr:context.model.attrs['lat']
+    props:
+        label: i18n:lat_label:Latitude
+        required: i18n:lat_required:Latitude is required
+- lon:
+    factory: field:label:error:number
+    value: expr:context.model.attrs['lon']
+    props:
+        label: i18n:lon_label:Longitude
+        required: i18n:lat_required:Longitude is required
+- street:
+    factory: field:label:error:text
+    value: expr:context.model.attrs['street']
+    props:
+        label: i18n:street_label:Street
+        required: i18n:lat_required:Street is required
+- zip:
+    factory: field:label:error:text
+    value: expr:context.model.attrs['zip']
+    props:
+        label: i18n:zip_label:ZIP
+        required: i18n:lat_required:ZIP is required
+- city:
+    factory: field:label:error:text
+    value: expr:context.model.attrs['city']
+    props:
+        label: i18n:city_label:City
+        required: i18n:lat_required:City is required
+- country:
+    factory: field:label:error:text
+    value: expr:context.model.attrs['country']
+    props:
+        label: i18n:country_label:Country
+        required: i18n:lat_required:Country is required
+- save:
+    factory: submit
+    props:
+        action: save
+        expression: True
+        handler: context.save
+        next: context.next
+        label: i18n:save:Save
+- cancel:
+    factory: submit
+    props:
+        action: cancel
+        expression: expr:context.action_resource == 'add'
+        handler: None
+        next: context.next
+        label: i18n:cancel:Cancel
+        skip: True

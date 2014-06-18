@@ -71,6 +71,9 @@ class Location(SQLRowNode):
         md = Metadata()
         md.title = _('location_label', default='Location')
         md.description = _('location_description', default='A location')
+        md.creator = self.attrs['creator']
+        md.created = self.attrs['created']
+        md.modified = self.attrs['modified']
         return md
 
 

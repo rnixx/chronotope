@@ -46,6 +46,10 @@ Locations metadata::
     >>> md.description
     u'locations_description'
 
+    >>> md.creator
+    >>> md.created
+    >>> md.modified
+
 Create and add Location Node::
 
     >>> import datetime

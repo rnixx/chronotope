@@ -39,6 +39,7 @@ setup(name='chronotope',
           'yafowil.widget.autocomplete',
           'yafowil.widget.datetime',
           'yafowil.widget.wysihtml5',
+          'yafowil.widget.select2',
       ],
       extras_require = dict(
           test=[

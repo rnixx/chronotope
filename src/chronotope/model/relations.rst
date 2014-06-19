@@ -3,9 +3,12 @@ Model relations
 
 Imports::
 
+    >>> import uuid
     >>> import datetime
     >>> from cone.app import get_root
+    >>> from chronotope.sql import get_session
     >>> from chronotope.model import (
+    ...     CategoryRecord,
     ...     Location,
     ...     Facility,
     ...     Occasion,
@@ -16,6 +19,21 @@ Fetch containers::
 
     >>> root = get_root()
     >>> chronotope = root['chronotope']
+
+Create categories::
+
+    >>> request = layer.new_request()
+    >>> session = get_session(request)
+
+    >>> category1 = CategoryRecord()
+    >>> category1.uid = uuid.UUID('3d9f44e1-00cb-42d4-82a3-f32f06e09e4f')
+    >>> category1.name = 'Category 1'
+    >>> session.add(category1)
+
+    >>> category2 = CategoryRecord()
+    >>> category2.uid = uuid.UUID('16a83305-2b60-4f29-b225-3c64a1f0f120')
+    >>> category2.name = 'Category 2'
+    >>> session.add(category2)
 
 Create locations::
 
@@ -57,6 +75,8 @@ Create facilities::
     >>> facility1.attrs['description'] = u'Facility description'
     >>> facility1.attrs['exists_from'] = datetime.datetime(2010, 01, 01, 0, 0)
     >>> facility1.attrs['exists_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> facility1.attrs['category'].append(category1)
+    >>> facility1.attrs['category'].append(category2)
     >>> facility1.attrs['location'].append(location1.record)
     >>> facilities['8a85304c-3f16-44c2-bea1-a774670534d6'] = facility1
 
@@ -68,6 +88,7 @@ Create facilities::
     >>> facility2.attrs['description'] = u'Other Facility description'
     >>> facility2.attrs['exists_from'] = datetime.datetime(2010, 01, 01, 0, 0)
     >>> facility2.attrs['exists_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> facility2.attrs['category'].append(category1)
     >>> facility2.attrs['location'].append(location1.record)
     >>> facility2.attrs['location'].append(location2.record)
     >>> facilities['a23d5cae-0ec5-40fd-969c-02e08f6d2dd7'] = facility2
@@ -86,6 +107,22 @@ Check references and back references of facility to location reference::
     <chronotope.model.facility.FacilityRecord object at ...>]
 
     >>> location2.record.facility
+    [<chronotope.model.facility.FacilityRecord object at ...>]
+
+Check references and back references of facility to category reference::
+
+    >>> facility1.record.category
+    [<chronotope.model.category.CategoryRecord object at ...>, 
+    <chronotope.model.category.CategoryRecord object at ...>]
+
+    >>> facility2.record.category
+    [<chronotope.model.category.CategoryRecord object at ...>]
+
+    >>> category1.facility
+    [<chronotope.model.facility.FacilityRecord object at ...>, 
+    <chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> category2.facility
     [<chronotope.model.facility.FacilityRecord object at ...>]
 
 Create occasions::
@@ -230,6 +267,8 @@ Cleanup::
         <class 'chronotope.model.attachment.Attachment'>: 7e964f01...
         <class 'chronotope.model.attachment.Attachment'>: cd6fabd0...
 
+    >>> session.delete(category1)
+    >>> session.delete(category2)
     >>> del locations['b8f6464b-3f62-45ab-b52a-b7906b2d74da']
     >>> del locations['4252cd8d-ef3e-4b2d-8910-d6bca0b3fab6']
     >>> del facilities['8a85304c-3f16-44c2-bea1-a774670534d6']

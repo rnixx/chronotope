@@ -6,6 +6,7 @@ from cone.app.model import (
     Properties,
     Metadata,
 )
+from chronotope.model.category import CategoryRecord
 from chronotope.model.location import (
     LocationRecord,
     Location,

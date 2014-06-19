@@ -24,7 +24,10 @@ from chronotope.sql import (
     SQLRowNodeAttributes,
     SQLRowNode,
 )
-from chronotope.model import LocationRecord
+from chronotope.model import (
+    LocationRecord,
+    CategoryRecord,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -34,6 +37,13 @@ facility_location_references = Table(
         'facility_location_references', Base.metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
+)
+
+
+facility_category_references = Table(
+        'facility_category_references', Base.metadata,
+    Column('facility_uid', GUID, ForeignKey('facility.uid')),
+    Column('category_uid', GUID, ForeignKey('category.uid'))
 )
 
 
@@ -47,7 +57,10 @@ class FacilityRecord(Base):
     description = Column(String)
     exists_from = Column(DateTime)
     exists_to = Column(DateTime)
-    #category = Column()
+    category = relationship(
+        CategoryRecord,
+        secondary=facility_category_references,
+        backref='facility')
     location = relationship(
         LocationRecord,
         secondary=facility_location_references,

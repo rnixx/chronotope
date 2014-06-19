@@ -105,7 +105,8 @@ Facility node attributes::
     >>> facility.attrs['exists_to']
     datetime.datetime(2012, 1, 1, 0, 0)
 
-    >>> # facility.attrs['category']
+    >>> facility.attrs['category']
+    []
 
     >>> facility.attrs['location']
     []

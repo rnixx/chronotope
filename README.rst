@@ -21,6 +21,9 @@ For installation resources and instructions please refer to::
 Model
 =====
 
+* Category
+    * Name (String)
+
 * Location
     * Lat (Float)
     * Lon (Float)
@@ -34,7 +37,7 @@ Model
     * Description (String)
     * Exists from (Date)
     * Exists to (Date)
-    * Category (List of Strings)
+    * Category (List of Reference UID's)
     * Location (List of Reference UID's)
 
 * Occasion

@@ -1,0 +1,66 @@
+factory: form
+name: facilityform
+props:
+    action: context.form_action
+widgets:
+- title:
+    factory: field:label:error:text
+    value: expr:context.model.attrs['title']
+    props:
+        label: i18n:title_label:Title
+        required: i18n:title_required:Title is required
+- description:
+    factory: field:label:error:wysihtml5
+    value: expr:context.model.attrs['description']
+    props:
+        label: i18n:description_label:Description
+        required: i18n:title_required:Description is required
+        focus: True,
+        resize: True,
+        size: mini,
+        color: True,
+        emphasis: True,
+        font-styles: True,
+        html: True,
+        justify: True,
+        link: True,
+        lists: True,
+- exists_from:
+    factory: field:label:error:datetime
+    value: expr:context.model.attrs['exists_from']
+    props:
+        label: i18n:exists_from_label:Exists From
+- exists_to:
+    factory: field:label:error:datetime
+    value: expr:context.model.attrs['exists_to']
+    props:
+        label: i18n:exists_to_label:Exists To
+- category:
+    factory: field:label:error:select2
+    value: expr:context.category_value
+    props:
+        label: i18n:category_label:Category
+        vocabulary: expr:context.category_vocab
+- location:
+    factory: field:label:error:select2
+    value: expr:context.location_value
+    props:
+        label: i18n:location_label:Location
+        vocabulary: expr:context.location_vocab
+- save:
+    factory: submit
+    props:
+        action: save
+        expression: True
+        handler: context.save
+        next: context.next
+        label: i18n:save:Save
+- cancel:
+    factory: submit
+    props:
+        action: cancel
+        expression: expr:context.action_resource == 'add'
+        handler: None
+        next: context.next
+        label: i18n:cancel:Cancel
+        skip: True

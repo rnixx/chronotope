@@ -4,6 +4,7 @@ from plumber import plumber
 from webob.exc import HTTPFound
 from pyramid.security import authenticated_userid
 from pyramid.i18n import TranslationStringFactory
+from pyramid.view import view_config
 from cone.tile import tile
 from cone.app.browser.ajax import (
     AjaxAction,
@@ -21,6 +22,16 @@ from chronotope.model import Location
 
 
 _ = TranslationStringFactory('chronotope')
+
+
+@view_config(name='chronotope.location',
+             accept='application/json',
+             renderer='json')
+def json_location(model, request):
+    return [
+        {'id': 'Location1', 'text': 'Location1'},
+        {'id': 'Location2', 'text': 'Location2'},
+    ]
 
 
 class LocationForm(object):

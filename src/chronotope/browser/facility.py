@@ -35,15 +35,7 @@ class FacilityForm(object):
         return []
 
     @property
-    def category_vocab(self):
-        return []
-
-    @property
     def location_value(self):
-        return []
-
-    @property
-    def location_vocab(self):
         return []
 
     def save(self, widget, data):

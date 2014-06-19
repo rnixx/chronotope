@@ -45,13 +45,22 @@ widgets:
     value: expr:context.category_value
     props:
         label: i18n:category_label:Category
-        vocabulary: expr:context.category_vocab
+        inputtag: True
+        minimumInputLength: 3
+        multiple: True
+        placeholder: i18n:category_placeholder:Select or add category
+        ajaxurl: chronotope.category
+        tags: True,
 - location:
     factory: field:label:error:select2
     value: expr:context.location_value
     props:
         label: i18n:location_label:Location
-        vocabulary: expr:context.location_vocab
+        inputtag: True
+        minimumInputLength: 3
+        multiple: True
+        placeholder: i18n:location_placeholder:Select or add location
+        ajaxurl: chronotope.location
 - save:
     factory: submit
     props:

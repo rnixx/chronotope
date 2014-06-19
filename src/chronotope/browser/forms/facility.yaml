@@ -33,6 +33,7 @@ widgets:
         label: i18n:exists_from_label:Exists From
         time: True
         datepicker: True
+        locale: de
 - exists_to:
     factory: field:label:error:datetime
     value: expr:context.model.attrs['exists_to']
@@ -40,6 +41,7 @@ widgets:
         label: i18n:exists_to_label:Exists To
         time: True
         datepicker: True
+        locale: de
 - category:
     factory: field:label:error:select2
     value: expr:context.category_value

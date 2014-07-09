@@ -1,8 +1,6 @@
 from sqlalchemy import (
     Table,
     Column,
-    Integer,
-    Float,
     String,
     DateTime,
     LargeBinary,
@@ -12,7 +10,6 @@ from sqlalchemy.orm import relationship
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
-    BaseNode,
     Properties,
     Metadata,
     NodeInfo,
@@ -118,7 +115,7 @@ info.title = _('attachment_label', default='Attachment')
 info.description = _('attachment_description', default='An attachment')
 info.node = Attachment
 info.addables = []
-info.icon = 'icon-file'
+info.icon = 'glyphicon glyphicon-file'
 registerNodeInfo('attachment', info)
 
 
@@ -152,5 +149,5 @@ info.description = \
     _('attachments_description', default='Container for Attachments')
 info.node = Attachments
 info.addables = ['attachment']
-info.icon = 'icon-folder-open'
+info.icon = 'glyphicon glyphicon-folder-open'
 registerNodeInfo('attachments', info)

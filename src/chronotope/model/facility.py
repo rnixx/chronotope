@@ -1,8 +1,6 @@
 from sqlalchemy import (
     Table,
     Column,
-    Integer,
-    Float,
     String,
     DateTime,
     ForeignKey,
@@ -11,7 +9,6 @@ from sqlalchemy.orm import relationship
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
-    BaseNode,
     Properties,
     Metadata,
     NodeInfo,
@@ -105,7 +102,7 @@ info.title = _('facility_label', default='Facility')
 info.description = _('facility_description', default='A Facility')
 info.node = Facility
 info.addables = []
-info.icon = 'icon-home'
+info.icon = 'glyphicon glyphicon-home'
 registerNodeInfo('facility', info)
 
 
@@ -139,5 +136,5 @@ info.description = \
     _('facilities_description', default='Container for Facilities')
 info.node = Facilities
 info.addables = ['facility']
-info.icon = 'icon-folder-open'
+info.icon = 'glyphicon glyphicon-record'
 registerNodeInfo('facilities', info)

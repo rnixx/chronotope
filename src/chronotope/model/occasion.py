@@ -1,8 +1,6 @@
 from sqlalchemy import (
     Table,
     Column,
-    Integer,
-    Float,
     String,
     DateTime,
     ForeignKey,
@@ -11,7 +9,6 @@ from sqlalchemy.orm import relationship
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
-    BaseNode,
     Properties,
     Metadata,
     NodeInfo,
@@ -91,7 +88,7 @@ info.title = _('occasion_label', default='Occasion')
 info.description = _('occasion_description', default='An Occasion')
 info.node = Occasion
 info.addables = []
-info.icon = 'icon-calendar'
+info.icon = 'glyphicon glyphicon-star-empty'
 registerNodeInfo('occasion', info)
 
 
@@ -125,5 +122,5 @@ info.description = \
     _('occasions_description', default='Container for Occasions')
 info.node = Occasions
 info.addables = ['occasion']
-info.icon = 'icon-folder-open'
+info.icon = 'glyphicon glyphicon-calendar'
 registerNodeInfo('occasions', info)

@@ -1,7 +1,5 @@
 from sqlalchemy import (
-    Table,
     Column,
-    Integer,
     Float,
     String,
     DateTime,
@@ -9,7 +7,6 @@ from sqlalchemy import (
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
-    BaseNode,
     Properties,
     Metadata,
     NodeInfo,
@@ -82,7 +79,7 @@ info.title = _('location_label', default='Location')
 info.description = _('location_description', default='A location')
 info.node = Location
 info.addables = []
-info.icon = 'icon-screenshot'
+info.icon = 'glyphicon glyphicon-map-marker'
 registerNodeInfo('location', info)
 
 
@@ -116,5 +113,5 @@ info.description = \
     _('locations_description', default='Container for Locations')
 info.node = Locations
 info.addables = ['location']
-info.icon = 'icon-folder-open'
+info.icon = 'glyphicon glyphicon-globe'
 registerNodeInfo('locations', info)

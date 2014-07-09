@@ -132,10 +132,33 @@ Occasion metadata::
     <cone.app.model.Metadata object at ...>
 
     >>> md.title
-    u'occasion_label'
+    u'Some occasion'
 
     >>> md.description
-    u'occasion_description'
+    u'Occasion description'
+
+    >>> md.creator
+    u'manager'
+
+    >>> md.created
+    datetime.datetime(2014, 6, 1, 0, 0)
+
+    >>> md.modified
+    datetime.datetime(2014, 6, 1, 0, 0)
+
+Occasion workflow state::
+
+    >>> from repoze.workflow import get_workflow
+    >>> from cone.app.interfaces import IWorkflowState
+
+    >>> IWorkflowState.providedBy(occasion)
+    True
+
+    >>> get_workflow(occasion.__class__, occasion.properties.wf_name)
+    <repoze.workflow.workflow.Workflow object at ...>
+
+    >>> occasion.state
+    u'draft'
 
 Delete occasion record::
 

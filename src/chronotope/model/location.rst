@@ -141,10 +141,30 @@ Location metadata::
     <cone.app.model.Metadata object at ...>
 
     >>> md.title
-    u'location_label'
+    'Museumstrasse 6020 Innsbruck'
 
-    >>> md.description
-    u'location_description'
+    >>> md.creator
+    u'manager'
+
+    >>> md.created
+    datetime.datetime(2014, 6, 1, 0, 0)
+
+    >>> md.modified
+    datetime.datetime(2014, 6, 1, 0, 0)
+
+Location workflow state::
+
+    >>> from repoze.workflow import get_workflow
+    >>> from cone.app.interfaces import IWorkflowState
+
+    >>> IWorkflowState.providedBy(location)
+    True
+
+    >>> get_workflow(location.__class__, location.properties.wf_name)
+    <repoze.workflow.workflow.Workflow object at ...>
+
+    >>> location.state
+    u'draft'
 
 Delete location record::
 

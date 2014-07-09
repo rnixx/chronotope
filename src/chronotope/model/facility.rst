@@ -135,10 +135,33 @@ Facility metadata::
     <cone.app.model.Metadata object at ...>
 
     >>> md.title
-    u'facility_label'
+    u'Some facility'
 
     >>> md.description
-    u'facility_description'
+    u'Facility description'
+
+    >>> md.creator
+    u'manager'
+
+    >>> md.created
+    datetime.datetime(2014, 6, 1, 0, 0)
+
+    >>> md.modified
+    datetime.datetime(2014, 6, 1, 0, 0)
+
+Location workflow state::
+
+    >>> from repoze.workflow import get_workflow
+    >>> from cone.app.interfaces import IWorkflowState
+
+    >>> IWorkflowState.providedBy(facility)
+    True
+
+    >>> get_workflow(facility.__class__, facility.properties.wf_name)
+    <repoze.workflow.workflow.Workflow object at ...>
+
+    >>> facility.state
+    u'draft'
 
 Delete facility record::
 

@@ -1,9 +1,7 @@
 import uuid
+from plumber import plumber
 from node.behaviors import NodeAttributes
-from sqlalchemy import (
-    engine_from_config,
-    MetaData,
-)
+from sqlalchemy import engine_from_config
 from sqlalchemy.orm import (
     sessionmaker,
     scoped_session,
@@ -15,7 +13,15 @@ from sqlalchemy.types import (
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from pyramid.threadlocal import get_current_request
-from cone.app.model import BaseNode
+from cone.app.model import (
+    BaseNode,
+    Properties,
+)
+from cone.app.workflow import (
+    WorkflowState,
+    WorkflowACL,
+)
+from chronotope.publication import PUBLICATION_TRANSITION_NAMES
 
 
 Base = declarative_base()
@@ -167,6 +173,11 @@ class SQLRowNodeAttributes(NodeAttributes):
 
 
 class SQLRowNode(BaseNode):
+    __metaclass__ = plumber
+    __plumbing__ = (
+        WorkflowState,
+        WorkflowACL,
+    )
 
     def __init__(self, name=None, parent=None, record=None):
         self.__name__ = name
@@ -176,6 +187,13 @@ class SQLRowNode(BaseNode):
             self._new = True
             record = self.record_factory()
         self.record = record
+
+    @property
+    def properties(self):
+        props = Properties()
+        props.wf_name = u'publication'
+        props.wf_transition_names = PUBLICATION_TRANSITION_NAMES
+        return props
 
     def record_factory(self):
         raise NotImplementedError(u"Abstract SQLRowNode does not implement "

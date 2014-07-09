@@ -1,0 +1,31 @@
+factory: form
+name: attachmentform
+props:
+    action: context.form_action
+    class: form-horizontal
+widgets:
+- controls:
+    factory: field:div
+    props:
+        structural: True
+        div.class_add: col-sm-offset-2 col-sm-10
+    widgets:
+    - save:
+        factory: submit
+        props:
+            action: save
+            expression: True
+            handler: context.save
+            next: context.next
+            label: i18n:save:Save
+            class_add: btn-default
+    - cancel:
+        factory: submit
+        props:
+            action: cancel
+            expression: expr:context.action_resource == 'add'
+            handler: None
+            next: context.next
+            label: i18n:cancel:Cancel
+            skip: True
+            class_add: btn-warning

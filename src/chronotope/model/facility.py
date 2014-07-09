@@ -50,6 +50,7 @@ class FacilityRecord(Base):
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
+    state = Column(String)
     title = Column(String)
     description = Column(String)
     exists_from = Column(DateTime)
@@ -66,8 +67,8 @@ class FacilityRecord(Base):
 
 class FacilityAttributes(SQLRowNodeAttributes):
     columns = [
-        'uid', 'creator', 'created', 'modified', 'title', 'description',
-        'exists_from', 'exists_to', 'category', 'location',
+        'uid', 'creator', 'created', 'modified', 'state', 'title',
+        'description', 'exists_from', 'exists_to', 'category', 'location',
     ]
 
 
@@ -82,7 +83,7 @@ class Facility(SQLRowNode):
 
     @instance_property
     def properties(self):
-        props = Properties()
+        props = super(Facility, self).properties
         props.action_up = True
         props.action_up_tile = 'listing'
         props.action_view = True
@@ -92,8 +93,11 @@ class Facility(SQLRowNode):
     @instance_property
     def metadata(self):
         md = Metadata()
-        md.title = _('facility_label', default='Facility')
-        md.description = _('facility_description', default='A Facility')
+        md.title = self.attrs['title']
+        md.description = self.attrs['description']
+        md.creator = self.attrs['creator']
+        md.created = self.attrs['created']
+        md.modified = self.attrs['modified']
         return md
 
 

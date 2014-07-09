@@ -30,6 +30,7 @@ class LocationRecord(Base):
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
+    state = Column(String)
     lat = Column(Float)
     lon = Column(Float)
     street = Column(String)
@@ -40,7 +41,7 @@ class LocationRecord(Base):
 
 class LocationAttributes(SQLRowNodeAttributes):
     columns = [
-        'uid', 'creator', 'created', 'modified',
+        'uid', 'creator', 'created', 'modified', 'state',
         'lat', 'lon', 'street', 'zip', 'city', 'country',
     ]
 
@@ -56,7 +57,7 @@ class Location(SQLRowNode):
 
     @instance_property
     def properties(self):
-        props = Properties()
+        props = super(Location, self).properties
         props.action_up = True
         props.action_up_tile = 'listing'
         props.action_view = True
@@ -66,8 +67,9 @@ class Location(SQLRowNode):
     @instance_property
     def metadata(self):
         md = Metadata()
-        md.title = _('location_label', default='Location')
-        md.description = _('location_description', default='A location')
+        md.title = '{0} {1} {2}'.format(self.attrs['street'],
+                                        self.attrs['zip'],
+                                        self.attrs['city'])
         md.creator = self.attrs['creator']
         md.created = self.attrs['created']
         md.modified = self.attrs['modified']

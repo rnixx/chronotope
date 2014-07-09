@@ -1,0 +1,91 @@
+factory: form
+name: occasionform
+props:
+    action: context.form_action
+    class: form-horizontal
+widgets:
+- title:
+    factory: field:label:div:help:error:text
+    value: expr:context.model.attrs['title']
+    props:
+        label: i18n:title_label:Title
+        required: i18n:title_required:Title is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- description:
+    factory: field:label:div:help:error:wysihtml5
+    value: expr:context.model.attrs['description']
+    props:
+        label: i18n:description_label:Description
+        required: i18n:title_required:Description is required
+        size: sm
+        color: True
+        emphasis: True
+        font-styles: True
+        html: True
+        image: True
+        justify: True
+        link: True
+        lists: True
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- duration_from:
+    factory: field:label:div:help:error:datetime
+    value: expr:context.model.attrs['duration_from']
+    props:
+        label: i18n:duration_from_label:Duration From
+        time: True
+        datepicker: True
+        timepicker: True
+        locale: de
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- duration_to:
+    factory: field:label:div:help:error:datetime
+    value: expr:context.model.attrs['duration_to']
+    props:
+        label: i18n:duration_to_label:Duration To
+        time: True
+        datepicker: True
+        timepicker: True
+        locale: de
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- facility:
+    factory: field:label:div:help:error:select2
+    value: expr:context.facility_value
+    props:
+        label: i18n:facility_label:Facility
+        inputtag: True
+        minimumInputLength: 3
+        multiple: True
+        placeholder: i18n:category_placeholder:Select or add facility
+        ajaxurl: chronotope.facility
+        tags: True,
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- controls:
+    factory: field:div
+    props:
+        structural: True
+        div.class_add: col-sm-offset-2 col-sm-10
+    widgets:
+    - save:
+        factory: submit
+        props:
+            action: save
+            expression: True
+            handler: context.save
+            next: context.next
+            label: i18n:save:Save
+            class_add: btn-default
+    - cancel:
+        factory: submit
+        props:
+            action: cancel
+            expression: expr:context.action_resource == 'add'
+            handler: None
+            next: context.next
+            label: i18n:cancel:Cancel
+            skip: True
+            class_add: btn-warning

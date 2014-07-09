@@ -59,6 +59,7 @@ class AttachmentRecord(Base):
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
+    state = Column(String)
     title = Column(String)
     attachment_type = Column(String) # 'text', 'file' or 'image'
     payload = Column(LargeBinary)
@@ -78,7 +79,7 @@ class AttachmentRecord(Base):
 
 class AttachmentAttributes(SQLRowNodeAttributes):
     columns = [
-        'uid', 'creator', 'created', 'modified', 'title',
+        'uid', 'creator', 'created', 'modified', 'state', 'title',
         'attachment_type', 'payload', 'location', 'facility',
         'occasion',
     ]
@@ -95,7 +96,7 @@ class Attachment(SQLRowNode):
 
     @instance_property
     def properties(self):
-        props = Properties()
+        props = super(Attachment, self).properties
         props.action_up = True
         props.action_up_tile = 'listing'
         props.action_view = True
@@ -105,8 +106,10 @@ class Attachment(SQLRowNode):
     @instance_property
     def metadata(self):
         md = Metadata()
-        md.title = _('attachment_label', default='Attachment')
-        md.description = _('attachment_description', default='An Attachment')
+        md.title = self.attrs['title']
+        md.creator = self.attrs['creator']
+        md.created = self.attrs['created']
+        md.modified = self.attrs['modified']
         return md
 
 

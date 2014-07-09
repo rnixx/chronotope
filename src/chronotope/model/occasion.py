@@ -40,6 +40,7 @@ class OccasionRecord(Base):
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)
+    state = Column(String)
     title = Column(String)
     description = Column(String)
     duration_from = Column(DateTime)
@@ -52,8 +53,8 @@ class OccasionRecord(Base):
 
 class OccasionAttributes(SQLRowNodeAttributes):
     columns = [
-        'uid', 'creator', 'created', 'modified', 'title', 'description',
-        'duration_from', 'duration_to', 'facility',
+        'uid', 'creator', 'created', 'modified', 'state', 'title',
+        'description', 'duration_from', 'duration_to', 'facility',
     ]
 
 
@@ -68,7 +69,7 @@ class Occasion(SQLRowNode):
 
     @instance_property
     def properties(self):
-        props = Properties()
+        props = super(Occasion, self).properties
         props.action_up = True
         props.action_up_tile = 'listing'
         props.action_view = True
@@ -78,8 +79,11 @@ class Occasion(SQLRowNode):
     @instance_property
     def metadata(self):
         md = Metadata()
-        md.title = _('occasion_label', default='Occasion')
-        md.description = _('occasion_description', default='An Occasion')
+        md.title = self.attrs['title']
+        md.description = self.attrs['description']
+        md.creator = self.attrs['creator']
+        md.created = self.attrs['created']
+        md.modified = self.attrs['modified']
         return md
 
 

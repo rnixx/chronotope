@@ -1,10 +1,12 @@
 import uuid
-import datetime
 from plumber import plumber
 from webob.exc import HTTPFound
-from pyramid.security import authenticated_userid
 from pyramid.i18n import TranslationStringFactory
 from cone.tile import tile
+from cone.app.utils import (
+    add_creation_metadata,
+    update_creation_metadata,
+)
 from cone.app.browser.ajax import (
     AjaxAction,
 )
@@ -71,9 +73,7 @@ class FacilityAddForm(FacilityForm, Form):
 
     def save(self, widget, data):
         attrs = self.model.attrs
-        attrs['creator'] = authenticated_userid(self.request)
-        attrs['created'] = datetime.datetime.now()
-        attrs['modified'] = attrs['created']
+        add_creation_metadata(self.request, attrs)
         super(FacilityAddForm, self).save(widget, data)
         self.model.parent[str(uuid.uuid4())] = self.model
         self.model()
@@ -86,6 +86,6 @@ class FacilityEditForm(FacilityForm, Form):
 
     def save(self, widget, data):
         attrs = self.model.attrs
-        attrs['modified'] = datetime.datetime.now()
+        update_creation_metadata(self.request, attrs)
         super(FacilityEditForm, self).save(widget, data)
         self.model()

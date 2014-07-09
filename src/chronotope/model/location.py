@@ -61,15 +61,16 @@ class Location(SQLRowNode):
         props.action_up = True
         props.action_up_tile = 'listing'
         props.action_view = True
+        props.action_edit = True
         props.action_delete = True
         return props
 
     @instance_property
     def metadata(self):
         md = Metadata()
-        md.title = '{0} {1} {2}'.format(self.attrs['street'],
-                                        self.attrs['zip'],
-                                        self.attrs['city'])
+        md.title = u'{0} {1} {2}'.format(self.attrs['street'],
+                                         self.attrs['zip'],
+                                         self.attrs['city'])
         md.creator = self.attrs['creator']
         md.created = self.attrs['created']
         md.modified = self.attrs['modified']

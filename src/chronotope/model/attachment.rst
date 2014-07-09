@@ -121,6 +121,9 @@ Attachment props::
     >>> props.action_view
     True
 
+    >>> props.action_edit
+    True
+
     >>> props.action_delete
     True
 
@@ -153,11 +156,23 @@ Attachment workflow state::
     >>> IWorkflowState.providedBy(attachment)
     True
 
-    >>> get_workflow(attachment.__class__, attachment.properties.wf_name)
+    >>> workflow = get_workflow(attachment.__class__,
+    ...                         attachment.properties.wf_name)
+    >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 
     >>> attachment.state
     u'draft'
+
+    >>> layer.login('manager')
+    >>> workflow.transition(attachment,
+    ...                     layer.new_request(),
+    ...                     'draft_2_published')
+    >>> attachment()
+    >>> layer.logout()
+
+    >>> attachment.state
+    u'published'
 
 Delete attachment record::
 

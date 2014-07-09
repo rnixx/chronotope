@@ -100,6 +100,7 @@ class Attachment(SQLRowNode):
         props.action_up = True
         props.action_up_tile = 'listing'
         props.action_view = True
+        props.action_edit = True
         props.action_delete = True
         return props
 

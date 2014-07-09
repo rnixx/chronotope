@@ -122,6 +122,9 @@ Facility props::
     >>> props.action_view
     True
 
+    >>> props.action_edit
+    True
+
     >>> props.action_delete
     True
 
@@ -157,11 +160,23 @@ Location workflow state::
     >>> IWorkflowState.providedBy(facility)
     True
 
-    >>> get_workflow(facility.__class__, facility.properties.wf_name)
+    >>> workflow = get_workflow(facility.__class__,
+    ...                         facility.properties.wf_name)
+    >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 
     >>> facility.state
     u'draft'
+
+    >>> layer.login('manager')
+    >>> workflow.transition(facility,
+    ...                     layer.new_request(),
+    ...                     'draft_2_published')
+    >>> facility()
+    >>> layer.logout()
+
+    >>> facility.state
+    u'published'
 
 Delete facility record::
 

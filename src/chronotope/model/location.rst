@@ -128,6 +128,9 @@ Location props::
     >>> props.action_view
     True
 
+    >>> props.action_edit
+    True
+
     >>> props.action_delete
     True
 
@@ -141,7 +144,7 @@ Location metadata::
     <cone.app.model.Metadata object at ...>
 
     >>> md.title
-    'Museumstrasse 6020 Innsbruck'
+    u'Museumstrasse 6020 Innsbruck'
 
     >>> md.creator
     u'manager'
@@ -160,11 +163,23 @@ Location workflow state::
     >>> IWorkflowState.providedBy(location)
     True
 
-    >>> get_workflow(location.__class__, location.properties.wf_name)
+    >>> workflow = get_workflow(location.__class__,
+    ...                         location.properties.wf_name)
+    >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 
     >>> location.state
     u'draft'
+
+    >>> layer.login('manager')
+    >>> workflow.transition(location,
+    ...                     layer.new_request(),
+    ...                     'draft_2_published')
+    >>> location()
+    >>> layer.logout()
+
+    >>> location.state
+    u'published'
 
 Delete location record::
 

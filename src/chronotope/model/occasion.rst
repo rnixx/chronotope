@@ -119,6 +119,9 @@ Occasion props::
     >>> props.action_view
     True
 
+    >>> props.action_edit
+    True
+
     >>> props.action_delete
     True
 
@@ -154,11 +157,23 @@ Occasion workflow state::
     >>> IWorkflowState.providedBy(occasion)
     True
 
-    >>> get_workflow(occasion.__class__, occasion.properties.wf_name)
+    >>> workflow = get_workflow(occasion.__class__,
+    ...                         occasion.properties.wf_name)
+    >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 
     >>> occasion.state
     u'draft'
+
+    >>> layer.login('manager')
+    >>> workflow.transition(occasion,
+    ...                     layer.new_request(),
+    ...                     'draft_2_published')
+    >>> occasion()
+    >>> layer.logout()
+
+    >>> occasion.state
+    u'published'
 
 Delete occasion record::
 

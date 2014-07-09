@@ -29,28 +29,34 @@ widgets:
         lists: True
         label.class_add: col-sm-2
         div.class_add: col-sm-10
-- exists_from:
-    factory: field:label:div:help:error:datetime
-    value: expr:context.model.attrs['exists_from']
+- exists:
+    factory: div
     props:
-        label: i18n:exists_from_label:Exists From
-        time: True
-        datepicker: True
-        timepicker: True
-        locale: de
-        label.class_add: col-sm-2
-        div.class_add: col-sm-10
-- exists_to:
-    factory: field:label:div:help:error:datetime
-    value: expr:context.model.attrs['exists_to']
-    props:
-        label: i18n:exists_to_label:Exists To
-        time: True
-        datepicker: True
-        timepicker: True
-        locale: de
-        label.class_add: col-sm-2
-        div.class_add: col-sm-10
+        structural: True
+        class: form-group
+    widgets:
+    - exists_from:
+        factory: label:div:help:error:datetime
+        value: expr:context.model.attrs['exists_from']
+        props:
+            label: i18n:exists_from_label:Exists From
+            time: True
+            datepicker: True
+            timepicker: True
+            locale: de
+            label.class_add: col-sm-2
+            div.class_add: col-sm-4
+    - exists_to:
+        factory: label:div:help:error:datetime
+        value: expr:context.model.attrs['exists_to']
+        props:
+            label: i18n:exists_to_label:Exists To
+            time: True
+            datepicker: True
+            timepicker: True
+            locale: de
+            label.class_add: col-sm-2
+            div.class_add: col-sm-4
 - category:
     factory: field:label:div:help:error:select2
     value: expr:context.category_value

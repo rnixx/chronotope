@@ -2,57 +2,78 @@ factory: form
 name: locationform
 props:
     action: context.form_action
+    class: form-horizontal
 widgets:
 - lat:
-    factory: field:label:error:number
+    factory: field:label:div:help:error:number
     value: expr:context.model.attrs['lat']
     props:
         label: i18n:lat_label:Latitude
         required: i18n:lat_required:Latitude is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - lon:
-    factory: field:label:error:number
+    factory: field:label:div:help:error:number
     value: expr:context.model.attrs['lon']
     props:
         label: i18n:lon_label:Longitude
         required: i18n:lat_required:Longitude is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - street:
-    factory: field:label:error:text
+    factory: field:label:div:help:error:text
     value: expr:context.model.attrs['street']
     props:
         label: i18n:street_label:Street
         required: i18n:lat_required:Street is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - zip:
-    factory: field:label:error:text
+    factory: field:label:div:help:error:text
     value: expr:context.model.attrs['zip']
     props:
         label: i18n:zip_label:ZIP
         required: i18n:lat_required:ZIP is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - city:
-    factory: field:label:error:text
+    factory: field:label:div:help:error:text
     value: expr:context.model.attrs['city']
     props:
         label: i18n:city_label:City
         required: i18n:lat_required:City is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - country:
-    factory: field:label:error:text
+    factory: field:label:div:help:error:text
     value: expr:context.model.attrs['country']
     props:
         label: i18n:country_label:Country
         required: i18n:lat_required:Country is required
-- save:
-    factory: submit
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- controls:
+    factory: field:div
     props:
-        action: save
-        expression: True
-        handler: context.save
-        next: context.next
-        label: i18n:save:Save
-- cancel:
-    factory: submit
-    props:
-        action: cancel
-        expression: expr:context.action_resource == 'add'
-        handler: None
-        next: context.next
-        label: i18n:cancel:Cancel
-        skip: True
+        structural: True
+        div.class_add: col-sm-offset-2 col-sm-10
+    widgets:
+    - save:
+        factory: submit
+        props:
+            action: save
+            expression: True
+            handler: context.save
+            next: context.next
+            label: i18n:save:Save
+            class_add: btn-default
+    - cancel:
+        factory: submit
+        props:
+            action: cancel
+            expression: expr:context.action_resource == 'add'
+            handler: None
+            next: context.next
+            label: i18n:cancel:Cancel
+            skip: True
+            class_add: btn-warning

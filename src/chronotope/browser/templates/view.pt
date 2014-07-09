@@ -4,6 +4,24 @@
           i18n:domain="chronotope"
           omit-tag="True">
 
-  <tal:view_tile replace="structure tile(context.view_tile)" />
+  <tal:contextmenu replace="structure tile('contextmenu')" />
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading content-heading">
+
+      <h4 class="col-xs-4 pull-left">
+        <span class="label label-primary">View</span>
+      </h4>
+
+      <div class="clearfix"></div>
+
+    </div>
+
+    <div class="panel-body">
+      <tal:view_tile replace="structure tile(context.view_tile)" />
+    </div>
+
+  </div>
 
 </tal:view>

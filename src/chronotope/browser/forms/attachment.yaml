@@ -4,6 +4,56 @@ props:
     action: context.form_action
     class: form-horizontal
 widgets:
+- title:
+    factory: field:label:div:help:error:text
+    value: expr:context.model.attrs['title']
+    props:
+        label: i18n:title_label:Title
+        help: i18n:attachment_title_help:Enter title of attachment
+        required: i18n:title_required:Title is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- location:
+    factory: field:label:div:help:error:select2
+    value: expr:context.location_value
+    props:
+        label: i18n:location_label:Location
+        help: i18n:attachment_location_help:Select locations attachment belongs to
+        inputtag: True
+        minimumInputLength: 3
+        multiple: True
+        placeholder: i18n:location_placeholder:Select or add location
+        ajaxurl: chronotope.location
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- facility:
+    factory: field:label:div:help:error:select2
+    value: expr:context.facility_value
+    props:
+        label: i18n:facility_label:Facility
+        help: i18n:attachment_facility_help:Select facilities attachment belongs to
+        inputtag: True
+        minimumInputLength: 3
+        multiple: True
+        placeholder: i18n:category_placeholder:Select or add facility
+        ajaxurl: chronotope.facility
+        tags: True,
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- occasion:
+    factory: field:label:div:help:error:select2
+    value: expr:context.occasion_value
+    props:
+        label: i18n:occasion_label:Occasion
+        help: i18n:attachment_occasion_help:Select occasions attachment belongs to
+        inputtag: True
+        minimumInputLength: 3
+        multiple: True
+        placeholder: i18n:category_placeholder:Select or add occasion
+        ajaxurl: chronotope.occasion
+        tags: True,
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - controls:
     factory: field:div
     props:

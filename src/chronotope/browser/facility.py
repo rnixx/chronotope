@@ -1,7 +1,7 @@
 import uuid
 from plumber import plumber
-from webob.exc import HTTPFound
 from pyramid.i18n import TranslationStringFactory
+from pyramid.view import view_config
 from cone.tile import (
     tile,
     Tile,
@@ -11,9 +11,6 @@ from cone.app.utils import (
     update_creation_metadata,
 )
 from cone.app.browser.layout import ProtectedContentTile
-from cone.app.browser.ajax import (
-    AjaxAction,
-)
 from cone.app.browser.form import (
     Form,
     YAMLForm,
@@ -22,11 +19,21 @@ from cone.app.browser.authoring import (
     AddBehavior,
     EditBehavior,
 )
-from cone.app.browser.utils import make_url
 from chronotope.model import Facility
+from chronotope.browser import AuthoringNext
 
 
 _ = TranslationStringFactory('chronotope')
+
+
+@view_config(name='chronotope.facility',
+             accept='application/json',
+             renderer='json')
+def json_facility(model, request):
+    return [
+        {'id': 'Facility1-uid', 'text': 'Facility1'},
+        {'id': 'Facility2-uid', 'text': 'Facility2'},
+    ]
 
 
 @tile('content', 'templates/view.pt',
@@ -47,20 +54,21 @@ class FacilityForm(object):
     __metaclass__ = plumber
     __plumbing__ = YAMLForm
 
+    form_name = 'facilityform'
     form_template = 'chronotope.browser:forms/facility.yaml'
     message_factory = _
 
     @property
     def category_value(self):
-        return []
+        return ['a', 'b', 'c']
 
     @property
     def location_value(self):
-        return []
+        return ['d', 'e', 'f']
 
     def save(self, widget, data):
         def fetch(name):
-            return data.fetch('facilityform.%s' % name).extracted
+            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
         attrs = self.model.attrs
         attrs['title'] = fetch('title')
         attrs['description'] = fetch('description')
@@ -71,23 +79,14 @@ class FacilityForm(object):
         #attrs['category'] = fetch('category')
         #attrs['location'] = fetch('location')
 
-    def next(self, request):
-        model = self.model
-        tile = 'content'
-        if self.request.params.get('action.facilityform.cancel'):
-            model = model.parent
-        url = make_url(request.request, node=model)
-        if self.ajax_request:
-            return [
-                AjaxAction(url, tile, 'inner', '#content'),
-            ]
-        return HTTPFound(location=url)
-
 
 @tile('addform', interface=Facility, permission="add")
 class FacilityAddForm(FacilityForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = AddBehavior
+    __plumbing__ = (
+        AddBehavior,
+        AuthoringNext,
+    )
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -100,7 +99,10 @@ class FacilityAddForm(FacilityForm, Form):
 @tile('editform', interface=Facility, permission="edit")
 class FacilityEditForm(FacilityForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = EditBehavior
+    __plumbing__ = (
+        EditBehavior,
+        AuthoringNext,
+    )
 
     def save(self, widget, data):
         attrs = self.model.attrs

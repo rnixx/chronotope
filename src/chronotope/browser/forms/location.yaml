@@ -9,6 +9,7 @@ widgets:
     value: expr:context.model.attrs['lat']
     props:
         label: i18n:lat_label:Latitude
+        help: i18n:location_lat_help:Enter latitude of location
         required: i18n:lat_required:Latitude is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
@@ -17,6 +18,7 @@ widgets:
     value: expr:context.model.attrs['lon']
     props:
         label: i18n:lon_label:Longitude
+        help: i18n:location_lon_help:Enter longitude of location
         required: i18n:lat_required:Longitude is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
@@ -25,6 +27,7 @@ widgets:
     value: expr:context.model.attrs['street']
     props:
         label: i18n:street_label:Street
+        help: i18n:location_street_help:Enter street of location
         required: i18n:lat_required:Street is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
@@ -33,6 +36,7 @@ widgets:
     value: expr:context.model.attrs['zip']
     props:
         label: i18n:zip_label:ZIP
+        help: i18n:location_zip_help:Enter ZIP of location
         required: i18n:lat_required:ZIP is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
@@ -41,6 +45,7 @@ widgets:
     value: expr:context.model.attrs['city']
     props:
         label: i18n:city_label:City
+        help: i18n:location_city_help:Enter city of location
         required: i18n:lat_required:City is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
@@ -49,6 +54,7 @@ widgets:
     value: expr:context.model.attrs['country']
     props:
         label: i18n:country_label:Country
+        help: i18n:location_country_help:Enter country of location
         required: i18n:lat_required:Country is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10

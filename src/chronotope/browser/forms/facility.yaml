@@ -9,6 +9,7 @@ widgets:
     value: expr:context.model.attrs['title']
     props:
         label: i18n:title_label:Title
+        help: i18n:facility_title_help:Enter title of facility
         required: i18n:title_required:Title is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
@@ -17,6 +18,7 @@ widgets:
     value: expr:context.model.attrs['description']
     props:
         label: i18n:description_label:Description
+        help: i18n:facility_description_help:Enter description of facility
         required: i18n:title_required:Description is required
         size: sm
         color: True
@@ -40,6 +42,7 @@ widgets:
         value: expr:context.model.attrs['exists_from']
         props:
             label: i18n:exists_from_label:Exists From
+            help: i18n:facility_exists_from_help:Enter opening date of facility
             time: True
             datepicker: True
             timepicker: True
@@ -51,6 +54,7 @@ widgets:
         value: expr:context.model.attrs['exists_to']
         props:
             label: i18n:exists_to_label:Exists To
+            help: i18n:facility_exists_to_help:Enter closing date of facility
             time: True
             datepicker: True
             timepicker: True
@@ -62,6 +66,7 @@ widgets:
     value: expr:context.category_value
     props:
         label: i18n:category_label:Category
+        help: i18n:facility_category_help:Select categories for facility
         inputtag: True
         minimumInputLength: 3
         multiple: True
@@ -75,6 +80,7 @@ widgets:
     value: expr:context.location_value
     props:
         label: i18n:location_label:Location
+        help: i18n:facility_location_help:Select locations facility belongs to
         inputtag: True
         minimumInputLength: 3
         multiple: True

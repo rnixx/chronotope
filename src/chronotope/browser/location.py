@@ -3,11 +3,15 @@ from plumber import plumber
 from webob.exc import HTTPFound
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
-from cone.tile import tile
+from cone.tile import (
+    tile,
+    Tile,
+)
 from cone.app.utils import (
     add_creation_metadata,
     update_creation_metadata,
 )
+from cone.app.browser.layout import ProtectedContentTile
 from cone.app.browser.ajax import (
     AjaxAction,
 )
@@ -34,6 +38,20 @@ def json_location(model, request):
         {'id': 'Location1', 'text': 'Location1'},
         {'id': 'Location2', 'text': 'Location2'},
     ]
+
+
+@tile('content', 'templates/view.pt',
+      interface=Location, permission='view',
+      strict=False)
+class LocationView(ProtectedContentTile):
+    view_tile = 'location'
+
+
+@tile('location', 'templates/location.pt',
+      interface=Location, permission='login',
+      strict=False)
+class LocationTile(Tile):
+    pass
 
 
 class LocationForm(object):

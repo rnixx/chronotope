@@ -1,0 +1,9 @@
+<tal:attachment xmlns:tal="http://xml.zope.org/namespaces/tal"
+                xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
+                i18n:domain="chronotope"
+                omit-tag="True">
+
+  Attachment
+
+</tal:attachment>

@@ -2,11 +2,15 @@ import uuid
 from plumber import plumber
 from webob.exc import HTTPFound
 from pyramid.i18n import TranslationStringFactory
-from cone.tile import tile
+from cone.tile import (
+    tile,
+    Tile,
+)
 from cone.app.utils import (
     add_creation_metadata,
     update_creation_metadata,
 )
+from cone.app.browser.layout import ProtectedContentTile
 from cone.app.browser.ajax import (
     AjaxAction,
 )
@@ -23,6 +27,20 @@ from chronotope.model import Facility
 
 
 _ = TranslationStringFactory('chronotope')
+
+
+@tile('content', 'templates/view.pt',
+      interface=Facility, permission='view',
+      strict=False)
+class FacilityView(ProtectedContentTile):
+    view_tile = 'facility'
+
+
+@tile('facility', 'templates/facility.pt',
+      interface=Facility, permission='login',
+      strict=False)
+class FacilityTile(Tile):
+    pass
 
 
 class FacilityForm(object):

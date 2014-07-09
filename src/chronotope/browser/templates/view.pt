@@ -1,0 +1,9 @@
+<tal:view xmlns:tal="http://xml.zope.org/namespaces/tal"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
+          i18n:domain="chronotope"
+          omit-tag="True">
+
+  <tal:view_tile replace="structure tile(context.view_tile)" />
+
+</tal:view>

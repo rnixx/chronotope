@@ -18,7 +18,6 @@ Imports::
 Fetch containers::
 
     >>> root = get_root()
-    >>> chronotope = root['chronotope']
 
 Create categories::
 
@@ -37,7 +36,7 @@ Create categories::
 
 Create locations::
 
-    >>> locations = chronotope['locations']
+    >>> locations = root['locations']
 
     >>> location1 = Location()
     >>> location1.attrs['creator'] = u'manager'
@@ -65,7 +64,7 @@ Create locations::
 
 Create facilities::
 
-    >>> facilities = chronotope['facilities']
+    >>> facilities = root['facilities']
 
     >>> facility1 = Facility()
     >>> facility1.attrs['creator'] = u'manager'
@@ -127,7 +126,7 @@ Check references and back references of facility to category reference::
 
 Create occasions::
 
-    >>> occasions = chronotope['occasions']
+    >>> occasions = root['occasions']
 
     >>> occasion1 = Occasion()
     >>> occasion1.attrs['creator'] = u'manager'
@@ -170,7 +169,7 @@ Check references and back references of occasion to facility reference::
 
 Create attachments::
 
-    >>> attachments = chronotope['attachments']
+    >>> attachments = root['attachments']
 
     >>> attachment1 = Attachment()
     >>> attachment1.attrs['creator'] = u'manager'
@@ -252,20 +251,21 @@ Commit::
 
 Cleanup::
 
-    >>> chronotope.printtree()
-    <class 'chronotope.model.Chronotope'>: chronotope
+    >>> root.printtree()
+    <class 'cone.app.model.AppRoot'>: None
+      <class 'cone.app.model.AppSettings'>: settings
       <class 'chronotope.model.location.Locations'>: locations
-        <class 'chronotope.model.location.Location'>: 4252cd8d...
-        <class 'chronotope.model.location.Location'>: b8f6464b...
+        <class 'chronotope.model.location.Location'>: 4252cd8d-...
+        <class 'chronotope.model.location.Location'>: b8f6464b-...
       <class 'chronotope.model.facility.Facilities'>: facilities
-        <class 'chronotope.model.facility.Facility'>: 8a85304c...
-        <class 'chronotope.model.facility.Facility'>: a23d5cae...
+        <class 'chronotope.model.facility.Facility'>: 8a85304c-...
+        <class 'chronotope.model.facility.Facility'>: a23d5cae-...
       <class 'chronotope.model.occasion.Occasions'>: occasions
-        <class 'chronotope.model.occasion.Occasion'>: 104f345...
-        <class 'chronotope.model.occasion.Occasion'>: 7cb5828f...
+        <class 'chronotope.model.occasion.Occasion'>: 104f3451-...
+        <class 'chronotope.model.occasion.Occasion'>: 7cb5828f-...
       <class 'chronotope.model.attachment.Attachments'>: attachments
-        <class 'chronotope.model.attachment.Attachment'>: 7e964f01...
-        <class 'chronotope.model.attachment.Attachment'>: cd6fabd0...
+        <class 'chronotope.model.attachment.Attachment'>: 7e964f01-...
+        <class 'chronotope.model.attachment.Attachment'>: cd6fabd0-...
 
     >>> session.delete(category1)
     >>> session.delete(category2)
@@ -279,8 +279,9 @@ Cleanup::
     >>> del attachments['7e964f01-56b9-40c8-a2f0-ac6aa53fa0e6']
     >>> session.commit()
 
-    >>> chronotope.printtree()
-    <class 'chronotope.model.Chronotope'>: chronotope
+    >>> root.printtree()
+    <class 'cone.app.model.AppRoot'>: None
+      <class 'cone.app.model.AppSettings'>: settings
       <class 'chronotope.model.location.Locations'>: locations
       <class 'chronotope.model.facility.Facilities'>: facilities
       <class 'chronotope.model.occasion.Occasions'>: occasions

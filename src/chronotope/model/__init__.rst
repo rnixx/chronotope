@@ -1,54 +1,22 @@
 chronotope.model
 ================
 
-Chronotope node::
+Chronotope entry nodes::
 
     >>> from cone.app import get_root
     >>> root = get_root()
-    >>> chronotope = root['chronotope']
-    >>> chronotope
-    <Chronotope object 'chronotope' at ...>
 
-    >>> chronotope.__parent__
-    <AppRoot object 'None' at ...>
+    >>> root.keys()
+    ['settings', 'locations', 'facilities', 'occasions', 'attachments']
 
-Chronotope props::
-
-    >>> props = chronotope.properties
-    >>> props
-    <cone.app.model.Properties object at ...>
-
-    >>> props.in_navtree
-    True
-
-    >>> props.icon
-    'icon-globe'
-
-Chronotope metadata::
-
-    >>> md = chronotope.metadata
-    >>> md
-    <cone.app.model.Metadata object at ...>
-
-    >>> md.title
-    u'chronotope_label'
-
-    >>> md.description
-    u'chronotope_description'
-
-Chronotope children::
-
-    >>> chronotope.keys()
-    ['locations', 'facilities', 'occasions', 'attachments']
-
-    >>> chronotope['locations']
+    >>> root['locations']
     <Locations object 'locations' at ...>
 
-    >>> chronotope['facilities']
+    >>> root['facilities']
     <Facilities object 'facilities' at ...>
 
-    >>> chronotope['occasions']
+    >>> root['occasions']
     <Occasions object 'occasions' at ...>
 
-    >>> chronotope['attachments']
+    >>> root['attachments']
     <Attachments object 'attachments' at ...>

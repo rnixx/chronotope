@@ -5,13 +5,12 @@ Attachments node::
 
     >>> from cone.app import get_root
     >>> root = get_root()
-    >>> chronotope = root['chronotope']
-    >>> attachments = chronotope['attachments']
+    >>> attachments = root['attachments']
     >>> attachments
     <Attachments object 'attachments' at ...>
 
     >>> attachments.__parent__
-    <Chronotope object 'chronotope' at ...>
+    <AppRoot object 'None' at ...>
 
 Attachments props::
 

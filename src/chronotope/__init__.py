@@ -12,25 +12,27 @@ from chronotope import model
 logger = logging.getLogger('chronotope')
 
 # css resources
-cone.app.cfg.css.public.append('chronotope-static/chronotope.css')
+#cone.app.cfg.css.public.append('chronotope-static/chronotope.css')
 
 # js resources
-cone.app.cfg.js.public.append(
-    'http://cdn.tortuga.squarewave.at/osm/latest/OpenLayers.js')
-cone.app.cfg.js.public.append('chronotope-static/chronotope.js')
+#cone.app.cfg.js.public.append(
+#    'http://cdn.tortuga.squarewave.at/osm/latest/OpenLayers.js')
+#cone.app.cfg.js.public.append('chronotope-static/chronotope.js')
 
-if not os.environ.get('CHRONOTOPE_TESTRUN', False):
+#if not os.environ.get('CHRONOTOPE_TESTRUN', False):
     # hide livesearch
-    cone.app.cfg.layout.livesearch = False
+    #cone.app.cfg.layout.livesearch = False
 
     # no settings node needed
-    del cone.app.root.factories['settings']
+    #del cone.app.root.factories['settings']
 
-# plugin entry
-cone.app.register_plugin('chronotope', model.Chronotope)
+# plugin entry nodes
+cone.app.register_plugin('locations', model.Locations)
+cone.app.register_plugin('facilities', model.Facilities)
+cone.app.register_plugin('occasions', model.Occasions)
+cone.app.register_plugin('attachments', model.Attachments)
 
 # register ACL's for nodes
-acl_registry.register(chronotope_default_acl, model.Chronotope)
 acl_registry.register(chronotope_default_acl, model.Locations)
 acl_registry.register(chronotope_default_acl, model.Facilities)
 acl_registry.register(chronotope_default_acl, model.Occasions)

@@ -5,13 +5,12 @@ Occasions node::
 
     >>> from cone.app import get_root
     >>> root = get_root()
-    >>> chronotope = root['chronotope']
-    >>> occasions = chronotope['occasions']
+    >>> occasions = root['occasions']
     >>> occasions
     <Occasions object 'occasions' at ...>
 
     >>> occasions.__parent__
-    <Chronotope object 'chronotope' at ...>
+    <AppRoot object 'None' at ...>
 
 Occasions props::
 

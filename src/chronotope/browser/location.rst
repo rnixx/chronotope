@@ -9,8 +9,7 @@ Imports::
 Get model::
 
     >>> root = get_root()
-    >>> chronotope = root['chronotope']
-    >>> locations = chronotope['locations']
+    >>> locations = root['locations']
 
 Locations are empty::
 
@@ -29,7 +28,7 @@ Empty add form::
     ... }
 
     >>> res = render_tile(locations, request, 'add', catch_errors=False)
-    >>> res.find('action="http://example.com/chronotope/locations/add"') > -1
+    >>> res.find('action="http://example.com/locations/add"') > -1
     True
 
 Submit add form::

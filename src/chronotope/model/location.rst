@@ -5,13 +5,12 @@ Locations node::
 
     >>> from cone.app import get_root
     >>> root = get_root()
-    >>> chronotope = root['chronotope']
-    >>> locations = chronotope['locations']
+    >>> locations = root['locations']
     >>> locations
     <Locations object 'locations' at ...>
 
     >>> locations.__parent__
-    <Chronotope object 'chronotope' at ...>
+    <AppRoot object 'None' at ...>
 
 Locations props::
 

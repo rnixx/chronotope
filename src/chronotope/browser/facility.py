@@ -46,6 +46,8 @@ class FacilityForm(object):
         attrs['description'] = fetch('description')
         attrs['exists_from'] = fetch('exists_from')
         attrs['exists_to'] = fetch('exists_to')
+        print fetch('category')
+        print fetch('location')
         #attrs['category'] = fetch('category')
         #attrs['location'] = fetch('location')
 

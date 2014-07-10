@@ -63,8 +63,24 @@ class FacilityForm(object):
         return ['a', 'b', 'c']
 
     @property
+    def category_vocab(self):
+        return {
+            'a': 'Label a',
+            'b': 'Label b',
+            'c': 'Label c',
+        }
+
+    @property
     def location_value(self):
         return ['d', 'e', 'f']
+
+    @property
+    def location_vocab(self):
+        return {
+            'd': 'Label d',
+            'e': 'Label e',
+            'f': 'Label f',
+        }
 
     def save(self, widget, data):
         def fetch(name):

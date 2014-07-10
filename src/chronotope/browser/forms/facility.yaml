@@ -67,6 +67,7 @@ widgets:
     props:
         label: i18n:category_label:Category
         help: i18n:facility_category_help:Select categories for facility
+        vocabulary: expr:context.category_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True
@@ -81,6 +82,7 @@ widgets:
     props:
         label: i18n:location_label:Location
         help: i18n:facility_location_help:Select locations facility belongs to
+        vocabulary: expr:context.location_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True

@@ -62,6 +62,14 @@ class OccasionForm(object):
     def facility_value(self):
         return ['g', 'h', 'i']
 
+    @property
+    def facility_vocab(self):
+        return {
+            'g': 'Label g',
+            'h': 'Label h',
+            'i': 'Label i',
+        }
+
     def save(self, widget, data):
         def fetch(name):
             return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted

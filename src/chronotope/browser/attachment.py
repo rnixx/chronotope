@@ -53,12 +53,36 @@ class AttachmentForm(object):
         return ['a', 'b', 'c']
 
     @property
+    def location_vocab(self):
+        return {
+            'a': 'Label a',
+            'b': 'Label a',
+            'c': 'Label a',
+        }
+
+    @property
     def facility_value(self):
         return ['d', 'e', 'f']
 
     @property
+    def facility_vocab(self):
+        return {
+            'd': 'Label d',
+            'e': 'Label e',
+            'f': 'Label f',
+        }
+
+    @property
     def occasion_value(self):
         return ['g', 'h', 'i']
+
+    @property
+    def occasion_vocab(self):
+        return {
+            'g': 'Label g',
+            'h': 'Label h',
+            'i': 'Label i',
+        }
 
     def save(self, widget, data):
         def fetch(name):

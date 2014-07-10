@@ -67,6 +67,7 @@ widgets:
     props:
         label: i18n:facility_label:Facility
         help: i18n:occasion_facility_help:Select facilities occasion belongs to
+        vocabulary: expr:context.facility_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True

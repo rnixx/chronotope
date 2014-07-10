@@ -1,6 +1,9 @@
-body {
-    font-family:'Droid Serif',Georgia,serif;
+.navbar-default .navbar-nav > li > a.state-draft {
+    color:orange;
 }
-#header {
-    background-color:#782850;
+.navbar-default .navbar-nav > li > a.state-published {
+    color:green;
+}
+.navbar-default .navbar-nav > li > a.state-declined {
+    color:red;
 }

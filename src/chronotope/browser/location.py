@@ -1,5 +1,6 @@
 import uuid
 from plumber import plumber
+from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from cone.tile import (
@@ -57,13 +58,27 @@ class LocationForm(object):
     form_name = 'locationform'
     form_template = 'chronotope.browser:forms/location.yaml'
     message_factory = _
+    location_zoom = 15
+
+    @property
+    def coordinates_value(self):
+        attrs = self.model.attrs
+        if attrs['lat'] is not None and attrs['lon'] is not None:
+            return {
+                'lat': attrs['lat'],
+                'lon': attrs['lon'],
+                'zoom': self.location_zoom,
+            }
+        return UNSET
 
     def save(self, widget, data):
         def fetch(name):
             return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
         attrs = self.model.attrs
-        attrs['lat'] = fetch('lat')
-        attrs['lon'] = fetch('lon')
+        coordinates = fetch('coordinates')
+        if coordinates:
+            attrs['lat'] = coordinates['lat']
+            attrs['lon'] = coordinates['lon']
         attrs['street'] = fetch('street')
         attrs['zip'] = fetch('zip')
         attrs['city'] = fetch('city')

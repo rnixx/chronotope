@@ -4,22 +4,13 @@ props:
     action: context.form_action
     class: form-horizontal
 widgets:
-- lat:
-    factory: field:label:div:help:error:number
-    value: expr:context.model.attrs['lat']
+- coordinates:
+    factory: field:label:div:help:error:location
+    value: expr:context.coordinates_value
     props:
-        label: i18n:lat_label:Latitude
-        help: i18n:location_lat_help:Enter latitude of location
-        required: i18n:lat_required:Latitude is required
-        label.class_add: col-sm-2
-        div.class_add: col-sm-10
-- lon:
-    factory: field:label:div:help:error:number
-    value: expr:context.model.attrs['lon']
-    props:
-        label: i18n:lon_label:Longitude
-        help: i18n:location_lon_help:Enter longitude of location
-        required: i18n:lat_required:Longitude is required
+        label: i18n:coordinates_label:Coordinates
+        help: i18n:location_coordinates_help:Pick point on map to set coordinates
+        required: i18n:coordinates_required:Coordinates are required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - street:

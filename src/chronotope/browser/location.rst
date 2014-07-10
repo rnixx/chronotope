@@ -35,8 +35,9 @@ Submit add form::
 
     >>> request.params = {
     ...     'factory': 'location',
-    ...     'locationform.lat': '11.1',
-    ...     'locationform.lon': '47.5',
+    ...     'locationform.coordinates.lat': '11.1',
+    ...     'locationform.coordinates.lon': '47.5',
+    ...     'locationform.coordinates.zoom': '11',
     ...     'locationform.street': u'Museumstrasse 1',
     ...     'locationform.zip': '6020',
     ...     'locationform.city': 'Innsbruck',
@@ -72,8 +73,9 @@ Edit location::
 
     >>> request.params = {
     ...     'factory': 'location',
-    ...     'locationform.lat': '15.1',
-    ...     'locationform.lon': '42.5',
+    ...     'locationform.coordinates.lat': '15.1',
+    ...     'locationform.coordinates.lon': '42.5',
+    ...     'locationform.coordinates.zoom': '16',
     ...     'locationform.street': u'Musterstrasse 1',
     ...     'locationform.zip': '1234',
     ...     'locationform.city': 'Musterort',

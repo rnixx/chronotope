@@ -109,7 +109,8 @@ class AttachmentForm(object):
 
     @property
     def type_value(self):
-        a_type = self.model.attrs['attachment_type']
+        a_type = self.request.params.get('{0}.type'.format(self.form_name))
+        a_type = a_type and a_type or self.model.attrs['attachment_type']
         return a_type and a_type or self.default_attachment_type
 
     @property
@@ -122,23 +123,27 @@ class AttachmentForm(object):
 
     @property
     def text_value(self):
-        a_type = self.model.attrs['attachment_type']
+        a_type = self.type_value
         if a_type == 'text':
             return self.model.attrs['payload'].decode('utf-8')
         return UNSET
 
     @property
     def file_value(self):
-        a_type = self.model.attrs['attachment_type']
+        a_type = self.type_value
+        if not a_type:
+            a_type = self.model.attrs['attachment_type']
         if a_type == 'file':
-            return { 'file': True }
+            # XXX: replace with exists marker
+            return {'file': True}
         return UNSET
 
     @property
     def image_value(self):
-        a_type = self.model.attrs['attachment_type']
+        a_type = self.type_value
         if a_type == 'image':
-            return {}
+            # XXX: replace with exists marker
+            return {'file': True}
         return UNSET
 
     @property
@@ -221,7 +226,6 @@ class AttachmentForm(object):
         attrs = self.model.attrs
         attrs['title'] = fetch('title')
         attrs['attachment_type'] = a_type = fetch('type')
-        import pdb;pdb.set_trace()
         if a_type == 'text':
             attrs['payload'] = fetch('text').encode('utf-8')
         elif a_type == 'file':

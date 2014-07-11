@@ -12,8 +12,7 @@ from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
     Properties,
     Metadata,
-    NodeInfo,
-    registerNodeInfo,
+    node_info,
 )
 from chronotope.sql import (
     Base,
@@ -85,8 +84,12 @@ class AttachmentAttributes(SQLRowNodeAttributes):
     ]
 
 
+@node_info(
+    name='attachment',
+    title=_('attachment_label', default='Attachment'),
+    description=_('attachment_description', default='An attachment'),
+    icon='glyphicon glyphicon-file')
 class Attachment(SQLRowNode):
-    node_info_name = 'attachment'
 
     def record_factory(self):
         return AttachmentRecord()
@@ -114,17 +117,14 @@ class Attachment(SQLRowNode):
         return md
 
 
-info = NodeInfo()
-info.title = _('attachment_label', default='Attachment')
-info.description = _('attachment_description', default='An attachment')
-info.node = Attachment
-info.addables = []
-info.icon = 'glyphicon glyphicon-file'
-registerNodeInfo('attachment', info)
-
-
+@node_info(
+    name='attachments',
+    title=_('attachments_label', default='Attachments'),
+    description=_('attachments_description',
+                  default='Container for Attachments'),
+    icon='glyphicon glyphicon-folder-open',
+    addables=['attachment'])
 class Attachments(SQLTableNode):
-    node_info_name = 'attachments'
     record_class = AttachmentRecord
     child_factory = Attachment
 
@@ -145,13 +145,3 @@ class Attachments(SQLTableNode):
         md.description = \
             _('attachments_description', default='Container for Attachments')
         return md
-
-
-info = NodeInfo()
-info.title = _('attachments_label', default='Attachments')
-info.description = \
-    _('attachments_description', default='Container for Attachments')
-info.node = Attachments
-info.addables = ['attachment']
-info.icon = 'glyphicon glyphicon-folder-open'
-registerNodeInfo('attachments', info)

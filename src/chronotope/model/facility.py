@@ -11,8 +11,7 @@ from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
     Properties,
     Metadata,
-    NodeInfo,
-    registerNodeInfo,
+    node_info,
 )
 from chronotope.sql import (
     Base,
@@ -72,8 +71,12 @@ class FacilityAttributes(SQLRowNodeAttributes):
     ]
 
 
+@node_info(
+    name='facility',
+    title=_('facility_label', default='Facility'),
+    description=_('facility_description', default='A Facility'),
+    icon='glyphicon glyphicon-home')
 class Facility(SQLRowNode):
-    node_info_name = 'facility'
 
     def record_factory(self):
         return FacilityRecord()
@@ -102,17 +105,14 @@ class Facility(SQLRowNode):
         return md
 
 
-info = NodeInfo()
-info.title = _('facility_label', default='Facility')
-info.description = _('facility_description', default='A Facility')
-info.node = Facility
-info.addables = []
-info.icon = 'glyphicon glyphicon-home'
-registerNodeInfo('facility', info)
-
-
+@node_info(
+    name='facilities',
+    title=_('facilities_label', default='Facilities'),
+    description=_('facilities_description',
+                  default='Container for Facilities'),
+    icon='glyphicon glyphicon-record',
+    addables=['facility'])
 class Facilities(SQLTableNode):
-    node_info_name = 'facilities'
     record_class = FacilityRecord
     child_factory = Facility
 
@@ -133,13 +133,3 @@ class Facilities(SQLTableNode):
         md.description = \
             _('facilities_description', default='Container for Facilities')
         return md
-
-
-info = NodeInfo()
-info.title = _('facilities_label', default='Facilities')
-info.description = \
-    _('facilities_description', default='Container for Facilities')
-info.node = Facilities
-info.addables = ['facility']
-info.icon = 'glyphicon glyphicon-record'
-registerNodeInfo('facilities', info)

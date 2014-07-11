@@ -11,8 +11,7 @@ from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
     Properties,
     Metadata,
-    NodeInfo,
-    registerNodeInfo,
+    node_info,
 )
 from chronotope.sql import (
     Base,
@@ -58,8 +57,12 @@ class OccasionAttributes(SQLRowNodeAttributes):
     ]
 
 
+@node_info(
+    name='occasion',
+    title=_('occasion_label', default='Occasion'),
+    description=_('occasion_description', default='An Occasion'),
+    icon='glyphicon glyphicon-star-empty')
 class Occasion(SQLRowNode):
-    node_info_name = 'occasion'
 
     def record_factory(self):
         return OccasionRecord()
@@ -88,17 +91,13 @@ class Occasion(SQLRowNode):
         return md
 
 
-info = NodeInfo()
-info.title = _('occasion_label', default='Occasion')
-info.description = _('occasion_description', default='An Occasion')
-info.node = Occasion
-info.addables = []
-info.icon = 'glyphicon glyphicon-star-empty'
-registerNodeInfo('occasion', info)
-
-
+@node_info(
+    name='occasions',
+    title=_('occasions_label', default='Occasions'),
+    description=_('occasions_description', default='Container for Occasions'),
+    icon='glyphicon glyphicon-calendar',
+    addables=['occasion'])
 class Occasions(SQLTableNode):
-    node_info_name = 'occasions'
     record_class = OccasionRecord
     child_factory = Occasion
 
@@ -119,13 +118,3 @@ class Occasions(SQLTableNode):
         md.description = \
             _('occasions_description', default='Container for Occasions')
         return md
-
-
-info = NodeInfo()
-info.title = _('occasions_label', default='Occasions')
-info.description = \
-    _('occasions_description', default='Container for Occasions')
-info.node = Occasions
-info.addables = ['occasion']
-info.icon = 'glyphicon glyphicon-calendar'
-registerNodeInfo('occasions', info)

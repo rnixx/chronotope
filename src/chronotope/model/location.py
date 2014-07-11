@@ -9,8 +9,7 @@ from pyramid.i18n import TranslationStringFactory
 from cone.app.model import (
     Properties,
     Metadata,
-    NodeInfo,
-    registerNodeInfo,
+    node_info,
 )
 from chronotope.sql import (
     Base,
@@ -46,8 +45,12 @@ class LocationAttributes(SQLRowNodeAttributes):
     ]
 
 
+@node_info(
+    name='location',
+    title=_('location_label', default='Location'),
+    description=_('location_description', default='A location'),
+    icon='glyphicon glyphicon-map-marker')
 class Location(SQLRowNode):
-    node_info_name = 'location'
 
     def record_factory(self):
         return LocationRecord()
@@ -77,17 +80,14 @@ class Location(SQLRowNode):
         return md
 
 
-info = NodeInfo()
-info.title = _('location_label', default='Location')
-info.description = _('location_description', default='A location')
-info.node = Location
-info.addables = []
-info.icon = 'glyphicon glyphicon-map-marker'
-registerNodeInfo('location', info)
-
-
+@node_info(
+    name='locations',
+    title=_('locations_label', default='Locations'),
+    description=_('locations_description',
+                  default='Container for Locations'),
+    icon='glyphicon glyphicon-globe',
+    addables=['location'])
 class Locations(SQLTableNode):
-    node_info_name = 'locations'
     record_class = LocationRecord
     child_factory = Location
 
@@ -108,13 +108,3 @@ class Locations(SQLTableNode):
         md.description = \
             _('locations_description', default='Container for Locations')
         return md
-
-
-info = NodeInfo()
-info.title = _('locations_label', default='Locations')
-info.description = \
-    _('locations_description', default='Container for Locations')
-info.node = Locations
-info.addables = ['location']
-info.icon = 'glyphicon glyphicon-globe'
-registerNodeInfo('locations', info)

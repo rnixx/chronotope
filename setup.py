@@ -30,6 +30,7 @@ setup(name='chronotope',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'html2text',
           'hurry.filesize',
           'zope.sqlalchemy',
           'node.ext.ugm',

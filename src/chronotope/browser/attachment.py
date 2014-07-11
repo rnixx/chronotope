@@ -1,5 +1,6 @@
 import uuid
 import pickle
+import html2text
 from StringIO import StringIO
 from plumber import plumber
 from node.utils import UNSET
@@ -42,14 +43,15 @@ def download(model, request):
     payload = model.attrs['payload']
     response = Response()
     if a_type == 'text':
-        # XXX: BeautifulSoup transform of the text
-        response.body = payload
+        response.text = html2text.html2text(payload.decode('utf-8'))
         response.headers['Content-Type'] = 'text/plain'
         response.headers['Content-Disposition'] = \
-            'attachment;filename={0}'.format(model.name)
+            'attachment;filename={0}.txt'.format(model.name)
     elif a_type == 'file':
         payload = pickle.loads(payload)
-        response.body = payload['file']
+        file_data = payload['file']
+        file_data.seek(0)
+        response.body = file_data.read()
         response.headers['Content-Type'] = payload['mimetype']
         response.headers['Content-Disposition'] = \
             'attachment;filename={0}'.format(payload['filename'])
@@ -99,6 +101,13 @@ class AttachmentForm(object):
         return data.fetch('{0}.{1}'.format(self.form_name, name))
 
     @property
+    def file_action_vocabulary(self):
+        return [
+            ('keep', u'Keep Existing image'),
+            ('replace', u'Replace existing image'),
+        ]
+
+    @property
     def type_value(self):
         a_type = self.model.attrs['attachment_type']
         return a_type and a_type or self.default_attachment_type
@@ -115,7 +124,7 @@ class AttachmentForm(object):
     def text_value(self):
         a_type = self.model.attrs['attachment_type']
         if a_type == 'text':
-            return self.model.attrs['payload']
+            return self.model.attrs['payload'].decode('utf-8')
         return UNSET
 
     @property
@@ -126,17 +135,10 @@ class AttachmentForm(object):
         return UNSET
 
     @property
-    def image_vocabulary(self):
-        return [
-            ('keep', u'Keep Existing image'),
-            ('replace', u'Replace existing image'),
-        ]
-
-    @property
     def image_value(self):
         a_type = self.model.attrs['attachment_type']
         if a_type == 'image':
-            return { 'file': True }
+            return {}
         return UNSET
 
     @property
@@ -219,14 +221,15 @@ class AttachmentForm(object):
         attrs = self.model.attrs
         attrs['title'] = fetch('title')
         attrs['attachment_type'] = a_type = fetch('type')
+        import pdb;pdb.set_trace()
         if a_type == 'text':
-            attrs['payload'] = fetch('text')
+            attrs['payload'] = fetch('text').encode('utf-8')
         elif a_type == 'file':
             a_file = fetch('file')
             if a_file['action'] in ['new', 'replace']:
                 payload = dict()
                 payload['mimetype'] = a_file['mimetype']
-                payload['filename'] = a_file['filename'].filename
+                payload['filename'] = a_file['filename']
                 file_data = StringIO()
                 file_data.write(a_file['file'].read())
                 payload['file'] = file_data

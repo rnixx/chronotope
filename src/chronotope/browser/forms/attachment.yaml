@@ -55,6 +55,7 @@ widgets:
         props:
             help: i18n:attachment_file_help:Select file to attach
             type_required: i18n:attachment_file_required:File is required
+            vocabulary: expr:context.file_action_vocabulary
             div.class: attachment_payload file_payload
         custom:
             type_required:
@@ -69,7 +70,7 @@ widgets:
             maxsize: expr:context.image_maxsize
             scales: expr:context.image_scales
             src: expr:context.image_src
-            vocabulary: expr:context.image_vocabulary
+            vocabulary: expr:context.file_action_vocabulary
             div.class: attachment_payload image_payload
         custom:
             type_required:

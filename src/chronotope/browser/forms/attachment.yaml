@@ -13,6 +13,63 @@ widgets:
         required: i18n:title_required:Title is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
+- attachment:
+    factory: field:label:div
+    props:
+        structural: True
+        field.class: context.attachment_field_class
+        label: i18n:attachment_label:Attachment
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+    widgets:
+    - type:
+        factory: div:select
+        value: expr:context.type_value
+        props:
+            vocabulary: expr:context.type_vocab
+            placeholder: i18n:select_attachment_type:Select Attachment type
+    - text:
+        factory: div:help:error:*type_required:wysihtml5
+        value: expr:context.text_value
+        props:
+            help: i18n:attachment_text_help:Enter attachment text
+            type_required: i18n:attachment_text_required:Text is required
+            size: sm
+            color: True
+            emphasis: True
+            font-styles: True
+            html: True
+            image: True
+            justify: True
+            link: True
+            lists: True
+            div.class: attachment_payload text_payload
+        custom:
+            type_required:
+                extractors:
+                    - context.type_required
+    - file:
+        factory: div:help:error:*type_required:file
+        value: expr:context.file_value
+        props:
+            help: i18n:attachment_file_help:Select file to attach
+            type_required: i18n:attachment_file_required:File is required
+            div.class: attachment_payload file_payload
+        custom:
+            type_required:
+                extractors:
+                    - context.type_required
+    - image:
+        factory: div:help:error:*type_required:image
+        value: expr:context.image_value
+        props:
+            help: i18n:attachment_image_help:Select image to attach
+            type_required: i18n:attachment_image_required:Image is required
+            div.class: attachment_payload image_payload
+        custom:
+            type_required:
+                extractors:
+                    - context.type_required
 - location:
     factory: field:label:div:help:error:select2
     value: expr:context.location_value

@@ -1,3 +1,4 @@
+/* workflow states */
 .navbar-default .navbar-nav > li > a.state-draft {
     color:orange;
 }
@@ -6,4 +7,15 @@
 }
 .navbar-default .navbar-nav > li > a.state-declined {
     color:red;
+}
+
+/* forms */
+.has-error .help-block {
+    color: #737373;
+}
+
+/* attachment form */
+.attachment_payload {
+    margin-top:1em;
+    display:none;
 }

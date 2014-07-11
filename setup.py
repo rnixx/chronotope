@@ -38,9 +38,10 @@ setup(name='chronotope',
           'cone.app',
           'yafowil.widget.autocomplete',
           'yafowil.widget.datetime',
-          'yafowil.widget.wysihtml5',
-          'yafowil.widget.select2',
+          'yafowil.widget.image',
           'yafowil.widget.location',
+          'yafowil.widget.select2',
+          'yafowil.widget.wysihtml5',
       ],
       extras_require = dict(
           test=[

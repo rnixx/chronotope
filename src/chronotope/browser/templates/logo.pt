@@ -8,8 +8,7 @@
      href="${request.application_url}"
      ajax:bind="click"
      ajax:target="${request.application_url}"
-     ajax:event="contextchanged:.contextsensitiv
-                 contextchanged:#content">
+     ajax:event="contextchanged:#layout">
     <img src="chronotope-static/images/eigenzeiten-klein.svg"
          width="140">
   </a>

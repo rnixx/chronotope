@@ -23,11 +23,12 @@ widgets:
         div.class_add: col-sm-10
     widgets:
     - type:
-        factory: div:select
+        factory: div:help:select
         value: expr:context.type_value
         props:
+            help: i18n:help_attachment_type:Warning - changing the attachment
+                       type on existing attachments will override existing data
             vocabulary: expr:context.type_vocab
-            placeholder: i18n:select_attachment_type:Select Attachment type
     - text:
         factory: div:help:error:*type_required:wysihtml5
         value: expr:context.text_value
@@ -65,6 +66,10 @@ widgets:
         props:
             help: i18n:attachment_image_help:Select image to attach
             type_required: i18n:attachment_image_required:Image is required
+            maxsize: expr:context.image_maxsize
+            scales: expr:context.image_scales
+            src: expr:context.image_src
+            vocabulary: expr:context.image_vocabulary
             div.class: attachment_payload image_payload
         custom:
             type_required:

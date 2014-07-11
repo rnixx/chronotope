@@ -109,8 +109,7 @@ class AttachmentForm(object):
 
     @property
     def type_value(self):
-        a_type = self.request.params.get('{0}.type'.format(self.form_name))
-        a_type = a_type and a_type or self.model.attrs['attachment_type']
+        a_type = self.model.attrs['attachment_type']
         return a_type and a_type or self.default_attachment_type
 
     @property
@@ -123,16 +122,14 @@ class AttachmentForm(object):
 
     @property
     def text_value(self):
-        a_type = self.type_value
+        a_type = self.model.attrs['attachment_type']
         if a_type == 'text':
             return self.model.attrs['payload'].decode('utf-8')
         return UNSET
 
     @property
     def file_value(self):
-        a_type = self.type_value
-        if not a_type:
-            a_type = self.model.attrs['attachment_type']
+        a_type = self.model.attrs['attachment_type']
         if a_type == 'file':
             # XXX: replace with exists marker
             return {'file': True}
@@ -140,10 +137,17 @@ class AttachmentForm(object):
 
     @property
     def image_value(self):
-        a_type = self.type_value
+        a_type = self.model.attrs['attachment_type']
         if a_type == 'image':
             # XXX: replace with exists marker
-            return {'file': True}
+            #      no useless data loading then any longer
+            payload = pickle.loads(self.model.attrs['payload'])
+            image_file = payload['image']
+            image_file.seek(0)
+            return {
+                'file': image_file,
+                'mimetype': payload['mimetype'],
+            }
         return UNSET
 
     @property

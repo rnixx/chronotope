@@ -20,7 +20,6 @@ from cone.app.browser.authoring import (
     EditBehavior,
 )
 from chronotope.model import Facility
-from chronotope.browser import AuthoringNext
 
 
 _ = TranslationStringFactory('chronotope')
@@ -88,8 +87,12 @@ class FacilityForm(object):
         attrs = self.model.attrs
         attrs['title'] = fetch('title')
         attrs['description'] = fetch('description')
-        attrs['exists_from'] = fetch('exists_from')
-        attrs['exists_to'] = fetch('exists_to')
+        exists_from = fetch('exists_from')
+        if exists_from:
+            attrs['exists_from'] = exists_from
+        exists_to = fetch('exists_to')
+        if exists_to:
+            attrs['exists_to'] = exists_to
         print fetch('category')
         print fetch('location')
         #attrs['category'] = fetch('category')
@@ -99,10 +102,7 @@ class FacilityForm(object):
 @tile('addform', interface=Facility, permission="add")
 class FacilityAddForm(FacilityForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        AddBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = AddBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -115,10 +115,7 @@ class FacilityAddForm(FacilityForm, Form):
 @tile('editform', interface=Facility, permission="edit")
 class FacilityEditForm(FacilityForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        EditBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = EditBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs

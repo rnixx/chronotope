@@ -20,7 +20,6 @@ from cone.app.browser.authoring import (
     EditBehavior,
 )
 from chronotope.model import Occasion
-from chronotope.browser import AuthoringNext
 
 
 _ = TranslationStringFactory('chronotope')
@@ -76,8 +75,12 @@ class OccasionForm(object):
         attrs = self.model.attrs
         attrs['title'] = fetch('title')
         attrs['description'] = fetch('description')
-        attrs['duration_from'] = fetch('duration_from')
-        attrs['duration_to'] = fetch('duration_to')
+        duration_from = fetch('duration_from')
+        if duration_from:
+            attrs['duration_from'] = duration_from
+        duration_to = fetch('duration_to')
+        if duration_to:
+            attrs['duration_to'] = duration_to
         print fetch('facility')
         #attrs['facility'] = fetch('facility')
 
@@ -85,10 +88,7 @@ class OccasionForm(object):
 @tile('addform', interface=Occasion, permission="add")
 class OccasionAddForm(OccasionForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        AddBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = AddBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -101,10 +101,7 @@ class OccasionAddForm(OccasionForm, Form):
 @tile('editform', interface=Occasion, permission="edit")
 class OccasionEditForm(OccasionForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        EditBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = EditBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs

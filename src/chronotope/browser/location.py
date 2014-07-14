@@ -21,7 +21,6 @@ from cone.app.browser.authoring import (
     EditBehavior,
 )
 from chronotope.model import Location
-from chronotope.browser import AuthoringNext
 
 
 _ = TranslationStringFactory('chronotope')
@@ -88,10 +87,7 @@ class LocationForm(object):
 @tile('addform', interface=Location, permission="add")
 class LocationAddForm(LocationForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        AddBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = AddBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -104,10 +100,7 @@ class LocationAddForm(LocationForm, Form):
 @tile('editform', interface=Location, permission="edit")
 class LocationEditForm(LocationForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        EditBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = EditBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs

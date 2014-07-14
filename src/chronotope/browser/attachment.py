@@ -30,7 +30,6 @@ from cone.app.browser.utils import (
     make_query,
 )
 from chronotope.model import Attachment
-from chronotope.browser import AuthoringNext
 
 
 _ = TranslationStringFactory('chronotope')
@@ -271,10 +270,7 @@ class AttachmentForm(object):
 @tile('addform', interface=Attachment, permission="add")
 class AttachmentAddForm(AttachmentForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        AddBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = AddBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -287,10 +283,7 @@ class AttachmentAddForm(AttachmentForm, Form):
 @tile('editform', interface=Attachment, permission="edit")
 class AttachmentEditForm(AttachmentForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = (
-        EditBehavior,
-        AuthoringNext,
-    )
+    __plumbing__ = EditBehavior
 
     def save(self, widget, data):
         attrs = self.model.attrs

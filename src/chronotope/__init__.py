@@ -3,6 +3,7 @@ import logging
 import cone.app
 from sqlalchemy import engine_from_config
 from cone.app.security import acl_registry
+from chronotope.layout import ChronotopeLayout
 from chronotope.security import chronotope_default_acl
 from chronotope.sql import initialize_sql
 from chronotope import model
@@ -31,6 +32,9 @@ acl_registry.register(chronotope_default_acl, model.Attachments)
 
 # application startup initialization
 def initialize_chronotope(config, global_config, local_config):
+    # chronotope layout adapter
+    config.registry.registerAdapter(ChronotopeLayout)
+
     # add translation
     config.add_translation_dirs('chronotope:locales/')
 

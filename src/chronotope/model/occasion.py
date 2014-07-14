@@ -17,7 +17,6 @@ from chronotope.sql import (
     Base,
     GUID,
     SQLTableNode,
-    SQLRowNodeAttributes,
     SQLRowNode,
 )
 from chronotope.model import FacilityRecord
@@ -50,25 +49,13 @@ class OccasionRecord(Base):
         backref='occasion')
 
 
-class OccasionAttributes(SQLRowNodeAttributes):
-    columns = [
-        'uid', 'creator', 'created', 'modified', 'state', 'title',
-        'description', 'duration_from', 'duration_to', 'facility',
-    ]
-
-
 @node_info(
     name='occasion',
     title=_('occasion_label', default='Occasion'),
     description=_('occasion_description', default='An Occasion'),
     icon='glyphicon glyphicon-star-empty')
 class Occasion(SQLRowNode):
-
-    def record_factory(self):
-        return OccasionRecord()
-
-    def attributes_factory(self, name, parent):
-        return OccasionAttributes(name, parent, self.record)
+    record_factory = OccasionRecord
 
     @instance_property
     def properties(self):

@@ -18,7 +18,6 @@ from chronotope.sql import (
     Base,
     GUID,
     SQLTableNode,
-    SQLRowNodeAttributes,
     SQLRowNode,
 )
 from chronotope.model import (
@@ -76,26 +75,13 @@ class AttachmentRecord(Base):
         backref='attachment')
 
 
-class AttachmentAttributes(SQLRowNodeAttributes):
-    columns = [
-        'uid', 'creator', 'created', 'modified', 'state', 'title',
-        'attachment_type', 'payload', 'location', 'facility',
-        'occasion',
-    ]
-
-
 @node_info(
     name='attachment',
     title=_('attachment_label', default='Attachment'),
     description=_('attachment_description', default='An attachment'),
     icon='glyphicon glyphicon-file')
 class Attachment(SQLRowNode):
-
-    def record_factory(self):
-        return AttachmentRecord()
-
-    def attributes_factory(self, name, parent):
-        return AttachmentAttributes(name, parent, self.record)
+    record_factory = AttachmentRecord
 
     @instance_property
     def properties(self):

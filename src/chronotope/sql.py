@@ -1,6 +1,7 @@
 import uuid
 from plumber import plumber
 from node.behaviors import NodeAttributes
+from sqlalchemy import inspect
 from sqlalchemy import engine_from_config
 from sqlalchemy.orm import (
     sessionmaker,
@@ -145,11 +146,14 @@ class SQLTableNode(BaseNode):
 
 
 class SQLRowNodeAttributes(NodeAttributes):
-    columns = list()
 
     def __init__(self, name, parent, record):
         NodeAttributes.__init__(self, name, parent)
         self.record = record
+
+    @property
+    def _columns(self):
+        return inspect(self.record.__class__).attrs.keys()
 
     def __getitem__(self, name):
         if name in self:
@@ -166,10 +170,10 @@ class SQLRowNodeAttributes(NodeAttributes):
         raise NotImplementedError
 
     def __iter__(self):
-        return iter(self.columns)
+        return iter(self._columns)
 
     def __contains__(self, name):
-        return name in self.columns
+        return name in self._columns
 
 
 class SQLRowNode(BaseNode):
@@ -178,6 +182,8 @@ class SQLRowNode(BaseNode):
         WorkflowState,
         WorkflowACL,
     )
+
+    record_factory = None
 
     def __init__(self, name=None, parent=None, record=None):
         self.__name__ = name
@@ -195,13 +201,8 @@ class SQLRowNode(BaseNode):
         props.wf_transition_names = PUBLICATION_TRANSITION_NAMES
         return props
 
-    def record_factory(self):
-        raise NotImplementedError(u"Abstract SQLRowNode does not implement "
-                                  u"record_factory")
-
     def attributes_factory(self, name, parent):
-        raise NotImplementedError(u"Abstract SQLRowNode does not implement "
-                                  u"attributes_factory")
+        return SQLRowNodeAttributes(name, parent, self.record)
 
     def __call__(self):
         session = get_session(get_current_request())

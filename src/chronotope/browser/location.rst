@@ -67,7 +67,9 @@ Check location attributes::
     ('street', u'Museumstrasse 1'), 
     ('zip', u'6020'), 
     ('city', u'Innsbruck'), 
-    ('country', u'Austria')]
+    ('country', u'Austria'), 
+    ('attachment', []), 
+    ('facility', [])]
 
 Edit location::
 
@@ -97,7 +99,9 @@ Check whether location attributes has changed::
     ('street', u'Musterstrasse 1'), 
     ('zip', u'1234'), 
     ('city', u'Musterort'), 
-    ('country', u'Fantasia')]
+    ('country', u'Fantasia'), 
+    ('attachment', []), 
+    ('facility', [])]
 
 Logout::
 

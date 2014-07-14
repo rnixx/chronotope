@@ -17,7 +17,6 @@ from chronotope.sql import (
     Base,
     GUID,
     SQLTableNode,
-    SQLRowNodeAttributes,
     SQLRowNode,
 )
 from chronotope.model import (
@@ -64,25 +63,13 @@ class FacilityRecord(Base):
         backref='facility')
 
 
-class FacilityAttributes(SQLRowNodeAttributes):
-    columns = [
-        'uid', 'creator', 'created', 'modified', 'state', 'title',
-        'description', 'exists_from', 'exists_to', 'category', 'location',
-    ]
-
-
 @node_info(
     name='facility',
     title=_('facility_label', default='Facility'),
     description=_('facility_description', default='A Facility'),
     icon='glyphicon glyphicon-home')
 class Facility(SQLRowNode):
-
-    def record_factory(self):
-        return FacilityRecord()
-
-    def attributes_factory(self, name, parent):
-        return FacilityAttributes(name, parent, self.record)
+    record_factory = FacilityRecord
 
     @instance_property
     def properties(self):

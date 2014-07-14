@@ -15,7 +15,6 @@ from chronotope.sql import (
     Base,
     GUID,
     SQLTableNode,
-    SQLRowNodeAttributes,
     SQLRowNode,
 )
 
@@ -38,25 +37,13 @@ class LocationRecord(Base):
     country = Column(String)
 
 
-class LocationAttributes(SQLRowNodeAttributes):
-    columns = [
-        'uid', 'creator', 'created', 'modified', 'state',
-        'lat', 'lon', 'street', 'zip', 'city', 'country',
-    ]
-
-
 @node_info(
     name='location',
     title=_('location_label', default='Location'),
     description=_('location_description', default='A location'),
     icon='glyphicon glyphicon-map-marker')
 class Location(SQLRowNode):
-
-    def record_factory(self):
-        return LocationRecord()
-
-    def attributes_factory(self, name, parent):
-        return LocationAttributes(name, parent, self.record)
+    record_factory = LocationRecord
 
     @instance_property
     def properties(self):

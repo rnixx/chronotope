@@ -14,6 +14,22 @@
     color: #737373;
 }
 
+/* login form */
+#form-loginform {
+    width:450px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#form-loginform .col-sm-2 {
+    width:25%;
+}
+#form-loginform .col-sm-5 {
+    width:75%;
+}
+#form-loginform .col-sm-offset-2 {
+    margin-left:25%;
+}
+
 /* attachment form */
 .attachment_payload {
     margin-top:1em;

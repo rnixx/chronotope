@@ -4,6 +4,7 @@
            i18n:domain="cone.time"
            omit-tag="True">
 
-  <div>Chronotope</div>
+  <div id="chronotope-map"
+       data-authenticated="${context.authenticated}"> </div>
 
 </tal:block>

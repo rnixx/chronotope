@@ -22,10 +22,12 @@ class ChronotopeLayout(object):
     content_grid_width = 9
 
     def __init__(self, context):
-        if authenticated_userid(get_current_request()):
+        request = get_current_request()
+        if authenticated_userid(request):
             return
-        self.mainmenu_fluid = True
+        #import pdb;pdb.set_trace()
         self.personaltools = False
         self.columns_fluid = True
+        self.pathbar = False
         self.sidebar_left = []
         self.content_grid_width = 12

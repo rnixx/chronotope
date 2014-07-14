@@ -2,9 +2,13 @@ import os
 import logging
 import cone.app
 from sqlalchemy import engine_from_config
+from cone.app.model import AppRoot
 from cone.app.security import acl_registry
 from chronotope.layout import ChronotopeLayout
-from chronotope.security import chronotope_default_acl
+from chronotope.security import (
+    chronotope_root_acl,
+    chronotope_content_acl,
+)
 from chronotope.sql import initialize_sql
 from chronotope import model
 
@@ -24,10 +28,15 @@ cone.app.register_plugin('occasions', model.Occasions)
 cone.app.register_plugin('attachments', model.Attachments)
 
 # register ACL's for nodes
-acl_registry.register(chronotope_default_acl, model.Locations)
-acl_registry.register(chronotope_default_acl, model.Facilities)
-acl_registry.register(chronotope_default_acl, model.Occasions)
-acl_registry.register(chronotope_default_acl, model.Attachments)
+acl_registry.register(chronotope_root_acl, AppRoot)
+acl_registry.register(chronotope_content_acl, model.Locations)
+acl_registry.register(chronotope_content_acl, model.Location)
+acl_registry.register(chronotope_content_acl, model.Facilities)
+acl_registry.register(chronotope_content_acl, model.Facility)
+acl_registry.register(chronotope_content_acl, model.Occasions)
+acl_registry.register(chronotope_content_acl, model.Occasion)
+acl_registry.register(chronotope_content_acl, model.Attachments)
+acl_registry.register(chronotope_content_acl, model.Attachment)
 
 
 # application startup initialization

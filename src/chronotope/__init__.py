@@ -28,7 +28,8 @@ cone.app.register_plugin('occasions', model.Occasions)
 cone.app.register_plugin('attachments', model.Attachments)
 
 # register ACL's for nodes
-acl_registry.register(chronotope_root_acl, AppRoot)
+if not os.environ.get('TESTRUN_MARKER'):
+    acl_registry.register(chronotope_root_acl, AppRoot)
 acl_registry.register(chronotope_content_acl, model.Locations)
 acl_registry.register(chronotope_content_acl, model.Location)
 acl_registry.register(chronotope_content_acl, model.Facilities)
@@ -42,7 +43,8 @@ acl_registry.register(chronotope_content_acl, model.Attachment)
 # application startup initialization
 def initialize_chronotope(config, global_config, local_config):
     # chronotope layout adapter
-    config.registry.registerAdapter(ChronotopeLayout)
+    if not os.environ.get('TESTRUN_MARKER'):
+        config.registry.registerAdapter(ChronotopeLayout)
 
     # add translation
     config.add_translation_dirs('chronotope:locales/')

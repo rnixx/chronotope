@@ -1,7 +1,19 @@
 import pickle
+from zope.interface import implementer
+from zope.component import adapter
+from cone.app.interfaces import (
+    IApplicationNode,
+    ILiveSearch,
+)
 from whoosh.qparser import QueryParser
 from chronotope.sql import get_session
 from chronotope.index import get_index
+from chronotope.model import (
+    LocationRecord,
+    FacilityRecord,
+    OccasionRecord,
+    AttachmentRecord,
+)
 
 
 def results_to_instances(request, results):
@@ -21,3 +33,48 @@ def search(request, query):
         query = parser.parse(query)
         results = results_to_instances(request, searcher.search(query))
     return results
+
+
+###############################################################################
+# livesearch
+###############################################################################
+
+def location_value(record):
+    return u'{0}, {1} {2}'.format(record.street, record.zip, record.city)
+
+
+def facility_value(record):
+    return record.title
+
+
+def occasion_value(record):
+    return record.title
+
+
+def attachment_value(record):
+    return record.title
+
+
+value_extractors = {
+    LocationRecord: location_value,
+    FacilityRecord: facility_value,
+    OccasionRecord: occasion_value,
+    AttachmentRecord: attachment_value,
+}
+
+
+@implementer(ILiveSearch)
+@adapter(IApplicationNode)
+class LiveSearch(object):
+
+    def __init__(self, model):
+        self.model = model
+
+    def search(self, request, query):
+        result = list()
+        for record in search(request, query):
+            result.append({
+                'uid': str(record.uid),
+                'value': value_extractors[record.__class__](record),
+            })
+        return result

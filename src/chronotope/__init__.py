@@ -10,6 +10,7 @@ from chronotope.security import (
     chronotope_content_acl,
 )
 from chronotope.sql import initialize_sql
+from chronotope.search import LiveSearch
 from chronotope import model
 
 
@@ -43,8 +44,10 @@ acl_registry.register(chronotope_content_acl, model.Attachment)
 # application startup initialization
 def initialize_chronotope(config, global_config, local_config):
     # chronotope layout adapter
-    if not os.environ.get('TESTRUN_MARKER'):
-        config.registry.registerAdapter(ChronotopeLayout)
+    config.registry.registerAdapter(ChronotopeLayout)
+
+    # chronotope livesearch adapter
+    config.registry.registerAdapter(LiveSearch)
 
     # add translation
     config.add_translation_dirs('chronotope:locales/')

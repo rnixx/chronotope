@@ -6,6 +6,7 @@ from cone.app.interfaces import (
     IApplicationNode,
     ILayout,
 )
+from cone.app.model import AppRoot
 
 
 @implementer(ILayout)
@@ -23,7 +24,7 @@ class ChronotopeLayout(object):
 
     def __init__(self, context):
         request = get_current_request()
-        if authenticated_userid(request):
+        if authenticated_userid(request) and not isinstance(context, AppRoot):
             return
         self.columns_fluid = True
         self.personaltools = False

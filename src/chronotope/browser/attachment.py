@@ -1,6 +1,5 @@
 import uuid
 import pickle
-import html2text
 from StringIO import StringIO
 from plumber import plumber
 from node.utils import UNSET
@@ -30,6 +29,7 @@ from cone.app.browser.utils import (
     make_query,
 )
 from chronotope.model import Attachment
+from chronotope.utils import html_2_text
 
 
 _ = TranslationStringFactory('chronotope')
@@ -42,7 +42,7 @@ def download(model, request):
     payload = model.attrs['payload']
     response = Response()
     if a_type == 'text':
-        response.text = html2text.html2text(payload.decode('utf-8'))
+        response.text = html_2_text(payload)
         response.headers['Content-Type'] = 'text/plain'
         response.headers['Content-Disposition'] = \
             'attachment;filename={0}.txt'.format(model.name)

@@ -12,8 +12,8 @@ from cone.app.model import (
     node_info,
 )
 from chronotope.sql import (
-    Base,
     GUID,
+    SQLBase,
     SQLTableNode,
     SQLRowNode,
 )
@@ -22,7 +22,7 @@ from chronotope.sql import (
 _ = TranslationStringFactory('chronotope')
 
 
-class LocationRecord(Base):
+class LocationRecord(SQLBase):
     __tablename__ = 'location'
     __index_attrs__ = ['street', 'zip', 'city']
 

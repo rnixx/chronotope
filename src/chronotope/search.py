@@ -1,11 +1,12 @@
 import pickle
 from zope.interface import implementer
 from zope.component import adapter
+from whoosh.qparser import QueryParser
+from pyramid.security import authenticated_userid
 from cone.app.interfaces import (
     IApplicationNode,
     ILiveSearch,
 )
-from whoosh.qparser import QueryParser
 from chronotope.sql import get_session
 from chronotope.index import get_index
 from chronotope.model import (
@@ -71,8 +72,11 @@ class LiveSearch(object):
         self.model = model
 
     def search(self, request, query):
+        authenticated = bool(authenticated_userid(request))
         result = list()
         for record in search(request, query):
+            if not authenticated and record.state in ['draft', 'declined']:
+                continue
             result.append({
                 'uid': str(record.uid),
                 'value': value_extractors[record.__class__](record),

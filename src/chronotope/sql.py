@@ -69,11 +69,21 @@ class GUID(TypeDecorator):
 
 class IndexingBase(object):
     __index_attrs__ = list()
+    __index_transforms__ = dict()
 
     def index(self, writer):
+        def transform_value(name):
+            value = getattr(self, name)
+            transform = self.__index_transforms__.get(name)
+            if transform:
+                value = transform(self, value)
+            return value
+        values = list()
+        for attr in self.__index_attrs__:
+            values.append(transform_value(attr))
         uid = u'{0}'.format(self.uid)
         cls = u'{0}'.format(pickle.dumps(self.__class__))
-        value = u' '.join([getattr(self, _) for _ in self.__index_attrs__])
+        value = u' '.join(values)
         writer.add_document(uid=uid, cls=cls, value=value)
 
     def reindex(self, writer):
@@ -220,9 +230,9 @@ class SQLRowNode(BaseNode):
 # initialization and WSGI
 ###############################################################################
 
-Base = declarative_base(cls=IndexingBase)
+SQLBase = declarative_base(cls=IndexingBase)
 DBSession = scoped_session(sessionmaker())
-metadata = Base.metadata
+metadata = SQLBase.metadata
 
 
 def initialize_sql(engine):
@@ -266,7 +276,7 @@ def make_app(next_app, global_conf, **local_conf):
     """
     from chronotope import sql
     engine = engine_from_config(local_conf, prefix='sqlalchemy.')
-    sql.Base.metadata.create_all(engine)
+    sql.SQLBase.metadata.create_all(engine)
     maker = sessionmaker(bind=engine)
     sql.session_key = local_conf.get('session_key', sql.session_key)
     return WSGISQLSession(next_app, maker, sql.session_key)

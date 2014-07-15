@@ -14,8 +14,8 @@ from cone.app.model import (
     node_info,
 )
 from chronotope.sql import (
-    Base,
     GUID,
+    SQLBase,
     SQLTableNode,
     SQLRowNode,
 )
@@ -23,28 +23,32 @@ from chronotope.model import (
     LocationRecord,
     CategoryRecord,
 )
+from chronotope.utils import html_index_transform
 
 
 _ = TranslationStringFactory('chronotope')
 
 
 facility_location_references = Table(
-        'facility_location_references', Base.metadata,
+        'facility_location_references', SQLBase.metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 
 
 facility_category_references = Table(
-        'facility_category_references', Base.metadata,
+        'facility_category_references', SQLBase.metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('category_uid', GUID, ForeignKey('category.uid'))
 )
 
 
-class FacilityRecord(Base):
+class FacilityRecord(SQLBase):
     __tablename__ = 'facility'
     __index_attrs__ = ['title', 'description']
+    __index_transforms__ = {
+        'description': html_index_transform,
+    }
 
     uid = Column(GUID, primary_key=True)
     creator = Column(String)

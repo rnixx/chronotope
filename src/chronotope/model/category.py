@@ -4,15 +4,15 @@ from sqlalchemy import (
 )
 from pyramid.i18n import TranslationStringFactory
 from chronotope.sql import (
-    Base,
     GUID,
+    SQLBase,
 )
 
 
 _ = TranslationStringFactory('chronotope')
 
 
-class CategoryRecord(Base):
+class CategoryRecord(SQLBase):
     __tablename__ = 'category'
     uid = Column(GUID, primary_key=True)
     name = Column(String)

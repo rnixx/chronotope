@@ -14,27 +14,31 @@ from cone.app.model import (
     node_info,
 )
 from chronotope.sql import (
-    Base,
     GUID,
+    SQLBase,
     SQLTableNode,
     SQLRowNode,
 )
 from chronotope.model import FacilityRecord
+from chronotope.utils import html_index_transform
 
 
 _ = TranslationStringFactory('chronotope')
 
 
 occasion_facility_references = Table(
-        'occasion_facility_references', Base.metadata,
+        'occasion_facility_references', SQLBase.metadata,
     Column('occasion_uid', GUID, ForeignKey('occasion.uid')),
     Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )
 
 
-class OccasionRecord(Base):
+class OccasionRecord(SQLBase):
     __tablename__ = 'occasion'
     __index_attrs__ = ['title', 'description']
+    __index_transforms__ = {
+        'description': html_index_transform,
+    }
 
     uid = Column(GUID, primary_key=True)
     creator = Column(String)

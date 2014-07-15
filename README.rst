@@ -54,6 +54,12 @@ Model
     * Occasion (List of Reference UID's)
 
 
+Credits
+=======
+
+- Indexing Inspirations at https://github.com/wwitzel3/sawhoosh
+
+
 Contributors
 ============
 

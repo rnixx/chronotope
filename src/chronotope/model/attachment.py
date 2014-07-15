@@ -15,8 +15,8 @@ from cone.app.model import (
     node_info,
 )
 from chronotope.sql import (
-    Base,
     GUID,
+    SQLBase,
     SQLTableNode,
     SQLRowNode,
 )
@@ -25,35 +25,45 @@ from chronotope.model import (
     FacilityRecord,
     OccasionRecord,
 )
+from chronotope.utils import html_2_text
 
 
 _ = TranslationStringFactory('chronotope')
 
 
 attachment_location_references = Table(
-        'attachment_location_references', Base.metadata,
+        'attachment_location_references', SQLBase.metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 
 
 attachment_facility_references = Table(
-        'attachment_facility_references', Base.metadata,
+        'attachment_facility_references', SQLBase.metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )
 
 
 attachment_occasion_references = Table(
-        'attachment_occasion_references', Base.metadata,
+        'attachment_occasion_references', SQLBase.metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('occasion_uid', GUID, ForeignKey('occasion.uid'))
 )
 
 
-class AttachmentRecord(Base):
+def payload_index_transform(instance, value):
+    if instance.attachment_type == 'text':
+        return html_2_text(value)
+    return u''
+
+
+class AttachmentRecord(SQLBase):
     __tablename__ = 'attachment'
-    __index_attrs__ = ['title']
+    __index_attrs__ = ['title', 'payload']
+    __index_transforms__ = {
+        'payload': payload_index_transform
+    }
 
     uid = Column(GUID, primary_key=True)
     creator = Column(String)

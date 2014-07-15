@@ -56,20 +56,20 @@ Location has been added::
 Check location attributes::
 
     >>> location = locations.values()[0]
-    >>> location.attrs.items()
-    [('uid', UUID('...')), 
-    ('creator', u'manager'), 
-    ('created', datetime.datetime(...)), 
-    ('modified', datetime.datetime(...)), 
-    ('state', u'draft'), 
-    ('lat', 11.1), 
-    ('lon', 47.5), 
-    ('street', u'Museumstrasse 1'), 
-    ('zip', u'6020'), 
+    >>> sorted(location.attrs.items(), key=lambda x: x[0])
+    [('attachment', []), 
     ('city', u'Innsbruck'), 
     ('country', u'Austria'), 
-    ('attachment', []), 
-    ('facility', [])]
+    ('created', datetime.datetime(...)), 
+    ('creator', u'manager'), 
+    ('facility', []), 
+    ('lat', 11.1), 
+    ('lon', 47.5), 
+    ('modified', datetime.datetime(...)), 
+    ('state', u'draft'), 
+    ('street', u'Museumstrasse 1'), 
+    ('uid', UUID('...')), 
+    ('zip', u'6020')]
 
 Edit location::
 
@@ -88,20 +88,20 @@ Edit location::
 
 Check whether location attributes has changed::
 
-    >>> location.attrs.items()
-    [('uid', UUID('...')), 
-    ('creator', u'manager'), 
-    ('created', datetime.datetime(...)), 
-    ('modified', datetime.datetime(...)), 
-    ('state', u'draft'), 
-    ('lat', 15.1), 
-    ('lon', 42.5), 
-    ('street', u'Musterstrasse 1'), 
-    ('zip', u'1234'), 
+    >>> sorted(location.attrs.items(), key=lambda x: x[0])
+    [('attachment', []), 
     ('city', u'Musterort'), 
     ('country', u'Fantasia'), 
-    ('attachment', []), 
-    ('facility', [])]
+    ('created', datetime.datetime(...)), 
+    ('creator', u'manager'), 
+    ('facility', []), 
+    ('lat', 15.1), 
+    ('lon', 42.5), 
+    ('modified', datetime.datetime(...)), 
+    ('state', u'draft'), 
+    ('street', u'Musterstrasse 1'), 
+    ('uid', UUID('...')), 
+    ('zip', u'1234')]
 
 Logout::
 

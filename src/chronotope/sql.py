@@ -1,7 +1,9 @@
 import uuid
+import pickle
 from plumber import plumber
 from node.behaviors import NodeAttributes
 from sqlalchemy import inspect
+from sqlalchemy import event
 from sqlalchemy import engine_from_config
 from sqlalchemy.orm import (
     sessionmaker,
@@ -23,48 +25,12 @@ from cone.app.workflow import (
     WorkflowACL,
 )
 from chronotope.publication import PUBLICATION_TRANSITION_NAMES
+from chronotope.index import get_index
 
 
-Base = declarative_base()
-DBSession = scoped_session(sessionmaker())
-#metadata = MetaData()
-metadata = Base.metadata
-
-
-def initialize_sql(engine):
-    DBSession.configure(bind=engine)
-    metadata.bind = engine
-    metadata.create_all(engine)
-
-
-session_key = 'cone.sql.session'
-
-
-def get_session(request):
-    return request.environ[session_key]
-
-
-class Session(object):
-    """WSGI framework component that opens and closes a SQL session.
-
-    Downstream applications will have the session in the environment,
-    normally under the key 'cone.sql.session'.
-    """
-
-    def __init__(self, next_app, maker, session_key=session_key):
-        self.next_app = next_app
-        self.maker = maker
-        self.connection_key = session_key
-
-    def __call__(self, environ, start_response):
-        environ[self.connection_key] = self.maker()
-        try:
-            result = self.next_app(environ, start_response)
-            return result
-        finally:
-            # XXX close session required?
-            pass
-
+###############################################################################
+# sql model basics
+###############################################################################
 
 class GUID(TypeDecorator):
     """Platform-independent GUID type.
@@ -100,6 +66,44 @@ class GUID(TypeDecorator):
         else:
             return uuid.UUID(value)
 
+
+class IndexingBase(object):
+    __index_attrs__ = list()
+
+    def index(self, writer):
+        uid = u'{0}'.format(self.uid)
+        cls = u'{0}'.format(pickle.dumps(self.__class__))
+        value = u' '.join([getattr(self, _) for _ in self.__index_attrs__])
+        writer.add_document(uid=uid, cls=cls, value=value)
+
+    def reindex(self, writer):
+        uid = u'{0}'.format(self.uid)
+        writer.delete_by_term('uid', uid)
+        self.index(writer)
+
+    def deindex(self, writer):
+        uid = u'{0}'.format(self.uid)
+        writer.delete_by_term('uid', uid)
+
+
+def update_indexes(session, flush_context):
+    writer = get_index().writer()
+    for i in session.new:
+        i.index(writer)
+    for i in session.dirty:
+        i.reindex(writer)
+    for i in session.deleted:
+        i.deindex(writer)
+    writer.commit()
+
+
+def bind_session_listeners(session):
+    event.listen(session, 'after_flush', update_indexes)
+
+
+###############################################################################
+# application node basics
+###############################################################################
 
 class SQLTableNode(BaseNode):
     record_class = None
@@ -212,6 +216,51 @@ class SQLRowNode(BaseNode):
         session.commit()
 
 
+###############################################################################
+# initialization and WSGI
+###############################################################################
+
+Base = declarative_base(cls=IndexingBase)
+DBSession = scoped_session(sessionmaker())
+metadata = Base.metadata
+
+
+def initialize_sql(engine):
+    DBSession.configure(bind=engine)
+    metadata.bind = engine
+    metadata.create_all(engine)
+
+
+session_key = 'cone.sql.session'
+
+
+def get_session(request):
+    return request.environ[session_key]
+
+
+class WSGISQLSession(object):
+    """WSGI framework component that opens and closes a SQL session.
+
+    Downstream applications will have the session in the environment,
+    normally under the key 'cone.sql.session'.
+    """
+
+    def __init__(self, next_app, maker, session_key=session_key):
+        self.next_app = next_app
+        self.maker = maker
+        self.session_key = session_key
+
+    def __call__(self, environ, start_response):
+        session = self.maker()
+        bind_session_listeners(session)
+        environ[self.session_key] = session
+        try:
+            result = self.next_app(environ, start_response)
+            return result
+        finally:
+            pass
+
+
 def make_app(next_app, global_conf, **local_conf):
     """Make a Session app.
     """
@@ -220,4 +269,4 @@ def make_app(next_app, global_conf, **local_conf):
     sql.Base.metadata.create_all(engine)
     maker = sessionmaker(bind=engine)
     sql.session_key = local_conf.get('session_key', sql.session_key)
-    return Session(next_app, maker, sql.session_key)
+    return WSGISQLSession(next_app, maker, sql.session_key)

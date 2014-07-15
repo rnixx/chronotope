@@ -24,6 +24,8 @@ _ = TranslationStringFactory('chronotope')
 
 class LocationRecord(Base):
     __tablename__ = 'location'
+    __index_attrs__ = ['street', 'zip', 'city']
+
     uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)

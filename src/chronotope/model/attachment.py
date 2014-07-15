@@ -53,6 +53,8 @@ attachment_occasion_references = Table(
 
 class AttachmentRecord(Base):
     __tablename__ = 'attachment'
+    __index_attrs__ = ['title']
+
     uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
@@ -61,6 +63,7 @@ class AttachmentRecord(Base):
     title = Column(String)
     attachment_type = Column(String) # 'text', 'file' or 'image'
     payload = Column(LargeBinary)
+
     location = relationship(
         LocationRecord,
         secondary=attachment_location_references,

@@ -34,6 +34,8 @@ occasion_facility_references = Table(
 
 class OccasionRecord(Base):
     __tablename__ = 'occasion'
+    __index_attrs__ = ['title', 'description']
+
     uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
@@ -43,6 +45,7 @@ class OccasionRecord(Base):
     description = Column(String)
     duration_from = Column(DateTime)
     duration_to = Column(DateTime)
+
     facility = relationship(
         FacilityRecord,
         secondary=occasion_facility_references,

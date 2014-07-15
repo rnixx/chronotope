@@ -44,6 +44,8 @@ facility_category_references = Table(
 
 class FacilityRecord(Base):
     __tablename__ = 'facility'
+    __index_attrs__ = ['title', 'description']
+
     uid = Column(GUID, primary_key=True)
     creator = Column(String)
     created = Column(DateTime)
@@ -53,6 +55,7 @@ class FacilityRecord(Base):
     description = Column(String)
     exists_from = Column(DateTime)
     exists_to = Column(DateTime)
+
     category = relationship(
         CategoryRecord,
         secondary=facility_category_references,

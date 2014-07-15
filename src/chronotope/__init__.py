@@ -56,6 +56,9 @@ def initialize_chronotope(config, global_config, local_config):
     # scan browser package
     config.scan('chronotope.browser')
 
+    # index directory
+    os.environ['chronotope.index.dir'] = local_config['chronotope.index.dir']
+
     # database initialization
     prefix = 'chronotope.dbinit.'
     if local_config.get('%surl' % prefix, None) is None:

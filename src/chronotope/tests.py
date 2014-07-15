@@ -20,6 +20,7 @@ TESTFILES = [
     'model/occasion.rst',
     'model/attachment.rst',
     'model/relations.rst',
+    'model/indexing.rst',
     'browser/category.rst',
     'browser/location.rst',
     'browser/facility.rst',

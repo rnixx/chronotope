@@ -1,19 +1,26 @@
+import os
 import tempfile
 import shutil
-import datetime
 import pyramid_zcml
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from cone.app.testing import Security
-from chronotope.sql import initialize_sql
+from chronotope.sql import (
+    initialize_sql,
+    bind_session_listeners,
+)
 
 
 class ChronotopeLayer(Security):
 
+    def make_app(self, **kw):
+        kw['chronotope.index.dir'] = os.path.join(self.tempdir, 'index')
+        super(ChronotopeLayer, self).make_app(**kw)
+
     def setUp(self, args=None):
+        self.tempdir = tempfile.mkdtemp()
         super(ChronotopeLayer, self).setUp()
         pyramid_zcml.zcml_configure('configure.zcml', 'chronotope')
-        self.tempdir = tempfile.mkdtemp()
         self.init_sql()
         self.new_request()
 
@@ -30,4 +37,6 @@ class ChronotopeLayer(Security):
         engine = create_engine('sqlite:///:memory:', echo=False)
         initialize_sql(engine)
         maker = sessionmaker(bind=engine)
-        self.sql_session = maker()
+        session = maker()
+        bind_session_listeners(session)
+        self.sql_session = session

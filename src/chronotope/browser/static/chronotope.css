@@ -35,3 +35,13 @@
     margin-top:1em;
     display:none;
 }
+
+/* attachment tile */
+.attachment-tile table td.row-title {
+    font-weight:bold;
+    text-align:right;
+    width:20%;
+}
+.panel-body .attachment-tile {
+    margin:-15px;
+}

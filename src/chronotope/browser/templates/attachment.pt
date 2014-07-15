@@ -4,6 +4,35 @@
                 i18n:domain="chronotope"
                 omit-tag="True">
 
-  Attachment
+  <div class="attachment-tile">
+
+    <table class="table">
+      <tr>
+        <td class="row-title">Title</td>
+        <td tal:content="model.attrs['title']">Title</td>
+      </tr>
+      <tr tal:condition="context.type == 'text'">
+        <td class="row-title">Text</td>
+        <td tal:content="structure context.text">Text</td>
+      </tr>
+      <tr tal:condition="context.type == 'file'">
+        <td class="row-title"></td>
+        <td></td>
+      </tr>
+      <tr tal:condition="context.type == 'image'">
+        <td class="row-title">Preview</td>
+        <td>
+          <img src="${context.preview}" alt="preview" />
+        </td>
+      </tr>
+      <tr>
+        <td class="row-title">Download</td>
+        <td>
+          <a href="${context.download_url}">download</a>
+        </td>
+      </tr>
+    </table>
+
+  </div>
 
 </tal:attachment>

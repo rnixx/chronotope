@@ -7,6 +7,7 @@ from yafowil.base import ExtractionError
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from pyramid.response import Response
+from pyramid.security import authenticated_userid
 from cone.tile import (
     tile,
     Tile,
@@ -84,7 +85,34 @@ class AttachmentView(ProtectedContentTile):
       interface=Attachment, permission='login',
       strict=False)
 class AttachmentTile(Tile):
-    pass
+
+    @property
+    def authenticated(self):
+        return bool(authenticated_userid(self.request))
+
+    @property
+    def title(self):
+        return self.model.attrs['title']
+
+    @property
+    def type(self):
+        return self.model.attrs['attachment_type']
+
+    @property
+    def text(self):
+        return self.type == 'text' and self.model.attrs['payload'].decode('utf-8') or u''
+
+    @property
+    def preview(self):
+        query = make_query(scale='preview')
+        return make_url(self.request,
+                        node=self.model,
+                        resource='download',
+                        query=query)
+
+    @property
+    def download_url(self):
+        return make_url(self.request, node=self.model, resource='download')
 
 
 class AttachmentForm(object):

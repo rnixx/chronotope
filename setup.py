@@ -30,6 +30,7 @@ setup(name='chronotope',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'pyOpenSSL',
           'html2text',
           'Whoosh',
           'hurry.filesize',

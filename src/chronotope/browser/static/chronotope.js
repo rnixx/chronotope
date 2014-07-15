@@ -59,7 +59,7 @@
                 this.default_zoom);
             var osm = 'Map data © <a href="http://openstreetmap.org">OSM</a>';
             var tiles = new L.tileLayer(
-                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 {
                     attribution: osm,
                     minZoom: 2,

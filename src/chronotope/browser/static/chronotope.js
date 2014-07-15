@@ -26,8 +26,18 @@
         default_zoom: 10,
 
         binder: function(context) {
+            chronotope.livesearch(context);
             chronotope.chronotope_map(context);
             chronotope.attachment_form(context);
+        },
+
+        livesearch: function(context) {
+            var input = $('input#search-text');
+            input.on('typeahead:selected', function(evt, suggestion, dataset) {
+                console.log(evt);
+                console.log(suggestion);
+                console.log(dataset);
+            });
         },
 
         resize_map: function(map_elem) {

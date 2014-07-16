@@ -103,7 +103,18 @@ class AttachmentTile(Tile):
 
     @property
     def text(self):
-        return self.type == 'text' and self.model.attrs['payload'].decode('utf-8') or u''
+        return self.type == 'text' \
+            and self.model.attrs['payload'].decode('utf-8') or u''
+
+    @property
+    def fileinfo(self):
+        if self.type == 'text':
+            return {}
+        payload = pickle.loads(self.model.attrs['payload'])
+        return {
+            'filename': payload['filename'],
+            'mimetype': payload['mimetype'],
+        }
 
     @property
     def preview(self):

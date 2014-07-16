@@ -15,16 +15,21 @@
         <td class="row-title">Text</td>
         <td tal:content="structure context.text">Text</td>
       </tr>
-      <tr tal:condition="context.type == 'file'">
-        <td class="row-title"></td>
-        <td></td>
-      </tr>
-      <tr tal:condition="context.type == 'image'">
-        <td class="row-title">Preview</td>
-        <td>
-          <img src="${context.preview}" alt="preview" />
-        </td>
-      </tr>
+      <tal:filelike condition="context.type in ['file', 'image']"
+                    define="fileinfo context.fileinfo">
+        <tr>
+          <td class="row-title">Filename</td>
+          <td tal:content="fileinfo['filename']"></td>
+        </tr>
+        <tr>
+          <td class="row-title">Mimetype</td>
+          <td tal:content="fileinfo['mimetype']"></td>
+        </tr>
+        <tr tal:condition="context.type == 'image'">
+          <td class="row-title">Preview</td>
+          <td><img src="${context.preview}" alt="preview" /></td>
+        </tr>
+      </tal:filelike>
       <tr>
         <td class="row-title">Download</td>
         <td>

@@ -20,6 +20,7 @@ from cone.app.browser.authoring import (
     EditBehavior,
 )
 from chronotope.model import Facility
+from chronotope.browser.category import CategoryReferencingForm
 
 
 _ = TranslationStringFactory('chronotope')
@@ -51,23 +52,14 @@ class FacilityTile(Tile):
 
 class FacilityForm(object):
     __metaclass__ = plumber
-    __plumbing__ = YAMLForm
+    __plumbing__ = (
+        YAMLForm,
+        CategoryReferencingForm,
+    )
 
     form_name = 'facilityform'
     form_template = 'chronotope.browser:forms/facility.yaml'
     message_factory = _
-
-    @property
-    def category_value(self):
-        return ['a', 'b', 'c']
-
-    @property
-    def category_vocab(self):
-        return {
-            'a': 'Label a',
-            'b': 'Label b',
-            'c': 'Label c',
-        }
 
     @property
     def location_value(self):
@@ -93,9 +85,8 @@ class FacilityForm(object):
         exists_to = fetch('exists_to')
         if exists_to:
             attrs['exists_to'] = exists_to
-        print fetch('category')
+
         print fetch('location')
-        #attrs['category'] = fetch('category')
         #attrs['location'] = fetch('location')
 
 

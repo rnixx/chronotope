@@ -1,7 +1,7 @@
 chronotope.model.category
 =========================
 
-::
+Direct SQLA::
 
     >>> import uuid
     >>> from chronotope.model import CategoryRecord
@@ -39,6 +39,60 @@ chronotope.model.category
 
     >>> session.delete(category1)
     >>> session.delete(category2)
+    >>> session.commit()
+
+    >>> session.query(CategoryRecord).all()
+    []
+
+API::
+
+    >>> from chronotope.model.category import (
+    ...     add_category,
+    ...     category_by_uid,
+    ...     categories_by_uid,
+    ...     category_by_name,
+    ...     search_categories,
+    ... )
+    >>> cat_1 = add_category(request, 'Cat 1')
+    >>> cat_2 = add_category(request, 'Cat 2')
+    >>> cat_3 = add_category(request, 'Cat 3')
+    >>> session.commit()
+
+    >>> category_by_uid(request, cat_1.uid)
+    <chronotope.model.category.CategoryRecord object at ...>
+
+    >>> category_by_uid(request, str(cat_1.uid))
+    <chronotope.model.category.CategoryRecord object at ...>
+
+    >>> category_by_uid(request, '9fede645-ede9-4768-92c4-ef051340c953')
+
+    >>> categories_by_uid(request, [cat_1.uid, str(cat_2.uid)])
+    [<chronotope.model.category.CategoryRecord object at ...>,
+    <chronotope.model.category.CategoryRecord object at ...>]
+
+    >>> categories_by_uid(request, ['9fede645-ede9-4768-92c4-ef051340c953'])
+    []
+
+    >>> category_by_name(request, 'Inexistent')
+
+    >>> category_by_name(request, 'Cat 1')
+    <chronotope.model.category.CategoryRecord object at ...>
+
+    >>> search_categories(request, 'at')
+    [<chronotope.model.category.CategoryRecord object at ...>,
+    <chronotope.model.category.CategoryRecord object at ...>,
+    <chronotope.model.category.CategoryRecord object at ...>]
+
+    >>> search_categories(request, 'Cat', limit=2)
+    [<chronotope.model.category.CategoryRecord object at ...>, 
+    <chronotope.model.category.CategoryRecord object at ...>]
+
+    >>> search_categories(request, 'Cat 1')
+    [<chronotope.model.category.CategoryRecord object at ...>]
+
+    >>> session.delete(cat_1)
+    >>> session.delete(cat_2)
+    >>> session.delete(cat_3)
     >>> session.commit()
 
     >>> session.query(CategoryRecord).all()

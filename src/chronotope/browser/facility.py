@@ -21,6 +21,7 @@ from cone.app.browser.authoring import (
 )
 from chronotope.model import Facility
 from chronotope.browser.category import CategoryReferencingForm
+from chronotope.browser.location import LocationReferencingForm
 
 
 _ = TranslationStringFactory('chronotope')
@@ -55,23 +56,12 @@ class FacilityForm(object):
     __plumbing__ = (
         YAMLForm,
         CategoryReferencingForm,
+        LocationReferencingForm,
     )
 
     form_name = 'facilityform'
     form_template = 'chronotope.browser:forms/facility.yaml'
     message_factory = _
-
-    @property
-    def location_value(self):
-        return ['d', 'e', 'f']
-
-    @property
-    def location_vocab(self):
-        return {
-            'd': 'Label d',
-            'e': 'Label e',
-            'f': 'Label f',
-        }
 
     def save(self, widget, data):
         def fetch(name):
@@ -85,9 +75,6 @@ class FacilityForm(object):
         exists_to = fetch('exists_to')
         if exists_to:
             attrs['exists_to'] = exists_to
-
-        print fetch('location')
-        #attrs['location'] = fetch('location')
 
 
 @tile('addform', interface=Facility, permission="add")

@@ -3,6 +3,7 @@ from sqlalchemy import (
     Float,
     String,
     DateTime,
+    or_,
 )
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
@@ -16,7 +17,9 @@ from chronotope.sql import (
     SQLBase,
     SQLTableNode,
     SQLRowNode,
+    get_session,
 )
+from chronotope.utils import ensure_uuid
 
 
 _ = TranslationStringFactory('chronotope')
@@ -37,6 +40,31 @@ class LocationRecord(SQLBase):
     zip = Column(String)
     city = Column(String)
     country = Column(String)
+
+
+def location_by_uid(request, uid):
+    session = get_session(request)
+    return session.query(LocationRecord).get(ensure_uuid(uid))
+
+
+def locations_by_uid(request, uids):
+    uids = [ensure_uuid(uid) for uid in uids]
+    session = get_session(request)
+    return session.query(LocationRecord)\
+                  .filter(LocationRecord.uid.in_(uids))\
+                  .all()
+
+
+def search_locations(request, term, limit=None):
+    session = get_session(request)
+    query = session.query(LocationRecord)
+    query = query.filter(or_(LocationRecord.street.like('%{0}%'.format(term)),
+                             LocationRecord.zip.like('%{0}%'.format(term)),
+                             LocationRecord.city.like('%{0}%'.format(term))))
+    query = query.order_by(LocationRecord.city)
+    if limit is not None:
+        query = query.limit(limit)
+    return query.all()
 
 
 @node_info(

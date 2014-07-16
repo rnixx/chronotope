@@ -1,5 +1,10 @@
 import uuid
-from plumber import plumber
+from plumber import (
+    plumber,
+    plumb,
+    default,
+    Behavior,
+)
 from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
@@ -20,20 +25,34 @@ from cone.app.browser.authoring import (
     AddBehavior,
     EditBehavior,
 )
-from chronotope.model import Location
+from chronotope.model.location import (
+    Location,
+    locations_by_uid,
+    search_locations,
+)
 
 
 _ = TranslationStringFactory('chronotope')
+
+
+LOCATION_LIMIT = 100
 
 
 @view_config(name='chronotope.location',
              accept='application/json',
              renderer='json')
 def json_location(model, request):
-    return [
-        {'id': 'Location1-uid', 'text': 'Location1'},
-        {'id': 'Location2-uid', 'text': 'Location2'},
-    ]
+    term = request.params['q']
+    locations = list()
+    for location in search_locations(request, term, limit=LOCATION_LIMIT):
+        name = u'{0} {1} {2}'.format(location.street,
+                                    location.zip,
+                                    location.city)
+        locations.append({
+            'id': str(location.uid),
+            'text': name,
+        })
+    return locations
 
 
 @tile('content', 'templates/view.pt',
@@ -48,6 +67,51 @@ class LocationView(ProtectedContentTile):
       strict=False)
 class LocationTile(Tile):
     pass
+
+
+class LocationReferencingForm(Behavior):
+
+    @default
+    @property
+    def location_value(self):
+        value = list()
+        for record in self.model.attrs['location']:
+            value.append(str(record.uid))
+        return value
+
+    @default
+    @property
+    def location_vocab(self):
+        vocab = dict()
+        for record in self.model.attrs['location']:
+            name = u'{0} {1} {2}'.format(record.street,
+                                         record.zip,
+                                         record.city)
+            vocab[str(record.uid)] = name
+        return vocab
+
+    @plumb
+    def save(next_, self, widget, data):
+        next_(self, widget, data)
+        def fetch(name):
+            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
+        # existing locations
+        existing = self.location_value
+        # expect a list of location uids
+        locations = fetch('location')
+        # remove locations
+        remove_locations = list()
+        for location in existing:
+            if not location in locations:
+                remove_locations.append(location)
+        remove_locations = locations_by_uid(self.request, remove_locations)
+        for location in remove_locations:
+            self.model.attrs['location'].remove(location)
+        # set remaining if necessary
+        locations = locations_by_uid(self.request, locations)
+        for location in locations:
+            if not location in self.model.attrs['location']:
+                self.model.attrs['location'].append(location)
 
 
 class LocationForm(object):

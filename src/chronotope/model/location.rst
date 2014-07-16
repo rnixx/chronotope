@@ -181,6 +181,35 @@ Location workflow state::
     >>> location.state
     u'published'
 
+Search and fetch functions::
+
+    >>> import uuid
+    >>> from chronotope.model.location import (
+    ...     location_by_uid,
+    ...     locations_by_uid,
+    ...     search_locations,
+    ... )
+    >>> request = layer.new_request()
+    >>> location_by_uid(request, 'd7d712ba-7f4c-4eaf-9723-8923e9d9a9ae')
+    <chronotope.model.location.LocationRecord object at ...>
+
+    >>> location_by_uid(request, uuid.uuid4())
+
+    >>> locations_by_uid(request, ['d7d712ba-7f4c-4eaf-9723-8923e9d9a9ae'])
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> locations_by_uid(request, [uuid.uuid4()])
+    []
+
+    >>> search_locations(request, 'Museum')
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> search_locations(request, '6020')
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> search_locations(request, 'Inns')
+    [<chronotope.model.location.LocationRecord object at ...>]
+
 Delete location record::
 
     >>> del locations['d7d712ba-7f4c-4eaf-9723-8923e9d9a9ae']

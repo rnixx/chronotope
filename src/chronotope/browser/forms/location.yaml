@@ -23,12 +23,11 @@ widgets:
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - zip:
-    factory: field:label:div:help:error:text
+    factory: field:label:div:help:text
     value: expr:context.model.attrs['zip']
     props:
         label: i18n:zip_label:ZIP
         help: i18n:location_zip_help:Enter ZIP of location
-        required: i18n:lat_required:ZIP is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - city:
@@ -41,12 +40,13 @@ widgets:
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - country:
-    factory: field:label:div:help:error:text
+    factory: field:label:div:help:select
     value: expr:context.model.attrs['country']
     props:
         label: i18n:country_label:Country
         help: i18n:location_country_help:Enter country of location
         required: i18n:lat_required:Country is required
+        vocabulary: expr:context.country_vocab
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - controls:

@@ -138,6 +138,14 @@ class LocationForm(object):
             }
         return UNSET
 
+    @property
+    def country_vocab(self):
+        return [
+            ('germany', _('germany', default=u'Germany')),
+            ('austria', _('austria', default=u'Austria')),
+            ('swizerland', _('swizerland', default=u'Swizerland')),
+        ]
+
     def save(self, widget, data):
         def fetch(name):
             return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted

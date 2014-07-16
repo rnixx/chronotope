@@ -171,6 +171,20 @@ Check removing no longer used category::
     >>> session.query(CategoryRecord).all()
     []
 
+Json view::
+
+    >>> from chronotope.browser.facility import json_facility
+    >>> model = root
+    >>> request = layer.new_request()
+    >>> request.params['q'] = 'Fac'
+    >>> json_facility(model, request)
+    [{'text': u'Some Facility changed', 
+    'id': '...'}]
+
+    >>> request.params['q'] = 'Inexistent'
+    >>> json_facility(model, request)
+    []
+
 Logout::
 
     >>> layer.logout()

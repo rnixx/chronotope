@@ -21,8 +21,8 @@
 
     chronotope = {
 
-        default_lon: 13.3833,
-        default_lat: 52.5167,
+        default_lon: 10.4144,
+        default_lat: 53.2525,
         default_zoom: 10,
 
         binder: function(context) {

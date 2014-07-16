@@ -114,6 +114,20 @@ Check whether occasion attributes have changed::
     ('title', u'Some Occasion changed'), 
     ('uid', UUID('...'))]
 
+Json view::
+
+    >>> from chronotope.browser.occasion import json_occasion
+    >>> model = root
+    >>> request = layer.new_request()
+    >>> request.params['q'] = 'Occ'
+    >>> json_occasion(model, request)
+    [{'text': u'Some Occasion changed', 
+    'id': '...'}]
+
+    >>> request.params['q'] = 'Inexistent'
+    >>> json_occasion(model, request)
+    []
+
 Logout::
 
     >>> layer.logout()

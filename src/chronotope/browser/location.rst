@@ -102,6 +102,20 @@ Check whether location attributes have changed::
     ('uid', UUID('...')), 
     ('zip', u'1234')]
 
+Json view::
+
+    >>> from chronotope.browser.location import json_location
+    >>> model = root
+    >>> request = layer.new_request()
+    >>> request.params['q'] = 'Mus'
+    >>> json_location(model, request)
+    [{'text': u'Musterstrasse 1 1234 Musterort', 
+    'id': '...'}]
+
+    >>> request.params['q'] = 'Inexistent'
+    >>> json_location(model, request)
+    []
+
 Logout::
 
     >>> layer.logout()

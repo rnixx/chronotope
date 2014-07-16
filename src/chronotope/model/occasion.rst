@@ -175,6 +175,29 @@ Occasion workflow state::
     >>> occasion.state
     u'published'
 
+Search and fetch functions::
+
+    >>> import uuid
+    >>> from chronotope.model.occasion import (
+    ...     occasion_by_uid,
+    ...     occasions_by_uid,
+    ...     search_occasions,
+    ... )
+    >>> request = layer.new_request()
+    >>> occasion_by_uid(request, '279af149-297d-4573-bb60-e565a8fb7a23')
+    <chronotope.model.occasion.OccasionRecord object at ...>
+
+    >>> occasion_by_uid(request, uuid.uuid4())
+
+    >>> occasions_by_uid(request, ['279af149-297d-4573-bb60-e565a8fb7a23'])
+    [<chronotope.model.occasion.OccasionRecord object at ...>]
+
+    >>> occasions_by_uid(request, [uuid.uuid4()])
+    []
+
+    >>> search_occasions(request, 'Occa')
+    [<chronotope.model.occasion.OccasionRecord object at ...>]
+
 Delete occasion record::
 
     >>> del occasions['279af149-297d-4573-bb60-e565a8fb7a23']

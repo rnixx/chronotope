@@ -1,5 +1,10 @@
 import uuid
-from plumber import plumber
+from plumber import (
+    plumber,
+    plumb,
+    default,
+    Behavior,
+)
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from cone.tile import (
@@ -19,21 +24,32 @@ from cone.app.browser.authoring import (
     AddBehavior,
     EditBehavior,
 )
-from chronotope.model import Occasion
+from chronotope.model.occasion import (
+    Occasion,
+    occasions_by_uid,
+    search_occasions,
+)
 from chronotope.browser.facility import FacilityReferencingForm
 
 
 _ = TranslationStringFactory('chronotope')
 
 
+OCCASION_LIMIT = 100
+
+
 @view_config(name='chronotope.occasion',
              accept='application/json',
              renderer='json')
 def json_occasion(model, request):
-    return [
-        {'id': 'Occasion1-uid', 'text': 'Occasion1'},
-        {'id': 'Occasion2-uid', 'text': 'Occasion2'},
-    ]
+    term = request.params['q']
+    occasions = list()
+    for occasion in search_occasions(request, term, limit=OCCASION_LIMIT):
+        occasions.append({
+            'id': str(occasion.uid),
+            'text': occasion.title,
+        })
+    return occasions
 
 
 @tile('content', 'templates/view.pt',
@@ -48,6 +64,48 @@ class OccasionView(ProtectedContentTile):
       strict=False)
 class OccasionTile(Tile):
     pass
+
+
+class OccasionReferencingForm(Behavior):
+
+    @default
+    @property
+    def occasion_value(self):
+        value = list()
+        for record in self.model.attrs['occasion']:
+            value.append(str(record.uid))
+        return value
+
+    @default
+    @property
+    def occasion_vocab(self):
+        vocab = dict()
+        for record in self.model.attrs['occasion']:
+            vocab[str(record.uid)] = record.title
+        return vocab
+
+    @plumb
+    def save(next_, self, widget, data):
+        next_(self, widget, data)
+        def fetch(name):
+            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
+        # existing occasion
+        existing = self.occasion_value
+        # expect a list of occasion uids
+        occasions = fetch('occasion')
+        # remove occasions
+        remove_occasions = list()
+        for occasion in existing:
+            if not occasion in occasions:
+                remove_occasions.append(occasion)
+        remove_occasions = occasions_by_uid(self.request, remove_occasions)
+        for occasion in remove_occasions:
+            self.model.attrs['occasion'].remove(occasion)
+        # set remaining if necessary
+        occasions = occasions_by_uid(self.request, occasions)
+        for occasion in occasions:
+            if not occasion in self.model.attrs['occasion']:
+                self.model.attrs['occasion'].append(occasion)
 
 
 class OccasionForm(object):

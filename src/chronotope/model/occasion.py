@@ -18,9 +18,13 @@ from chronotope.sql import (
     SQLBase,
     SQLTableNode,
     SQLRowNode,
+    get_session,
 )
 from chronotope.model import FacilityRecord
-from chronotope.utils import html_index_transform
+from chronotope.utils import (
+    html_index_transform,
+    ensure_uuid,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -54,6 +58,29 @@ class OccasionRecord(SQLBase):
         FacilityRecord,
         secondary=occasion_facility_references,
         backref='occasion')
+
+
+def occasion_by_uid(request, uid):
+    session = get_session(request)
+    return session.query(OccasionRecord).get(ensure_uuid(uid))
+
+
+def occasions_by_uid(request, uids):
+    uids = [ensure_uuid(uid) for uid in uids]
+    session = get_session(request)
+    return session.query(OccasionRecord)\
+                  .filter(OccasionRecord.uid.in_(uids))\
+                  .all()
+
+
+def search_occasions(request, term, limit=None):
+    session = get_session(request)
+    query = session.query(OccasionRecord)
+    query = query.filter(OccasionRecord.title.like('%{0}%'.format(term)))
+    query = query.order_by(OccasionRecord.title)
+    if limit is not None:
+        query = query.limit(limit)
+    return query.all()
 
 
 @node_info(

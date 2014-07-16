@@ -31,6 +31,9 @@ from cone.app.browser.utils import (
 )
 from chronotope.model import Attachment
 from chronotope.utils import html_2_text
+from chronotope.browser.location import LocationReferencingForm
+from chronotope.browser.facility import FacilityReferencingForm
+from chronotope.browser.occasion import OccasionReferencingForm
 
 
 _ = TranslationStringFactory('chronotope')
@@ -117,7 +120,12 @@ class AttachmentTile(Tile):
 
 class AttachmentForm(object):
     __metaclass__ = plumber
-    __plumbing__ = YAMLForm
+    __plumbing__ = (
+        YAMLForm,
+        LocationReferencingForm,
+        FacilityReferencingForm,
+        OccasionReferencingForm,
+    )
 
     form_name = 'attachmentform'
     form_template = 'chronotope.browser:forms/attachment.yaml'
@@ -215,42 +223,6 @@ class AttachmentForm(object):
             raise ExtractionError(widget.attrs['type_required'])
         return data.extracted
 
-    @property
-    def location_value(self):
-        return ['a', 'b', 'c']
-
-    @property
-    def location_vocab(self):
-        return {
-            'a': 'Label a',
-            'b': 'Label a',
-            'c': 'Label a',
-        }
-
-    @property
-    def facility_value(self):
-        return ['d', 'e', 'f']
-
-    @property
-    def facility_vocab(self):
-        return {
-            'd': 'Label d',
-            'e': 'Label e',
-            'f': 'Label f',
-        }
-
-    @property
-    def occasion_value(self):
-        return ['g', 'h', 'i']
-
-    @property
-    def occasion_vocab(self):
-        return {
-            'g': 'Label g',
-            'h': 'Label h',
-            'i': 'Label i',
-        }
-
     def save(self, widget, data):
         def fetch(name):
             return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
@@ -287,12 +259,6 @@ class AttachmentForm(object):
                     scales[scale_name] = scale_data
                 payload['scales'] = scales
                 attrs['payload'] = pickle.dumps(payload)
-        print fetch('location')
-        print fetch('facility')
-        print fetch('occasion')
-        #attrs['location'] = fetch('location')
-        #attrs['facility'] = fetch('facility')
-        #attrs['occasion'] = fetch('occasion')
 
 
 @tile('addform', interface=Attachment, permission="add")

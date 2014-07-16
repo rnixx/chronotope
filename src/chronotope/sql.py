@@ -120,12 +120,14 @@ class SQLTableNode(BaseNode):
     child_factory = None
 
     def __setitem__(self, name, value):
-        name = uuid.UUID(name)
+        uid = uuid.UUID(name)
         attrs = value.attrs
         if not attrs['uid']:
-            attrs['uid'] = name
-        if name != attrs['uid']:
+            attrs['uid'] = uid
+        if uid != attrs['uid']:
             raise ValueError('Node name must equal Node uid.')
+        if value.name is None:
+            value.__name__ = name
         session = get_session(get_current_request())
         session.add(value.record)
 

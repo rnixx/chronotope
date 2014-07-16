@@ -11,7 +11,7 @@ Get model::
     >>> root = get_root()
     >>> locations = root['locations']
 
-Locations are empty::
+Check empty::
 
     >>> locations.printtree()
     <class 'chronotope.model.location.Locations'>: locations
@@ -86,7 +86,7 @@ Edit location::
     ... }
     >>> res = render_tile(location, request, 'edit', catch_errors=False)
 
-Check whether location attributes has changed::
+Check whether location attributes have changed::
 
     >>> sorted(location.attrs.items(), key=lambda x: x[0])
     [('attachment', []), 
@@ -106,3 +106,9 @@ Check whether location attributes has changed::
 Logout::
 
     >>> layer.logout()
+
+Cleanup::
+
+    >>> del locations[location.name]
+    >>> locations.printtree()
+    <class 'chronotope.model.location.Locations'>: locations

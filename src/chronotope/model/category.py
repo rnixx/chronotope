@@ -48,6 +48,8 @@ def category_by_name(request, name):
 
 
 def categories_by_uid(request, uids):
+    if not uids:
+        return list()
     uids = [ensure_uuid(uid) for uid in uids]
     session = get_session(request)
     return session.query(CategoryRecord)\

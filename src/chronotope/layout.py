@@ -24,8 +24,10 @@ class ChronotopeLayout(object):
 
     def __init__(self, context):
         request = get_current_request()
-        if authenticated_userid(request) and not isinstance(context, AppRoot):
-            return
+        if not isinstance(context, AppRoot):
+            self.livesearch = False
+            if authenticated_userid(request):
+                return
         if not authenticated_userid(request):
             self.personaltools = False
         self.columns_fluid = True

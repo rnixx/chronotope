@@ -1,5 +1,5 @@
-Facility tiles
-==============
+chronotope.browser.facility
+===========================
 
 Imports::
 

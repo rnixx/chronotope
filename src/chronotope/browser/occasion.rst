@@ -1,5 +1,5 @@
-Occasion tiles
-==============
+chronotope.browser.occasion
+===========================
 
 Imports::
 

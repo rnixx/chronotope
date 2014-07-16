@@ -1,5 +1,5 @@
-Location tiles
-==============
+chronotope.browser.location
+===========================
 
 Imports::
 

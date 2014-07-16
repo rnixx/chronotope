@@ -1,5 +1,5 @@
-Attachment tiles
-================
+chronotope.browser.attachment
+=============================
 
 Imports::
 

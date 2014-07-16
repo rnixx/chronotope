@@ -84,7 +84,8 @@ class LocationReferencingForm(Behavior):
         vocab = dict()
         value = self.request.params.get(widget.dottedpath)
         if value is not None:
-            records = locations_by_uid(self.request, value.split(','))
+            value = [it for it in value.split(',') if it]
+            records = locations_by_uid(self.request, value)
         else:
             records = self.model.attrs['location']
         for record in records:

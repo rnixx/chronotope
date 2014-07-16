@@ -82,7 +82,8 @@ class FacilityReferencingForm(Behavior):
         vocab = dict()
         value = self.request.params.get(widget.dottedpath)
         if value is not None:
-            records = facilities_by_uid(self.request, value.split(','))
+            value = [it for it in value.split(',') if it]
+            records = facilities_by_uid(self.request, value)
         else:
             records = self.model.attrs['facility']
         for record in records:

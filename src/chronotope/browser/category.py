@@ -30,6 +30,7 @@ def json_category(model, request):
             'text': category.name,
         })
     if not categories:
+        term = term.replace(',', ' ')
         categories.append({
             'id': term,
             'text': term,
@@ -52,7 +53,7 @@ class CategoryReferencingForm(Behavior):
         vocab = dict()
         value = self.request.params.get(widget.dottedpath)
         if value is not None:
-            value = value.split(',')
+            value = [it for it in value.split(',') if it]
             for category in value:
                 try:
                     uid = uuid.UUID(category)

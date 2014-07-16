@@ -81,7 +81,8 @@ class OccasionReferencingForm(Behavior):
         vocab = dict()
         value = self.request.params.get(widget.dottedpath)
         if value is not None:
-            records = occasions_by_uid(self.request, value.split(','))
+            value = [it for it in value.split(',') if it]
+            records = occasions_by_uid(self.request, value)
         else:
             records = self.model.attrs['occasion']
         for record in records:

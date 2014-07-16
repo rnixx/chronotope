@@ -1,3 +1,4 @@
+import uuid
 from plumber import (
     plumb,
     default,
@@ -8,13 +9,13 @@ from chronotope.model.category import (
     add_category,
     delete_category,
     category_by_name,
+    category_by_uid,
     categories_by_uid,
     search_categories,
 )
 
 
 CATEGORY_LIMIT = 100
-CATEGORY_NEW_MARKER = '__new__'
 
 
 @view_config(name='chronotope.category',
@@ -30,7 +31,7 @@ def json_category(model, request):
         })
     if not categories:
         categories.append({
-            'id': '{0}{1}'.format(CATEGORY_NEW_MARKER, term),
+            'id': term,
             'text': term,
         })
     return categories
@@ -47,11 +48,22 @@ class CategoryReferencingForm(Behavior):
         return value
 
     @default
-    @property
-    def category_vocab(self):
+    def category_vocab(self, widget, data):
         vocab = dict()
-        for record in self.model.attrs['category']:
-            vocab[str(record.uid)] = record.name
+        value = self.request.params.get(widget.dottedpath)
+        if value is not None:
+            value = value.split(',')
+            for category in value:
+                try:
+                    uid = uuid.UUID(category)
+                    category = category_by_uid(self.request, uid)
+                    if category:
+                        vocab[str(uid)] = category.name
+                except ValueError:
+                    vocab[category] = category
+        else:
+            for record in self.model.attrs['category']:
+                vocab[str(record.uid)] = record.name
         return vocab
 
     @plumb
@@ -67,18 +79,24 @@ class CategoryReferencingForm(Behavior):
         # new categories
         new_categories = list()
         for category in categories:
-            if category[:len(CATEGORY_NEW_MARKER)] == CATEGORY_NEW_MARKER:
-                name = category[len(CATEGORY_NEW_MARKER):]
+            try:
+                category = uuid.UUID(category)
+            except ValueError:
                 # try to get by name, possibly added by others in meantime
-                cat = category_by_name(self.request, name)
+                cat = category_by_name(self.request, category)
                 if not cat:
-                    cat = add_category(self.request, name)
+                    cat = add_category(self.request, category)
                 new_categories.append(cat)
         for category in new_categories:
             self.model.attrs['category'].append(category)
         # reduce categories
-        categories = [cat for cat in categories \
-                      if cat[:len(CATEGORY_NEW_MARKER)] != CATEGORY_NEW_MARKER]
+        categories = list()
+        for cat in categories:
+            try:
+                uuid.UUID(cat)
+                categories.append(cat)
+            except ValueError:
+                pass
         # remove categories
         remove_categories = list()
         for category in existing:
@@ -91,7 +109,7 @@ class CategoryReferencingForm(Behavior):
             # XXX: need to adopt once other than facilities are categorized
             if not category.facility:
                 delete_category(self.request, category)
-        # set remaining if necessary
+        # set categories
         categories = categories_by_uid(self.request, categories)
         for category in categories:
             if not category in self.model.attrs['category']:

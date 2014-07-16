@@ -155,9 +155,10 @@ class LocationAddForm(LocationForm, Form):
 
     def save(self, widget, data):
         attrs = self.model.attrs
+        attrs['uid'] = uuid.uuid4()
         add_creation_metadata(self.request, attrs)
         super(LocationAddForm, self).save(widget, data)
-        self.model.parent[str(uuid.uuid4())] = self.model
+        self.model.parent[str(attrs['uid'])] = self.model
         self.model()
 
 

@@ -30,6 +30,11 @@ def add_category(request, name):
     return category
 
 
+def delete_category(request, category):
+    session = get_session(request)
+    session.delete(category)
+
+
 def category_by_uid(request, uid):
     session = get_session(request)
     return session.query(CategoryRecord).get(ensure_uuid(uid))

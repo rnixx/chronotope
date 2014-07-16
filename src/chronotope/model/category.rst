@@ -48,6 +48,7 @@ API::
 
     >>> from chronotope.model.category import (
     ...     add_category,
+    ...     delete_category,
     ...     category_by_uid,
     ...     categories_by_uid,
     ...     category_by_name,
@@ -90,9 +91,10 @@ API::
     >>> search_categories(request, 'Cat 1')
     [<chronotope.model.category.CategoryRecord object at ...>]
 
-    >>> session.delete(cat_1)
-    >>> session.delete(cat_2)
-    >>> session.delete(cat_3)
+    >>> delete_category(request, cat_1)
+    >>> delete_category(request, cat_2)
+    >>> delete_category(request, cat_3)
+
     >>> session.commit()
 
     >>> session.query(CategoryRecord).all()

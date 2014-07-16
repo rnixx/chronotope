@@ -6,6 +6,7 @@ from plumber import (
 from pyramid.view import view_config
 from chronotope.model.category import (
     add_category,
+    delete_category,
     category_by_name,
     categories_by_uid,
     search_categories,
@@ -86,6 +87,10 @@ class CategoryReferencingForm(Behavior):
         remove_categories = categories_by_uid(self.request, remove_categories)
         for category in remove_categories:
             self.model.attrs['category'].remove(category)
+            # remove category entirely if not used any longer
+            # XXX: need to adopt once other than facilities is categorized
+            if not category.facility:
+                delete_category(self.request, category)
         # set remaining if necessary
         categories = categories_by_uid(self.request, categories)
         for category in categories:

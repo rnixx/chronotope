@@ -77,10 +77,14 @@ class OccasionReferencingForm(Behavior):
         return value
 
     @default
-    @property
-    def occasion_vocab(self):
+    def occasion_vocab(self, widget, data):
         vocab = dict()
-        for record in self.model.attrs['occasion']:
+        value = self.request.params.get(widget.dottedpath)
+        if value is not None:
+            records = occasions_by_uid(self.request, value.split(','))
+        else:
+            records = self.model.attrs['occasion']
+        for record in records:
             vocab[str(record.uid)] = record.title
         return vocab
 

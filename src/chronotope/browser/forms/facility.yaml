@@ -82,7 +82,7 @@ widgets:
     props:
         label: i18n:location_label:Location
         help: i18n:facility_location_help:Select locations facility belongs to
-        vocabulary: expr:context.location_vocab
+        vocabulary: context.location_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True

@@ -80,7 +80,7 @@ class CategoryReferencingForm(Behavior):
         new_categories = list()
         for category in categories:
             try:
-                category = uuid.UUID(category)
+                uuid.UUID(category)
             except ValueError:
                 # try to get by name, possibly added by others in meantime
                 cat = category_by_name(self.request, category)
@@ -90,17 +90,17 @@ class CategoryReferencingForm(Behavior):
         for category in new_categories:
             self.model.attrs['category'].append(category)
         # reduce categories
-        categories = list()
+        reduced = list()
         for cat in categories:
             try:
                 uuid.UUID(cat)
-                categories.append(cat)
+                reduced.append(cat)
             except ValueError:
                 pass
         # remove categories
         remove_categories = list()
         for category in existing:
-            if not category in categories:
+            if not category in reduced:
                 remove_categories.append(category)
         remove_categories = categories_by_uid(self.request, remove_categories)
         for category in remove_categories:
@@ -110,7 +110,7 @@ class CategoryReferencingForm(Behavior):
             if not category.facility:
                 delete_category(self.request, category)
         # set categories
-        categories = categories_by_uid(self.request, categories)
+        categories = categories_by_uid(self.request, reduced)
         for category in categories:
             if not category in self.model.attrs['category']:
                 self.model.attrs['category'].append(category)

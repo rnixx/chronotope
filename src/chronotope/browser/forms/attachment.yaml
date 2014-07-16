@@ -82,7 +82,7 @@ widgets:
     props:
         label: i18n:location_label:Location
         help: i18n:attachment_location_help:Select locations attachment belongs to
-        vocabulary: expr:context.location_vocab
+        vocabulary: context.location_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True
@@ -96,7 +96,7 @@ widgets:
     props:
         label: i18n:facility_label:Facility
         help: i18n:attachment_facility_help:Select facilities attachment belongs to
-        vocabulary: expr:context.facility_vocab
+        vocabulary: context.facility_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True
@@ -111,7 +111,7 @@ widgets:
     props:
         label: i18n:occasion_label:Occasion
         help: i18n:attachment_occasion_help:Select occasions attachment belongs to
-        vocabulary: expr:context.occasion_vocab
+        vocabulary: context.occasion_vocab
         inputtag: True
         minimumInputLength: 3
         multiple: True

@@ -80,10 +80,14 @@ class LocationReferencingForm(Behavior):
         return value
 
     @default
-    @property
-    def location_vocab(self):
+    def location_vocab(self, widget, data):
         vocab = dict()
-        for record in self.model.attrs['location']:
+        value = self.request.params.get(widget.dottedpath)
+        if value is not None:
+            records = locations_by_uid(self.request, value.split(','))
+        else:
+            records = self.model.attrs['location']
+        for record in records:
             name = u'{0} {1} {2}'.format(record.street,
                                          record.zip,
                                          record.city)

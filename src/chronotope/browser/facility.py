@@ -78,10 +78,14 @@ class FacilityReferencingForm(Behavior):
         return value
 
     @default
-    @property
-    def facility_vocab(self):
+    def facility_vocab(self, widget, data):
         vocab = dict()
-        for record in self.model.attrs['facility']:
+        value = self.request.params.get(widget.dottedpath)
+        if value is not None:
+            records = facilities_by_uid(self.request, value.split(','))
+        else:
+            records = self.model.attrs['facility']
+        for record in records:
             vocab[str(record.uid)] = record.title
         return vocab
 

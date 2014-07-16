@@ -44,7 +44,6 @@ Submit add form::
     ...     'locationform.country': 'Austria',
     ...     'action.locationform.save': '1',
     ... }
-
     >>> res = render_tile(locations, request, 'add', catch_errors=False)
 
 Location has been added::

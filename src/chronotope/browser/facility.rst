@@ -37,6 +37,8 @@ Create dummy content::
     >>> location.attrs['country'] = 'Austria'
     >>> locations['d7d712ba-7f4c-4eaf-9723-8923e9d9a9ae'] = location
 
+    >>> locations()
+
     >>> request = layer.new_request()
 
     >>> from chronotope.model.category import add_category
@@ -73,14 +75,13 @@ Submit add form::
     ...     'facilityform.location': str(location.name),
     ...     'action.facilityform.save': '1',
     ... }
-
     >>> res = render_tile(facilities, request, 'add', catch_errors=False)
 
 Facility has been added::
 
     >>> facilities.printtree()
-     <class 'chronotope.model.facility.Facilities'>: facilities
-      <class 'chronotope.model.facility.Facility'>: ...
+    <class 'chronotope.model.facility.Facilities'>: facilities
+     <class 'chronotope.model.facility.Facility'>: ...
 
 Check facility attributes::
 

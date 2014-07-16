@@ -24,7 +24,7 @@ TESTFILES = [
     'browser/category.rst',
     'browser/location.rst',
     'browser/facility.rst',
-    #'browser/occasion.rst',
+    'browser/occasion.rst',
     #'browser/attachment.rst',
 ]
 

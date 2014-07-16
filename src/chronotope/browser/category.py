@@ -88,7 +88,7 @@ class CategoryReferencingForm(Behavior):
         for category in remove_categories:
             self.model.attrs['category'].remove(category)
             # remove category entirely if not used any longer
-            # XXX: need to adopt once other than facilities is categorized
+            # XXX: need to adopt once other than facilities are categorized
             if not category.facility:
                 delete_category(self.request, category)
         # set remaining if necessary

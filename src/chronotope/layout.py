@@ -26,8 +26,9 @@ class ChronotopeLayout(object):
         request = get_current_request()
         if authenticated_userid(request) and not isinstance(context, AppRoot):
             return
+        if not authenticated_userid(request):
+            self.personaltools = False
         self.columns_fluid = True
-        self.personaltools = False
         self.pathbar = False
         self.sidebar_left = []
         self.content_grid_width = 12

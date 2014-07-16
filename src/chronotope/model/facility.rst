@@ -178,6 +178,29 @@ Location workflow state::
     >>> facility.state
     u'published'
 
+Search and fetch functions::
+
+    >>> import uuid
+    >>> from chronotope.model.facility import (
+    ...     facility_by_uid,
+    ...     facilities_by_uid,
+    ...     search_facilities,
+    ... )
+    >>> request = layer.new_request()
+    >>> facility_by_uid(request, '1fbc0e0a-94bb-4726-bccb-5d1e17041123')
+    <chronotope.model.facility.FacilityRecord object at ...>
+
+    >>> facility_by_uid(request, uuid.uuid4())
+
+    >>> facilities_by_uid(request, ['1fbc0e0a-94bb-4726-bccb-5d1e17041123'])
+    [<chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> facilities_by_uid(request, [uuid.uuid4()])
+    []
+
+    >>> search_facilities(request, 'Faci')
+    [<chronotope.model.facility.FacilityRecord object at ...>]
+
 Delete facility record::
 
     >>> del facilities['1fbc0e0a-94bb-4726-bccb-5d1e17041123']

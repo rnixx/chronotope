@@ -18,12 +18,16 @@ from chronotope.sql import (
     SQLBase,
     SQLTableNode,
     SQLRowNode,
+    get_session,
 )
 from chronotope.model import (
     LocationRecord,
     CategoryRecord,
 )
-from chronotope.utils import html_index_transform
+from chronotope.utils import (
+    html_index_transform,
+    ensure_uuid,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -68,6 +72,29 @@ class FacilityRecord(SQLBase):
         LocationRecord,
         secondary=facility_location_references,
         backref='facility')
+
+
+def facility_by_uid(request, uid):
+    session = get_session(request)
+    return session.query(FacilityRecord).get(ensure_uuid(uid))
+
+
+def facilities_by_uid(request, uids):
+    uids = [ensure_uuid(uid) for uid in uids]
+    session = get_session(request)
+    return session.query(FacilityRecord)\
+                  .filter(FacilityRecord.uid.in_(uids))\
+                  .all()
+
+
+def search_facilities(request, term, limit=None):
+    session = get_session(request)
+    query = session.query(FacilityRecord)
+    query = query.filter(FacilityRecord.title.like('%{0}%'.format(term)))
+    query = query.order_by(FacilityRecord.title)
+    if limit is not None:
+        query = query.limit(limit)
+    return query.all()
 
 
 @node_info(

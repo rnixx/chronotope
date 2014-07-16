@@ -20,6 +20,7 @@ from cone.app.browser.authoring import (
     EditBehavior,
 )
 from chronotope.model import Occasion
+from chronotope.browser.facility import FacilityReferencingForm
 
 
 _ = TranslationStringFactory('chronotope')
@@ -51,23 +52,14 @@ class OccasionTile(Tile):
 
 class OccasionForm(object):
     __metaclass__ = plumber
-    __plumbing__ = YAMLForm
+    __plumbing__ = (
+        YAMLForm,
+        FacilityReferencingForm,
+    )
 
     form_name = 'occasionform'
     form_template = 'chronotope.browser:forms/occasion.yaml'
     message_factory = _
-
-    @property
-    def facility_value(self):
-        return ['g', 'h', 'i']
-
-    @property
-    def facility_vocab(self):
-        return {
-            'g': 'Label g',
-            'h': 'Label h',
-            'i': 'Label i',
-        }
 
     def save(self, widget, data):
         def fetch(name):
@@ -81,8 +73,6 @@ class OccasionForm(object):
         duration_to = fetch('duration_to')
         if duration_to:
             attrs['duration_to'] = duration_to
-        print fetch('facility')
-        #attrs['facility'] = fetch('facility')
 
 
 @tile('addform', interface=Occasion, permission="add")

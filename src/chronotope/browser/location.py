@@ -29,6 +29,7 @@ from chronotope.model.location import (
     Location,
     locations_by_uid,
     search_locations,
+    location_title,
 )
 
 
@@ -45,9 +46,7 @@ def json_location(model, request):
     term = request.params['q']
     locations = list()
     for location in search_locations(request, term, limit=LOCATION_LIMIT):
-        name = u'{0} {1} {2}'.format(location.street,
-                                    location.zip,
-                                    location.city)
+        name = location_title(location.street, location.zip, location.city)
         locations.append({
             'id': str(location.uid),
             'text': name,
@@ -89,9 +88,7 @@ class LocationReferencingForm(Behavior):
         else:
             records = self.model.attrs['location']
         for record in records:
-            name = u'{0} {1} {2}'.format(record.street,
-                                         record.zip,
-                                         record.city)
+            name = location_title(record.street, record.zip, record.city)
             vocab[str(record.uid)] = name
         return vocab
 

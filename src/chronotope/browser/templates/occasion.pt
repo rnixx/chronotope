@@ -4,6 +4,48 @@
               i18n:domain="chronotope"
               omit-tag="True">
 
-  Occasion
+  <div class="occasion-tile">
+
+    <table class="table">
+
+      <tr>
+        <td class="row-title">Title</td>
+        <td tal:content="model.attrs['title']">Title</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Description</td>
+        <td tal:content="structure model.attrs['description']">
+          Description
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Duration from</td>
+        <td tal:content="context.duration_from">1.1.2014</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Duration to</td>
+        <td tal:content="context.duration_to">1.1.2014</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Facilities</td>
+        <td>
+          <tal:related replace="structure tile('related_facilities')" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Attachments</td>
+        <td>
+          <tal:related replace="structure tile('related_attachments')" />
+        </td>
+      </tr>
+
+    </table>
+
+  </div>
 
 </tal:occasion>

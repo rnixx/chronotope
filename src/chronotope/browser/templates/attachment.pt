@@ -7,14 +7,17 @@
   <div class="attachment-tile">
 
     <table class="table">
+
       <tr>
         <td class="row-title">Title</td>
         <td tal:content="model.attrs['title']">Title</td>
       </tr>
+
       <tr tal:condition="context.type == 'text'">
         <td class="row-title">Text</td>
         <td tal:content="structure context.text">Text</td>
       </tr>
+
       <tal:filelike condition="context.type in ['file', 'image']"
                     define="fileinfo context.fileinfo">
         <tr>
@@ -30,12 +33,35 @@
           <td><img src="${context.preview}" alt="preview" /></td>
         </tr>
       </tal:filelike>
+
       <tr>
         <td class="row-title">Download</td>
         <td>
           <a href="${context.download_url}">download</a>
         </td>
       </tr>
+
+      <tr>
+        <td class="row-title">Locations</td>
+        <td>
+          <tal:related replace="structure tile('related_locations')" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Facilities</td>
+        <td>
+          <tal:related replace="structure tile('related_facilities')" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Occasions</td>
+        <td>
+          <tal:related replace="structure tile('related_occasions')" />
+        </td>
+      </tr>
+
     </table>
 
   </div>

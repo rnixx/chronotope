@@ -24,6 +24,7 @@ from cone.app.browser.authoring import (
     AddBehavior,
     EditBehavior,
 )
+from cone.app.browser.utils import format_date
 from chronotope.model.occasion import (
     Occasion,
     occasions_by_uid,
@@ -63,7 +64,16 @@ class OccasionView(ProtectedContentTile):
       interface=Occasion, permission='login',
       strict=False)
 class OccasionTile(Tile):
-    pass
+
+    @property
+    def duration_from(self):
+        duration_from = self.model.attrs['duration_from']
+        return format_date(duration_from, long=False)
+
+    @property
+    def duration_to(self):
+        duration_to = self.model.attrs['duration_to']
+        return format_date(duration_to, long=False)
 
 
 class OccasionReferencingForm(Behavior):

@@ -7,10 +7,7 @@ from plumber import (
 )
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
-from cone.tile import (
-    tile,
-    Tile,
-)
+from cone.tile import tile
 from cone.app.utils import (
     add_creation_metadata,
     update_creation_metadata,
@@ -24,12 +21,16 @@ from cone.app.browser.authoring import (
     AddBehavior,
     EditBehavior,
 )
+from cone.app.browser.utils import format_date
 from chronotope.model.facility import (
     Facility,
     facilities_by_uid,
     search_facilities,
 )
-from chronotope.browser.category import CategoryReferencingForm
+from chronotope.browser.category import (
+    CategoriesTile,
+    CategoryReferencingForm,
+)
 from chronotope.browser.location import LocationReferencingForm
 
 
@@ -63,8 +64,17 @@ class FacilityView(ProtectedContentTile):
 @tile('facility', 'templates/facility.pt',
       interface=Facility, permission='login',
       strict=False)
-class FacilityTile(Tile):
-    pass
+class FacilityTile(CategoriesTile):
+
+    @property
+    def exists_from(self):
+        exists_from = self.model.attrs['exists_from']
+        return format_date(exists_from, long=False)
+
+    @property
+    def exists_to(self):
+        exists_to = self.model.attrs['exists_to']
+        return format_date(exists_to, long=False)
 
 
 class FacilityReferencingForm(Behavior):

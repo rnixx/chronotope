@@ -36,12 +36,18 @@
     display:none;
 }
 
-/* attachment tile */
+/* content tiles */
+.location-tile table td.row-title,
+.facility-tile table td.row-title,
+.occasion-tile table td.row-title,
 .attachment-tile table td.row-title {
     font-weight:bold;
     text-align:right;
     width:20%;
 }
+.panel-body .location-tile,
+.panel-body .facility-tile,
+.panel-body .occasion-tile,
 .panel-body .attachment-tile {
     margin:-15px;
 }

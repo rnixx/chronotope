@@ -4,6 +4,66 @@
               i18n:domain="chronotope"
               omit-tag="True">
 
-  Facility
+  <div class="facility-tile">
+
+    <table class="table">
+
+      <tr>
+        <td class="row-title">Title</td>
+        <td tal:content="model.attrs['title']">Title</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Description</td>
+        <td tal:content="structure model.attrs['description']">
+          Description
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Exists from</td>
+        <td tal:content="context.exists_from">1.1.2014</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Exists to</td>
+        <td tal:content="context.exists_to">1.1.2014</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Categories</td>
+        <td>
+          <ul class="list-unstyled">
+            <li tal:repeat="category context.categories">
+              <span tal:content="category">Category</span>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Locations</td>
+        <td>
+          <tal:related replace="structure tile('related_locations')" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Occasions</td>
+        <td>
+          <tal:related replace="structure tile('related_occasions')" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Attachments</td>
+        <td>
+          <tal:related replace="structure tile('related_attachments')" />
+        </td>
+      </tr>
+
+    </table>
+
+  </div>
 
 </tal:facility>

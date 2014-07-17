@@ -4,6 +4,51 @@
               i18n:domain="chronotope"
               omit-tag="True">
 
-  Location
+  <div class="location-tile">
+
+    <table class="table">
+
+      <tr>
+        <td class="row-title">Coordinates</td>
+        <td>Map XXX</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Street</td>
+        <td tal:content="model.attrs['street']">Street</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">ZIP</td>
+        <td tal:content="model.attrs['zip']">ZIP</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">City</td>
+        <td tal:content="model.attrs['city']">City</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Country</td>
+        <td tal:content="model.attrs['country']">Country</td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Facilities</td>
+        <td>
+          <tal:related replace="structure tile('related_facilities')" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="row-title">Attachments</td>
+        <td>
+          <tal:related replace="structure tile('related_attachments')" />
+        </td>
+      </tr>
+
+    </table>
+
+  </div>
 
 </tal:location>

@@ -5,6 +5,7 @@ from plumber import (
     Behavior,
 )
 from pyramid.view import view_config
+from cone.tile import Tile
 from chronotope.model.category import (
     add_category,
     delete_category,
@@ -36,6 +37,14 @@ def json_category(model, request):
             'text': term,
         })
     return categories
+
+
+class CategoriesTile(Tile):
+
+    @property
+    def categories(self):
+        categories = self.model.attrs['category']
+        return [it.name for it in categories]
 
 
 class CategoryReferencingForm(Behavior):

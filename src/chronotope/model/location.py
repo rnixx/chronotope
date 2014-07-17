@@ -69,6 +69,10 @@ def search_locations(request, term, limit=None):
     return query.all()
 
 
+def location_title(street, zip_, city):
+    return u'{0} {1} {2}'.format(street, zip_, city)
+
+
 @node_info(
     name='location',
     title=_('location_label', default='Location'),
@@ -90,9 +94,8 @@ class Location(SQLRowNode):
     @instance_property
     def metadata(self):
         md = Metadata()
-        md.title = u'{0} {1} {2}'.format(self.attrs['street'],
-                                         self.attrs['zip'],
-                                         self.attrs['city'])
+        md.title = location_title(
+            self.attrs['street'], self.attrs['zip'], self.attrs['city'])
         md.creator = self.attrs['creator']
         md.created = self.attrs['created']
         md.modified = self.attrs['modified']

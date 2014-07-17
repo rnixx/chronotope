@@ -15,7 +15,7 @@
             if (!map_elem.length) {
                 return;
             }
-            chronotope.resize_map(map_elem);
+            chronotope.resize_main_map(map_elem);
         });
     });
 
@@ -24,10 +24,15 @@
         default_lon: 10.4144,
         default_lat: 53.2525,
         default_zoom: 10,
+        min_zoom: 2,
+        max_zoom: 18,
+        map_attrib: 'Map data © <a href="http://openstreetmap.org">OSM</a>',
+        map_tiles: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
         binder: function(context) {
             chronotope.livesearch(context);
             chronotope.chronotope_map(context);
+            chronotope.location_map(context);
             chronotope.attachment_form(context);
         },
 
@@ -40,11 +45,25 @@
             });
         },
 
-        resize_map: function(map_elem) {
-            map_elem.css('height', $(window).height() - 96);
-            map_elem.css('margin-top', -20);
-            map_elem.css('margin-left', -15);
-            map_elem.css('margin-right', -15);
+        create_map: function(el) {
+            var lat = el.data('lat') ? el.data('lat') : this.default_lat;
+            var lon = el.data('lon') ? el.data('lon') : this.default_lon;
+            var zoom = el.data('zoom') ? el.data('zoom') : this.default_zoom;
+            var map = new L.map(el.attr('id')).setView([lat, lon], zoom);
+            var tiles = new L.tileLayer(this.map_tiles, {
+                attribution: this.map_attrib,
+                minZoom: this.min_zoom,
+                maxZoom: this.max_zoom
+            });
+            tiles.addTo(map);
+            return map;
+        },
+
+        resize_main_map: function(el) {
+            el.css('height', $(window).height() - 96)
+              .css('margin-top', -20)
+              .css('margin-left', -15)
+              .css('margin-right', -15);
         },
 
         chronotope_map: function(context) {
@@ -52,20 +71,23 @@
             if (!map_elem.length) {
                 return;
             }
-            this.resize_map(map_elem);
+            this.resize_main_map(map_elem);
             var authenticated = map_elem.data('authenticated');
-            var map = new L.map('chronotope-map').setView(
-                [this.default_lat, this.default_lon],
-                this.default_zoom);
-            var osm = 'Map data © <a href="http://openstreetmap.org">OSM</a>';
-            var tiles = new L.tileLayer(
-                '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                {
-                    attribution: osm,
-                    minZoom: 2,
-                    maxZoom: 18
-                });
-            tiles.addTo(map);
+            var map = this.create_map(map_elem);
+        },
+
+        location_map: function(context) {
+            var map_elems = $('.location-view-map', context);
+            $(map_elems).each(function() {
+                var map_elem = $(this);
+                var map = chronotope.create_map(map_elem);
+                var markers = new L.FeatureGroup();
+                map.addLayer(markers);
+                var marker = new L.marker(
+                    [map_elem.data('lat'), map_elem.data('lon')]
+                );
+                marker.addTo(markers);
+            });
         },
 
         attachment_form: function(context) {

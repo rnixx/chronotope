@@ -65,7 +65,14 @@ class LocationView(ProtectedContentTile):
       interface=Location, permission='login',
       strict=False)
 class LocationTile(Tile):
-    pass
+
+    @property
+    def coordinates(self):
+        return {
+            'lat': self.model.attrs['lat'],
+            'lon': self.model.attrs['lon'],
+            'zoom': 15,
+        }
 
 
 class LocationReferencingForm(Behavior):

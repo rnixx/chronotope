@@ -51,3 +51,8 @@
 .panel-body .attachment-tile {
     margin:-15px;
 }
+
+/* location view */
+.location-view-map {
+    height:250px;
+}

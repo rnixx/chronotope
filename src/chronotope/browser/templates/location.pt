@@ -10,7 +10,13 @@
 
       <tr>
         <td class="row-title">Coordinates</td>
-        <td>Map XXX</td>
+        <td tal:define="coordinates context.coordinates">
+          <div id="location-view-map-${model.name}"
+               class="location-view-map"
+               data-lat="${coordinates['lat']}"
+               data-lon="${coordinates['lon']}"
+               data-zoom="${coordinates['zoom']}"></div>
+        </td>
       </tr>
 
       <tr>

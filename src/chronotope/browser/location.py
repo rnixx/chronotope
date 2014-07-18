@@ -1,10 +1,5 @@
 import uuid
-from plumber import (
-    plumber,
-    plumb,
-    default,
-    Behavior,
-)
+from plumber import plumber
 from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
@@ -27,7 +22,6 @@ from cone.app.browser.authoring import (
 )
 from chronotope.model.location import (
     Location,
-    locations_by_uid,
     search_locations,
     location_title,
 )
@@ -73,54 +67,6 @@ class LocationTile(Tile):
             'lon': self.model.attrs['lon'],
             'zoom': 15,
         }
-
-
-class LocationReferencingForm(Behavior):
-
-    @default
-    @property
-    def location_value(self):
-        value = list()
-        for record in self.model.attrs['location']:
-            value.append(str(record.uid))
-        return value
-
-    @default
-    def location_vocab(self, widget, data):
-        vocab = dict()
-        value = self.request.params.get(widget.dottedpath)
-        if value is not None:
-            value = [it for it in value.split(',') if it]
-            records = locations_by_uid(self.request, value)
-        else:
-            records = self.model.attrs['location']
-        for record in records:
-            name = location_title(record.street, record.zip, record.city)
-            vocab[str(record.uid)] = name
-        return vocab
-
-    @plumb
-    def save(next_, self, widget, data):
-        next_(self, widget, data)
-        def fetch(name):
-            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
-        # existing locations
-        existing = self.location_value
-        # expect a list of location uids
-        locations = fetch('location')
-        # remove locations
-        remove_locations = list()
-        for location in existing:
-            if not location in locations:
-                remove_locations.append(location)
-        remove_locations = locations_by_uid(self.request, remove_locations)
-        for location in remove_locations:
-            self.model.attrs['location'].remove(location)
-        # set remaining if necessary
-        locations = locations_by_uid(self.request, locations)
-        for location in locations:
-            if not location in self.model.attrs['location']:
-                self.model.attrs['location'].append(location)
 
 
 class LocationForm(object):

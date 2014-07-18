@@ -1,10 +1,5 @@
 import uuid
-from plumber import (
-    plumber,
-    plumb,
-    default,
-    Behavior,
-)
+from plumber import plumber
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from cone.tile import tile
@@ -24,14 +19,13 @@ from cone.app.browser.authoring import (
 from cone.app.browser.utils import format_date
 from chronotope.model.facility import (
     Facility,
-    facilities_by_uid,
     search_facilities,
 )
-from chronotope.browser.category import (
-    CategoriesTile,
-    CategoryReferencingForm,
+from chronotope.browser.category import CategoriesTile
+from chronotope.browser.references import (
+    LocationReferencing,
+    CategoryReferencing,
 )
-from chronotope.browser.location import LocationReferencingForm
 
 
 _ = TranslationStringFactory('chronotope')
@@ -77,59 +71,12 @@ class FacilityTile(CategoriesTile):
         return format_date(exists_to, long=False)
 
 
-class FacilityReferencingForm(Behavior):
-
-    @default
-    @property
-    def facility_value(self):
-        value = list()
-        for record in self.model.attrs['facility']:
-            value.append(str(record.uid))
-        return value
-
-    @default
-    def facility_vocab(self, widget, data):
-        vocab = dict()
-        value = self.request.params.get(widget.dottedpath)
-        if value is not None:
-            value = [it for it in value.split(',') if it]
-            records = facilities_by_uid(self.request, value)
-        else:
-            records = self.model.attrs['facility']
-        for record in records:
-            vocab[str(record.uid)] = record.title
-        return vocab
-
-    @plumb
-    def save(next_, self, widget, data):
-        next_(self, widget, data)
-        def fetch(name):
-            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
-        # existing facilities
-        existing = self.facility_value
-        # expect a list of facility uids
-        facilities = fetch('facility')
-        # remove facilities
-        remove_facilities = list()
-        for facility in existing:
-            if not facility in facilities:
-                remove_facilities.append(facility)
-        remove_facilities = facilities_by_uid(self.request, remove_facilities)
-        for facility in remove_facilities:
-            self.model.attrs['facility'].remove(facility)
-        # set remaining if necessary
-        facilities = facilities_by_uid(self.request, facilities)
-        for facility in facilities:
-            if not facility in self.model.attrs['facility']:
-                self.model.attrs['facility'].append(facility)
-
-
 class FacilityForm(object):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
-        CategoryReferencingForm,
-        LocationReferencingForm,
+        CategoryReferencing,
+        LocationReferencing,
     )
 
     form_name = 'facilityform'

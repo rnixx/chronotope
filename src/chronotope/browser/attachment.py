@@ -31,9 +31,11 @@ from cone.app.browser.utils import (
 )
 from chronotope.model import Attachment
 from chronotope.utils import html_2_text
-from chronotope.browser.location import LocationReferencingForm
-from chronotope.browser.facility import FacilityReferencingForm
-from chronotope.browser.occasion import OccasionReferencingForm
+from chronotope.browser.references import (
+    LocationReferencing,
+    FacilityReferencing,
+    OccasionReferencing,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -133,9 +135,9 @@ class AttachmentForm(object):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
-        LocationReferencingForm,
-        FacilityReferencingForm,
-        OccasionReferencingForm,
+        LocationReferencing,
+        FacilityReferencing,
+        OccasionReferencing,
     )
 
     form_name = 'attachmentform'

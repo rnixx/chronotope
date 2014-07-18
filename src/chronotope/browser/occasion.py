@@ -1,9 +1,6 @@
 import uuid
 from plumber import (
     plumber,
-    plumb,
-    default,
-    Behavior,
 )
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
@@ -27,10 +24,9 @@ from cone.app.browser.authoring import (
 from cone.app.browser.utils import format_date
 from chronotope.model.occasion import (
     Occasion,
-    occasions_by_uid,
     search_occasions,
 )
-from chronotope.browser.facility import FacilityReferencingForm
+from chronotope.browser.references import FacilityReferencing
 
 
 _ = TranslationStringFactory('chronotope')
@@ -76,58 +72,11 @@ class OccasionTile(Tile):
         return format_date(duration_to, long=False)
 
 
-class OccasionReferencingForm(Behavior):
-
-    @default
-    @property
-    def occasion_value(self):
-        value = list()
-        for record in self.model.attrs['occasion']:
-            value.append(str(record.uid))
-        return value
-
-    @default
-    def occasion_vocab(self, widget, data):
-        vocab = dict()
-        value = self.request.params.get(widget.dottedpath)
-        if value is not None:
-            value = [it for it in value.split(',') if it]
-            records = occasions_by_uid(self.request, value)
-        else:
-            records = self.model.attrs['occasion']
-        for record in records:
-            vocab[str(record.uid)] = record.title
-        return vocab
-
-    @plumb
-    def save(next_, self, widget, data):
-        next_(self, widget, data)
-        def fetch(name):
-            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
-        # existing occasion
-        existing = self.occasion_value
-        # expect a list of occasion uids
-        occasions = fetch('occasion')
-        # remove occasions
-        remove_occasions = list()
-        for occasion in existing:
-            if not occasion in occasions:
-                remove_occasions.append(occasion)
-        remove_occasions = occasions_by_uid(self.request, remove_occasions)
-        for occasion in remove_occasions:
-            self.model.attrs['occasion'].remove(occasion)
-        # set remaining if necessary
-        occasions = occasions_by_uid(self.request, occasions)
-        for occasion in occasions:
-            if not occasion in self.model.attrs['occasion']:
-                self.model.attrs['occasion'].append(occasion)
-
-
 class OccasionForm(object):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
-        FacilityReferencingForm,
+        FacilityReferencing,
     )
 
     form_name = 'occasionform'

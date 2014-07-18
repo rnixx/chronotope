@@ -1,0 +1,13 @@
+factory: field:label:div:help:error:select2
+value: expr:context.location_value
+props:
+    label: i18n:location_label:Location
+    help: i18n:location_help:Select locations this object belongs to
+    vocabulary: context.location_vocab
+    inputtag: True
+    minimumInputLength: 3
+    multiple: True
+    placeholder: i18n:location_placeholder:Select or add location
+    ajaxurl: chronotope.location
+    label.class_add: col-sm-2
+    div.class_add: col-sm-10

@@ -77,19 +77,7 @@ widgets:
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - location:
-    factory: field:label:div:help:error:select2
-    value: expr:context.location_value
-    props:
-        label: i18n:location_label:Location
-        help: i18n:facility_location_help:Select locations facility belongs to
-        vocabulary: context.location_vocab
-        inputtag: True
-        minimumInputLength: 3
-        multiple: True
-        placeholder: i18n:location_placeholder:Select or add location
-        ajaxurl: chronotope.location
-        label.class_add: col-sm-2
-        div.class_add: col-sm-10
+    nest: location_reference.yaml
 - controls:
     factory: field:div
     props:

@@ -62,20 +62,7 @@ widgets:
             label.class_add: col-sm-2
             div.class_add: col-sm-4
 - facility:
-    factory: field:label:div:help:error:select2
-    value: expr:context.facility_value
-    props:
-        label: i18n:facility_label:Facility
-        help: i18n:occasion_facility_help:Select facilities occasion belongs to
-        vocabulary: context.facility_vocab
-        inputtag: True
-        minimumInputLength: 3
-        multiple: True
-        placeholder: i18n:category_placeholder:Select or add facility
-        ajaxurl: chronotope.facility
-        tags: True,
-        label.class_add: col-sm-2
-        div.class_add: col-sm-10
+    nest: facility_reference.yaml
 - controls:
     factory: field:div
     props:

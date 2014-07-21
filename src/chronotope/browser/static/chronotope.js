@@ -19,6 +19,37 @@
         });
     });
 
+    L.Control.LocationControl = L.Control.extend({
+        options: {
+            position: 'topleft'
+        },
+
+        initialize: function (options) {
+            L.Util.extend(this.options, options);
+        },
+
+        onAdd: function (map) {
+            this.map = map;
+            this.controls = L.DomUtil.create(
+                'div', 'leaflet-control-location leaflet-bar');
+
+            var add_action = document.createElement('a');
+            add_action.href = '#';
+            add_action.title = 'Add Location';
+            add_action.id = 'leaflet-control-locations-add';
+            this.add_action = add_action;
+
+            var icon = document.createElement('span');
+            icon.className = 'glyphicon glyphicon-map-marker';
+            icon.innerHtml = '';
+
+            this.add_action.appendChild(icon);
+            this.controls.appendChild(add_action);
+
+            return this.controls;
+        }
+    });
+
     chronotope = {
 
         default_lon: 10.4144,
@@ -79,6 +110,22 @@
               .css('margin-right', -15);
         },
 
+        add_geosearch: function(map) {
+            var geosearch = new L.Control.GeoSearch({
+                provider: new L.GeoSearch.Provider.OpenStreetMap(),
+                position: 'topleft',
+                showMarker: false
+            });
+            geosearch.addTo(map);
+            return geosearch;
+        },
+
+        add_location_control: function(map) {
+            var location_control = new L.Control.LocationControl();
+            location_control.addTo(map);
+            return location_control;
+        },
+
         chronotope_map: function(context) {
             var map_elem = $('#chronotope-map', context);
             if (!map_elem.length) {
@@ -87,6 +134,12 @@
             this.resize_main_map(map_elem);
             var authenticated = map_elem.data('authenticated');
             var map = this.create_map(map_elem);
+            //var geosearch = this.add_geosearch(map);
+            //geosearch._config.zoomLevel = 14;
+            //map.on('geosearch_showlocation', function(result) {
+            //    console.log(result.Location.Label);
+            //});
+            var location_control = this.add_location_control(map);
         },
 
         location_map: function(context) {

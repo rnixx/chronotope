@@ -56,3 +56,14 @@
 .location-view-map {
     height:250px;
 }
+
+/* main map */
+.leaflet-control-location a {
+    font-size:16px;
+    height:26px;
+    line-height:26px;
+    width:26px;
+}
+.leaflet-control-location a span {
+    line-height:26px;
+}

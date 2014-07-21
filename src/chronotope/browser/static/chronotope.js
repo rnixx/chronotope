@@ -19,6 +19,8 @@
         });
     });
 
+    var email_re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     L.Control.LocationControl = L.Control.extend({
         options: {
             position: 'topleft'
@@ -69,10 +71,18 @@
                 console.log('dropdown li clicked');
                 return false;
             });
-
+            $('#submitter_email', controls).on('keyup blur', function(evt) {
+                var input = $(evt.target);
+                var form_group = $('.form-group', input.parents());
+                var value = input.val();
+                if (!email_re.test(value)) {
+                    form_group.addClass('has-error');
+                    return;
+                }
+                form_group.removeClass('has-error');
+            });
             this.map = map;
             this.controls = controls.get(0);
-
             return this.controls;
         }
     });

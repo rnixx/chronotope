@@ -38,10 +38,23 @@
 
         livesearch: function(context) {
             var input = $('input#search-text');
+            var from_suggestion = false;
             input.on('typeahead:selected', function(evt, suggestion, dataset) {
-                console.log(evt);
+                from_suggestion = true;
+                console.log('display suggestion from livesearch');
                 console.log(suggestion);
-                console.log(dataset);
+            });
+            input.on('keydown', function(evt) {
+                if (from_suggestion) {
+                    from_suggestion = false;
+                    return;
+                }
+                switch (evt.keyCode || evt.which) {
+                    case 13:
+                        console.log('display all results from livesearch');
+                        input.typeahead('close');
+                        evt.preventDefault();
+                }
             });
         },
 

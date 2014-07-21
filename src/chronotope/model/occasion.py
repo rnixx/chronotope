@@ -20,7 +20,10 @@ from chronotope.sql import (
     SQLRowNode,
     get_session,
 )
-from chronotope.model import FacilityRecord
+from chronotope.model import (
+    LocationRecord,
+    FacilityRecord,
+)
 from chronotope.utils import (
     html_index_transform,
     ensure_uuid,
@@ -28,6 +31,13 @@ from chronotope.utils import (
 
 
 _ = TranslationStringFactory('chronotope')
+
+
+occasion_location_references = Table(
+        'occasion_location_references', SQLBase.metadata,
+    Column('occasion_uid', GUID, ForeignKey('occasion.uid')),
+    Column('location_uid', GUID, ForeignKey('location.uid'))
+)
 
 
 occasion_facility_references = Table(
@@ -55,6 +65,10 @@ class OccasionRecord(SQLBase):
     duration_from = Column(DateTime)
     duration_to = Column(DateTime)
 
+    location = relationship(
+        LocationRecord,
+        secondary=occasion_location_references,
+        backref='occasion')
     facility = relationship(
         FacilityRecord,
         secondary=occasion_facility_references,

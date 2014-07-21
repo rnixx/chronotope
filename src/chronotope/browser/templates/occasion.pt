@@ -31,6 +31,13 @@
       </tr>
 
       <tr>
+        <td class="row-title">Locations</td>
+        <td>
+          <tal:related replace="structure tile('related_locations')" />
+        </td>
+      </tr>
+
+      <tr>
         <td class="row-title">Facilities</td>
         <td>
           <tal:related replace="structure tile('related_facilities')" />

@@ -47,6 +47,13 @@
       </tr>
 
       <tr>
+        <td class="row-title">Occasions</td>
+        <td>
+          <tal:related replace="structure tile('related_occasions')" />
+        </td>
+      </tr>
+
+      <tr>
         <td class="row-title">Attachments</td>
         <td>
           <tal:related replace="structure tile('related_attachments')" />

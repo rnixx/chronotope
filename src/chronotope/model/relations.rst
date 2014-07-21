@@ -136,6 +136,7 @@ Create occasions::
     >>> occasion1.attrs['description'] = u'Occasion description'
     >>> occasion1.attrs['duration_from'] = datetime.datetime(2010, 01, 01, 0, 0)
     >>> occasion1.attrs['duration_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> occasion1.attrs['location'].append(location1.record)
     >>> occasion1.attrs['facility'].append(facility1.record)
     >>> occasions['104f3451-8895-47a2-918d-6c420394aaec'] = occasion1
 
@@ -147,11 +148,20 @@ Create occasions::
     >>> occasion2.attrs['description'] = u'Other occasion description'
     >>> occasion2.attrs['duration_from'] = datetime.datetime(2010, 01, 01, 0, 0)
     >>> occasion2.attrs['duration_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> occasion2.attrs['location'].append(location1.record)
+    >>> occasion2.attrs['location'].append(location2.record)
     >>> occasion2.attrs['facility'].append(facility1.record)
     >>> occasion2.attrs['facility'].append(facility2.record)
     >>> occasions['7cb5828f-2821-424f-a734-88a8ec07d266'] = occasion2
 
 Check references and back references of occasion to facility reference::
+
+    >>> occasion1.record.location
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> occasion2.record.location
+    [<chronotope.model.location.LocationRecord object at ...>, 
+    <chronotope.model.location.LocationRecord object at ...>]
 
     >>> occasion1.record.facility
     [<chronotope.model.facility.FacilityRecord object at ...>]
@@ -159,6 +169,13 @@ Check references and back references of occasion to facility reference::
     >>> occasion2.record.facility
     [<chronotope.model.facility.FacilityRecord object at ...>, 
     <chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> location1.record.occasion
+    [<chronotope.model.occasion.OccasionRecord object at ...>, 
+    <chronotope.model.occasion.OccasionRecord object at ...>]
+
+    >>> location2.record.occasion
+    [<chronotope.model.occasion.OccasionRecord object at ...>]
 
     >>> facility1.record.occasion
     [<chronotope.model.occasion.OccasionRecord object at ...>, 

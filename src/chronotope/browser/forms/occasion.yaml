@@ -61,6 +61,8 @@ widgets:
             locale: de
             label.class_add: col-sm-2
             div.class_add: col-sm-4
+- location:
+    nest: location_reference.yaml
 - facility:
     nest: facility_reference.yaml
 - controls:

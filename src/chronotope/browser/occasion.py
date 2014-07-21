@@ -26,7 +26,10 @@ from chronotope.model.occasion import (
     Occasion,
     search_occasions,
 )
-from chronotope.browser.references import FacilityReferencing
+from chronotope.browser.references import (
+    LocationReferencing,
+    FacilityReferencing,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -76,6 +79,7 @@ class OccasionForm(object):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
+        LocationReferencing,
         FacilityReferencing,
     )
 

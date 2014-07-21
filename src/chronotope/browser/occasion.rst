@@ -9,6 +9,7 @@ Imports::
 Get model::
 
     >>> root = get_root()
+    >>> locations = root['locations']
     >>> facilities = root['facilities']
     >>> occasions = root['occasions']
 
@@ -23,7 +24,20 @@ Check empty::
 Create dummy content::
 
     >>> import datetime
+    >>> from chronotope.model import Location
     >>> from chronotope.model import Facility
+
+    >>> location = Location()
+    >>> location.attrs['creator'] = u'manager'
+    >>> location.attrs['created'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> location.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
+    >>> location.attrs['lat'] = 11.37879
+    >>> location.attrs['lon'] = 47.2854551
+    >>> location.attrs['street'] = u'Museumstrasse'
+    >>> location.attrs['zip'] = u'6020'
+    >>> location.attrs['city'] = u'Innsbruck'
+    >>> location.attrs['country'] = 'Austria'
+    >>> locations['d7d712ba-7f4c-4eaf-9723-8923e9d9a9ae'] = location
 
     >>> facility = Facility()
     >>> facility.attrs['creator'] = u'manager'
@@ -60,6 +74,7 @@ Submit add form::
     ...     'occasionform.description': u'Some occasion description',
     ...     'occasionform.duration_from': '1.1.2014',
     ...     'occasionform.duration_to': '1.2.2014',
+    ...     'occasionform.location': str(location.name),
     ...     'occasionform.facility': str(facility.name),
     ...     'action.occasionform.save': '1',
     ... }
@@ -82,6 +97,7 @@ Check occasion attributes::
     ('duration_from', datetime.datetime(2014, 1, 1, 0, 0)), 
     ('duration_to', datetime.datetime(2014, 2, 1, 0, 0)), 
     ('facility', [<chronotope.model.facility.FacilityRecord object at ...>]), 
+    ('location', [<chronotope.model.location.LocationRecord object at ...>]), 
     ('modified', datetime.datetime(...)), 
     ('state', u'draft'), 
     ('submitter', None), 
@@ -96,6 +112,7 @@ Edit occasion::
     ...     'occasionform.description': u'Some occasion description changed',
     ...     'occasionform.duration_from': '1.1.2014',
     ...     'occasionform.duration_to': '1.2.2014',
+    ...     'occasionform.location': '',
     ...     'occasionform.facility': '',
     ...     'action.occasionform.save': '1',
     ... }
@@ -111,6 +128,7 @@ Check whether occasion attributes have changed::
     ('duration_from', datetime.datetime(2014, 1, 1, 0, 0)), 
     ('duration_to', datetime.datetime(2014, 2, 1, 0, 0)), 
     ('facility', []), 
+    ('location', []), 
     ('modified', datetime.datetime(...)), 
     ('state', u'draft'), 
     ('submitter', None), 
@@ -136,6 +154,10 @@ Logout::
     >>> layer.logout()
 
 Cleanup::
+
+    >>> del locations[str(location.name)]
+    >>> locations.printtree()
+    <class 'chronotope.model.location.Locations'>: locations
 
     >>> del facilities[str(facility.name)]
     >>> facilities.printtree()

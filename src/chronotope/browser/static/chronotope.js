@@ -28,23 +28,50 @@
             L.Util.extend(this.options, options);
         },
 
+        controls_tmpl: function() {
+            return $(
+            '<div class="leaflet-control-location">' +
+                '<div class="dropdown">' +
+                    '<button class="btn dropdown-toggle" ' +
+                            'type="button" ' +
+                            'id="location-controls-dropdown" ' +
+                            'data-toggle="dropdown">' +
+                        '<span class="glyphicon glyphicon-map-marker"></span>' +
+                    '</button>' +
+                    '<ul class="dropdown-menu">' +
+                        '<li class="disabled">' +
+                            '<a href="#">Add new location</a>' +
+                        '</li>' +
+                        '<li class="divider"></li>' +
+                        '<li>' +
+                            '<div class="form-group has-error submitter_email">' +
+                                '<label for="submitter_email">' +
+                                    'Submitter' +
+                                '</label>' +
+                                '<input type="email" ' +
+                                       'class="form-control" ' +
+                                       'id="submitter_email" ' +
+                                       'placeholder="Enter email address" />' +
+                                '<p class="help-block">' +
+                                    'Needs to be filled in order to add ' +
+                                    'contents.' +
+                                '</p>' +
+                            '</div>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>' +
+            '</div>');
+        },
+
         onAdd: function (map) {
+            var controls = this.controls_tmpl();
+            $('.dropdown-menu li', controls).on('click', function(evt) {
+                console.log('dropdown li clicked');
+                return false;
+            });
+
             this.map = map;
-            this.controls = L.DomUtil.create(
-                'div', 'leaflet-control-location leaflet-bar');
-
-            var add_action = document.createElement('a');
-            add_action.href = '#';
-            add_action.title = 'Add Location';
-            add_action.id = 'leaflet-control-locations-add';
-            this.add_action = add_action;
-
-            var icon = document.createElement('span');
-            icon.className = 'glyphicon glyphicon-map-marker';
-            icon.innerHtml = '';
-
-            this.add_action.appendChild(icon);
-            this.controls.appendChild(add_action);
+            this.controls = controls.get(0);
 
             return this.controls;
         }

@@ -30,6 +30,7 @@ class LocationRecord(SQLBase):
     __index_attrs__ = ['street', 'zip', 'city']
 
     uid = Column(GUID, primary_key=True)
+    submitter = Column(String)
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)

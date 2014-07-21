@@ -45,6 +45,7 @@ class OccasionRecord(SQLBase):
     }
 
     uid = Column(GUID, primary_key=True)
+    submitter = Column(String)
     creator = Column(String)
     created = Column(DateTime)
     modified = Column(DateTime)

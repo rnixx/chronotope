@@ -98,6 +98,7 @@ Check facility attributes::
     ('modified', datetime.datetime(...)), 
     ('occasion', []), 
     ('state', u'draft'), 
+    ('submitter', None), 
     ('title', u'Some Facility'), 
     ('uid', UUID('...'))]
 
@@ -129,6 +130,7 @@ Check whether facility attributes have changed::
     ('modified', datetime.datetime(...)), 
     ('occasion', []), 
     ('state', u'draft'), 
+    ('submitter', None), 
     ('title', u'Some Facility changed'), 
     ('uid', UUID('...'))]
 

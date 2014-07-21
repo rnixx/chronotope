@@ -82,7 +82,9 @@ Check occasion attributes::
     ('duration_from', datetime.datetime(2014, 1, 1, 0, 0)), 
     ('duration_to', datetime.datetime(2014, 2, 1, 0, 0)), 
     ('facility', [<chronotope.model.facility.FacilityRecord object at ...>]), 
-    ('modified', datetime.datetime(...)), ('state', u'draft'), 
+    ('modified', datetime.datetime(...)), 
+    ('state', u'draft'), 
+    ('submitter', None), 
     ('title', u'Some Occasion'), 
     ('uid', UUID('...'))]
 
@@ -111,6 +113,7 @@ Check whether occasion attributes have changed::
     ('facility', []), 
     ('modified', datetime.datetime(...)), 
     ('state', u'draft'), 
+    ('submitter', None), 
     ('title', u'Some Occasion changed'), 
     ('uid', UUID('...'))]
 

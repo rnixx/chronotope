@@ -67,6 +67,7 @@ Check location attributes::
     ('modified', datetime.datetime(...)), 
     ('state', u'draft'), 
     ('street', u'Museumstrasse 1'), 
+    ('submitter', None), 
     ('uid', UUID('...')), 
     ('zip', u'6020')]
 
@@ -99,6 +100,7 @@ Check whether location attributes have changed::
     ('modified', datetime.datetime(...)), 
     ('state', u'draft'), 
     ('street', u'Musterstrasse 1'), 
+    ('submitter', None), 
     ('uid', UUID('...')), 
     ('zip', u'1234')]
 

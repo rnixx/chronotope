@@ -115,6 +115,7 @@ Check attachment attributes::
     ('occasion', [<chronotope.model.occasion.OccasionRecord object at ...>]), 
     ('payload', 'Some Attachment Text'), 
     ('state', u'draft'), 
+    ('submitter', None), 
     ('title', u'Some Attachment'), 
     ('uid', UUID('...'))]
 
@@ -144,6 +145,7 @@ Check whether attachment attributes have changed::
     ('occasion', []), 
     ('payload', 'Some Attachment Text changed'), 
     ('state', u'draft'), 
+    ('submitter', None), 
     ('title', u'Some Attachment changed'), 
     ('uid', UUID('...'))]
 

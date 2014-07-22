@@ -41,10 +41,6 @@
                         '<span class="glyphicon glyphicon-map-marker"></span>' +
                     '</button>' +
                     '<ul class="dropdown-menu">' +
-                        '<li class="disabled">' +
-                            '<a href="#">Add new location</a>' +
-                        '</li>' +
-                        '<li class="divider"></li>' +
                         '<li>' +
                             '<div class="form-group has-error submitter_email">' +
                                 '<label for="submitter_email">' +
@@ -60,6 +56,10 @@
                                 '</p>' +
                             '</div>' +
                         '</li>' +
+                        '<li class="divider"></li>' +
+                        '<li class="disabled">' +
+                        '<a href="#">Add new location</a>' +
+                    '</li>' +
                     '</ul>' +
                 '</div>' +
             '</div>');
@@ -116,10 +116,24 @@
             input.off('typeahead:selected');
             input.on('typeahead:selected', function(evt, suggestion, dataset) {
                 from_suggestion = true;
-                if (suggestion.action == 'location') {
-                    chronotope.set_markers([suggestion]);
-                    chronotope.fit_bounds();
-                }
+                bdajax.request({
+                    success: function(data) {
+                        chronotope.set_markers(data);
+                        if (data.length) {
+                            chronotope.fit_bounds();
+                        }
+                    },
+                    url: 'chronotope.related_locations',
+                    params: {
+                        uid: suggestion.uid,
+                        action: suggestion.action
+                    },
+                    type: 'json',
+                    error: function() {
+                        var msg = 'Error while fetching remote data';
+                        bdajax.error(msg);
+                    }
+                });
                 bdajax.overlay({
                     action: suggestion.action,
                     target: suggestion.target

@@ -96,6 +96,8 @@
         max_zoom: 18,
         map_attrib: 'Map data © <a href="http://openstreetmap.org">OSM</a>',
         map_tiles: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        map: null,
+        markers: null,
 
         binder: function(context) {
             chronotope.livesearch(context);
@@ -105,7 +107,6 @@
         },
 
         render_livesearch_suggestion: function (datum) {
-            console.log('livesearch suggestion custom render');
             return '<span class="' + datum.icon + '"></span> ' + datum.value;
         },
 
@@ -114,8 +115,25 @@
             var from_suggestion = false;
             input.on('typeahead:selected', function(evt, suggestion, dataset) {
                 from_suggestion = true;
-                console.log('display suggestion from livesearch');
-                console.log(suggestion);
+                if (suggestion.type == 'location') {
+                    var coords = [suggestion.lat, suggestion.lon];
+                    chronotope.map.removeLayer(chronotope.markers);
+                    var markers = chronotope.create_markers(chronotope.map);
+                    var marker = new L.marker(coords);
+                    marker.addTo(markers);
+                    marker.on('click', function(evt) {
+                        bdajax.overlay({
+                            action: suggestion.action,
+                            target: suggestion.target
+                        });
+                    });
+                    chronotope.map.panTo(coords);
+                    chronotope.map.setZoom(15);
+                }
+                bdajax.overlay({
+                    action: suggestion.action,
+                    target: suggestion.target
+                });
             });
             input.on('keydown', function(evt) {
                 if (from_suggestion) {
@@ -136,6 +154,7 @@
             var lon = el.data('lon') ? el.data('lon') : this.default_lon;
             var zoom = el.data('zoom') ? el.data('zoom') : this.default_zoom;
             var map = new L.map(el.attr('id')).setView([lat, lon], zoom);
+            this.map = map;
             var tiles = new L.tileLayer(this.map_tiles, {
                 attribution: this.map_attrib,
                 minZoom: this.min_zoom,
@@ -168,6 +187,13 @@
             return location_control;
         },
 
+        create_markers: function(map) {
+            var markers = new L.FeatureGroup();
+            this.markers = markers;
+            map.addLayer(markers);
+            return markers;
+        },
+
         chronotope_map: function(context) {
             var map_elem = $('#chronotope-map', context);
             if (!map_elem.length) {
@@ -176,6 +202,7 @@
             this.resize_main_map(map_elem);
             var authenticated = map_elem.data('authenticated');
             var map = this.create_map(map_elem);
+            var markers = this.create_markers(map);
             //var geosearch = this.add_geosearch(map);
             //geosearch._config.zoomLevel = 14;
             //map.on('geosearch_showlocation', function(result) {

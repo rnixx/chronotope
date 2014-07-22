@@ -25,6 +25,7 @@ from chronotope.model.location import (
     search_locations,
     location_title,
 )
+from chronotope.browser import UXMixin
 
 
 _ = TranslationStringFactory('chronotope')
@@ -58,7 +59,7 @@ class LocationView(ProtectedContentTile):
 @tile('location', 'templates/location.pt',
       interface=Location, permission='login',
       strict=False)
-class LocationTile(Tile):
+class LocationTile(Tile, UXMixin):
 
     @property
     def coordinates(self):

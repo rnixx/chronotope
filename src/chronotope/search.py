@@ -7,6 +7,10 @@ from cone.app.interfaces import (
     IApplicationNode,
     ILiveSearch,
 )
+from cone.app.browser.utils import (
+    make_url,
+    make_query,
+)
 from chronotope.sql import get_session
 from chronotope.index import get_index
 from chronotope.model import (
@@ -14,6 +18,10 @@ from chronotope.model import (
     FacilityRecord,
     OccasionRecord,
     AttachmentRecord,
+)
+from chronotope.utils import (
+    UX_IDENT,
+    UX_FRONTEND,
 )
 
 
@@ -56,17 +64,23 @@ def attachment_value(record):
     return record.title
 
 
-value_types = {
-    LocationRecord: 'location',
-    FacilityRecord: 'facility',
-    OccasionRecord: 'occasion',
-    AttachmentRecord: 'attachment',
-}
 value_extractors = {
     LocationRecord: location_value,
     FacilityRecord: facility_value,
     OccasionRecord: occasion_value,
     AttachmentRecord: attachment_value,
+}
+value_actions = {
+    LocationRecord: 'location',
+    FacilityRecord: 'facility',
+    OccasionRecord: 'occasion',
+    AttachmentRecord: 'attachment',
+}
+value_containers = {
+    LocationRecord: 'locations',
+    FacilityRecord: 'facilities',
+    OccasionRecord: 'occasions',
+    AttachmentRecord: 'attachments',
 }
 value_icons = {
     LocationRecord: 'glyphicon glyphicon-map-marker',
@@ -90,10 +104,21 @@ class LiveSearch(object):
             if not authenticated and record.state in ['draft', 'declined']:
                 continue
             cls = record.__class__
-            result.append({
-                'uid': str(record.uid),
+            uid = str(record.uid)
+            value_action = value_actions[cls]
+            query = make_query(**{UX_IDENT: UX_FRONTEND})
+            target = make_url(request,
+                              path=[value_containers[cls], uid],
+                              query=query)
+            suggestion = {
+                'uid': uid,
                 'value': value_extractors[cls](record),
-                'type': value_types[cls],
+                'action': value_action,
+                'target': target,
                 'icon': value_icons[cls],
-            })
+            }
+            if value_action == 'location':
+                suggestion['lat'] = record.lat
+                suggestion['lon'] = record.lon
+            result.append(suggestion)
         return result

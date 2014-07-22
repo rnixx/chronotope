@@ -1,6 +1,9 @@
 import uuid
 import html2text
 
+UX_IDENT = '__ux'
+UX_FRONTEND = 'fe'
+
 # XXX: move to cone.app
 
 def ensure_uuid(val):

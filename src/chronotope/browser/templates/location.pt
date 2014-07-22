@@ -8,7 +8,7 @@
 
     <table class="table">
 
-      <tr>
+      <tr tal:condition="context.is_backend">
         <td class="row-title">Coordinates</td>
         <td tal:define="coordinates context.coordinates">
           <div id="location-view-map-${model.name}"

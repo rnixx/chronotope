@@ -11,6 +11,10 @@ from cone.tile import (
 )
 from cone.app.browser.utils import make_url
 from cone.app.browser.ajax import AjaxAction
+from chronotope.utils import (
+    UX_IDENT,
+    UX_FRONTEND,
+)
 
 
 static_resources = static_view('static', use_subpath=True)
@@ -18,6 +22,17 @@ static_resources = static_view('static', use_subpath=True)
 
 registerTile('logo', 'templates/logo.pt', permission='login', strict=False)
 registerTile('footer', 'templates/footer.pt', permission='login', strict=False)
+
+
+class UXMixin(object):
+
+    @property
+    def is_frontent(self):
+        return self.request.params.get(UX_IDENT) == UX_FRONTEND
+
+    @property
+    def is_backend(self):
+        return self.request.params.get(UX_IDENT) != UX_FRONTEND
 
 
 @tile('chronotope', 'templates/chronotope.pt',

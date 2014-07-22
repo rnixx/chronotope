@@ -10,7 +10,6 @@ from chronotope.security import (
     chronotope_content_acl,
 )
 from chronotope.sql import initialize_sql
-from chronotope.search import LiveSearch
 from chronotope import model
 
 
@@ -46,9 +45,6 @@ def initialize_chronotope(config, global_config, local_config):
     # chronotope layout adapter
     config.registry.registerAdapter(ChronotopeLayout)
 
-    # chronotope livesearch adapter
-    config.registry.registerAdapter(LiveSearch)
-
     # add translation
     config.add_translation_dirs('chronotope:locales/')
 
@@ -58,6 +54,10 @@ def initialize_chronotope(config, global_config, local_config):
 
     # scan browser package
     config.scan('chronotope.browser')
+
+    # chronotope livesearch adapter
+    from chronotope.browser.search import LiveSearch
+    config.registry.registerAdapter(LiveSearch)
 
     # index directory
     os.environ['chronotope.index.dir'] = local_config['chronotope.index.dir']

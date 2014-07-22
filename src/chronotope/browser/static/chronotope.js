@@ -113,9 +113,10 @@
         livesearch: function(context) {
             var input = $('input#search-text');
             var from_suggestion = false;
+            input.off('typeahead:selected');
             input.on('typeahead:selected', function(evt, suggestion, dataset) {
                 from_suggestion = true;
-                if (suggestion.type == 'location') {
+                if (suggestion.action == 'location') {
                     var coords = [suggestion.lat, suggestion.lon];
                     chronotope.map.removeLayer(chronotope.markers);
                     var markers = chronotope.create_markers(chronotope.map);
@@ -135,7 +136,8 @@
                     target: suggestion.target
                 });
             });
-            input.on('keydown', function(evt) {
+            input.off('keyup');
+            input.on('keyup', function(evt) {
                 if (from_suggestion) {
                     from_suggestion = false;
                     return;

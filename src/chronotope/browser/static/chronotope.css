@@ -37,6 +37,12 @@
 }
 
 /* content tiles */
+.location-tile table,
+.facility-tile table,
+.occasion-tile table,
+.attachment-tile table {
+    margin-bottom:0px;
+}
 .location-tile table td.row-title,
 .facility-tile table td.row-title,
 .occasion-tile table td.row-title,
@@ -45,24 +51,28 @@
     text-align:right;
     width:20%;
 }
+.location-tile table td ul.list-unstyled,
+.facility-tile table td ul.list-unstyled,
+.occasion-tile table td ul.list-unstyled,
+.attachment-tile table td ul.list-unstyled {
+    margin-bottom:0px;
+}
 .panel-body .location-tile,
 .panel-body .facility-tile,
 .panel-body .occasion-tile,
 .panel-body .attachment-tile {
-    margin:-15px;
+    margin:-16px -15px -15px -15px;
+}
+.modal-body .location-tile,
+.modal-body .facility-tile,
+.modal-body .occasion-tile,
+.modal-body .attachment-tile {
+    margin:-16px -15px -15px -15px;
 }
 
 /* location view */
 .location-view-map {
     height:250px;
-}
-
-/* live search */
-@media (min-width: 992px) {
-    .tt-dropdown-menu {
-        width:400px;
-        margin-left:-195px;
-    }
 }
 
 /* main map */
@@ -83,4 +93,12 @@
 }
 .leaflet-control-location .submitter_email {
     padding:3px 20px;
+}
+
+/* live search */
+@media (min-width: 992px) {
+    .tt-dropdown-menu {
+        width:400px;
+        margin-left:-195px;
+    }
 }

@@ -16,7 +16,7 @@ Imports::
     ...     Occasion,
     ...     Attachment,
     ... )
-    >>> from chronotope.search import search
+    >>> from chronotope.search import fulltext_search
 
 Fetch containers::
 
@@ -61,11 +61,11 @@ Create locations::
 
     >>> session.commit()
 
-    >>> search(request, 'Innsbruck')
+    >>> fulltext_search(request, 'Innsbruck')
     [<chronotope.model.location.LocationRecord object at ...>,
     <chronotope.model.location.LocationRecord object at ...>]
 
-    >>> search(request, 'Anichst*')
+    >>> fulltext_search(request, 'Anichst*')
     [<chronotope.model.location.LocationRecord object at ...>]
 
 Create facilities::
@@ -94,11 +94,11 @@ Create facilities::
 
     >>> session.commit()
 
-    >>> search(request, 'facility')
+    >>> fulltext_search(request, 'facility')
     [<chronotope.model.facility.FacilityRecord object at ...>, 
     <chronotope.model.facility.FacilityRecord object at ...>]
 
-    >>> search(request, 'other')
+    >>> fulltext_search(request, 'other')
     [<chronotope.model.facility.FacilityRecord object at ...>]
 
 Create occasions::
@@ -127,7 +127,7 @@ Create occasions::
 
     >>> session.commit()
 
-    >>> search(request, 'description')
+    >>> fulltext_search(request, 'description')
     [<chronotope.model.occasion.OccasionRecord object at ...>, 
     <chronotope.model.facility.FacilityRecord object at ...>, 
     <chronotope.model.occasion.OccasionRecord object at ...>, 
@@ -157,14 +157,14 @@ Create attachments::
 
     >>> session.commit()
 
-    >>> search(request, 'attachment')
+    >>> fulltext_search(request, 'attachment')
     [<chronotope.model.attachment.AttachmentRecord object at ...>, 
     <chronotope.model.attachment.AttachmentRecord object at ...>]
 
     >>> attachment2.attrs['title'] = u'Other'
     >>> session.commit()
 
-    >>> search(request, 'attachment')
+    >>> fulltext_search(request, 'attachment')
     [<chronotope.model.attachment.AttachmentRecord object at ...>]
 
 Cleanup::
@@ -179,7 +179,7 @@ Cleanup::
     >>> del attachments['7e964f01-56b9-40c8-a2f0-ac6aa53fa0e6']
     >>> session.commit()
 
-    >>> search(request, 'description')
+    >>> fulltext_search(request, 'description')
     []
 
     >>> root.printtree()

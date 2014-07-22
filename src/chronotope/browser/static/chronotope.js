@@ -144,8 +144,8 @@
                 });
             });
 
-            input.off('keyup');
-            input.on('keyup', function(evt) {
+            input.off('keyup.livesearch');
+            input.on('keyup.livesearch', function(evt) {
                 if (from_suggestion) {
                     from_suggestion = false;
                     return;

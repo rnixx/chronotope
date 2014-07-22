@@ -113,6 +113,14 @@
         livesearch: function(context) {
             var input = $('input#search-text');
             var from_suggestion = false;
+
+            input.off('blur.livesearch');
+            input.on('blur.livesearch', function(evt) {
+                if (!input.val()) {
+                    chronotope.search_in_bounds();
+                }
+            });
+
             input.off('typeahead:selected');
             input.on('typeahead:selected', function(evt, suggestion, dataset) {
                 from_suggestion = true;
@@ -128,17 +136,14 @@
                         uid: suggestion.uid,
                         action: suggestion.action
                     },
-                    type: 'json',
-                    error: function() {
-                        var msg = 'Error while fetching remote data';
-                        bdajax.error(msg);
-                    }
+                    type: 'json'
                 });
                 bdajax.overlay({
                     action: suggestion.action,
                     target: suggestion.target
                 });
             });
+
             input.off('keyup');
             input.on('keyup', function(evt) {
                 if (from_suggestion) {
@@ -159,11 +164,7 @@
                         },
                         url: 'chronotope.search_locations',
                         params: {term: input.val()},
-                        type: 'json',
-                        error: function() {
-                            var msg = 'Error while fetching remote data';
-                            bdajax.error(msg);
-                        }
+                        type: 'json'
                     });
                 }
             });
@@ -243,6 +244,23 @@
             this.map.fitBounds(this.markers.getBounds());
         },
 
+        search_in_bounds: function() {
+            var bounds = this.map.getBounds();
+            bdajax.request({
+                success: function(data) {
+                    chronotope.set_markers(data);
+                },
+                url: 'chronotope.locations_in_bounds',
+                params: {
+                    n: bounds.getNorth(),
+                    s: bounds.getSouth(),
+                    w: bounds.getWest(),
+                    e: bounds.getEast()
+                },
+                type: 'json'
+            });
+        },
+
         chronotope_map: function(context) {
             var map_elem = $('#chronotope-map', context);
             if (!map_elem.length) {
@@ -257,6 +275,14 @@
             this.add_geosearch_control(map);
             this.add_zoom_control(map);
             this.add_location_control(map);
+            map.on('moveend', function() {
+                var input = $('input#search-text');
+                if (input.val()) {
+                    return;
+                }
+                chronotope.search_in_bounds();
+            });
+            this.search_in_bounds();
         },
 
         location_map: function(context) {

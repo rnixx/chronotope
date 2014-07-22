@@ -70,6 +70,16 @@ def search_locations(request, term, limit=None):
     return query.all()
 
 
+def locations_in_bounds(request, north, south, west, east, limit=None):
+    session = get_session(request)
+    query = session.query(LocationRecord)\
+                   .filter(LocationRecord.lon.between(west, east))\
+                   .filter(LocationRecord.lat.between(south, north))
+    if limit is not None:
+        query = query.limit(limit)
+    return query.all()
+
+
 def location_title(street, zip_, city):
     return u'{0} {1} {2}'.format(street, zip_, city)
 

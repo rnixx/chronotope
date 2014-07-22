@@ -18,6 +18,7 @@ from chronotope.model import (
     OccasionRecord,
     AttachmentRecord,
 )
+from chronotope.model.location import locations_in_bounds
 from chronotope.search import fulltext_search
 from chronotope.utils import (
     UX_IDENT,
@@ -165,3 +166,33 @@ def json_search_locations(model, request):
             continue
         extract_locations(request, record, result)
     return result.values()
+
+
+@view_config(name='chronotope.locations_in_bounds',
+             accept='application/json',
+             renderer='json')
+def json_locations_in_bounds(model, request):
+    records = locations_in_bounds(
+        request,
+        request.params['n'],
+        request.params['s'],
+        request.params['w'],
+        request.params['e']
+    )
+    result = list()
+    for record in records:
+        uid = str(record.uid)
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        target = make_url(
+            request,
+            path=[value_containers[LocationRecord], uid],
+            query=query,
+        )
+        result.append({
+            'value': value_extractors[LocationRecord](record),
+            'action': value_actions[LocationRecord],
+            'target': target,
+            'lat': record.lat,
+            'lon': record.lon,
+        })
+    return result

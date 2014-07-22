@@ -155,12 +155,13 @@
             });
         },
 
-        create_map: function(el) {
+        create_map: function(el, options) {
             var lat = el.data('lat') ? el.data('lat') : this.default_lat;
             var lon = el.data('lon') ? el.data('lon') : this.default_lon;
             var zoom = el.data('zoom') ? el.data('zoom') : this.default_zoom;
-            var map = new L.map(el.attr('id')).setView([lat, lon], zoom);
+            var map = new L.map(el.attr('id'), options);
             this.map = map;
+            map.setView([lat, lon], zoom);
             var tiles = new L.tileLayer(this.map_tiles, {
                 attribution: this.map_attrib,
                 minZoom: this.min_zoom,
@@ -177,14 +178,20 @@
               .css('margin-right', -15);
         },
 
-        add_geosearch: function(map) {
-            var geosearch = new L.Control.GeoSearch({
+        add_geosearch_control: function(map) {
+            var geosearch_control = new L.Control.GeoSearch({
                 provider: new L.GeoSearch.Provider.OpenStreetMap(),
                 position: 'topleft',
                 showMarker: false
             });
-            geosearch.addTo(map);
-            return geosearch;
+            geosearch_control.addTo(map);
+            return geosearch_control;
+        },
+
+        add_zoom_control: function(map) {
+            var zoom_control = new L.control.zoom();
+            zoom_control.addTo(map);
+            return zoom_control;
         },
 
         add_location_control: function(map) {
@@ -229,14 +236,13 @@
             }
             this.resize_main_map(map_elem);
             var authenticated = map_elem.data('authenticated');
-            var map = this.create_map(map_elem);
-            var markers = this.create_markers(map);
-            //var geosearch = this.add_geosearch(map);
-            //geosearch._config.zoomLevel = 14;
-            //map.on('geosearch_showlocation', function(result) {
-            //    console.log(result.Location.Label);
-            //});
-            var location_control = this.add_location_control(map);
+            var map = this.create_map(map_elem, {
+                zoomControl: false
+            });
+            this.create_markers(map);
+            this.add_geosearch_control(map);
+            this.add_zoom_control(map);
+            this.add_location_control(map);
         },
 
         location_map: function(context) {

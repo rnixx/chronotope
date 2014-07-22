@@ -104,6 +104,11 @@
             chronotope.attachment_form(context);
         },
 
+        render_livesearch_suggestion: function (datum) {
+            console.log('livesearch suggestion custom render');
+            return '<span class="' + datum.icon + '"></span> ' + datum.value;
+        },
+
         livesearch: function(context) {
             var input = $('input#search-text');
             var from_suggestion = false;
@@ -217,5 +222,10 @@
             });
         }
     }
+
+    // extend livesearch options
+    livesearch_options.templates = {
+        suggestion: chronotope.render_livesearch_suggestion
+    };
 
 })(jQuery);

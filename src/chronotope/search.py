@@ -56,11 +56,23 @@ def attachment_value(record):
     return record.title
 
 
+value_types = {
+    LocationRecord: 'location',
+    FacilityRecord: 'facility',
+    OccasionRecord: 'occasion',
+    AttachmentRecord: 'attachment',
+}
 value_extractors = {
     LocationRecord: location_value,
     FacilityRecord: facility_value,
     OccasionRecord: occasion_value,
     AttachmentRecord: attachment_value,
+}
+value_icons = {
+    LocationRecord: 'glyphicon glyphicon-map-marker',
+    FacilityRecord: 'glyphicon glyphicon-home',
+    OccasionRecord: 'glyphicon glyphicon-star-empty',
+    AttachmentRecord: 'glyphicon glyphicon-file',
 }
 
 
@@ -77,8 +89,11 @@ class LiveSearch(object):
         for record in search(request, query):
             if not authenticated and record.state in ['draft', 'declined']:
                 continue
+            cls = record.__class__
             result.append({
                 'uid': str(record.uid),
-                'value': value_extractors[record.__class__](record),
+                'value': value_extractors[cls](record),
+                'type': value_types[cls],
+                'icon': value_icons[cls],
             })
         return result

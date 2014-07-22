@@ -15,11 +15,26 @@ from chronotope import model
 
 logger = logging.getLogger('chronotope')
 
+# cone.app global config
+cfg = cone.app.cfg
+
 # css resources
-cone.app.cfg.css.public.append('chronotope-static/chronotope.css')
+cfg.css.public.append('chronotope-static/Leaflet/leaflet.css')
+cfg.css.public.append('chronotope-static/L.GeoSearch/l.geosearch.css')
+cfg.css.public.append('chronotope-static/L.mc/MarkerCluster.css')
+cfg.css.public.append('chronotope-static/L.mc/MarkerCluster.Default.css')
+cfg.css.public.append('chronotope-static/chronotope.css')
 
 # js resources
-cone.app.cfg.js.public.append('chronotope-static/chronotope.js')
+cfg.js.public.append('chronotope-static/Leaflet/leaflet-src.js')
+cfg.js.public.append('chronotope-static/L.GeoSearch/l.control.geosearch.js')
+cfg.js.public.append('chronotope-static/L.GeoSearch/l.geosearch.provider.openstreetmap.js')
+cfg.js.public.append('chronotope-static/L.mc/leaflet.markercluster-src.js')
+cfg.js.public.append('chronotope-static/chronotope.js')
+
+# ignore yafowil.widget.location dependencies
+cfg.yafowil.js_skip.add('yafowil.widget.location.dependencies')
+cfg.yafowil.css_skip.add('yafowil.widget.location.dependencies')
 
 # plugin entry nodes
 cone.app.register_plugin('locations', model.Locations)

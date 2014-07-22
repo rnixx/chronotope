@@ -216,7 +216,7 @@
         },
 
         create_markers: function(map) {
-            var markers = new L.FeatureGroup();
+            var markers = new L.MarkerClusterGroup();
             this.markers = markers;
             map.addLayer(markers);
             return markers;

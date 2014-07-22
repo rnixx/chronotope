@@ -117,19 +117,8 @@
             input.on('typeahead:selected', function(evt, suggestion, dataset) {
                 from_suggestion = true;
                 if (suggestion.action == 'location') {
-                    var coords = [suggestion.lat, suggestion.lon];
-                    chronotope.map.removeLayer(chronotope.markers);
-                    var markers = chronotope.create_markers(chronotope.map);
-                    var marker = new L.marker(coords);
-                    marker.addTo(markers);
-                    marker.on('click', function(evt) {
-                        bdajax.overlay({
-                            action: suggestion.action,
-                            target: suggestion.target
-                        });
-                    });
-                    chronotope.map.panTo(coords);
-                    chronotope.map.setZoom(15);
+                    chronotope.set_markers([suggestion]);
+                    chronotope.fit_bounds();
                 }
                 bdajax.overlay({
                     action: suggestion.action,
@@ -142,11 +131,26 @@
                     from_suggestion = false;
                     return;
                 }
-                switch (evt.keyCode || evt.which) {
-                    case 13:
-                        console.log('display all results from livesearch');
-                        input.typeahead('close');
-                        evt.preventDefault();
+                var key_code = evt.keyCode || evt.which;
+                if (key_code == 13) {
+                    input.typeahead('close');
+                    evt.preventDefault();
+                    bdajax.request({
+                        success: function(data) {
+                            if (!data.length) {
+                                return;
+                            }
+                            chronotope.set_markers(data);
+                            chronotope.fit_bounds();
+                        },
+                        url: 'chronotope.search_locations',
+                        params: {term: input.val()},
+                        type: 'json',
+                        error: function() {
+                            var msg = 'Error while fetching remote data';
+                            bdajax.error(msg);
+                        }
+                    });
                 }
             });
         },
@@ -194,6 +198,28 @@
             this.markers = markers;
             map.addLayer(markers);
             return markers;
+        },
+
+        set_markers: function(data) {
+            chronotope.map.removeLayer(chronotope.markers);
+            var markers = chronotope.create_markers(chronotope.map);
+            $(data).each(function() {
+                var datum = this;
+                var coords = [datum.lat, datum.lon];
+                var marker = new L.marker(coords);
+                marker.addTo(markers);
+                marker.on('click', function(evt) {
+                    bdajax.overlay({
+                        action: datum.action,
+                        target: datum.target
+                    });
+                });
+            });
+            return markers;
+        },
+
+        fit_bounds: function() {
+            this.map.fitBounds(this.markers.getBounds());
         },
 
         chronotope_map: function(context) {

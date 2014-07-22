@@ -11,6 +11,8 @@ widgets:
         label: i18n:coordinates_label:Coordinates
         help: i18n:location_coordinates_help:Pick point on map to set coordinates
         required: i18n:coordinates_required:Coordinates are required
+        location.lat: 53.2525
+        location.lon: 10.4144
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - street:

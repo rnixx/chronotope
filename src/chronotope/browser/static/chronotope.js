@@ -154,13 +154,16 @@
                 if (key_code == 13) {
                     input.typeahead('close');
                     evt.preventDefault();
+                    if (!input.val()) {
+                        chronotope.search_in_bounds();
+                        return;
+                    }
                     bdajax.request({
                         success: function(data) {
-                            if (!data.length) {
-                                return;
-                            }
                             chronotope.set_markers(data);
-                            chronotope.fit_bounds();
+                            if (data.length) {
+                                chronotope.fit_bounds();
+                            }
                         },
                         url: 'chronotope.search_locations',
                         params: {term: input.val()},

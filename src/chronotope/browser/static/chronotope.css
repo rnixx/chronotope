@@ -95,6 +95,11 @@
     padding:3px 20px;
 }
 
+/* footer */
+.footer-ae {
+    margin:12px 0px;
+}
+
 /* live search */
 @media (min-width: 992px) {
     .tt-dropdown-menu {

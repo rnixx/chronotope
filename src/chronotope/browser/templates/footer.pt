@@ -4,10 +4,17 @@
   <footer class="navbar-default navbar-fixed-bottom">
 
     <div class="container">
-      <p>
+      <p class="pull-left">
         Copyright (c) 2014
         <a href="http://www.leuphana.de/">Leuphana Universität Lüneburg</a>.
       </p>
+
+      <a href="http://www.aesthetische-eigenzeiten.de/"
+         class="footer-ae pull-right"
+         target="blank">
+        <img src="chronotope-static/images/eigenzeiten.svg"
+             width="140">
+      </a>
     </div>
 
   </footer>

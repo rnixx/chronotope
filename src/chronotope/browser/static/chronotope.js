@@ -42,7 +42,6 @@
                     that.bind_actions();
                     that.bind_submitter();
                     var submitter = that.get_submitter();
-                    console.log('submitter: ' + submitter);
                     if (submitter) {
                         $('#submitter_email', that.controls).val(submitter);
                         that.set_submitter_state('success');
@@ -56,34 +55,23 @@
         },
 
         bind_actions: function() {
+            var that = this;
             $('.dropdown-menu li', this.controls).on('click', function(evt) {
-                console.log('dropdown li clicked');
+                var elem = $(this);
+                if (elem.hasClass('add-location-action')) {
+                    var map = that.map;
+                    map.once('click', function(evt) {
+                        var map_container = $(map.getContainer());
+                        map_container.css('cursor', 'crosshair');
+                        map.once('click', function(evt) {
+                            map_container.css('cursor', '');
+                            console.log('trigger location form');
+                        });
+                    });
+                    return;
+                }
                 return false;
             });
-        },
-
-        set_submitter_state: function(state) {
-            var controls = this.controls;
-            var form_group = $('.form-group', controls);
-            var help_empty = $('.submitter-empty', controls);
-            var help_success = $('.submitter-success', controls);
-            var help_error = $('.submitter-error', controls);
-            if (state == 'empty') {
-                help_success.hide();
-                help_error.hide();
-                help_empty.show();
-                form_group.removeClass('has-success').removeClass('has-error');
-            } else if (state == 'error') {
-                help_empty.hide();
-                help_success.hide();
-                help_error.show();
-                form_group.removeClass('has-success').addClass('has-error');
-            } else if (state == 'success') {
-                help_empty.hide();
-                help_error.hide();
-                help_success.show();
-                form_group.addClass('has-success').removeClass('has-error');
-            }
         },
 
         bind_submitter: function() {
@@ -105,12 +93,47 @@
             });
         },
 
+        set_submitter_state: function(state) {
+            var controls = this.controls;
+            var form_group = $('.form-group', controls);
+            var help_empty = $('.submitter-empty', controls);
+            var help_success = $('.submitter-success', controls);
+            var help_error = $('.submitter-error', controls);
+            if (state == 'empty') {
+                this.disable_add_location();
+                help_success.hide();
+                help_error.hide();
+                help_empty.show();
+                form_group.removeClass('has-success').removeClass('has-error');
+            } else if (state == 'error') {
+                this.disable_add_location();
+                help_empty.hide();
+                help_success.hide();
+                help_error.show();
+                form_group.removeClass('has-success').addClass('has-error');
+            } else if (state == 'success') {
+                this.enable_add_location();
+                help_empty.hide();
+                help_error.hide();
+                help_success.show();
+                form_group.addClass('has-success').removeClass('has-error');
+            }
+        },
+
         set_submitter: function(email) {
             createCookie(this.options.submitter_cookie, email);
         },
 
         get_submitter: function() {
             return readCookie(this.options.submitter_cookie);
+        },
+
+        enable_add_location: function() {
+            $('.add-location-action', this.controls).removeClass('disabled');
+        },
+
+        disable_add_location: function() {
+            $('.add-location-action', this.controls).addClass('disabled');
         }
     });
 

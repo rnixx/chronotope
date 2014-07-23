@@ -38,7 +38,7 @@
 
         <li class="divider"></li>
 
-        <li class="disabled">
+        <li class="disabled add-location-action">
           <a href="#">Add new location</a>
         </li>
       </ul>

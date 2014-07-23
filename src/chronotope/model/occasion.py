@@ -93,7 +93,7 @@ def occasions_by_uid(request, uids):
 def search_occasions(request, term, limit=None):
     session = get_session(request)
     query = session.query(OccasionRecord)
-    query = query.filter(OccasionRecord.title.like('%{0}%'.format(term)))
+    query = query.filter(OccasionRecord.title.like(u'%{0}%'.format(term)))
     query = query.order_by(OccasionRecord.title)
     if limit is not None:
         query = query.limit(limit)

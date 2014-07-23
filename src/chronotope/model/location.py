@@ -61,9 +61,9 @@ def locations_by_uid(request, uids):
 def search_locations(request, term, limit=None):
     session = get_session(request)
     query = session.query(LocationRecord)
-    query = query.filter(or_(LocationRecord.street.like('%{0}%'.format(term)),
-                             LocationRecord.zip.like('%{0}%'.format(term)),
-                             LocationRecord.city.like('%{0}%'.format(term))))
+    query = query.filter(or_(LocationRecord.street.like(u'%{0}%'.format(term)),
+                             LocationRecord.zip.like(u'%{0}%'.format(term)),
+                             LocationRecord.city.like(u'%{0}%'.format(term))))
     query = query.order_by(LocationRecord.city)
     if limit is not None:
         query = query.limit(limit)

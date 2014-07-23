@@ -60,7 +60,7 @@ def categories_by_uid(request, uids):
 def search_categories(request, term, limit=None):
     session = get_session(request)
     query = session.query(CategoryRecord)\
-                   .filter(CategoryRecord.name.like('%{0}%'.format(term)))\
+                   .filter(CategoryRecord.name.like(u'%{0}%'.format(term)))\
                    .order_by(CategoryRecord.name)
     if limit is not None:
         query = query.limit(limit)

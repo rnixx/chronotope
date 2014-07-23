@@ -23,67 +23,94 @@
 
     L.Control.LocationControl = L.Control.extend({
         options: {
-            position: 'topleft'
+            position: 'topleft',
+            submitter_cookie: 'chronotope.submitter'
         },
 
         initialize: function (options) {
             L.Util.extend(this.options, options);
         },
 
-        controls_tmpl: function() {
-            return $(
-            '<div class="leaflet-control-location">' +
-                '<div class="dropdown">' +
-                    '<button class="btn dropdown-toggle" ' +
-                            'type="button" ' +
-                            'id="location-controls-dropdown" ' +
-                            'data-toggle="dropdown">' +
-                        '<span class="glyphicon glyphicon-map-marker"></span>' +
-                    '</button>' +
-                    '<ul class="dropdown-menu">' +
-                        '<li>' +
-                            '<div class="form-group has-error submitter_email">' +
-                                '<label for="submitter_email">' +
-                                    'Submitter' +
-                                '</label>' +
-                                '<input type="email" ' +
-                                       'class="form-control" ' +
-                                       'id="submitter_email" ' +
-                                       'placeholder="Enter email address" />' +
-                                '<p class="help-block">' +
-                                    'Needs to be filled in order to add ' +
-                                    'contents.' +
-                                '</p>' +
-                            '</div>' +
-                        '</li>' +
-                        '<li class="divider"></li>' +
-                        '<li class="disabled">' +
-                        '<a href="#">Add new location</a>' +
-                    '</li>' +
-                    '</ul>' +
-                '</div>' +
-            '</div>');
+        onAdd: function (map) {
+            this.map = map;
+            var controls = $('<div class="leaflet-control-location"></div>');
+            this.controls = controls;
+            var that = this;
+            bdajax.request({
+                success: function(data) {
+                    that.controls.html(data);
+                    that.bind_actions();
+                    that.bind_submitter();
+                    var submitter = that.get_submitter();
+                    console.log('submitter: ' + submitter);
+                    if (submitter) {
+                        $('#submitter_email', that.controls).val(submitter);
+                        that.set_submitter_state('success');
+                    } else {
+                        that.set_submitter_state('empty');
+                    }
+                },
+                url: 'chronotope.location_controls'
+            });
+            return controls.get(0);
         },
 
-        onAdd: function (map) {
-            var controls = this.controls_tmpl();
-            $('.dropdown-menu li', controls).on('click', function(evt) {
+        bind_actions: function() {
+            $('.dropdown-menu li', this.controls).on('click', function(evt) {
                 console.log('dropdown li clicked');
                 return false;
             });
+        },
+
+        set_submitter_state: function(state) {
+            var controls = this.controls;
+            var form_group = $('.form-group', controls);
+            var help_empty = $('.submitter-empty', controls);
+            var help_success = $('.submitter-success', controls);
+            var help_error = $('.submitter-error', controls);
+            if (state == 'empty') {
+                help_success.hide();
+                help_error.hide();
+                help_empty.show();
+                form_group.removeClass('has-success').removeClass('has-error');
+            } else if (state == 'error') {
+                help_empty.hide();
+                help_success.hide();
+                help_error.show();
+                form_group.removeClass('has-success').addClass('has-error');
+            } else if (state == 'success') {
+                help_empty.hide();
+                help_error.hide();
+                help_success.show();
+                form_group.addClass('has-success').removeClass('has-error');
+            }
+        },
+
+        bind_submitter: function() {
+            var controls = this.controls;
+            var that = this;
             $('#submitter_email', controls).on('keyup blur', function(evt) {
                 var input = $(evt.target);
-                var form_group = $('.form-group', input.parents());
                 var value = input.val();
-                if (!email_re.test(value)) {
-                    form_group.addClass('has-error');
-                    return;
+                if (!value) {
+                    that.set_submitter('');
+                    that.set_submitter_state('empty');
+                } else if (!email_re.test(value)) {
+                    that.set_submitter('');
+                    that.set_submitter_state('error');
+                } else {
+                    that.set_submitter(value);
+                    that.set_submitter_state('success');
                 }
-                form_group.removeClass('has-error');
             });
-            this.map = map;
-            this.controls = controls.get(0);
-            return this.controls;
+        },
+
+        set_submitter: function(email) {
+            createCookie(this.options.submitter_cookie, email);
+        },
+
+        get_submitter: function() {
+            return readCookie(this.options.submitter_cookie);
         }
     });
 

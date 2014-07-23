@@ -11,7 +11,7 @@
 
 /* forms */
 .has-error .help-block {
-    color: #737373;
+    color:#737373;
 }
 
 /* login form */
@@ -93,6 +93,12 @@
 }
 .leaflet-control-location .submitter_email {
     padding:3px 20px;
+}
+.leaflet-control-location .help-block.submitter-error {
+    color:#a94442;
+}
+.leaflet-control-location .help-block.submitter-success {
+    color:#3c763d;
 }
 
 /* footer */

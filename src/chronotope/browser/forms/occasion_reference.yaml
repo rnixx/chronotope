@@ -9,6 +9,5 @@ props:
     multiple: True
     placeholder: i18n:category_placeholder:Select or add occasion
     ajaxurl: chronotope.occasion
-    tags: True,
     label.class_add: col-sm-2
     div.class_add: col-sm-10

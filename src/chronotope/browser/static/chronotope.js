@@ -58,7 +58,8 @@
             var that = this;
             $('.dropdown-menu li', this.controls).on('click', function(evt) {
                 var elem = $(this);
-                if (elem.hasClass('add-location-action')) {
+                if (elem.hasClass('add-location-action')
+                        && !elem.hasClass('disabled')) {
                     var map = that.map;
                     map.once('click', function(evt) {
                         var map_container = $(map.getContainer());

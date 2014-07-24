@@ -6,30 +6,31 @@ from pyramid.security import (
 )
 
 
+# permission sets
+viewer_permissions = ['view']
+editor_permissions = ['view', 'add', 'edit']
+admin_permissions = ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste',
+                     'change_state']
+manager_permissions = admin_permissions + ['manage']
+
+
 # chronotope root ACL
-admin_permissions = [
-    'view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state',
-]
-manager_permissions = ['manage']
 chronotope_root_acl = [
-    (Allow, 'role:viewer', ['view']),
-    (Allow, 'role:editor', ['view', 'add', 'edit']),
+    (Allow, 'role:viewer', viewer_permissions),
+    (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),
-    (Allow, 'role:manager', admin_permissions + manager_permissions),
+    (Allow, 'role:manager',  manager_permissions),
     (Allow, Everyone, ['login', 'view']),
     (Deny, Everyone, ALL_PERMISSIONS),
 ]
 
-# chronotope content ACL
-admin_permissions = [
-    'view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state',
-]
-manager_permissions = ['manage']
-chronotope_content_acl = [
-    (Allow, 'role:viewer', ['view']),
-    (Allow, 'role:editor', ['view', 'add', 'edit']),
+
+# chronotope default ACL
+chronotope_default_acl = [
+    (Allow, 'role:viewer', viewer_permissions),
+    (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),
-    (Allow, 'role:manager', admin_permissions + manager_permissions),
+    (Allow, 'role:manager', manager_permissions),
     (Allow, Everyone, ['login']),
     (Deny, Everyone, ALL_PERMISSIONS),
 ]

@@ -4,6 +4,7 @@ from plumber import (
     default,
     Behavior,
 )
+from pyramid.security import authenticated_userid
 from cone.tile import (
     Tile,
     tile,
@@ -48,7 +49,10 @@ class References(Tile, UXMixin):
     @property
     def references(self):
         ret = list()
+        authenticated = bool(authenticated_userid(self.request))
         for record in self.reference_records:
+            if not authenticated and record.state != 'published':
+                continue
             title = self.reference_title(record)
             path = self.reference_path(record)
             if self.is_frontent:

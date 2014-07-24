@@ -79,11 +79,10 @@ class LiveSearch(object):
         self.model = model
 
     def search(self, request, query):
-        authenticated = bool(authenticated_userid(request))
         result = list()
-        for record in fulltext_search(request, query)[:SEARCH_LIMIT]:
-            if not authenticated and record.state in ['draft', 'declined']:
-                continue
+        state = not authenticated_userid(request) and ['published'] or []
+        for record in fulltext_search(request, query, state=state,
+                                      limit=SEARCH_LIMIT):
             cls = record.__class__
             uid = str(record.uid)
             query = make_query(**{UX_IDENT: UX_FRONTEND})
@@ -104,6 +103,9 @@ class LiveSearch(object):
 def extract_locations(request, record, result):
     cls = record.__class__
     if cls is LocationRecord:
+        authenticated = bool(authenticated_userid(request))
+        if not authenticated and record.state != 'published':
+            return
         uid = str(record.uid)
         query = make_query(**{UX_IDENT: UX_FRONTEND})
         target = make_url(
@@ -155,11 +157,10 @@ def json_related_locations(model, request):
              renderer='json')
 def json_search_locations(model, request):
     query = request.params['term']
-    authenticated = bool(authenticated_userid(request))
     result = dict()
-    for record in fulltext_search(request, query)[:SEARCH_LIMIT]:
-        if not authenticated and record.state in ['draft', 'declined']:
-            continue
+    state = not authenticated_userid(request) and ['published'] or []
+    for record in fulltext_search(request, query, state=state,
+                                  limit=SEARCH_LIMIT):
         extract_locations(request, record, result)
     return result.values()
 
@@ -168,12 +169,14 @@ def json_search_locations(model, request):
              accept='application/json',
              renderer='json')
 def json_locations_in_bounds(model, request):
+    state = not authenticated_userid(request) and ['published'] or []
     records = locations_in_bounds(
         request,
         request.params['n'],
         request.params['s'],
         request.params['w'],
-        request.params['e']
+        request.params['e'],
+        state=state
     )
     result = list()
     for record in records:

@@ -90,10 +90,12 @@ def facilities_by_uid(request, uids):
                   .all()
 
 
-def search_facilities(request, term, limit=None):
+def search_facilities(request, term, state=[], limit=None):
     session = get_session(request)
     query = session.query(FacilityRecord)
     query = query.filter(FacilityRecord.title.like(u'%{0}%'.format(term)))
+    if state:
+        query = query.filter(FacilityRecord.state.in_(state))
     query = query.order_by(FacilityRecord.title)
     if limit is not None:
         query = query.limit(limit)

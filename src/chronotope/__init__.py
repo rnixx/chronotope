@@ -7,7 +7,7 @@ from cone.app.security import acl_registry
 from chronotope.layout import ChronotopeLayout
 from chronotope.security import (
     chronotope_root_acl,
-    chronotope_content_acl,
+    chronotope_default_acl,
 )
 from chronotope.sql import initialize_sql
 from chronotope import model
@@ -45,14 +45,10 @@ cone.app.register_plugin('attachments', model.Attachments)
 # register ACL's for nodes
 if not os.environ.get('TESTRUN_MARKER'):
     acl_registry.register(chronotope_root_acl, AppRoot)
-acl_registry.register(chronotope_content_acl, model.Locations)
-acl_registry.register(chronotope_content_acl, model.Location)
-acl_registry.register(chronotope_content_acl, model.Facilities)
-acl_registry.register(chronotope_content_acl, model.Facility)
-acl_registry.register(chronotope_content_acl, model.Occasions)
-acl_registry.register(chronotope_content_acl, model.Occasion)
-acl_registry.register(chronotope_content_acl, model.Attachments)
-acl_registry.register(chronotope_content_acl, model.Attachment)
+acl_registry.register(chronotope_default_acl, model.Locations)
+acl_registry.register(chronotope_default_acl, model.Facilities)
+acl_registry.register(chronotope_default_acl, model.Occasions)
+acl_registry.register(chronotope_default_acl, model.Attachments)
 
 
 # application startup initialization

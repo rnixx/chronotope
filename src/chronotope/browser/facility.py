@@ -2,6 +2,7 @@ import uuid
 from plumber import plumber
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
+from pyramid.security import authenticated_userid
 from cone.tile import tile
 from cone.app.utils import (
     add_creation_metadata,
@@ -40,7 +41,9 @@ FACILITY_LIMIT = 100
 def json_facility(model, request):
     term = request.params['q']
     facilities = list()
-    for facility in search_facilities(request, term, limit=FACILITY_LIMIT):
+    state = not authenticated_userid(request) and ['published'] or []
+    for facility in search_facilities(request, term, state=state,
+                                      limit=FACILITY_LIMIT):
         facilities.append({
             'id': str(facility.uid),
             'text': facility.title,

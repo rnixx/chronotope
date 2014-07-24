@@ -1,9 +1,8 @@
 import uuid
-from plumber import (
-    plumber,
-)
+from plumber import plumber
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
+from pyramid.security import authenticated_userid
 from cone.tile import (
     tile,
     Tile,
@@ -44,7 +43,9 @@ OCCASION_LIMIT = 100
 def json_occasion(model, request):
     term = request.params['q']
     occasions = list()
-    for occasion in search_occasions(request, term, limit=OCCASION_LIMIT):
+    state = not authenticated_userid(request) and ['published'] or []
+    for occasion in search_occasions(request, term, state=state,
+                                     limit=OCCASION_LIMIT):
         occasions.append({
             'id': str(occasion.uid),
             'text': occasion.title,

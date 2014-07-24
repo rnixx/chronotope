@@ -3,6 +3,7 @@ from plumber import plumber
 from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
+from pyramid.security import authenticated_userid
 from cone.tile import (
     tile,
     Tile,
@@ -40,7 +41,9 @@ LOCATION_LIMIT = 100
 def json_location(model, request):
     term = request.params['q']
     locations = list()
-    for location in search_locations(request, term, limit=LOCATION_LIMIT):
+    state = not authenticated_userid(request) and ['published'] or []
+    for location in search_locations(request, term, state=state,
+                                     limit=LOCATION_LIMIT):
         name = location_title(location.street, location.zip, location.city)
         locations.append({
             'id': str(location.uid),

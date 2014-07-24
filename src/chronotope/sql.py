@@ -24,7 +24,10 @@ from cone.app.workflow import (
     WorkflowState,
     WorkflowACL,
 )
-from chronotope.publication import PUBLICATION_TRANSITION_NAMES
+from chronotope.publication import (
+    publication_transition_names,
+    publication_state_acls,
+)
 from chronotope.index import get_index
 
 
@@ -199,6 +202,7 @@ class SQLRowNode(BaseNode):
         WorkflowACL,
     )
 
+    state_acls = publication_state_acls
     record_factory = None
 
     def __init__(self, name=None, parent=None, record=None):
@@ -214,7 +218,7 @@ class SQLRowNode(BaseNode):
     def properties(self):
         props = Properties()
         props.wf_name = u'publication'
-        props.wf_transition_names = PUBLICATION_TRANSITION_NAMES
+        props.wf_transition_names = publication_transition_names
         return props
 
     def attributes_factory(self, name, parent):

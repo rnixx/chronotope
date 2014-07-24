@@ -14,10 +14,14 @@ def results_to_instances(request, results):
     return instances
 
 
-def fulltext_search(request, query):
+def fulltext_search(request, query, state=[], limit=None):
     index = get_index()
     parser = QueryParser('value', index.schema)
     with index.searcher() as searcher:
         query = parser.parse(query)
         results = results_to_instances(request, searcher.search(query))
+    if state:
+        results = [res for res in results if res.state in state]
+    if limit is not None:
+        results = results[:limit]
     return results

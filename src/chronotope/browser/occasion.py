@@ -17,8 +17,8 @@ from cone.app.browser.form import (
     YAMLForm,
 )
 from cone.app.browser.authoring import (
-    AddBehavior,
-    EditBehavior,
+    AddForm,
+    EditForm,
 )
 from cone.app.browser.utils import format_date
 from chronotope.model.occasion import (
@@ -105,7 +105,7 @@ class OccasionForm(object):
 @tile('addform', interface=Occasion, permission="add")
 class OccasionAddForm(OccasionForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = AddBehavior
+    __plumbing__ = AddForm
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -119,7 +119,7 @@ class OccasionAddForm(OccasionForm, Form):
 @tile('editform', interface=Occasion, permission="edit")
 class OccasionEditForm(OccasionForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = EditBehavior
+    __plumbing__ = EditForm
 
     def save(self, widget, data):
         attrs = self.model.attrs

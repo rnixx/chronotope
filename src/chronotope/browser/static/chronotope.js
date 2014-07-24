@@ -65,7 +65,19 @@
                 map_container.css('cursor', 'crosshair');
                 map.once('click', function(evt) {
                     map_container.css('cursor', '');
-                    console.log('trigger location form');
+                    var center = map.getCenter();
+                    var zoom = map.getZoom();
+                    var target =
+                        '/locations/?' +
+                        'factory=location' +
+                        '&locationform.coordinates.lat=' + center.lat +
+                        '&locationform.coordinates.lon=' + center.lng +
+                        '&locationform.coordinates.zoom=' + zoom;
+                    bdajax.overlay({
+                        action: 'overlayadd',
+                        target: target,
+                        selector: '#ajax-form',
+                    });
                 });
             });
         },
@@ -91,8 +103,6 @@
 
         set_default_zoom: function() {
             var map = this.map;
-            var map_container = $(map.getContainer());
-            map_container.css('cursor', '');
             var zoom = map.getZoom();
             chronotope.set_default_zoom(zoom);
             var msg = 'Default zoom has been set to ' + zoom;

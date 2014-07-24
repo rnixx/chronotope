@@ -20,8 +20,10 @@ from cone.app.browser.form import (
     YAMLForm,
 )
 from cone.app.browser.authoring import (
-    AddBehavior,
-    EditBehavior,
+    AddForm,
+    EditForm,
+    OverlayAddForm,
+    OverlayEditForm,
 )
 from chronotope.model.location import (
     Location,
@@ -89,7 +91,7 @@ class LocationTile(Tile, UXMixin):
         }
 
 
-class LocationForm(object):
+class LocationForm(Form):
     __metaclass__ = plumber
     __plumbing__ = YAMLForm
 
@@ -131,27 +133,45 @@ class LocationForm(object):
         attrs['country'] = fetch('country')
 
 
-@tile('addform', interface=Location, permission="add")
-class LocationAddForm(LocationForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = AddBehavior
+class LocationAdding(LocationForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         attrs['uid'] = uuid.uuid4()
         add_creation_metadata(self.request, attrs)
-        super(LocationAddForm, self).save(widget, data)
+        super(LocationAdding, self).save(widget, data)
         self.model.parent[str(attrs['uid'])] = self.model
         self.model()
 
 
-@tile('editform', interface=Location, permission="edit")
-class LocationEditForm(LocationForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = EditBehavior
+class LocationEditing(LocationForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         update_creation_metadata(self.request, attrs)
-        super(LocationEditForm, self).save(widget, data)
+        super(LocationEditing, self).save(widget, data)
         self.model()
+
+
+@tile('addform', interface=Location, permission="add")
+class LocationAddForm(LocationAdding):
+    __metaclass__ = plumber
+    __plumbing__ = AddForm
+
+
+@tile('editform', interface=Location, permission="edit")
+class LocationEditForm(LocationEditing):
+    __metaclass__ = plumber
+    __plumbing__ = EditForm
+
+
+@tile('overlayaddform', interface=Location, permission="login")
+class LocationOverlayAddForm(LocationAdding):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayAddForm
+
+
+@tile('overlayeditform', interface=Location, permission="login")
+class LocationOverlayEditForm(LocationEditing):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayEditForm

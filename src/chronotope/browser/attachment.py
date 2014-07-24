@@ -22,8 +22,8 @@ from cone.app.browser.form import (
     YAMLForm,
 )
 from cone.app.browser.authoring import (
-    AddBehavior,
-    EditBehavior,
+    AddForm,
+    EditForm,
 )
 from cone.app.browser.utils import (
     make_url,
@@ -277,7 +277,7 @@ class AttachmentForm(object):
 @tile('addform', interface=Attachment, permission="add")
 class AttachmentAddForm(AttachmentForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = AddBehavior
+    __plumbing__ = AddForm
 
     def save(self, widget, data):
         attrs = self.model.attrs
@@ -291,7 +291,7 @@ class AttachmentAddForm(AttachmentForm, Form):
 @tile('editform', interface=Attachment, permission="edit")
 class AttachmentEditForm(AttachmentForm, Form):
     __metaclass__ = plumber
-    __plumbing__ = EditBehavior
+    __plumbing__ = EditForm
 
     def save(self, widget, data):
         attrs = self.model.attrs

@@ -40,6 +40,10 @@
                 success: function(data) {
                     that.controls.html(data);
                     that.bind_actions();
+                    if ($('.authenticated', that.controls).length) {
+                        that.enable_add_location();
+                        return;
+                    }
                     that.bind_submitter();
                     var submitter = that.get_submitter();
                     if (submitter) {

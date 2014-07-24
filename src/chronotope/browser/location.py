@@ -4,9 +4,11 @@ from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from pyramid.security import authenticated_userid
+from pyramid.response import Response
 from cone.tile import (
     tile,
     Tile,
+    render_tile,
 )
 from cone.app.utils import (
     add_creation_metadata,
@@ -33,6 +35,20 @@ _ = TranslationStringFactory('chronotope')
 
 
 LOCATION_LIMIT = 100
+
+
+@view_config('chronotope.location_controls')
+def location_controls(model, request):
+    return Response(render_tile(model, request, 'location_controls'))
+
+
+@tile('location_controls', 'templates/location_controls.pt',
+      permission='login', strict=False)
+class LocationControls(Tile):
+
+    @property
+    def authenticated(self):
+        return bool(authenticated_userid(self.request))
 
 
 @view_config(name='chronotope.location',

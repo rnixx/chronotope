@@ -1,7 +1,7 @@
 <tal:controls xmlns:tal="http://xml.zope.org/namespaces/tal"
               omit-tag="True">
 
-  <div>
+  <div class="${context.authenticated and 'authenticated' or None}">
 
     <div class="dropdown">
       <button class="btn dropdown-toggle" 
@@ -12,35 +12,38 @@
       </button>
 
       <ul class="dropdown-menu">
-        <li>
-          <div class="form-group submitter_email">
-            <label for="submitter_email">
-                Submitter
-            </label>
-            <input type="email"
-                   class="form-control"
-                   id="submitter_email"
-                   placeholder="Enter your email address" />
-            <p class="help-block submitter-empty"
-               style="display:none;">
-              Needs to be filled in order to add contents.
-            </p>
-            <p class="help-block submitter-error"
-               style="display:none;">
-              Input is not a valid email address.
-            </p>
-            <p class="help-block submitter-success"
-               style="display:none;">
-              OK! You can create content.
-            </p>
-          </div>
-        </li>
 
-        <li class="divider"></li>
+        <tal:anon condition="not context.authenticated">
+          <li>
+            <div class="form-group submitter_email">
+              <label for="submitter_email">
+                Submitter
+              </label>
+              <input type="email"
+                     class="form-control"
+                     id="submitter_email"
+                     placeholder="Enter your email address" />
+              <p class="help-block submitter-empty"
+                 style="display:none;">
+                Needs to be filled in order to add contents.
+              </p>
+              <p class="help-block submitter-error"
+                 style="display:none;">
+                Input is not a valid email address.
+              </p>
+              <p class="help-block submitter-success"
+                 style="display:none;">
+                OK! You can create content.
+              </p>
+            </div>
+          </li>
+          <li class="divider"></li>
+        </tal:anon>
 
         <li class="disabled add-location-action">
           <a href="#">Add new location</a>
         </li>
+
       </ul>
     </div>
 

@@ -41,7 +41,24 @@
         </tal:anon>
 
         <li class="disabled add-location-action">
-          <a href="#">Add new location</a>
+          <a href="#">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            Add new location
+          </a>
+        </li>
+
+        <li class="set-default-center-action">
+          <a href="#">
+            <span class="glyphicon glyphicon-screenshot"></span>
+            Set default center
+          </a>
+        </li>
+
+        <li class="set-default-zoom-action">
+          <a href="#">
+            <span class="glyphicon glyphicon-zoom-in"></span>
+            Set current zoom level as default
+          </a>
         </li>
 
       </ul>

@@ -58,24 +58,68 @@
             return controls.get(0);
         },
 
+        add_location: function() {
+            var map = this.map;
+            map.once('click', function(evt) {
+                var map_container = $(map.getContainer());
+                map_container.css('cursor', 'crosshair');
+                map.once('click', function(evt) {
+                    map_container.css('cursor', '');
+                    console.log('trigger location form');
+                });
+            });
+        },
+
+        set_default_center: function() {
+            var map = this.map;
+            map.once('click', function(evt) {
+                var map_container = $(map.getContainer());
+                map_container.css('cursor', 'crosshair');
+                map.once('click', function(evt) {
+                    map_container.css('cursor', '');
+                    var center = map.getCenter();
+                    chronotope.set_default_center(center);
+                    var msg = 'Default center has been set to:<br/>' +
+                              '<br/>' +
+                              '&nbsp;&nbsp;* Latitude: ' + center.lat +
+                              '<br/>' +
+                              '&nbsp;&nbsp;* Longitude: ' + center.lng;
+                    bdajax.info(msg);
+                });
+            });
+        },
+
+        set_default_zoom: function() {
+            var map = this.map;
+            var map_container = $(map.getContainer());
+            map_container.css('cursor', '');
+            var zoom = map.getZoom();
+            chronotope.set_default_zoom(zoom);
+            var msg = 'Default zoom has been set to ' + zoom;
+            bdajax.info(msg);
+        },
+
+        dispatch_action: function(elem) {
+            if (elem.hasClass('add-location-action')
+                    && !elem.hasClass('disabled')) {
+                this.add_location();
+                return;
+            }
+            if (elem.hasClass('set-default-center-action')) {
+                this.set_default_center();
+                return;
+            }
+            if (elem.hasClass('set-default-zoom-action')) {
+                this.set_default_zoom();
+                return;
+            }
+            return false;
+        },
+
         bind_actions: function() {
             var that = this;
             $('.dropdown-menu li', this.controls).on('click', function(evt) {
-                var elem = $(this);
-                if (elem.hasClass('add-location-action')
-                        && !elem.hasClass('disabled')) {
-                    var map = that.map;
-                    map.once('click', function(evt) {
-                        var map_container = $(map.getContainer());
-                        map_container.css('cursor', 'crosshair');
-                        map.once('click', function(evt) {
-                            map_container.css('cursor', '');
-                            console.log('trigger location form');
-                        });
-                    });
-                    return;
-                }
-                return false;
+                return that.dispatch_action($(this));
             });
         },
 
@@ -153,6 +197,41 @@
         map_tiles: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         map: null,
         markers: null,
+        default_lon_cookie: 'chronotope.default_lon',
+        default_lat_cookie: 'chronotope.default_lat',
+        default_zoom_cookie: 'chronotope.default_zoom',
+
+        set_default_center: function(latlon) {
+            createCookie(this.default_lat_cookie, latlon.lat);
+            createCookie(this.default_lon_cookie, latlon.lng);
+        },
+
+        get_default_center: function() {
+            var lat = readCookie(this.default_lat_cookie);
+            var lon = readCookie(this.default_lon_cookie);
+            if (lat !== null && lon !== null) {
+                return {
+                    lat: lat,
+                    lon: lon
+                };
+            }
+            return {
+                lat: this.default_lat,
+                lon: this.default_lon
+            };
+        },
+
+        set_default_zoom: function(zoom) {
+            createCookie(this.default_zoom_cookie, zoom);
+        },
+
+        get_default_zoom: function() {
+            var zoom = readCookie(this.default_zoom_cookie);
+            if (zoom !== null) {
+                return zoom;
+            }
+            return this.default_zoom;
+        },
 
         binder: function(context) {
             chronotope.livesearch(context);
@@ -229,9 +308,11 @@
         },
 
         create_map: function(el, options) {
-            var lat = el.data('lat') ? el.data('lat') : this.default_lat;
-            var lon = el.data('lon') ? el.data('lon') : this.default_lon;
-            var zoom = el.data('zoom') ? el.data('zoom') : this.default_zoom;
+            var default_center = this.get_default_center();
+            var default_zoom = this.get_default_zoom();
+            var lat = el.data('lat') ? el.data('lat') : default_center.lat;
+            var lon = el.data('lon') ? el.data('lon') : default_center.lon;
+            var zoom = el.data('zoom') ? el.data('zoom') : default_zoom;
             var map = new L.map(el.attr('id'), options);
             this.map = map;
             map.setView([lat, lon], zoom);

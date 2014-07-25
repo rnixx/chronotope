@@ -24,7 +24,10 @@ from cone.app.browser.form import (
 from cone.app.browser.authoring import (
     AddForm,
     EditForm,
+    OverlayAddForm,
+    OverlayEditForm,
 )
+from cone.app.browser.ajax import AjaxOverlay
 from cone.app.browser.utils import (
     make_url,
     make_query,
@@ -35,6 +38,14 @@ from chronotope.browser.references import (
     LocationReferencing,
     FacilityReferencing,
     OccasionReferencing,
+)
+from chronotope.browser import (
+    UXMixin,
+    UXMixinProxy,
+)
+from chronotope.utils import (
+    UX_IDENT,
+    UX_FRONTEND,
 )
 
 
@@ -131,10 +142,11 @@ class AttachmentTile(Tile):
         return make_url(self.request, node=self.model, resource='download')
 
 
-class AttachmentForm(object):
+class AttachmentForm(Form, UXMixin):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
+        UXMixinProxy,
         LocationReferencing,
         FacilityReferencing,
         OccasionReferencing,
@@ -274,27 +286,55 @@ class AttachmentForm(object):
                 attrs['payload'] = pickle.dumps(payload)
 
 
-@tile('addform', interface=Attachment, permission="add")
-class AttachmentAddForm(AttachmentForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = AddForm
+class AttachmentAdding(AttachmentForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         attrs['uid'] = uuid.uuid4()
         add_creation_metadata(self.request, attrs)
-        super(AttachmentAddForm, self).save(widget, data)
+        super(AttachmentAdding, self).save(widget, data)
         self.model.parent[str(attrs['uid'])] = self.model
         self.model()
 
 
-@tile('editform', interface=Attachment, permission="edit")
-class AttachmentEditForm(AttachmentForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = EditForm
+class AttachmentEditing(AttachmentForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         update_creation_metadata(self.request, attrs)
-        super(AttachmentEditForm, self).save(widget, data)
+        super(AttachmentEditing, self).save(widget, data)
         self.model()
+
+
+@tile('addform', interface=Attachment, permission="add")
+class AttachmentAddForm(AttachmentAdding):
+    __metaclass__ = plumber
+    __plumbing__ = AddForm
+
+
+@tile('editform', interface=Attachment, permission="edit")
+class AttachmentEditForm(AttachmentEditing):
+    __metaclass__ = plumber
+    __plumbing__ = EditForm
+
+
+@tile('overlayaddform', interface=Attachment, permission="login")
+class AttachmentOverlayAddForm(AttachmentAdding):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayAddForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        attachment_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='attachment', target=attachment_url)]
+
+
+@tile('overlayeditform', interface=Attachment, permission="login")
+class AttachmentOverlayEditForm(AttachmentEditing):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayEditForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        attachment_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='attachment', target=attachment_url)]

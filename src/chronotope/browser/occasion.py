@@ -19,8 +19,15 @@ from cone.app.browser.form import (
 from cone.app.browser.authoring import (
     AddForm,
     EditForm,
+    OverlayAddForm,
+    OverlayEditForm,
 )
-from cone.app.browser.utils import format_date
+from cone.app.browser.ajax import AjaxOverlay
+from cone.app.browser.utils import (
+    make_url,
+    make_query,
+    format_date,
+)
 from chronotope.model.occasion import (
     Occasion,
     search_occasions,
@@ -28,6 +35,14 @@ from chronotope.model.occasion import (
 from chronotope.browser.references import (
     LocationReferencing,
     FacilityReferencing,
+)
+from chronotope.browser import (
+    UXMixin,
+    UXMixinProxy,
+)
+from chronotope.utils import (
+    UX_IDENT,
+    UX_FRONTEND,
 )
 
 
@@ -76,10 +91,11 @@ class OccasionTile(Tile):
         return format_date(duration_to, long=False)
 
 
-class OccasionForm(object):
+class OccasionForm(Form, UXMixin):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
+        UXMixinProxy,
         LocationReferencing,
         FacilityReferencing,
     )
@@ -102,27 +118,55 @@ class OccasionForm(object):
             attrs['duration_to'] = duration_to
 
 
-@tile('addform', interface=Occasion, permission="add")
-class OccasionAddForm(OccasionForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = AddForm
+class OccasionAdding(OccasionForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         attrs['uid'] = uuid.uuid4()
         add_creation_metadata(self.request, attrs)
-        super(OccasionAddForm, self).save(widget, data)
+        super(OccasionAdding, self).save(widget, data)
         self.model.parent[str(attrs['uid'])] = self.model
         self.model()
 
 
-@tile('editform', interface=Occasion, permission="edit")
-class OccasionEditForm(OccasionForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = EditForm
+class OccasionEditing(OccasionForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         update_creation_metadata(self.request, attrs)
-        super(OccasionEditForm, self).save(widget, data)
+        super(OccasionEditing, self).save(widget, data)
         self.model()
+
+
+@tile('addform', interface=Occasion, permission="add")
+class OccasionAddForm(OccasionAdding):
+    __metaclass__ = plumber
+    __plumbing__ = AddForm
+
+
+@tile('editform', interface=Occasion, permission="edit")
+class OccasionEditForm(OccasionEditing):
+    __metaclass__ = plumber
+    __plumbing__ = EditForm
+
+
+@tile('overlayaddform', interface=Occasion, permission="login")
+class OccasionOverlayAddForm(OccasionAdding):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayAddForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        occasion_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='occasion', target=occasion_url)]
+
+
+@tile('overlayeditform', interface=Occasion, permission="login")
+class OccasionOverlayEditForm(OccasionEditing):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayEditForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        occasion_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='occasion', target=occasion_url)]

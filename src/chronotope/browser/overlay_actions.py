@@ -47,7 +47,7 @@ class OverlayActions(Tile, UXMixin):
             'target': url,
             'overlay': 'overlayedit',
             'icon': 'glyphicon glyphicon-pencil',
-            'title': _('edit_location', default=u'Edit Location'),
+            'title': _('edit', default=u'Edit'),
         }
 
     @property
@@ -126,7 +126,7 @@ class LocationOverlayActions(OverlayActions):
             'target': url,
             'overlay': 'overlayedit',
             'icon': 'glyphicon glyphicon-pencil',
-            'title': _('edit_location', default=u'Edit Location'),
+            'title': _('edit', default=u'Edit'),
         }
 
 

@@ -23,8 +23,8 @@ from cone.app.browser.ajax import AjaxOverlay
 from cone.app.browser.utils import (
     make_url,
     make_query,
+    format_date,
 )
-from cone.app.browser.utils import format_date
 from chronotope.model.facility import (
     Facility,
     search_facilities,

@@ -37,6 +37,9 @@ from chronotope.browser.references import (
 from chronotope.browser import (
     UXMixin,
     UXMixinProxy,
+    SubmitterAccessTile,
+    SubmitterAccessAddForm,
+    SubmitterAccessEditForm,
 )
 from chronotope.utils import (
     UX_IDENT,
@@ -76,7 +79,7 @@ class FacilityView(ProtectedContentTile):
 @tile('facility', 'templates/facility.pt',
       interface=Facility, permission='login',
       strict=False)
-class FacilityTile(CategoriesTile):
+class FacilityTile(SubmitterAccessTile, CategoriesTile):
 
     @property
     def exists_from(self):
@@ -148,10 +151,13 @@ class FacilityEditForm(FacilityEditing):
     __plumbing__ = EditForm
 
 
-@tile('overlayaddform', interface=Facility, permission="login")
+@tile('overlayaddform', interface=Facility, permission="add")
 class FacilityOverlayAddForm(FacilityAdding):
     __metaclass__ = plumber
-    __plumbing__ = OverlayAddForm
+    __plumbing__ = (
+        OverlayAddForm,
+        SubmitterAccessAddForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})
@@ -159,10 +165,13 @@ class FacilityOverlayAddForm(FacilityAdding):
         return [AjaxOverlay(action='facility', target=facility_url)]
 
 
-@tile('overlayeditform', interface=Facility, permission="login")
+@tile('overlayeditform', interface=Facility, permission="edit")
 class FacilityOverlayEditForm(FacilityEditing):
     __metaclass__ = plumber
-    __plumbing__ = OverlayEditForm
+    __plumbing__ = (
+        OverlayEditForm,
+        SubmitterAccessEditForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})

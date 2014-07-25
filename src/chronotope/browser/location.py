@@ -46,6 +46,9 @@ from chronotope.model.location import (
 from chronotope.browser import (
     UXMixin,
     UXMixinProxy,
+    SubmitterAccessTile,
+    SubmitterAccessAddForm,
+    SubmitterAccessEditForm,
 )
 from chronotope.utils import (
     UX_IDENT,
@@ -100,7 +103,7 @@ class LocationView(ProtectedContentTile):
 @tile('location', 'templates/location.pt',
       interface=Location, permission='login',
       strict=False)
-class LocationTile(Tile, UXMixin):
+class LocationTile(SubmitterAccessTile, UXMixin):
 
     @property
     def coordinates(self):
@@ -209,10 +212,13 @@ class LocationEditForm(LocationEditing):
     __plumbing__ = EditForm
 
 
-@tile('overlayaddform', interface=Location, permission="login")
+@tile('overlayaddform', interface=Location, permission="add")
 class LocationOverlayAddForm(LocationAdding):
     __metaclass__ = plumber
-    __plumbing__ = OverlayAddForm
+    __plumbing__ = (
+        OverlayAddForm,
+        SubmitterAccessAddForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})
@@ -222,10 +228,13 @@ class LocationOverlayAddForm(LocationAdding):
                 AjaxEvent(root_url, 'datachanged', '#chronotope-map')]
 
 
-@tile('overlayeditform', interface=Location, permission="login")
+@tile('overlayeditform', interface=Location, permission="edit")
 class LocationOverlayEditForm(LocationEditing):
     __metaclass__ = plumber
-    __plumbing__ = OverlayEditForm
+    __plumbing__ = (
+        OverlayEditForm,
+        SubmitterAccessEditForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})

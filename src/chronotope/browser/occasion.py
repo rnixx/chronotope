@@ -3,10 +3,7 @@ from plumber import plumber
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from pyramid.security import authenticated_userid
-from cone.tile import (
-    tile,
-    Tile,
-)
+from cone.tile import tile
 from cone.app.utils import (
     add_creation_metadata,
     update_creation_metadata,
@@ -39,6 +36,9 @@ from chronotope.browser.references import (
 from chronotope.browser import (
     UXMixin,
     UXMixinProxy,
+    SubmitterAccessTile,
+    SubmitterAccessAddForm,
+    SubmitterAccessEditForm,
 )
 from chronotope.utils import (
     UX_IDENT,
@@ -78,7 +78,7 @@ class OccasionView(ProtectedContentTile):
 @tile('occasion', 'templates/occasion.pt',
       interface=Occasion, permission='login',
       strict=False)
-class OccasionTile(Tile):
+class OccasionTile(SubmitterAccessTile):
 
     @property
     def duration_from(self):
@@ -150,10 +150,13 @@ class OccasionEditForm(OccasionEditing):
     __plumbing__ = EditForm
 
 
-@tile('overlayaddform', interface=Occasion, permission="login")
+@tile('overlayaddform', interface=Occasion, permission="add")
 class OccasionOverlayAddForm(OccasionAdding):
     __metaclass__ = plumber
-    __plumbing__ = OverlayAddForm
+    __plumbing__ = (
+        OverlayAddForm,
+        SubmitterAccessAddForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})
@@ -161,10 +164,13 @@ class OccasionOverlayAddForm(OccasionAdding):
         return [AjaxOverlay(action='occasion', target=occasion_url)]
 
 
-@tile('overlayeditform', interface=Occasion, permission="login")
+@tile('overlayeditform', interface=Occasion, permission="edit")
 class OccasionOverlayEditForm(OccasionEditing):
     __metaclass__ = plumber
-    __plumbing__ = OverlayEditForm
+    __plumbing__ = (
+        OverlayEditForm,
+        SubmitterAccessEditForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})

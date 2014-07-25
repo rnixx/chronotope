@@ -1,10 +1,15 @@
 import uuid
-from plumber import plumber
+from plumber import (
+    Behavior,
+    plumber,
+    plumb,
+)
 from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from pyramid.security import authenticated_userid
 from pyramid.response import Response
+from yafowil.base import factory
 from cone.tile import (
     tile,
     Tile,
@@ -25,12 +30,27 @@ from cone.app.browser.authoring import (
     OverlayAddForm,
     OverlayEditForm,
 )
+from cone.app.browser.ajax import (
+    AjaxOverlay,
+    AjaxEvent,
+)
+from cone.app.browser.utils import (
+    make_url,
+    make_query,
+)
 from chronotope.model.location import (
     Location,
     search_locations,
     location_title,
 )
-from chronotope.browser import UXMixin
+from chronotope.browser import (
+    UXMixin,
+    UXMixinProxy,
+)
+from chronotope.utils import (
+    UX_IDENT,
+    UX_FRONTEND,
+)
 
 
 _ = TranslationStringFactory('chronotope')
@@ -91,14 +111,38 @@ class LocationTile(Tile, UXMixin):
         }
 
 
-class LocationForm(Form):
+class CoordinatesProxy(Behavior):
+
+    @plumb
+    def prepare(_next, self):
+        _next(self)
+        if self.is_backend:
+            return
+        def fname(name):
+            return '{0}.coordinates.{1}'.format(self.form_name, name)
+        params = self.request.params
+        coordinates = self.form['coordinates'] = factory('compound')
+        coordinates['lat'] = factory('hidden', value=params[fname('lat')])
+        coordinates['lon'] = factory('hidden', value=params[fname('lon')])
+        coordinates['zoom'] = factory('hidden', value=params[fname('zoom')])
+
+
+class LocationForm(Form, UXMixin):
     __metaclass__ = plumber
-    __plumbing__ = YAMLForm
+    __plumbing__ = (
+        YAMLForm,
+        UXMixinProxy,
+        CoordinatesProxy,
+    )
 
     form_name = 'locationform'
     form_template = 'chronotope.browser:forms/location.yaml'
     message_factory = _
     location_zoom = 15
+
+    @property
+    def coordinates_mode(self):
+        return self.is_backend and 'edit' or 'skip'
 
     @property
     def coordinates_value(self):
@@ -170,8 +214,20 @@ class LocationOverlayAddForm(LocationAdding):
     __metaclass__ = plumber
     __plumbing__ = OverlayAddForm
 
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        location_url = make_url(self.request, node=self.model, query=query)
+        root_url = make_url(self.request, node=self.model.root)
+        return [AjaxOverlay(action='location', target=location_url),
+                AjaxEvent(root_url, 'datachanged', '#chronotope-map')]
+
 
 @tile('overlayeditform', interface=Location, permission="login")
 class LocationOverlayEditForm(LocationEditing):
     __metaclass__ = plumber
     __plumbing__ = OverlayEditForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        location_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='location', target=location_url)]

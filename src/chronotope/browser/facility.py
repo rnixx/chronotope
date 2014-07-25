@@ -16,6 +16,13 @@ from cone.app.browser.form import (
 from cone.app.browser.authoring import (
     AddForm,
     EditForm,
+    OverlayAddForm,
+    OverlayEditForm,
+)
+from cone.app.browser.ajax import AjaxOverlay
+from cone.app.browser.utils import (
+    make_url,
+    make_query,
 )
 from cone.app.browser.utils import format_date
 from chronotope.model.facility import (
@@ -26,6 +33,14 @@ from chronotope.browser.category import CategoriesTile
 from chronotope.browser.references import (
     LocationReferencing,
     CategoryReferencing,
+)
+from chronotope.browser import (
+    UXMixin,
+    UXMixinProxy,
+)
+from chronotope.utils import (
+    UX_IDENT,
+    UX_FRONTEND,
 )
 
 
@@ -74,10 +89,11 @@ class FacilityTile(CategoriesTile):
         return format_date(exists_to, long=False)
 
 
-class FacilityForm(object):
+class FacilityForm(Form, UXMixin):
     __metaclass__ = plumber
     __plumbing__ = (
         YAMLForm,
+        UXMixinProxy,
         CategoryReferencing,
         LocationReferencing,
     )
@@ -100,27 +116,55 @@ class FacilityForm(object):
             attrs['exists_to'] = exists_to
 
 
-@tile('addform', interface=Facility, permission="add")
-class FacilityAddForm(FacilityForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = AddForm
+class FacilityAdding(FacilityForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         attrs['uid'] = uuid.uuid4()
         add_creation_metadata(self.request, attrs)
-        super(FacilityAddForm, self).save(widget, data)
+        super(FacilityAdding, self).save(widget, data)
         self.model.parent[str(attrs['uid'])] = self.model
         self.model()
 
 
-@tile('editform', interface=Facility, permission="edit")
-class FacilityEditForm(FacilityForm, Form):
-    __metaclass__ = plumber
-    __plumbing__ = EditForm
+class FacilityEditing(FacilityForm):
 
     def save(self, widget, data):
         attrs = self.model.attrs
         update_creation_metadata(self.request, attrs)
-        super(FacilityEditForm, self).save(widget, data)
+        super(FacilityEditing, self).save(widget, data)
         self.model()
+
+
+@tile('addform', interface=Facility, permission="add")
+class FacilityAddForm(FacilityAdding):
+    __metaclass__ = plumber
+    __plumbing__ = AddForm
+
+
+@tile('editform', interface=Facility, permission="edit")
+class FacilityEditForm(FacilityEditing):
+    __metaclass__ = plumber
+    __plumbing__ = EditForm
+
+
+@tile('overlayaddform', interface=Facility, permission="login")
+class FacilityOverlayAddForm(FacilityAdding):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayAddForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        facility_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='facility', target=facility_url)]
+
+
+@tile('overlayeditform', interface=Facility, permission="login")
+class FacilityOverlayEditForm(FacilityEditing):
+    __metaclass__ = plumber
+    __plumbing__ = OverlayEditForm
+
+    def next(self, request):
+        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        facility_url = make_url(self.request, node=self.model, query=query)
+        return [AjaxOverlay(action='facility', target=facility_url)]

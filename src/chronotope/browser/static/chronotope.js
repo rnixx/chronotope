@@ -65,18 +65,17 @@
                 map_container.css('cursor', 'crosshair');
                 map.once('click', function(evt) {
                     map_container.css('cursor', '');
-                    var center = map.getCenter();
+                    var latlng = evt.latlng;
                     var zoom = map.getZoom();
                     var target =
-                        '/locations/?' +
-                        'factory=location' +
-                        '&locationform.coordinates.lat=' + center.lat +
-                        '&locationform.coordinates.lon=' + center.lng +
+                        '/locations/?__ux=fe' +
+                        '&factory=location' +
+                        '&locationform.coordinates.lat=' + latlng.lat +
+                        '&locationform.coordinates.lon=' + latlng.lng +
                         '&locationform.coordinates.zoom=' + zoom;
                     bdajax.overlay({
                         action: 'overlayadd',
-                        target: target,
-                        selector: '#ajax-form',
+                        target: target
                     });
                 });
             });
@@ -428,6 +427,13 @@
                 var input = $('input#search-text');
                 if (input.val()) {
                     return;
+                }
+                chronotope.search_in_bounds();
+            });
+            map_elem.on('datachanged', function(evt) {
+                var input = $('input#search-text');
+                if (input.val()) {
+                    input.val('');
                 }
                 chronotope.search_in_bounds();
             });

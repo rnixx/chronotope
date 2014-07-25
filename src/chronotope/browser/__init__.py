@@ -1,5 +1,10 @@
+from plumber import (
+    Behavior,
+    plumb,
+)
 from pyramid.security import authenticated_userid
 from pyramid.static import static_view
+from yafowil.base import factory
 from cone.tile import (
     Tile,
     tile,
@@ -36,3 +41,14 @@ class UXMixin(object):
     @property
     def is_backend(self):
         return self.request.params.get(UX_IDENT) != UX_FRONTEND
+
+
+class UXMixinProxy(Behavior):
+
+    @plumb
+    def prepare(_next, self):
+        _next(self)
+        self.form[UX_IDENT] = factory(
+            'proxy',
+            value=self.request.params.get(UX_IDENT),
+        )

@@ -1,0 +1,19 @@
+<tal:actions xmlns:tal="http://xml.zope.org/namespaces/tal"
+             xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
+             i18n:domain="chronotope"
+             define="actions context.actions"
+             condition="actions"
+             omit-tag="True">
+
+  <tal:btn repeat="action actions">
+    <button class="btn btn-sm btn-${action.btn}"
+            ajax:bind="click"
+            ajax:target="${action.target}"
+            ajax:overlay="${action.overlay}">
+      <span class="${action.icon}"></span>
+      <span tal:content="action.title">Action Title</span>
+    </button>
+  </tal:btn>
+
+</tal:actions>

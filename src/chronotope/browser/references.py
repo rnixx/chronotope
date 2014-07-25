@@ -14,11 +14,18 @@ from cone.app.browser.utils import (
     make_query,
 )
 from chronotope.model.location import (
+    location_by_uid,
     locations_by_uid,
     location_title,
 )
-from chronotope.model.facility import facilities_by_uid
-from chronotope.model.occasion import occasions_by_uid
+from chronotope.model.facility import (
+    facility_by_uid,
+    facilities_by_uid,
+)
+from chronotope.model.occasion import (
+    occasion_by_uid,
+    occasions_by_uid,
+)
 from chronotope.model.category import (
     add_category,
     delete_category,
@@ -119,6 +126,9 @@ class LocationReferencing(Behavior):
     @property
     def location_value(self):
         value = list()
+        preset = self.request.params.get('preset.location')
+        if preset:
+            value.append(preset)
         for record in self.model.attrs['location']:
             value.append(str(record.uid))
         return value
@@ -135,6 +145,11 @@ class LocationReferencing(Behavior):
         for record in records:
             name = location_title(record.street, record.zip, record.city)
             vocab[str(record.uid)] = name
+        preset = self.request.params.get('preset.location')
+        if preset:
+            record = location_by_uid(self.request, preset)
+            name = location_title(record.street, record.zip, record.city)
+            vocab[preset] = name
         return vocab
 
     @plumb
@@ -184,6 +199,9 @@ class FacilityReferencing(Behavior):
     @property
     def facility_value(self):
         value = list()
+        preset = self.request.params.get('preset.facility')
+        if preset:
+            value.append(preset)
         for record in self.model.attrs['facility']:
             value.append(str(record.uid))
         return value
@@ -199,6 +217,10 @@ class FacilityReferencing(Behavior):
             records = self.model.attrs['facility']
         for record in records:
             vocab[str(record.uid)] = record.title
+        preset = self.request.params.get('preset.facility')
+        if preset:
+            record = facility_by_uid(self.request, preset)
+            vocab[preset] = record.title
         return vocab
 
     @plumb
@@ -248,6 +270,9 @@ class OccasionReferencing(Behavior):
     @property
     def occasion_value(self):
         value = list()
+        preset = self.request.params.get('preset.occasion')
+        if preset:
+            value.append(preset)
         for record in self.model.attrs['occasion']:
             value.append(str(record.uid))
         return value
@@ -263,6 +288,10 @@ class OccasionReferencing(Behavior):
             records = self.model.attrs['occasion']
         for record in records:
             vocab[str(record.uid)] = record.title
+        preset = self.request.params.get('preset.occasion')
+        if preset:
+            record = occasion_by_uid(self.request, preset)
+            vocab[preset] = record.title
         return vocab
 
     @plumb

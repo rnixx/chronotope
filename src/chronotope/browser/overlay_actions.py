@@ -24,6 +24,7 @@ _ = TranslationStringFactory('chronotope')
 
 
 class OverlayActions(Tile, UXMixin):
+    additional_adding_params = {}
 
     @property
     def actions(self):
@@ -53,10 +54,12 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def add_facility(self):
-        query = make_query(**{
+        params = {
             UX_IDENT: UX_FRONTEND,
             'factory': 'facility',
-        })
+        }
+        params.update(self.additional_adding_params)
+        query = make_query(**params)
         url = make_url(
             self.request,
             node=self.model.root['facilities'],
@@ -72,10 +75,12 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def add_occasion(self):
-        query = make_query(**{
+        params = {
             UX_IDENT: UX_FRONTEND,
             'factory': 'occasion',
-        })
+        }
+        params.update(self.additional_adding_params)
+        query = make_query(**params)
         url = make_url(
             self.request,
             node=self.model.root['occasions'],
@@ -91,10 +96,12 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def add_attachment(self):
-        query = make_query(**{
+        params = {
             UX_IDENT: UX_FRONTEND,
             'factory': 'attachment',
-        })
+        }
+        params.update(self.additional_adding_params)
+        query = make_query(**params)
         url = make_url(
             self.request,
             node=self.model.root['attachments'],
@@ -129,16 +136,28 @@ class LocationOverlayActions(OverlayActions):
             'title': _('edit', default=u'Edit'),
         }
 
+    @property
+    def additional_adding_params(self):
+        return {'preset.location': str(self.model.attrs['uid'])}
+
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Facility)
 class FacilityOverlayActions(OverlayActions):
     add_facility = None
+
+    @property
+    def additional_adding_params(self):
+        return {'preset.facility': str(self.model.attrs['uid'])}
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Occasion)
 class OccasionOverlayActions(OverlayActions):
     add_facility = None
     add_occasion = None
+
+    @property
+    def additional_adding_params(self):
+        return {'preset.occasion': str(self.model.attrs['uid'])}
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Attachment)

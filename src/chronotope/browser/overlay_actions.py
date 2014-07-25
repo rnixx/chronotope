@@ -11,6 +11,7 @@ from chronotope.model import (
     Location,
     Facility,
     Occasion,
+    Attachment,
 )
 from chronotope.browser import UXMixin
 from chronotope.utils import (
@@ -113,7 +114,6 @@ class LocationOverlayActions(OverlayActions):
 
     @property
     def edit(self):
-
         query = make_query(**{
             UX_IDENT: UX_FRONTEND,
             'locationform.coordinates.lat': str(self.model.attrs['lat']),
@@ -132,9 +132,17 @@ class LocationOverlayActions(OverlayActions):
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Facility)
 class FacilityOverlayActions(OverlayActions):
-    pass
+    add_facility = None
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Occasion)
 class OccasionOverlayActions(OverlayActions):
-    pass
+    add_facility = None
+    add_occasion = None
+
+
+@tile('overlay_actions', 'templates/overlay_actions.pt', interface=Attachment)
+class AttachmentOverlayActions(OverlayActions):
+    add_facility = None
+    add_occasion = None
+    add_attachment = None

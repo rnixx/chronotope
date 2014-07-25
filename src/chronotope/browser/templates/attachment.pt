@@ -62,6 +62,13 @@
         </td>
       </tr>
 
+      <tr>
+        <td class="row-title">Actions</td>
+        <td>
+          <tal:actions replace="structure tile('overlay_actions')" />
+        </td>
+      </tr>
+
     </table>
 
   </div>

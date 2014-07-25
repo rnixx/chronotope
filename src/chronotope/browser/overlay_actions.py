@@ -1,4 +1,5 @@
 from pyramid.i18n import TranslationStringFactory
+from pyramid.security import authenticated_userid
 from cone.tile import (
     tile,
     Tile,
@@ -17,6 +18,7 @@ from chronotope.browser import UXMixin
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
+    get_submitter,
 )
 
 
@@ -30,6 +32,9 @@ class OverlayActions(Tile, UXMixin):
     def actions(self):
         actions = list()
         if self.is_backend:
+            return actions
+        authenticated = bool(authenticated_userid(self.request))
+        if not authenticated and not get_submitter(self.request):
             return actions
         actions = [
             self.edit,

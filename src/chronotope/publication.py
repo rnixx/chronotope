@@ -33,7 +33,7 @@ publication_state_acls['draft'] = [
     (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),
     (Allow, 'role:manager', manager_permissions),
-    (Allow, Everyone, ['login']),
+    (Allow, Everyone, ['login', 'view', 'add', 'edit']),
     (Deny, Everyone, ALL_PERMISSIONS),
 ]
 publication_state_acls['published'] = [

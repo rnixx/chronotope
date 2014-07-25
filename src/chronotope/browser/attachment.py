@@ -8,10 +8,7 @@ from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from pyramid.response import Response
 from pyramid.security import authenticated_userid
-from cone.tile import (
-    tile,
-    Tile,
-)
+from cone.tile import tile
 from cone.app.utils import (
     add_creation_metadata,
     update_creation_metadata,
@@ -42,6 +39,10 @@ from chronotope.browser.references import (
 from chronotope.browser import (
     UXMixin,
     UXMixinProxy,
+    check_submitter_access,
+    SubmitterAccessTile,
+    SubmitterAccessAddForm,
+    SubmitterAccessEditForm,
 )
 from chronotope.utils import (
     UX_IDENT,
@@ -54,7 +55,7 @@ _ = TranslationStringFactory('chronotope')
 
 @view_config('download', context=Attachment)
 def download(model, request):
-    # XXX: permission checks
+    check_submitter_access(model, request)
     a_type = model.attrs['attachment_type']
     payload = model.attrs['payload']
     response = Response()
@@ -100,7 +101,7 @@ class AttachmentView(ProtectedContentTile):
 @tile('attachment', 'templates/attachment.pt',
       interface=Attachment, permission='login',
       strict=False)
-class AttachmentTile(Tile):
+class AttachmentTile(SubmitterAccessTile):
 
     @property
     def authenticated(self):
@@ -318,10 +319,13 @@ class AttachmentEditForm(AttachmentEditing):
     __plumbing__ = EditForm
 
 
-@tile('overlayaddform', interface=Attachment, permission="login")
+@tile('overlayaddform', interface=Attachment, permission="add")
 class AttachmentOverlayAddForm(AttachmentAdding):
     __metaclass__ = plumber
-    __plumbing__ = OverlayAddForm
+    __plumbing__ = (
+        OverlayAddForm,
+        SubmitterAccessAddForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})
@@ -329,10 +333,13 @@ class AttachmentOverlayAddForm(AttachmentAdding):
         return [AjaxOverlay(action='attachment', target=attachment_url)]
 
 
-@tile('overlayeditform', interface=Attachment, permission="login")
+@tile('overlayeditform', interface=Attachment, permission="edit")
 class AttachmentOverlayEditForm(AttachmentEditing):
     __metaclass__ = plumber
-    __plumbing__ = OverlayEditForm
+    __plumbing__ = (
+        OverlayEditForm,
+        SubmitterAccessEditForm,
+    )
 
     def next(self, request):
         query = make_query(**{UX_IDENT: UX_FRONTEND})

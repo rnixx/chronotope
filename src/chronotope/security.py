@@ -25,12 +25,12 @@ chronotope_root_acl = [
 ]
 
 
-# chronotope default ACL
-chronotope_default_acl = [
+# chronotope container ACL
+chronotope_container_acl = [
     (Allow, 'role:viewer', viewer_permissions),
     (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),
     (Allow, 'role:manager', manager_permissions),
-    (Allow, Everyone, ['login']),
+    (Allow, Everyone, ['login', 'add']),
     (Deny, Everyone, ALL_PERMISSIONS),
 ]

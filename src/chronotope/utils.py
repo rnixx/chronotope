@@ -1,6 +1,7 @@
 import uuid
 import html2text
 
+
 UX_IDENT = '__ux'
 UX_FRONTEND = 'fe'
 
@@ -33,3 +34,7 @@ def html_2_text(value):
 
 def html_index_transform(instance, value):
     return html_2_text(value)
+
+
+def get_submitter(request):
+    return request.cookies.get('chronotope.submitter')

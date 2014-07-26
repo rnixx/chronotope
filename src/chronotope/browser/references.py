@@ -37,6 +37,7 @@ from chronotope.browser import UXMixin
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
+    get_submitter,
 )
 
 
@@ -57,11 +58,23 @@ class References(Tile, UXMixin):
     def references(self):
         ret = list()
         authenticated = bool(authenticated_userid(self.request))
+        submitter = get_submitter(self.request)
         for record in self.reference_records:
+            # check ignoring not authenticated
             if not authenticated and record.state != 'published':
-                continue
+                # no submitter, continue
+                if not submitter:
+                    continue
+                # wrong submitter, continue
+                if record.submitter != submitter:
+                    continue
+                # wrong state, continue
+                if record.state != 'draft':
+                    continue
+            # ref title and path
             title = self.reference_title(record)
             path = self.reference_path(record)
+            # case rendered in frontend
             if self.is_frontent:
                 query = make_query(**{UX_IDENT: UX_FRONTEND})
                 ref = self._make_reference(
@@ -70,6 +83,7 @@ class References(Tile, UXMixin):
                     overlay=self.reference_tile,
                     icon=self.icon,
                 )
+            # case rendered in backend
             else:
                 ref = self._make_reference(
                     title,

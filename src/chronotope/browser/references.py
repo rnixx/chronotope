@@ -114,6 +114,66 @@ class References(Tile, UXMixin):
         }
 
 
+class Referencing(Behavior):
+
+    @default
+    def references_value(self, name):
+        value = list()
+        preset = self.request.params.get('preset.{0}'.format(name))
+        if preset:
+            value.append(preset)
+        for record in self.model.attrs[name]:
+            value.append(str(record.uid))
+        return value
+
+    @default
+    def references_vocab(self, widget, data, name,
+                         references_by_uid, reference_by_uid,
+                         extract_title=None):
+        vocab = dict()
+        value = self.request.params.get(widget.dottedpath)
+        if value is not None:
+            value = [it for it in value.split(',') if it]
+            records = references_by_uid(self.request, value)
+        else:
+            records = self.model.attrs[name]
+        for record in records:
+            if extract_title is not None:
+                vocab[str(record.uid)] = extract_title(record)
+            else:
+                vocab[str(record.uid)] = record.title
+        preset = self.request.params.get('preset.{0}'.format(name))
+        if preset:
+            record = reference_by_uid(self.request, preset)
+            if extract_title is not None:
+                vocab[preset] = extract_title(record)
+            else:
+                vocab[preset] = record.title
+        return vocab
+
+    @default
+    def references_save(self, widget, data, name, references_by_uid):
+        def fetch(name):
+            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
+        # existing references
+        existing = self.references_value(name)
+        # expect a list of reference uids
+        references = fetch(name)
+        # remove references
+        remove_references = list()
+        for reference in existing:
+            if not reference in references:
+                remove_references.append(reference)
+        remove_references = references_by_uid(self.request, remove_references)
+        for reference in remove_references:
+            self.model.attrs[name].remove(reference)
+        # set remaining if necessary
+        references = references_by_uid(self.request, references)
+        for reference in references:
+            if not reference in self.model.attrs[name]:
+                self.model.attrs[name].append(reference)
+
+
 ###############################################################################
 # location references
 ###############################################################################
@@ -134,60 +194,25 @@ class LocationReferences(References):
         return location_title(record.street, record.zip, record.city)
 
 
-class LocationReferencing(Behavior):
+class LocationReferencing(Referencing):
 
     @default
     @property
     def location_value(self):
-        value = list()
-        preset = self.request.params.get('preset.location')
-        if preset:
-            value.append(preset)
-        for record in self.model.attrs['location']:
-            value.append(str(record.uid))
-        return value
+        return self.references_value('location')
 
     @default
     def location_vocab(self, widget, data):
-        vocab = dict()
-        value = self.request.params.get(widget.dottedpath)
-        if value is not None:
-            value = [it for it in value.split(',') if it]
-            records = locations_by_uid(self.request, value)
-        else:
-            records = self.model.attrs['location']
-        for record in records:
-            name = location_title(record.street, record.zip, record.city)
-            vocab[str(record.uid)] = name
-        preset = self.request.params.get('preset.location')
-        if preset:
-            record = location_by_uid(self.request, preset)
-            name = location_title(record.street, record.zip, record.city)
-            vocab[preset] = name
-        return vocab
+        def extract_title(record):
+            return location_title(record.street, record.zip, record.city)
+        return self.references_vocab(
+            widget, data, 'location', locations_by_uid, location_by_uid,
+            extract_title=extract_title)
 
     @plumb
     def save(next_, self, widget, data):
         next_(self, widget, data)
-        def fetch(name):
-            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
-        # existing locations
-        existing = self.location_value
-        # expect a list of location uids
-        locations = fetch('location')
-        # remove locations
-        remove_locations = list()
-        for location in existing:
-            if not location in locations:
-                remove_locations.append(location)
-        remove_locations = locations_by_uid(self.request, remove_locations)
-        for location in remove_locations:
-            self.model.attrs['location'].remove(location)
-        # set remaining if necessary
-        locations = locations_by_uid(self.request, locations)
-        for location in locations:
-            if not location in self.model.attrs['location']:
-                self.model.attrs['location'].append(location)
+        self.references_save(widget, data, 'location', locations_by_uid)
 
 
 ###############################################################################
@@ -207,58 +232,22 @@ class FacilityReferences(References):
         return ['facilities', str(record.uid)]
 
 
-class FacilityReferencing(Behavior):
+class FacilityReferencing(Referencing):
 
     @default
     @property
     def facility_value(self):
-        value = list()
-        preset = self.request.params.get('preset.facility')
-        if preset:
-            value.append(preset)
-        for record in self.model.attrs['facility']:
-            value.append(str(record.uid))
-        return value
+        return self.references_value('facility')
 
     @default
     def facility_vocab(self, widget, data):
-        vocab = dict()
-        value = self.request.params.get(widget.dottedpath)
-        if value is not None:
-            value = [it for it in value.split(',') if it]
-            records = facilities_by_uid(self.request, value)
-        else:
-            records = self.model.attrs['facility']
-        for record in records:
-            vocab[str(record.uid)] = record.title
-        preset = self.request.params.get('preset.facility')
-        if preset:
-            record = facility_by_uid(self.request, preset)
-            vocab[preset] = record.title
-        return vocab
+        return self.references_vocab(
+            widget, data, 'facility', facilities_by_uid, facility_by_uid)
 
     @plumb
     def save(next_, self, widget, data):
         next_(self, widget, data)
-        def fetch(name):
-            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
-        # existing facilities
-        existing = self.facility_value
-        # expect a list of facility uids
-        facilities = fetch('facility')
-        # remove facilities
-        remove_facilities = list()
-        for facility in existing:
-            if not facility in facilities:
-                remove_facilities.append(facility)
-        remove_facilities = facilities_by_uid(self.request, remove_facilities)
-        for facility in remove_facilities:
-            self.model.attrs['facility'].remove(facility)
-        # set remaining if necessary
-        facilities = facilities_by_uid(self.request, facilities)
-        for facility in facilities:
-            if not facility in self.model.attrs['facility']:
-                self.model.attrs['facility'].append(facility)
+        self.references_save(widget, data, 'facility', facilities_by_uid)
 
 
 ###############################################################################
@@ -278,58 +267,22 @@ class OccasionReferences(References):
         return ['occasions', str(record.uid)]
 
 
-class OccasionReferencing(Behavior):
+class OccasionReferencing(Referencing):
 
     @default
     @property
     def occasion_value(self):
-        value = list()
-        preset = self.request.params.get('preset.occasion')
-        if preset:
-            value.append(preset)
-        for record in self.model.attrs['occasion']:
-            value.append(str(record.uid))
-        return value
+        return self.references_value('occasion')
 
     @default
     def occasion_vocab(self, widget, data):
-        vocab = dict()
-        value = self.request.params.get(widget.dottedpath)
-        if value is not None:
-            value = [it for it in value.split(',') if it]
-            records = occasions_by_uid(self.request, value)
-        else:
-            records = self.model.attrs['occasion']
-        for record in records:
-            vocab[str(record.uid)] = record.title
-        preset = self.request.params.get('preset.occasion')
-        if preset:
-            record = occasion_by_uid(self.request, preset)
-            vocab[preset] = record.title
-        return vocab
+        return self.references_vocab(
+            widget, data, 'occasion', occasions_by_uid, occasion_by_uid)
 
     @plumb
     def save(next_, self, widget, data):
         next_(self, widget, data)
-        def fetch(name):
-            return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
-        # existing occasion
-        existing = self.occasion_value
-        # expect a list of occasion uids
-        occasions = fetch('occasion')
-        # remove occasions
-        remove_occasions = list()
-        for occasion in existing:
-            if not occasion in occasions:
-                remove_occasions.append(occasion)
-        remove_occasions = occasions_by_uid(self.request, remove_occasions)
-        for occasion in remove_occasions:
-            self.model.attrs['occasion'].remove(occasion)
-        # set remaining if necessary
-        occasions = occasions_by_uid(self.request, occasions)
-        for occasion in occasions:
-            if not occasion in self.model.attrs['occasion']:
-                self.model.attrs['occasion'].append(occasion)
+        self.references_save(widget, data, 'occasion', occasions_by_uid)
 
 
 ###############################################################################

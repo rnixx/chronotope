@@ -30,6 +30,7 @@ from chronotope.model.occasion import (
     search_occasions,
 )
 from chronotope.browser.references import (
+    json_references,
     LocationReferencing,
     FacilityReferencing,
 )
@@ -43,7 +44,6 @@ from chronotope.browser import (
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
-    get_submitter,
 )
 
 
@@ -57,29 +57,7 @@ OCCASION_LIMIT = 100
              accept='application/json',
              renderer='json')
 def json_occasion(model, request):
-    term = request.params['q']
-    # authenticated gets all locations
-    authenticated = bool(authenticated_userid(request))
-    if authenticated:
-        records = search_occasions(request, term, limit=OCCASION_LIMIT)
-    # anonymous gets published locations
-    else:
-        records = search_occasions(request, term, state=['published'],
-                                   limit=OCCASION_LIMIT)
-        # additionally add records by submitter
-        submitter = get_submitter(request)
-        if submitter:
-            records += search_occasions(request, term, state=['draft'],
-                                        submitter=submitter,
-                                        limit=OCCASION_LIMIT)
-    # create and return result
-    occasions = list()
-    for occasion in records:
-        occasions.append({
-            'id': str(occasion.uid),
-            'text': occasion.title,
-        })
-    return sorted(occasions, key=lambda x: x['text'])
+    return json_references(model, request, search_occasions, OCCASION_LIMIT)
 
 
 @tile('content', 'templates/view.pt',

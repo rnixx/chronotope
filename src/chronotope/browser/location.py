@@ -43,6 +43,7 @@ from chronotope.model.location import (
     search_locations,
     location_title,
 )
+from chronotope.browser.references import json_references
 from chronotope.browser import (
     UXMixin,
     UXMixinProxy,
@@ -80,17 +81,11 @@ class LocationControls(Tile):
              accept='application/json',
              renderer='json')
 def json_location(model, request):
-    term = request.params['q']
-    locations = list()
-    state = not authenticated_userid(request) and ['published'] or []
-    for location in search_locations(request, term, state=state,
-                                     limit=LOCATION_LIMIT):
-        name = location_title(location.street, location.zip, location.city)
-        locations.append({
-            'id': str(location.uid),
-            'text': name,
-        })
-    return locations
+    def extract_title(record):
+        return location_title(record.street, record.zip, record.city)
+    return json_references(
+        model, request, search_locations, LOCATION_LIMIT,
+        extract_title=extract_title)
 
 
 @tile('content', 'templates/view.pt',

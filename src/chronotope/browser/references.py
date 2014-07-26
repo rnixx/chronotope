@@ -45,6 +45,37 @@ from chronotope.utils import (
 # general
 ###############################################################################
 
+def json_references(model, request, search_references, limit,
+                    extract_title=None):
+    term = request.params['q']
+    # authenticated gets all
+    authenticated = bool(authenticated_userid(request))
+    if authenticated:
+        records = search_references(request, term, limit=limit)
+    # anonymous gets published
+    else:
+        records = search_references(
+            request, term, state=['published'], limit=limit)
+        # additionally add by submitter
+        submitter = get_submitter(request)
+        if submitter:
+            records += search_references(
+                request, term, state=['draft'],
+                submitter=submitter, limit=limit)
+    # create and return result
+    result = list()
+    for record in records:
+        if extract_title is not None:
+            name = extract_title(record)
+        else:
+            name = record.title
+        result.append({
+            'id': str(record.uid),
+            'text': name,
+        })
+    return sorted(result, key=lambda x: x['text'])
+
+
 class References(Tile, UXMixin):
     icon = None
     reference_tile = None

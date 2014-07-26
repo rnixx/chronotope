@@ -12,6 +12,16 @@ Facilities node::
     >>> facilities.__parent__
     <AppRoot object 'None' at ...>
 
+Facilities ACL::
+
+    >>> facilities.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'add']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
+
 Facilities props::
 
     >>> props = facilities.properties
@@ -74,6 +84,19 @@ Facility node from facilities node::
     >>> facility = facilities['1fbc0e0a-94bb-4726-bccb-5d1e17041123']
     >>> facility
     <Facility object '1fbc0e0a-94bb-4726-bccb-5d1e17041123' at ...>
+
+Initial state and ACL::
+
+    >>> facility.attrs['state']
+    u'draft'
+
+    >>> facility.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'view', 'add', 'edit']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
 
 Facility node attributes::
 

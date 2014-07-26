@@ -12,6 +12,16 @@ Attachments node::
     >>> attachments.__parent__
     <AppRoot object 'None' at ...>
 
+Attachments ACL::
+
+    >>> attachments.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'add']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
+
 Attachments props::
 
     >>> props = attachments.properties
@@ -73,6 +83,20 @@ Attachment node from attachments node::
     >>> attachment = attachments['b495eefd-bb92-4108-88c4-e04c82efe0a7']
     >>> attachment
     <Attachment object 'b495eefd-bb92-4108-88c4-e04c82efe0a7' at ...>
+
+Initial state and ACL::
+
+    >>> attachment.attrs['state']
+    u'draft'
+
+    >>> attachment.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'view', 'add', 'edit']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
+
 
 Attachment node attributes::
 

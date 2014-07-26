@@ -45,10 +45,10 @@ cone.app.register_plugin('attachments', model.Attachments)
 # register ACL's for nodes
 if not os.environ.get('TESTRUN_MARKER'):
     acl_registry.register(chronotope_root_acl, AppRoot)
-acl_registry.register(chronotope_container_acl, model.Locations)
-acl_registry.register(chronotope_container_acl, model.Facilities)
-acl_registry.register(chronotope_container_acl, model.Occasions)
-acl_registry.register(chronotope_container_acl, model.Attachments)
+acl_registry.register(chronotope_container_acl, model.Locations, 'locations')
+acl_registry.register(chronotope_container_acl, model.Facilities, 'facilities')
+acl_registry.register(chronotope_container_acl, model.Occasions, 'occasions')
+acl_registry.register(chronotope_container_acl, model.Attachments, 'attachments')
 
 
 # application startup initialization

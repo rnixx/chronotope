@@ -12,6 +12,16 @@ Occasions node::
     >>> occasions.__parent__
     <AppRoot object 'None' at ...>
 
+Occasions ACL::
+
+    >>> occasions.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'add']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
+
 Occasions props::
 
     >>> props = occasions.properties
@@ -74,6 +84,19 @@ Occasion node from occasions node::
     >>> occasion = occasions['279af149-297d-4573-bb60-e565a8fb7a23']
     >>> occasion
     <Occasion object '279af149-297d-4573-bb60-e565a8fb7a23' at ...>
+
+Initial state and ACL::
+
+    >>> occasion.attrs['state']
+    u'draft'
+
+    >>> occasion.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'view', 'add', 'edit']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
 
 Occasion node attributes::
 

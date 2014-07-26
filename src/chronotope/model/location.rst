@@ -12,6 +12,16 @@ Locations node::
     >>> locations.__parent__
     <AppRoot object 'None' at ...>
 
+Locations ACL::
+
+    >>> locations.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'add']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
+
 Locations props::
 
     >>> props = locations.properties
@@ -80,6 +90,19 @@ Location node from locations node::
     >>> location = locations['d7d712ba-7f4c-4eaf-9723-8923e9d9a9ae']
     >>> location
     <Location object 'd7d712ba-7f4c-4eaf-9723-8923e9d9a9ae' at ...>
+
+Initial state and ACL::
+
+    >>> location.attrs['state']
+    u'draft'
+
+    >>> location.__acl__
+    [('Allow', 'role:viewer', ['view']), 
+    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    ('Allow', 'system.Everyone', ['login', 'view', 'add', 'edit']), 
+    ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
 
 Location node attributes::
 

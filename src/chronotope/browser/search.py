@@ -23,6 +23,7 @@ from chronotope.search import fulltext_search
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
+    get_submitter,
 )
 
 
@@ -101,9 +102,19 @@ class LiveSearch(object):
 def extract_locations(request, record, result):
     cls = record.__class__
     if cls is LocationRecord:
+        # check ignoring not authenticated
         authenticated = bool(authenticated_userid(request))
         if not authenticated and record.state != 'published':
-            return
+            submitter = get_submitter(request)
+            # no submitter, ignore
+            if not submitter:
+                return
+            # wrong submitter, ignore
+            if record.submitter != submitter:
+                return
+            # wrong state, ignore
+            if record.state != 'draft':
+                return
         uid = str(record.uid)
         query = make_query(**{UX_IDENT: UX_FRONTEND})
         target = make_url(
@@ -165,15 +176,28 @@ def json_search_locations(model, request):
              accept='application/json',
              renderer='json')
 def json_locations_in_bounds(model, request):
-    state = not authenticated_userid(request) and ['published'] or []
-    records = locations_in_bounds(
-        request,
+    # bounds
+    north, south, west, east = (
         request.params['n'],
         request.params['s'],
         request.params['w'],
         request.params['e'],
-        state=state
     )
+    # authenticated gets all locations
+    authenticated = bool(authenticated_userid(request))
+    if authenticated:
+        records = locations_in_bounds(request, north, south, west, east)
+    # anonymous gets published locations
+    else:
+        records = locations_in_bounds(
+            request, north, south, west, east, state=['published'])
+        # additionally add records by submitter
+        submitter = get_submitter(request)
+        if submitter:
+            records += locations_in_bounds(
+                request, north, south, west, east,
+                state=['draft'], submitter=submitter)
+    # create result
     result = list()
     for record in records:
         uid = str(record.uid)

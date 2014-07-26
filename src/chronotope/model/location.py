@@ -58,7 +58,7 @@ def locations_by_uid(request, uids):
                   .all()
 
 
-def search_locations(request, term, state=[], limit=None):
+def search_locations(request, term, state=[], submitter=None, limit=None):
     session = get_session(request)
     query = session.query(LocationRecord)
     query = query.filter(or_(LocationRecord.street.like(u'%{0}%'.format(term)),
@@ -66,6 +66,8 @@ def search_locations(request, term, state=[], limit=None):
                              LocationRecord.city.like(u'%{0}%'.format(term))))
     if state:
         query = query.filter(LocationRecord.state.in_(state))
+    if submitter:
+        query = query.filter(LocationRecord.submitter == submitter)
     query = query.order_by(LocationRecord.city)
     if limit is not None:
         query = query.limit(limit)
@@ -73,13 +75,15 @@ def search_locations(request, term, state=[], limit=None):
 
 
 def locations_in_bounds(request, north, south, west, east,
-                        state=[], limit=None):
+                        state=[], submitter=None, limit=None):
     session = get_session(request)
     query = session.query(LocationRecord)\
                    .filter(LocationRecord.lon.between(west, east))\
                    .filter(LocationRecord.lat.between(south, north))
     if state:
         query = query.filter(LocationRecord.state.in_(state))
+    if submitter:
+        query = query.filter(LocationRecord.submitter == submitter)
     if limit is not None:
         query = query.limit(limit)
     return query.all()

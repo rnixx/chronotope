@@ -18,20 +18,15 @@ Imports::
     ... )
     >>> from chronotope.search import fulltext_search
 
-Fetch containers::
+Dummy content creation::
 
     >>> root = get_root()
-
-Create request::
-
     >>> request = layer.new_request()
-
-Get session::
-
-    >>> from chronotope.sql import get_session
     >>> session = get_session(request)
 
-Create locations::
+locations::
+
+    >>> root = get_root()
 
     >>> locations = root['locations']
 
@@ -59,16 +54,7 @@ Create locations::
     >>> location2.attrs['country'] = 'Austria'
     >>> locations['4252cd8d-ef3e-4b2d-8910-d6bca0b3fab6'] = location2
 
-    >>> session.commit()
-
-    >>> fulltext_search(request, 'Innsbruck')
-    [<chronotope.model.location.LocationRecord object at ...>,
-    <chronotope.model.location.LocationRecord object at ...>]
-
-    >>> fulltext_search(request, 'Anichst*')
-    [<chronotope.model.location.LocationRecord object at ...>]
-
-Create facilities::
+facilities::
 
     >>> facilities = root['facilities']
 
@@ -92,16 +78,7 @@ Create facilities::
     >>> facility2.attrs['exists_to'] = datetime.datetime(2012, 01, 01, 0, 0)
     >>> facilities['a23d5cae-0ec5-40fd-969c-02e08f6d2dd7'] = facility2
 
-    >>> session.commit()
-
-    >>> fulltext_search(request, 'facility')
-    [<chronotope.model.facility.FacilityRecord object at ...>, 
-    <chronotope.model.facility.FacilityRecord object at ...>]
-
-    >>> fulltext_search(request, 'other')
-    [<chronotope.model.facility.FacilityRecord object at ...>]
-
-Create occasions::
+occasions::
 
     >>> occasions = root['occasions']
 
@@ -125,15 +102,7 @@ Create occasions::
     >>> occasion2.attrs['duration_to'] = datetime.datetime(2012, 01, 01, 0, 0)
     >>> occasions['7cb5828f-2821-424f-a734-88a8ec07d266'] = occasion2
 
-    >>> session.commit()
-
-    >>> fulltext_search(request, 'description')
-    [<chronotope.model.occasion.OccasionRecord object at ...>, 
-    <chronotope.model.facility.FacilityRecord object at ...>, 
-    <chronotope.model.occasion.OccasionRecord object at ...>, 
-    <chronotope.model.facility.FacilityRecord object at ...>]
-
-Create attachments::
+attachments::
 
     >>> attachments = root['attachments']
 
@@ -157,15 +126,65 @@ Create attachments::
 
     >>> session.commit()
 
-    >>> fulltext_search(request, 'attachment')
+No published objects, empty result::
+
+    >>> fulltext_search(request, 'Innsbruck', 100)
+    []
+
+Authenticated user gets result::
+
+    >>> layer.login('viewer')
+
+    >>> fulltext_search(request, 'Innsbruck', 100)
+    [<chronotope.model.location.LocationRecord object at ...>,
+    <chronotope.model.location.LocationRecord object at ...>]
+
+    >>> fulltext_search(request, 'Anichst*', 100)
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+    >>> layer.logout()
+
+Anonymous users get published entries::
+
+    >>> location1.state = u'published'
+    >>> session.commit()
+
+    >>> fulltext_search(request, 'Innsbruck', 100)
+    [<chronotope.model.location.LocationRecord object at ...>]
+
+Different searches::
+
+    >>> layer.login('viewer')
+
+    >>> fulltext_search(request, 'facility', 100)
+    [<chronotope.model.facility.FacilityRecord object at ...>, 
+    <chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> fulltext_search(request, 'other facility', 100)
+    [<chronotope.model.facility.FacilityRecord object at ...>]
+
+    >>> fulltext_search(request, 'description', 100)
+    [<chronotope.model...Record object at ...>, 
+    <chronotope.model...Record object at ...>, 
+    <chronotope.model...Record object at ...>, 
+    <chronotope.model...Record object at ...>]
+
+    >>> fulltext_search(request, 'attachment', 100)
     [<chronotope.model.attachment.AttachmentRecord object at ...>, 
     <chronotope.model.attachment.AttachmentRecord object at ...>]
 
     >>> attachment2.attrs['title'] = u'Other'
     >>> session.commit()
 
-    >>> fulltext_search(request, 'attachment')
+    >>> fulltext_search(request, 'attachment', 100)
     [<chronotope.model.attachment.AttachmentRecord object at ...>]
+
+    >>> fulltext_search(request, 'other', 100)
+    [<chronotope.model...Record object at ...>, 
+    <chronotope.model...Record object at ...>, 
+    <chronotope.model...Record object at ...>]
+
+    >>> layer.logout()
 
 Cleanup::
 
@@ -179,7 +198,7 @@ Cleanup::
     >>> del attachments['7e964f01-56b9-40c8-a2f0-ac6aa53fa0e6']
     >>> session.commit()
 
-    >>> fulltext_search(request, 'description')
+    >>> fulltext_search(request, 'description', 100)
     []
 
     >>> root.printtree()

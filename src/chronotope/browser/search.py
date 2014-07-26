@@ -80,9 +80,7 @@ class LiveSearch(object):
 
     def search(self, request, query):
         result = list()
-        state = not authenticated_userid(request) and ['published'] or []
-        for record in fulltext_search(request, query, state=state,
-                                      limit=SEARCH_LIMIT):
+        for record in fulltext_search(request, query, SEARCH_LIMIT):
             cls = record.__class__
             uid = str(record.uid)
             query = make_query(**{UX_IDENT: UX_FRONTEND})
@@ -158,9 +156,7 @@ def json_related_locations(model, request):
 def json_search_locations(model, request):
     query = request.params['term']
     result = dict()
-    state = not authenticated_userid(request) and ['published'] or []
-    for record in fulltext_search(request, query, state=state,
-                                  limit=SEARCH_LIMIT):
+    for record in fulltext_search(request, query, SEARCH_LIMIT):
         extract_locations(request, record, result)
     return result.values()
 

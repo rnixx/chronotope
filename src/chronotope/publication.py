@@ -6,6 +6,7 @@ from pyramid.security import (
     ALL_PERMISSIONS,
 )
 from chronotope.security import (
+    authenticated_permissions,
     viewer_permissions,
     editor_permissions,
     admin_permissions,
@@ -29,6 +30,7 @@ publication_transition_names = {
 # ACLs for publication workflow states
 publication_state_acls = dict()
 publication_state_acls['draft'] = [
+    (Allow, 'system.Authenticated', authenticated_permissions),
     (Allow, 'role:viewer', viewer_permissions),
     (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),
@@ -37,6 +39,7 @@ publication_state_acls['draft'] = [
     (Deny, Everyone, ALL_PERMISSIONS),
 ]
 publication_state_acls['published'] = [
+    (Allow, 'system.Authenticated', authenticated_permissions),
     (Allow, 'role:viewer', viewer_permissions),
     (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),
@@ -45,6 +48,7 @@ publication_state_acls['published'] = [
     (Deny, Everyone, ALL_PERMISSIONS),
 ]
 publication_state_acls['declined'] = [
+    (Allow, 'system.Authenticated', authenticated_permissions),
     (Allow, 'role:viewer', viewer_permissions),
     (Allow, 'role:editor', editor_permissions),
     (Allow, 'role:admin', admin_permissions),

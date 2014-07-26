@@ -15,10 +15,13 @@ Attachments node::
 Attachments ACL::
 
     >>> attachments.__acl__
-    [('Allow', 'role:viewer', ['view']), 
-    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
-    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
-    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    [('Allow', 'system.Authenticated', ['view']), 
+    ('Allow', 'role:viewer', ['view', 'list']), 
+    ('Allow', 'role:editor', ['view', 'list', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'list', 'add', 'edit', 'delete', 'cut', 
+    'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'list', 'add', 'edit', 'delete', 'cut', 
+    'copy', 'paste', 'change_state', 'manage']), 
     ('Allow', 'system.Everyone', ['login', 'add']), 
     ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
 
@@ -90,13 +93,15 @@ Initial state and ACL::
     u'draft'
 
     >>> attachment.__acl__
-    [('Allow', 'role:viewer', ['view']), 
-    ('Allow', 'role:editor', ['view', 'add', 'edit']), 
-    ('Allow', 'role:admin', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state']), 
-    ('Allow', 'role:manager', ['view', 'add', 'edit', 'delete', 'cut', 'copy', 'paste', 'change_state', 'manage']), 
+    [('Allow', 'system.Authenticated', ['view']), 
+    ('Allow', 'role:viewer', ['view', 'list']), 
+    ('Allow', 'role:editor', ['view', 'list', 'add', 'edit']), 
+    ('Allow', 'role:admin', ['view', 'list', 'add', 'edit', 'delete', 'cut', 
+    'copy', 'paste', 'change_state']), 
+    ('Allow', 'role:manager', ['view', 'list', 'add', 'edit', 'delete', 'cut', 
+    'copy', 'paste', 'change_state', 'manage']), 
     ('Allow', 'system.Everyone', ['login', 'view', 'add', 'edit']), 
     ('Deny', 'system.Everyone', <pyramid.security.AllPermissionsList object at ...>)]
-
 
 Attachment node attributes::
 

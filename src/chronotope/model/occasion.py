@@ -90,12 +90,14 @@ def occasions_by_uid(request, uids):
                   .all()
 
 
-def search_occasions(request, term, state=[], limit=None):
+def search_occasions(request, term, state=[], submitter=None, limit=None):
     session = get_session(request)
     query = session.query(OccasionRecord)
     query = query.filter(OccasionRecord.title.like(u'%{0}%'.format(term)))
     if state:
         query = query.filter(OccasionRecord.state.in_(state))
+    if submitter:
+        query = query.filter(OccasionRecord.submitter == submitter)
     query = query.order_by(OccasionRecord.title)
     if limit is not None:
         query = query.limit(limit)

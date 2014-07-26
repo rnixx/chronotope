@@ -44,6 +44,7 @@ from chronotope.browser import (
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
+    get_submitter,
 )
 
 
@@ -58,15 +59,28 @@ FACILITY_LIMIT = 100
              renderer='json')
 def json_facility(model, request):
     term = request.params['q']
+    # authenticated gets all locations
+    authenticated = bool(authenticated_userid(request))
+    if authenticated:
+        records = search_facilities(request, term, limit=FACILITY_LIMIT)
+    # anonymous gets published locations
+    else:
+        records = search_facilities(request, term, state=['published'],
+                                    limit=FACILITY_LIMIT)
+        # additionally add records by submitter
+        submitter = get_submitter(request)
+        if submitter:
+            records += search_facilities(request, term, state=['draft'],
+                                         submitter=submitter,
+                                         limit=FACILITY_LIMIT)
+    # create and return result
     facilities = list()
-    state = not authenticated_userid(request) and ['published'] or []
-    for facility in search_facilities(request, term, state=state,
-                                      limit=FACILITY_LIMIT):
+    for facility in records:
         facilities.append({
             'id': str(facility.uid),
             'text': facility.title,
         })
-    return facilities
+    return sorted(facilities, key=lambda x: x['text'])
 
 
 @tile('content', 'templates/view.pt',

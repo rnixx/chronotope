@@ -73,6 +73,12 @@ def initialize_chronotope(config, global_config, local_config):
     # index directory
     os.environ['chronotope.index.dir'] = local_config['chronotope.index.dir']
 
+    # recaptcha keys
+    os.environ['chronotope.recaptcha.public_key'] = \
+        local_config['chronotope.recaptcha.public_key']
+    os.environ['chronotope.recaptcha.private_key'] = \
+        local_config['chronotope.recaptcha.private_key']
+
     # database initialization
     prefix = 'chronotope.dbinit.'
     if local_config.get('%surl' % prefix, None) is None:

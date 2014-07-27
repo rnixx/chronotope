@@ -1,3 +1,4 @@
+import os
 import uuid
 import html2text
 
@@ -38,3 +39,11 @@ def html_index_transform(instance, value):
 
 def get_submitter(request):
     return request.cookies.get('chronotope.submitter')
+
+
+def get_recaptcha_public_key():
+    return os.environ['chronotope.recaptcha.public_key']
+
+
+def get_recaptcha_private_key():
+    return os.environ['chronotope.recaptcha.private_key']

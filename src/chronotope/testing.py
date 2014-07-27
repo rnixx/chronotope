@@ -14,6 +14,9 @@ from chronotope.sql import (
 class ChronotopeLayer(Security):
 
     def make_app(self, **kw):
+        dummy_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        kw['chronotope.recaptcha.public_key'] = dummy_key
+        kw['chronotope.recaptcha.private_key'] = dummy_key
         kw['chronotope.index.dir'] = os.path.join(self.tempdir, 'index')
         super(ChronotopeLayer, self).make_app(**kw)
 

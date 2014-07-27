@@ -2,6 +2,7 @@ from plumber import (
     Behavior,
     plumb,
 )
+from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from pyramid.static import static_view
 from pyramid.exceptions import Forbidden
@@ -15,7 +16,12 @@ from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
     get_submitter,
+    get_recaptcha_public_key,
+    get_recaptcha_private_key,
 )
+
+
+_ = TranslationStringFactory('chronotope')
 
 
 static_resources = static_view('static', use_subpath=True)
@@ -55,6 +61,28 @@ class SubmitterAccessTile(Tile):
 
 
 class SubmitterForm(Behavior):
+
+    @plumb
+    def prepare(_next, self):
+        _next(self)
+        if authenticated_userid(self.request):
+            return
+        captcha_widget = factory(
+            'field:label:div:error:recaptcha',
+            name='captcha',
+            props={
+                'label': _('verify_human', default='Verify'),
+                'public_key': get_recaptcha_public_key(),
+                'private_key': get_recaptcha_private_key(),
+                'lang': 'de',
+                'theme': 'clean',
+                'label.class_add': 'col-sm-2',
+                'div.class_add': 'col-sm-10',
+                'error.position': 'after',
+            },
+        )
+        save_widget = self.form['controls']
+        self.form.insertbefore(captcha_widget, save_widget)
 
     @plumb
     def save(_next, self, widget, data):

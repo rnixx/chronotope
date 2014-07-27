@@ -45,6 +45,7 @@ setup(name='chronotope',
           'yafowil.widget.location',
           'yafowil.widget.select2',
           'yafowil.widget.wysihtml5',
+          'yafowil.widget.recaptcha',
       ],
       extras_require = dict(
           test=[

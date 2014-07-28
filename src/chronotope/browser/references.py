@@ -106,7 +106,7 @@ class References(Tile, UXMixin):
             title = self.reference_title(record)
             path = self.reference_path(record)
             # case rendered in frontend
-            if self.is_frontent:
+            if self.is_frontend:
                 query = make_query(**{UX_IDENT: UX_FRONTEND})
                 ref = self._make_reference(
                     title,

@@ -9,6 +9,12 @@
     <table class="table">
 
       <tr>
+        <td colspan="2">
+          <h3 class="overlay-view-heading">Occasion</h3>
+        </td>
+      </tr>
+
+      <tr>
         <td class="row-title">Title</td>
         <td tal:content="model.attrs['title']">Title</td>
       </tr>

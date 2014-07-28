@@ -12,7 +12,7 @@ from chronotope.utils import (
 class UXMixin(object):
 
     @property
-    def is_frontent(self):
+    def is_frontend(self):
         return self.request.params.get(UX_IDENT) == UX_FRONTEND
 
     @property

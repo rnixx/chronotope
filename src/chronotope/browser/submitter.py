@@ -1,6 +1,7 @@
 from plumber import (
     Behavior,
     plumb,
+    default,
 )
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
@@ -39,16 +40,21 @@ class SubmitterAccessTile(Tile):
 
 class SubmitterForm(Behavior):
 
+    @default
+    @property
+    def authenticated(self):
+        return bool(authenticated_userid(self.request))
+
     @plumb
     def prepare(_next, self):
         _next(self)
-        if authenticated_userid(self.request):
+        if self.authenticated:
             return
         captcha_widget = factory(
             'field:label:div:error:recaptcha',
             name='captcha',
             props={
-                'label': _('verify_human', default='Verify'),
+                'label': _('verify', default='Verify'),
                 'public_key': get_recaptcha_public_key(),
                 'private_key': get_recaptcha_private_key(),
                 'lang': 'de',
@@ -63,8 +69,7 @@ class SubmitterForm(Behavior):
 
     @plumb
     def save(_next, self, widget, data):
-        authenticated = authenticated_userid(self.request)
-        if not authenticated:
+        if not self.authenticated:
             submitter = get_submitter(self.request)
             self.model.attrs['submitter'] = submitter
         _next(self, widget, data)
@@ -74,9 +79,8 @@ class SubmitterAccessAddForm(SubmitterForm):
 
     @plumb
     def prepare(_next, self):
-        authenticated = authenticated_userid(self.request)
         submitter = get_submitter(self.request)
-        if not authenticated:
+        if not self.authenticated:
             if not submitter:
                 raise Forbidden
         _next(self)
@@ -86,9 +90,8 @@ class SubmitterAccessEditForm(SubmitterForm):
 
     @plumb
     def prepare(_next, self):
-        authenticated = authenticated_userid(self.request)
         submitter = get_submitter(self.request)
-        if not authenticated:
+        if not self.authenticated:
             if not submitter:
                 raise Forbidden
             if submitter != self.model.attrs['submitter']:

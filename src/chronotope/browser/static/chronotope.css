@@ -13,6 +13,10 @@
 .has-error .help-block {
     color:#737373;
 }
+.overlay-form-heading {
+    margin-top:0;
+    margin-bottom:16px;
+}
 
 /* login form */
 #form-loginform {
@@ -68,6 +72,10 @@
 .modal-body .occasion-tile,
 .modal-body .attachment-tile {
     margin:-16px -15px -15px -15px;
+}
+.overlay-view-heading {
+    margin-top:4px;
+    margin-bottom:4px;
 }
 
 /* location view */

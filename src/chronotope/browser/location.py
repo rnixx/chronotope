@@ -44,12 +44,14 @@ from chronotope.model.location import (
     location_title,
 )
 from chronotope.browser.references import json_references
-from chronotope.browser import (
-    UXMixin,
-    UXMixinProxy,
+from chronotope.browser.submitter import (
     SubmitterAccessTile,
     SubmitterAccessAddForm,
     SubmitterAccessEditForm,
+)
+from chronotope.browser.ux import (
+    UXMixin,
+    UXMixinProxy,
 )
 from chronotope.utils import (
     UX_IDENT,

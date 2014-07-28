@@ -36,13 +36,15 @@ from chronotope.browser.references import (
     FacilityReferencing,
     OccasionReferencing,
 )
-from chronotope.browser import (
-    UXMixin,
-    UXMixinProxy,
+from chronotope.browser.submitter import (
     check_submitter_access,
     SubmitterAccessTile,
     SubmitterAccessAddForm,
     SubmitterAccessEditForm,
+)
+from chronotope.browser.ux import (
+    UXMixin,
+    UXMixinProxy,
 )
 from chronotope.utils import (
     UX_IDENT,

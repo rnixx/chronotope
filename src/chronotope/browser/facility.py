@@ -2,7 +2,6 @@ import uuid
 from plumber import plumber
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
-from pyramid.security import authenticated_userid
 from cone.tile import tile
 from cone.app.utils import (
     add_creation_metadata,
@@ -35,12 +34,14 @@ from chronotope.browser.references import (
     LocationReferencing,
     CategoryReferencing,
 )
-from chronotope.browser import (
-    UXMixin,
-    UXMixinProxy,
+from chronotope.browser.submitter import (
     SubmitterAccessTile,
     SubmitterAccessAddForm,
     SubmitterAccessEditForm,
+)
+from chronotope.browser.ux import (
+    UXMixin,
+    UXMixinProxy,
 )
 from chronotope.utils import (
     UX_IDENT,

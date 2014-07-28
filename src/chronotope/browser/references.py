@@ -33,7 +33,7 @@ from chronotope.model.category import (
     category_by_uid,
     categories_by_uid,
 )
-from chronotope.browser import UXMixin
+from chronotope.browser.ux import UXMixin
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,

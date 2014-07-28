@@ -14,7 +14,7 @@ from chronotope.model import (
     Occasion,
     Attachment,
 )
-from chronotope.browser import UXMixin
+from chronotope.browser.ux import UXMixin
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,

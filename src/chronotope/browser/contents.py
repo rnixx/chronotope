@@ -26,9 +26,13 @@ class ChronotopeContentsTile(ContentsTile):
         'content': 'string'
     }]
     sort_keys = ContentsTile.sort_keys.copy()
+    sort_keys['creator'] = lambda x: x.attrs['submitter'] \
+        and x.attrs['submitter'].lower() or x.metadata.creator.lower()
     sort_keys['state'] = lambda x: x.attrs['state']
 
     def row_data(self, node):
         row_data = super(ChronotopeContentsTile, self).row_data(node)
+        row_data['creator'] = node.attrs['submitter'] \
+            and node.attrs['submitter'] or node.metadata.creator
         row_data['state'] = node.attrs['state']
         return row_data

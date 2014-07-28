@@ -128,6 +128,7 @@ def extract_locations(request, record, result):
             'target': target,
             'lat': record.lat,
             'lon': record.lon,
+            'state': record.state,
         }
     elif cls is FacilityRecord:
         for location in record.location:
@@ -213,5 +214,6 @@ def json_locations_in_bounds(model, request):
             'target': target,
             'lat': record.lat,
             'lon': record.lon,
+            'state': record.state,
         })
     return result

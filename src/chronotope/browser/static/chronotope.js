@@ -370,13 +370,29 @@
             return markers;
         },
 
+        icon_url: function(datum) {
+            var images_base = 'chronotope-static/images/marker-icon-';
+            return images_base + datum.state + '.png';
+        },
+
+        shadow_url: 'chronotope-static/Leaflet/images/marker-shadow.png',
+
         set_markers: function(data) {
             chronotope.map.removeLayer(chronotope.markers);
             var markers = chronotope.create_markers(chronotope.map);
             $(data).each(function() {
                 var datum = this;
                 var coords = [datum.lat, datum.lon];
-                var marker = new L.marker(coords);
+                var marker = new L.marker(coords, {
+                    icon: L.icon({
+                        iconUrl: chronotope.icon_url(datum),
+                        shadowUrl: chronotope.shadow_url,
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
+                });
                 marker.addTo(markers);
                 marker.on('click', function(evt) {
                     bdajax.overlay({

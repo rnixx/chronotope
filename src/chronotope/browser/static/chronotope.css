@@ -44,11 +44,21 @@ tr.state-declined td.state,
 }
 
 /* content tiles */
+.overlay-view-heading {
+    margin-top:4px;
+    margin-bottom:4px;
+}
+.location-tile .pagination,
+.facility-tile .pagination,
+.occasion-tile .pagination,
+.attachment-tile .pagination {
+    margin:4px 0 0 0;
+}
 .location-tile table,
 .facility-tile table,
 .occasion-tile table,
 .attachment-tile table {
-    margin-bottom:0px;
+    margin-bottom:0;
 }
 .location-tile table td.row-title,
 .facility-tile table td.row-title,
@@ -62,7 +72,7 @@ tr.state-declined td.state,
 .facility-tile table td ul.list-unstyled,
 .occasion-tile table td ul.list-unstyled,
 .attachment-tile table td ul.list-unstyled {
-    margin-bottom:0px;
+    margin-bottom:0;
 }
 .panel-body .location-tile,
 .panel-body .facility-tile,
@@ -75,10 +85,6 @@ tr.state-declined td.state,
 .modal-body .occasion-tile,
 .modal-body .attachment-tile {
     margin:-16px -15px -15px -15px;
-}
-.overlay-view-heading {
-    margin-top:4px;
-    margin-bottom:4px;
 }
 
 /* location view */
@@ -114,7 +120,7 @@ tr.state-declined td.state,
 
 /* footer */
 .footer-ae {
-    margin:12px 0px;
+    margin:12px 0;
 }
 
 /* live search */

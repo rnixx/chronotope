@@ -4,18 +4,28 @@
                 i18n:domain="chronotope"
                 omit-tag="True">
 
-  <ul class="list-unstyled">
-    <li tal:repeat="reference context.references">
-      <a href="#"
-         ajax:bind="${reference['bind']}"
-         ajax:target="${reference['target']}"
-         ajax:action="${reference['action']|nothing}"
-         ajax:event="${reference['event']|nothing}"
-         ajax:overlay="${reference['overlay']|nothing}"
-        ><span class="${reference['icon']}"
-               tal:condition="reference['icon']"></span
-        >&nbsp;<span tal:content="reference['title']">Reference</span></a>
-    </li>
-  </ul>
+  <div id="${context.references_id}"
+       class="${context.references_id}batchsensitiv"
+       ajax:bind="batchclicked"
+       ajax:target="${context.references_target}"
+       ajax:action="${context.references_tile}:#${context.references_id}:replace">
+
+    <ul class="list-unstyled">
+      <li tal:repeat="reference context.slice.references">
+        <a href="#"
+           ajax:bind="${reference['bind']}"
+           ajax:target="${reference['target']}"
+           ajax:action="${reference['action']|nothing}"
+           ajax:event="${reference['event']|nothing}"
+           ajax:overlay="${reference['overlay']|nothing}"
+          ><span class="${reference['icon']}"
+                 tal:condition="reference['icon']"></span
+          >&nbsp;<span tal:content="reference['title']">Reference</span></a>
+      </li>
+    </ul>
+
+    <tal:batch replace="structure context.batch" />
+
+  </div>
 
 </tal:references>

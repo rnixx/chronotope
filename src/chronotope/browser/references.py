@@ -9,9 +9,11 @@ from cone.tile import (
     Tile,
     tile,
 )
+from cone.app.browser.batch import Batch
 from cone.app.browser.utils import (
     make_url,
     make_query,
+    nodepath,
 )
 from chronotope.model.location import (
     location_by_uid,
@@ -76,9 +78,71 @@ def json_references(model, request, search_references, limit,
     return sorted(result, key=lambda x: x['text'])
 
 
+class ReferencesSlice(object):
+
+    def __init__(self, references_tile, model, request):
+        self.references_tile = references_tile
+        self.model = model
+        self.request = request
+
+    @property
+    def slice(self):
+        current = int(self.request.params.get('b_page', '0'))
+        start = current * self.references_tile.slicesize
+        end = start + self.references_tile.slicesize
+        return start, end
+
+    @property
+    def references(self):
+        start, end = self.slice
+        return self.references_tile.references(start, end)
+
+
+class ReferencesBatch(Batch):
+
+    def __init__(self, references_tile):
+        self.references_tile = references_tile
+        self.name = references_tile.references_id + 'batch'
+        self.path = None
+        self.attribute = 'render'
+
+    @property
+    def display(self):
+        return len(self.vocab) > 1
+
+    @property
+    def vocab(self):
+        ret = list()
+        path = nodepath(self.model)
+        count = self.references_tile.item_count
+        slicesize = self.references_tile.slicesize
+        pages = count / slicesize
+        if count % slicesize != 0:
+            pages += 1
+        current = self.request.params.get('b_page', '0')
+        params = {
+            UX_IDENT: UX_FRONTEND,
+            'size': slicesize,
+        }
+        for i in range(pages):
+            params['b_page'] = str(i)
+            query = make_query(**params)
+            url = make_url(self.request, path=path, query=query)
+            ret.append({
+                'page': '%i' % (i + 1),
+                'current': current == str(i),
+                'visible': True,
+                'url': url,
+            })
+        return ret
+
+
 class References(Tile, UXMixin):
-    icon = None
+    slicesize = 5
+    references_id = None
+    references_tile = None
     reference_tile = None
+    icon = None
 
     @property
     def reference_records(self):
@@ -86,8 +150,24 @@ class References(Tile, UXMixin):
                                   u'implement ``reference_records``')
 
     @property
-    def references(self):
-        ret = list()
+    def references_target(self):
+        return make_url(self.request, node=self.model)
+
+    @property
+    def slice(self):
+        return ReferencesSlice(self, self.model, self.request)
+
+    @property
+    def batch(self):
+        return ReferencesBatch(self)(self.model, self.request)
+
+    @property
+    def item_count(self):
+        return len(self.visible_references)
+
+    @property
+    def visible_references(self):
+        records = list()
         authenticated = bool(authenticated_userid(self.request))
         submitter = get_submitter(self.request)
         for record in self.reference_records:
@@ -102,6 +182,12 @@ class References(Tile, UXMixin):
                 # wrong state, continue
                 if record.state != 'draft':
                     continue
+            records.append(record)
+        return records
+
+    def references(self, start, end):
+        ret = list()
+        for record in self.visible_references[start:end]:
             # ref title and path
             title = self.reference_title(record)
             path = self.reference_path(record)
@@ -211,8 +297,10 @@ class Referencing(Behavior):
 
 @tile('related_locations', 'templates/references.pt', permission='view')
 class LocationReferences(References):
-    icon = 'glyphicon glyphicon-map-marker'
+    references_id = 'relatedlocations'
+    references_tile = 'related_locations'
     reference_tile = 'location'
+    icon = 'glyphicon glyphicon-map-marker'
 
     @property
     def reference_records(self):
@@ -252,8 +340,10 @@ class LocationReferencing(Referencing):
 
 @tile('related_facilities', 'templates/references.pt', permission='view')
 class FacilityReferences(References):
-    icon = 'glyphicon glyphicon-home'
+    references_id = 'relatedfacilities'
+    references_tile = 'related_facilities'
     reference_tile = 'facility'
+    icon = 'glyphicon glyphicon-home'
 
     @property
     def reference_records(self):
@@ -287,8 +377,10 @@ class FacilityReferencing(Referencing):
 
 @tile('related_occasions', 'templates/references.pt', permission='view')
 class OccasionReferences(References):
-    icon = 'glyphicon glyphicon-star-empty'
+    references_id = 'relatedoccasions'
+    references_tile = 'related_occasions'
     reference_tile = 'occasion'
+    icon = 'glyphicon glyphicon-star-empty'
 
     @property
     def reference_records(self):
@@ -322,8 +414,10 @@ class OccasionReferencing(Referencing):
 
 @tile('related_attachments', 'templates/references.pt', permission='view')
 class AttachmentReferences(References):
-    icon = 'glyphicon glyphicon-file'
+    references_id = 'relatedattachments'
+    references_tile = 'related_attachments'
     reference_tile = 'attachment'
+    icon = 'glyphicon glyphicon-file'
 
     @property
     def reference_records(self):

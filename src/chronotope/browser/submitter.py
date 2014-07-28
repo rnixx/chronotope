@@ -209,13 +209,14 @@ class SubmitterContentsTile(ContentsTile):
 
     @property
     def listable_children(self):
+        authenticated = authenticated_userid(self.request)
         submitter = get_submitter(self.request)
-        if submitter:
+        if submitter and not authenticated:
             def query(cls):
                 return session.query(cls.uid)\
                               .filter(cls.submitter == submitter).all()
         else:
-            creator = authenticated_userid(self.request)
+            creator = authenticated
             def query(cls):
                 return session.query(cls.uid)\
                               .filter(cls.creator == creator).all()

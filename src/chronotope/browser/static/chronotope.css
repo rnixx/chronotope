@@ -1,10 +1,13 @@
 /* workflow states */
+tr.state-draft td.state,
 .navbar-default .navbar-nav > li > a.state-draft {
     color:orange;
 }
+tr.state-published td.state,
 .navbar-default .navbar-nav > li > a.state-published {
     color:green;
 }
+tr.state-declined td.state,
 .navbar-default .navbar-nav > li > a.state-declined {
     color:red;
 }

@@ -47,6 +47,18 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def edit(self):
+        # published objects are not editable via frontend
+        if self.model.attrs['state'] == 'published':
+            return None
+        # anon user
+        if not authenticated_userid(self.request):
+            # if submitter not matches, no editing
+            submitter = get_submitter(self.request)
+            if submitter != self.model.attrs['submitter']:
+                return None
+            # if state not draft, no editing
+            if self.model.attrs['state'] == 'draft':
+                return None
         query = make_query(**{UX_IDENT: UX_FRONTEND})
         url = make_url(self.request, node=self.model, query=query)
         return {

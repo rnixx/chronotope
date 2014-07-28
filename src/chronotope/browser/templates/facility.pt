@@ -47,31 +47,35 @@
         </td>
       </tr>
 
-      <tr>
+      <tr tal:define="related_locations tile('related_locations').strip()"
+          tal:condition="related_locations">
         <td class="row-title">Locations</td>
         <td>
-          <tal:related replace="structure tile('related_locations')" />
+          <tal:related replace="structure related_locations" />
         </td>
       </tr>
 
-      <tr>
+      <tr tal:define="related_occasions tile('related_occasions').strip()"
+          tal:condition="related_occasions">
         <td class="row-title">Occasions</td>
         <td>
-          <tal:related replace="structure tile('related_occasions')" />
+          <tal:related replace="structure related_occasions" />
         </td>
       </tr>
 
-      <tr>
+      <tr tal:define="related_attachments tile('related_attachments').strip()"
+          tal:condition="related_attachments">
         <td class="row-title">Attachments</td>
         <td>
-          <tal:related replace="structure tile('related_attachments')" />
+          <tal:related replace="structure related_attachments" />
         </td>
       </tr>
 
-      <tr>
+      <tr tal:define="overlay_actions tile('overlay_actions').strip()"
+          tal:condition="overlay_actions">
         <td class="row-title">Actions</td>
         <td>
-          <tal:actions replace="structure tile('overlay_actions')" />
+          <tal:actions replace="structure overlay_actions" />
         </td>
       </tr>
 

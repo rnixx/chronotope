@@ -2,6 +2,8 @@
                 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
                 xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
                 i18n:domain="chronotope"
+                tal:define="references context.slice.references"
+                tal:condition="references"
                 omit-tag="True">
 
   <div id="${context.references_id}"
@@ -11,7 +13,7 @@
        ajax:action="${context.references_tile}:#${context.references_id}:replace">
 
     <ul class="list-unstyled">
-      <li tal:repeat="reference context.slice.references">
+      <li tal:repeat="reference references">
         <a href="#"
            ajax:bind="${reference['bind']}"
            ajax:target="${reference['target']}"

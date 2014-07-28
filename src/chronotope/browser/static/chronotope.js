@@ -42,6 +42,7 @@
                     that.bind_actions();
                     if ($('.authenticated', that.controls).length) {
                         that.enable_add_location();
+                        that.enable_show_submitter_contents();
                         return;
                     }
                     that.bind_submitter();
@@ -170,18 +171,21 @@
             var help_error = $('.submitter-error', controls);
             if (state == 'empty') {
                 this.disable_add_location();
+                this.disable_show_submitter_contents();
                 help_success.hide();
                 help_error.hide();
                 help_empty.show();
                 form_group.removeClass('has-success').removeClass('has-error');
             } else if (state == 'error') {
                 this.disable_add_location();
+                this.disable_show_submitter_contents();
                 help_empty.hide();
                 help_success.hide();
                 help_error.show();
                 form_group.removeClass('has-success').addClass('has-error');
             } else if (state == 'success') {
                 this.enable_add_location();
+                this.enable_show_submitter_contents();
                 help_empty.hide();
                 help_error.hide();
                 help_success.show();
@@ -203,6 +207,14 @@
 
         disable_add_location: function() {
             $('.add-location-action', this.controls).addClass('disabled');
+        },
+
+        enable_show_submitter_contents: function() {
+            $('.show-submitter-contents-action', this.controls).show();
+        },
+
+        disable_show_submitter_contents: function() {
+            $('.show-submitter-contents-action', this.controls).hide();
         }
     });
 

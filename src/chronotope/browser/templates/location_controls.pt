@@ -62,6 +62,7 @@
         </li>
 
         <li class="show-submitter-contents-action"
+            style="display:none;"
             data-target="${context.nodeurl}">
           <a href="#">
             <span class="glyphicon glyphicon-th-list"></span>

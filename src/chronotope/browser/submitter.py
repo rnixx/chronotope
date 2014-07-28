@@ -149,6 +149,10 @@ class SubmitterViewLink(ViewLink):
         if isinstance(self.model, Occasion):
             return 'occasion'
 
+    @property
+    def icon(self):
+        return self.model.nodeinfo.icon
+
 
 @tile('submitter_contents',
       'cone.app.browser:templates/table.pt',

@@ -18,9 +18,8 @@ class ChronotopeLayout(object):
     personaltools = True
     columns_fluid = False
     pathbar = True
-    sidebar_left = ['navtree']
-    sidebar_left_grid_width = 3
-    content_grid_width = 9
+    sidebar_left = []
+    content_grid_width = 12
 
     def __init__(self, context):
         request = get_current_request()
@@ -32,5 +31,3 @@ class ChronotopeLayout(object):
             self.personaltools = False
         self.columns_fluid = True
         self.pathbar = False
-        self.sidebar_left = []
-        self.content_grid_width = 12

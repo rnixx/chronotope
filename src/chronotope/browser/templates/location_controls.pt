@@ -61,6 +61,14 @@
           </a>
         </li>
 
+        <li class="show-submitter-contents-action"
+            data-target="${context.nodeurl}">
+          <a href="#">
+            <span class="glyphicon glyphicon-th-list"></span>
+            Show my Items
+          </a>
+        </li>
+
       </ul>
     </div>
 

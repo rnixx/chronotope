@@ -108,6 +108,13 @@
             bdajax.info(msg);
         },
 
+        show_submitter_contents: function(elem) {
+            bdajax.overlay({
+                action: 'submitter_contents',
+                target: elem.data('target')
+            });
+        },
+
         dispatch_action: function(elem) {
             if (elem.hasClass('add-location-action')
                     && !elem.hasClass('disabled')) {
@@ -120,6 +127,10 @@
             }
             if (elem.hasClass('set-default-zoom-action')) {
                 this.set_default_zoom();
+                return;
+            }
+            if (elem.hasClass('show-submitter-contents-action')) {
+                this.show_submitter_contents(elem);
                 return;
             }
             return false;

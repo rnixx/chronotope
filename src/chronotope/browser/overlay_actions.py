@@ -1,3 +1,4 @@
+import urllib2
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from cone.tile import (
@@ -37,6 +38,7 @@ class OverlayActions(Tile, UXMixin):
         if not authenticated and not get_submitter(self.request):
             return actions
         actions = [
+            self.contents,
             self.edit,
             self.add_facility,
             self.add_occasion,
@@ -44,6 +46,22 @@ class OverlayActions(Tile, UXMixin):
         ]
         actions = [action for action in actions if action]
         return actions
+
+    @property
+    def contents(self):
+        url = self.request.params.get('submitter_came_from')
+        if not url:
+            query = make_query(**{UX_IDENT: UX_FRONTEND})
+            url = make_url(self.request, node=self.model.root, query=query)
+        else:
+            url = urllib2.unquote(url)
+        return {
+            'btn': 'default',
+            'target': url,
+            'overlay': 'submitter_contents',
+            'icon': 'glyphicon glyphicon-th-list',
+            'title': _('my_items', default=u'My Items'),
+        }
 
     @property
     def edit(self):
@@ -59,7 +77,11 @@ class OverlayActions(Tile, UXMixin):
             # if state not draft, no editing
             if self.model.attrs['state'] == 'draft':
                 return None
-        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        submitter_came_from = self.request.params.get('submitter_came_from')
+        query = make_query(**{
+            UX_IDENT: UX_FRONTEND,
+            'submitter_came_from': submitter_came_from,
+        })
         url = make_url(self.request, node=self.model, query=query)
         return {
             'btn': 'default',
@@ -138,8 +160,10 @@ class LocationOverlayActions(OverlayActions):
 
     @property
     def edit(self):
+        submitter_came_from = self.request.params.get('submitter_came_from')
         query = make_query(**{
             UX_IDENT: UX_FRONTEND,
+            'submitter_came_from': submitter_came_from,
             'locationform.coordinates.lat': str(self.model.attrs['lat']),
             'locationform.coordinates.lon': str(self.model.attrs['lon']),
             'locationform.coordinates.zoom': str(15),
@@ -155,7 +179,11 @@ class LocationOverlayActions(OverlayActions):
 
     @property
     def additional_adding_params(self):
-        return {'preset.location': str(self.model.attrs['uid'])}
+        submitter_came_from = self.request.params.get('submitter_came_from')
+        return {
+            'preset.location': str(self.model.attrs['uid']),
+            'submitter_came_from': submitter_came_from,
+        }
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Facility)
@@ -164,7 +192,11 @@ class FacilityOverlayActions(OverlayActions):
 
     @property
     def additional_adding_params(self):
-        return {'preset.facility': str(self.model.attrs['uid'])}
+        submitter_came_from = self.request.params.get('submitter_came_from')
+        return {
+            'preset.facility': str(self.model.attrs['uid']),
+            'submitter_came_from': submitter_came_from,
+        }
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Occasion)
@@ -174,7 +206,11 @@ class OccasionOverlayActions(OverlayActions):
 
     @property
     def additional_adding_params(self):
-        return {'preset.occasion': str(self.model.attrs['uid'])}
+        submitter_came_from = self.request.params.get('submitter_came_from')
+        return {
+            'preset.occasion': str(self.model.attrs['uid']),
+            'submitter_came_from': submitter_came_from,
+        }
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Attachment)

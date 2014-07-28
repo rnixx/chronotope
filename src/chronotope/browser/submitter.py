@@ -1,3 +1,4 @@
+import urllib2
 from plumber import (
     Behavior,
     plumb,
@@ -77,6 +78,10 @@ class SubmitterForm(Behavior):
     @plumb
     def prepare(_next, self):
         _next(self)
+        self.form['submitter_came_from'] = factory(
+            'proxy',
+            value=self.request.params.get('submitter_came_from'),
+        )
         if self.authenticated:
             return
         captcha_widget = factory(
@@ -135,7 +140,18 @@ class SubmitterViewLink(ViewLink):
 
     @property
     def target(self):
-        query = make_query(**{UX_IDENT: UX_FRONTEND})
+        query = make_query(**{
+            'sort': self.request.params.get('sort'),
+            'term': self.request.params.get('term'),
+            'order': self.request.params.get('order'),
+            'b_page': self.request.params.get('b_page'),
+            'size': self.request.params.get('size'),
+        })
+        came_from = make_url(self.request, node=self.model.root, query=query)
+        query = make_query(**{
+            UX_IDENT: UX_FRONTEND,
+            'submitter_came_from': urllib2.quote(came_from),
+        })
         return make_url(self.request, node=self.model, query=query)
 
     @property

@@ -13,8 +13,8 @@ from cone.app.browser.form import (
     YAMLForm,
 )
 from cone.app.browser.authoring import (
-    AddForm,
-    EditForm,
+    ContentAddForm,
+    ContentEditForm,
     OverlayAddForm,
     OverlayEditForm,
 )
@@ -134,13 +134,13 @@ class OccasionEditing(OccasionForm):
 @tile('addform', interface=Occasion, permission="add")
 class OccasionAddForm(OccasionAdding):
     __metaclass__ = plumber
-    __plumbing__ = AddForm
+    __plumbing__ = ContentAddForm
 
 
 @tile('editform', interface=Occasion, permission="edit")
 class OccasionEditForm(OccasionEditing):
     __metaclass__ = plumber
-    __plumbing__ = EditForm
+    __plumbing__ = ContentEditForm
 
 
 @tile('overlayaddform', interface=Occasion, permission="add")

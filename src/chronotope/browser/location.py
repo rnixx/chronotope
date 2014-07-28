@@ -25,8 +25,8 @@ from cone.app.browser.form import (
     YAMLForm,
 )
 from cone.app.browser.authoring import (
-    AddForm,
-    EditForm,
+    ContentAddForm,
+    ContentEditForm,
     OverlayAddForm,
     OverlayEditForm,
 )
@@ -200,13 +200,13 @@ class LocationEditing(LocationForm):
 @tile('addform', interface=Location, permission="add")
 class LocationAddForm(LocationAdding):
     __metaclass__ = plumber
-    __plumbing__ = AddForm
+    __plumbing__ = ContentAddForm
 
 
 @tile('editform', interface=Location, permission="edit")
 class LocationEditForm(LocationEditing):
     __metaclass__ = plumber
-    __plumbing__ = EditForm
+    __plumbing__ = ContentEditForm
 
 
 @tile('overlayaddform', interface=Location, permission="add")

@@ -19,8 +19,8 @@ from cone.app.browser.form import (
     YAMLForm,
 )
 from cone.app.browser.authoring import (
-    AddForm,
-    EditForm,
+    ContentAddForm,
+    ContentEditForm,
     OverlayAddForm,
     OverlayEditForm,
 )
@@ -312,13 +312,13 @@ class AttachmentEditing(AttachmentForm):
 @tile('addform', interface=Attachment, permission="add")
 class AttachmentAddForm(AttachmentAdding):
     __metaclass__ = plumber
-    __plumbing__ = AddForm
+    __plumbing__ = ContentAddForm
 
 
 @tile('editform', interface=Attachment, permission="edit")
 class AttachmentEditForm(AttachmentEditing):
     __metaclass__ = plumber
-    __plumbing__ = EditForm
+    __plumbing__ = ContentEditForm
 
 
 @tile('overlayaddform', interface=Attachment, permission="add")

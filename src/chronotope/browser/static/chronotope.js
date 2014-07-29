@@ -265,8 +265,8 @@
         },
 
         get_default_layer_index: function() {
-            var index = readCookie(this.default_layer_cookie);
-            if (index !== undefined) {
+            var index = parseInt(readCookie(this.default_layer_cookie));
+            if (!isNaN(index)) {
                 return parseInt(index);
             }
             return 0;

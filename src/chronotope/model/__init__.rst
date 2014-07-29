@@ -7,7 +7,10 @@ Chronotope entry nodes::
     >>> root = get_root()
 
     >>> root.keys()
-    ['settings', 'locations', 'facilities', 'occasions', 'attachments']
+    ['settings', 'about', 'locations', 'facilities', 'occasions', 'attachments']
+
+    >>> root['attachments']
+    <Attachments object 'attachments' at ...>
 
     >>> root['locations']
     <Locations object 'locations' at ...>

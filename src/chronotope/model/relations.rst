@@ -271,6 +271,8 @@ Cleanup::
     >>> root.printtree()
     <class 'cone.app.model.AppRoot'>: None
       <class 'cone.app.model.AppSettings'>: settings
+        <class 'chronotope.model.settings.Settings'>: chronotope
+      <class 'chronotope.model.about.About'>: about
       <class 'chronotope.model.location.Locations'>: locations
         <class 'chronotope.model.location.Location'>: 4252cd8d-...
         <class 'chronotope.model.location.Location'>: b8f6464b-...
@@ -299,6 +301,8 @@ Cleanup::
     >>> root.printtree()
     <class 'cone.app.model.AppRoot'>: None
       <class 'cone.app.model.AppSettings'>: settings
+        <class 'chronotope.model.settings.Settings'>: chronotope
+      <class 'chronotope.model.about.About'>: about
       <class 'chronotope.model.location.Locations'>: locations
       <class 'chronotope.model.facility.Facilities'>: facilities
       <class 'chronotope.model.occasion.Occasions'>: occasions

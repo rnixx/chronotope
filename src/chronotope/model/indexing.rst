@@ -204,6 +204,8 @@ Cleanup::
     >>> root.printtree()
     <class 'cone.app.model.AppRoot'>: None
       <class 'cone.app.model.AppSettings'>: settings
+        <class 'chronotope.model.settings.Settings'>: chronotope
+      <class 'chronotope.model.about.About'>: about
       <class 'chronotope.model.location.Locations'>: locations
       <class 'chronotope.model.facility.Facilities'>: facilities
       <class 'chronotope.model.occasion.Occasions'>: occasions

@@ -194,6 +194,7 @@ class SubmitterViewLink(ViewLink):
       'cone.app.browser:templates/table.pt',
       permission='view')
 class SubmitterContentsTile(ContentsTile):
+    default_slicesize = 10
     table_id = 'submitter_contents'
     table_tile_name = 'submitter_contents'
     col_defs = [{

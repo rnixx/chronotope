@@ -44,6 +44,11 @@ chronotope_root_acl = [
 ]
 
 
+# chronotope about ACL
+chronotope_about_acl = [
+    (Allow, Everyone, ['view']),
+]
+
 
 # chronotope container ACL
 chronotope_container_acl = [

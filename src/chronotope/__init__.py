@@ -37,6 +37,7 @@ cfg.yafowil.js_skip.add('yafowil.widget.location.dependencies')
 cfg.yafowil.css_skip.add('yafowil.widget.location.dependencies')
 
 # plugin entry nodes
+cone.app.register_plugin('about', model.About)
 cone.app.register_plugin('locations', model.Locations)
 cone.app.register_plugin('facilities', model.Facilities)
 cone.app.register_plugin('occasions', model.Occasions)

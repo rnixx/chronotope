@@ -1,4 +1,5 @@
 from chronotope.model.category import CategoryRecord
+from chronotope.model.about import About
 from chronotope.model.location import (
     LocationRecord,
     Location,

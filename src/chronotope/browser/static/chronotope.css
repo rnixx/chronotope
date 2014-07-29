@@ -139,6 +139,11 @@ tr.state-declined td.state,
     color:#3c763d;
 }
 
+/* about */
+.about {
+    margin-bottom:24px;
+}
+
 /* footer */
 .footer-ae {
     margin:12px 0;

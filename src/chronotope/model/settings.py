@@ -37,7 +37,8 @@ class Settings(BaseNode):
     @property
     def metadata(self):
         metadata = Metadata()
-        metadata.title = _('chronotope_settings', 'Chronotope Settings')
+        metadata.title = _('chronotope_settings',
+                           default='Chronotope Settings')
         return metadata
 
     def __call__(self):

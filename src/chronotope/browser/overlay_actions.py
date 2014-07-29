@@ -28,6 +28,7 @@ _ = TranslationStringFactory('chronotope')
 
 class OverlayActions(Tile, UXMixin):
     additional_adding_params = {}
+    additional_editing_params = {}
 
     @property
     def actions(self):
@@ -48,8 +49,29 @@ class OverlayActions(Tile, UXMixin):
         return actions
 
     @property
+    def authoring_came_from(self):
+        return urllib2.quote(make_url(self.request, node=self.model))
+
+    @property
+    def submitter_came_from(self):
+        return self.request.params.get('submitter_came_from')
+
+    @property
+    def can_edit(self):
+        authenticated = bool(authenticated_userid(self.request))
+        if not authenticated:
+            submitter = get_submitter(self.request)
+            if not submitter:
+                return False
+            if self.model.attrs['submitter'] != submitter:
+                return False
+            if self.model.attrs['state'] != 'draft':
+                return False
+        return True
+
+    @property
     def contents(self):
-        url = self.request.params.get('submitter_came_from')
+        url = self.submitter_came_from
         if not url:
             query = make_query(**{UX_IDENT: UX_FRONTEND})
             url = make_url(self.request, node=self.model.root, query=query)
@@ -65,23 +87,15 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def edit(self):
-        # published objects are not editable via frontend
-        if self.model.attrs['state'] == 'published':
+        if not self.can_edit:
             return None
-        # anon user
-        if not authenticated_userid(self.request):
-            # if submitter not matches, no editing
-            submitter = get_submitter(self.request)
-            if submitter != self.model.attrs['submitter']:
-                return None
-            # if state not draft, no editing
-            if self.model.attrs['state'] == 'draft':
-                return None
-        submitter_came_from = self.request.params.get('submitter_came_from')
-        query = make_query(**{
+        params = {
             UX_IDENT: UX_FRONTEND,
-            'submitter_came_from': submitter_came_from,
-        })
+            'authoring_came_from': self.authoring_came_from,
+            'submitter_came_from': self.submitter_came_from,
+        }
+        params.update(self.additional_editing_params)
+        query = make_query(**params)
         url = make_url(self.request, node=self.model, query=query)
         return {
             'btn': 'default',
@@ -96,6 +110,8 @@ class OverlayActions(Tile, UXMixin):
         params = {
             UX_IDENT: UX_FRONTEND,
             'factory': 'facility',
+            'authoring_came_from': self.authoring_came_from,
+            'submitter_came_from': self.submitter_came_from,
         }
         params.update(self.additional_adding_params)
         query = make_query(**params)
@@ -117,6 +133,8 @@ class OverlayActions(Tile, UXMixin):
         params = {
             UX_IDENT: UX_FRONTEND,
             'factory': 'occasion',
+            'authoring_came_from': self.authoring_came_from,
+            'submitter_came_from': self.submitter_came_from,
         }
         params.update(self.additional_adding_params)
         query = make_query(**params)
@@ -138,6 +156,8 @@ class OverlayActions(Tile, UXMixin):
         params = {
             UX_IDENT: UX_FRONTEND,
             'factory': 'attachment',
+            'authoring_came_from': self.authoring_came_from,
+            'submitter_came_from': self.submitter_came_from,
         }
         params.update(self.additional_adding_params)
         query = make_query(**params)
@@ -160,14 +180,18 @@ class LocationOverlayActions(OverlayActions):
 
     @property
     def edit(self):
-        submitter_came_from = self.request.params.get('submitter_came_from')
-        query = make_query(**{
+        if not self.can_edit:
+            return None
+        params = {
             UX_IDENT: UX_FRONTEND,
-            'submitter_came_from': submitter_came_from,
+            'authoring_came_from': self.authoring_came_from,
+            'submitter_came_from': self.submitter_came_from,
+            'came_from_tile': 'location',
             'locationform.coordinates.lat': str(self.model.attrs['lat']),
             'locationform.coordinates.lon': str(self.model.attrs['lon']),
             'locationform.coordinates.zoom': str(15),
-        })
+        }
+        query = make_query(**params)
         url = make_url(self.request, node=self.model, query=query)
         return {
             'btn': 'default',
@@ -179,10 +203,9 @@ class LocationOverlayActions(OverlayActions):
 
     @property
     def additional_adding_params(self):
-        submitter_came_from = self.request.params.get('submitter_came_from')
         return {
             'preset.location': str(self.model.attrs['uid']),
-            'submitter_came_from': submitter_came_from,
+            'came_from_tile': 'location',
         }
 
 
@@ -192,11 +215,14 @@ class FacilityOverlayActions(OverlayActions):
 
     @property
     def additional_adding_params(self):
-        submitter_came_from = self.request.params.get('submitter_came_from')
         return {
             'preset.facility': str(self.model.attrs['uid']),
-            'submitter_came_from': submitter_came_from,
+            'came_from_tile': 'facility',
         }
+
+    @property
+    def additional_editing_params(self):
+        return {'came_from_tile': 'facility'}
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Occasion)
@@ -206,11 +232,14 @@ class OccasionOverlayActions(OverlayActions):
 
     @property
     def additional_adding_params(self):
-        submitter_came_from = self.request.params.get('submitter_came_from')
         return {
             'preset.occasion': str(self.model.attrs['uid']),
-            'submitter_came_from': submitter_came_from,
+            'came_from_tile': 'occasion',
         }
+
+    @property
+    def additional_editing_params(self):
+        return {'came_from_tile': 'occasion'}
 
 
 @tile('overlay_actions', 'templates/overlay_actions.pt', interface=Attachment)
@@ -218,3 +247,11 @@ class AttachmentOverlayActions(OverlayActions):
     add_facility = None
     add_occasion = None
     add_attachment = None
+
+    @property
+    def additional_adding_params(self):
+        return {'came_from_tile': 'attachment'}
+
+    @property
+    def additional_editing_params(self):
+        return {'came_from_tile': 'attachment'}

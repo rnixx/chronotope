@@ -1,4 +1,5 @@
 import uuid
+import urllib2
 from plumber import (
     Behavior,
     plumber,
@@ -213,15 +214,28 @@ class LocationEditForm(LocationEditing):
 class LocationOverlayAddForm(LocationAdding):
     __metaclass__ = plumber
     __plumbing__ = (
-        OverlayAddForm,
         SubmitterAccessAddForm,
+        OverlayAddForm,
     )
 
     def next(self, request):
-        query = make_query(**{UX_IDENT: UX_FRONTEND})
-        location_url = make_url(self.request, node=self.model, query=query)
+        came_from_url = urllib2.unquote(request.get('authoring_came_from'))
         root_url = make_url(self.request, node=self.model.root)
-        return [AjaxOverlay(action='location', target=location_url),
+        if not came_from_url:
+            if request.get('action.{0}.cancel'.format(self.form_name)):
+                return [AjaxOverlay(close=True)]
+            query = make_query(**{
+                UX_IDENT: UX_FRONTEND,
+            })
+            url = make_url(self.request, node=self.model, query=query)
+            return [AjaxOverlay(action='location', target=url),
+                    AjaxEvent(root_url, 'datachanged', '#chronotope-map')]
+        came_from_url += make_query(**{
+            UX_IDENT: UX_FRONTEND,
+            'submitter_came_from': request.get('submitter_came_from'),
+        })
+        came_from_tile = request.get('came_from_tile')
+        return [AjaxOverlay(action=came_from_tile, target=came_from_url),
                 AjaxEvent(root_url, 'datachanged', '#chronotope-map')]
 
 
@@ -229,11 +243,6 @@ class LocationOverlayAddForm(LocationAdding):
 class LocationOverlayEditForm(LocationEditing):
     __metaclass__ = plumber
     __plumbing__ = (
-        OverlayEditForm,
         SubmitterAccessEditForm,
+        OverlayEditForm,
     )
-
-    def next(self, request):
-        query = make_query(**{UX_IDENT: UX_FRONTEND})
-        location_url = make_url(self.request, node=self.model, query=query)
-        return [AjaxOverlay(action='location', target=location_url)]

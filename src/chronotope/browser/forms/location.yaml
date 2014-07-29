@@ -79,9 +79,8 @@ widgets:
         factory: submit
         props:
             action: cancel
-            expression: expr:context.action_resource == 'add'
-            handler: None
+            expression: True
+            skip: True
             next: context.next
             label: i18n:cancel:Cancel
-            skip: True
             class_add: btn-warning

@@ -12,6 +12,11 @@ tr.state-declined td.state,
     color:red;
 }
 
+/* modal */
+.modal-dialog {
+    width:700px;
+}
+
 /* forms */
 .has-error .help-block {
     color:#737373;

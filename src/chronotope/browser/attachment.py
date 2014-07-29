@@ -24,7 +24,6 @@ from cone.app.browser.authoring import (
     OverlayAddForm,
     OverlayEditForm,
 )
-from cone.app.browser.ajax import AjaxOverlay
 from cone.app.browser.utils import (
     make_url,
     make_query,
@@ -45,10 +44,6 @@ from chronotope.browser.submitter import (
 from chronotope.browser.ux import (
     UXMixin,
     UXMixinProxy,
-)
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
 )
 
 
@@ -325,25 +320,15 @@ class AttachmentEditForm(AttachmentEditing):
 class AttachmentOverlayAddForm(AttachmentAdding):
     __metaclass__ = plumber
     __plumbing__ = (
-        OverlayAddForm,
         SubmitterAccessAddForm,
+        OverlayAddForm,
     )
-
-    def next(self, request):
-        query = make_query(**{UX_IDENT: UX_FRONTEND})
-        attachment_url = make_url(self.request, node=self.model, query=query)
-        return [AjaxOverlay(action='attachment', target=attachment_url)]
 
 
 @tile('overlayeditform', interface=Attachment, permission="edit")
 class AttachmentOverlayEditForm(AttachmentEditing):
     __metaclass__ = plumber
     __plumbing__ = (
-        OverlayEditForm,
         SubmitterAccessEditForm,
+        OverlayEditForm,
     )
-
-    def next(self, request):
-        query = make_query(**{UX_IDENT: UX_FRONTEND})
-        attachment_url = make_url(self.request, node=self.model, query=query)
-        return [AjaxOverlay(action='attachment', target=attachment_url)]

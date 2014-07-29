@@ -15,6 +15,7 @@ from cone.tile import (
 )
 from cone.app.browser.contents import ContentsTile
 from cone.app.browser.actions import ViewLink
+from cone.app.browser.ajax import AjaxOverlay
 from cone.app.browser.utils import (
     make_query,
     make_url,
@@ -82,6 +83,14 @@ class SubmitterForm(Behavior):
             'proxy',
             value=self.request.params.get('submitter_came_from'),
         )
+        self.form['authoring_came_from'] = factory(
+            'proxy',
+            value=self.request.params.get('authoring_came_from'),
+        )
+        self.form['came_from_tile'] = factory(
+            'proxy',
+            value=self.request.params.get('came_from_tile'),
+        )
         if self.authenticated:
             return
         captcha_widget = factory(
@@ -107,6 +116,16 @@ class SubmitterForm(Behavior):
             submitter = get_submitter(self.request)
             self.model.attrs['submitter'] = submitter
         _next(self, widget, data)
+
+    @default
+    def next(self, request):
+        came_from_url = urllib2.unquote(request.get('authoring_came_from'))
+        came_from_url += make_query(**{
+            UX_IDENT: UX_FRONTEND,
+            'submitter_came_from': request.get('submitter_came_from'),
+        })
+        came_from_tile = request.get('came_from_tile')
+        return [AjaxOverlay(action=came_from_tile, target=came_from_url)]
 
 
 class SubmitterAccessAddForm(SubmitterForm):

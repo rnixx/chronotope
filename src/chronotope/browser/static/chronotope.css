@@ -92,6 +92,21 @@ tr.state-declined td.state,
     margin:-16px -15px -15px -15px;
 }
 
+/* submitter contents */
+#submitter_contents {
+    margin:-16px -15px -15px -15px;
+    border-radius:0;
+    border:none;
+}
+#submitter_contents .panel-heading {
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+}
+#submitter_contents .panel-footer {
+    border-bottom-left-radius:0;
+    border-bottom-right-radius:0;
+}
+
 /* location view */
 .location-view-map {
     height:250px;

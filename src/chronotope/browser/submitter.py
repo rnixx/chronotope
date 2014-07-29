@@ -41,6 +41,7 @@ from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
     get_submitter,
+    submitter_came_from,
     get_recaptcha_public_key,
     get_recaptcha_private_key,
 )
@@ -81,7 +82,7 @@ class SubmitterForm(Behavior):
         _next(self)
         self.form['submitter_came_from'] = factory(
             'proxy',
-            value=self.request.params.get('submitter_came_from'),
+            value=submitter_came_from(self.request),
         )
         self.form['authoring_came_from'] = factory(
             'proxy',
@@ -98,8 +99,8 @@ class SubmitterForm(Behavior):
             name='captcha',
             props={
                 'label': _('verify', default='Verify'),
-                'public_key': get_recaptcha_public_key(),
-                'private_key': get_recaptcha_private_key(),
+                'public_key': get_recaptcha_public_key(self.model),
+                'private_key': get_recaptcha_private_key(self.model),
                 'lang': 'de',
                 'theme': 'clean',
                 'label.class_add': 'col-sm-2',
@@ -122,7 +123,7 @@ class SubmitterForm(Behavior):
         came_from_url = urllib2.unquote(request.get('authoring_came_from'))
         came_from_url += make_query(**{
             UX_IDENT: UX_FRONTEND,
-            'submitter_came_from': request.get('submitter_came_from'),
+            'submitter_came_from': submitter_came_from(self.request),
         })
         came_from_tile = request.get('came_from_tile')
         return [AjaxOverlay(action=came_from_tile, target=came_from_url)]

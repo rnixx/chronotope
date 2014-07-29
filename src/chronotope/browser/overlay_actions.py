@@ -20,6 +20,7 @@ from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
     get_submitter,
+    submitter_came_from,
 )
 
 
@@ -53,10 +54,6 @@ class OverlayActions(Tile, UXMixin):
         return urllib2.quote(make_url(self.request, node=self.model))
 
     @property
-    def submitter_came_from(self):
-        return self.request.params.get('submitter_came_from')
-
-    @property
     def can_edit(self):
         authenticated = bool(authenticated_userid(self.request))
         if not authenticated:
@@ -71,7 +68,7 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def contents(self):
-        url = self.submitter_came_from
+        url = submitter_came_from(self.request)
         if not url:
             query = make_query(**{UX_IDENT: UX_FRONTEND})
             url = make_url(self.request, node=self.model.root, query=query)
@@ -92,7 +89,7 @@ class OverlayActions(Tile, UXMixin):
         params = {
             UX_IDENT: UX_FRONTEND,
             'authoring_came_from': self.authoring_came_from,
-            'submitter_came_from': self.submitter_came_from,
+            'submitter_came_from': submitter_came_from(self.request),
         }
         params.update(self.additional_editing_params)
         query = make_query(**params)
@@ -111,7 +108,7 @@ class OverlayActions(Tile, UXMixin):
             UX_IDENT: UX_FRONTEND,
             'factory': 'facility',
             'authoring_came_from': self.authoring_came_from,
-            'submitter_came_from': self.submitter_came_from,
+            'submitter_came_from': submitter_came_from(self.request),
         }
         params.update(self.additional_adding_params)
         query = make_query(**params)
@@ -134,7 +131,7 @@ class OverlayActions(Tile, UXMixin):
             UX_IDENT: UX_FRONTEND,
             'factory': 'occasion',
             'authoring_came_from': self.authoring_came_from,
-            'submitter_came_from': self.submitter_came_from,
+            'submitter_came_from': submitter_came_from(self.request),
         }
         params.update(self.additional_adding_params)
         query = make_query(**params)
@@ -157,7 +154,7 @@ class OverlayActions(Tile, UXMixin):
             UX_IDENT: UX_FRONTEND,
             'factory': 'attachment',
             'authoring_came_from': self.authoring_came_from,
-            'submitter_came_from': self.submitter_came_from,
+            'submitter_came_from': submitter_came_from(self.request),
         }
         params.update(self.additional_adding_params)
         query = make_query(**params)
@@ -185,7 +182,7 @@ class LocationOverlayActions(OverlayActions):
         params = {
             UX_IDENT: UX_FRONTEND,
             'authoring_came_from': self.authoring_came_from,
-            'submitter_came_from': self.submitter_came_from,
+            'submitter_came_from': submitter_came_from(self.request),
             'came_from_tile': 'location',
             'locationform.coordinates.lat': str(self.model.attrs['lat']),
             'locationform.coordinates.lon': str(self.model.attrs['lon']),

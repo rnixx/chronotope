@@ -19,3 +19,4 @@ from chronotope.model.attachment import (
     Attachment,
     Attachments,
 )
+from chronotope.model.settings import Settings

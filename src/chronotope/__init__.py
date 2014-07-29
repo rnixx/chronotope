@@ -42,6 +42,9 @@ cone.app.register_plugin('facilities', model.Facilities)
 cone.app.register_plugin('occasions', model.Occasions)
 cone.app.register_plugin('attachments', model.Attachments)
 
+# plugin settings
+cone.app.register_plugin_config('chronotope', model.Settings)
+
 # register ACL's for nodes
 if not os.environ.get('TESTRUN_MARKER'):
     acl_registry.register(chronotope_root_acl, AppRoot)
@@ -73,11 +76,9 @@ def initialize_chronotope(config, global_config, local_config):
     # index directory
     os.environ['chronotope.index.dir'] = local_config['chronotope.index.dir']
 
-    # recaptcha keys
-    os.environ['chronotope.recaptcha.public_key'] = \
-        local_config['chronotope.recaptcha.public_key']
-    os.environ['chronotope.recaptcha.private_key'] = \
-        local_config['chronotope.recaptcha.private_key']
+    # settings path
+    os.environ['chronotope.settings.path'] = \
+        local_config['chronotope.settings.path']
 
     # database initialization
     prefix = 'chronotope.dbinit.'

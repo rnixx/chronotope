@@ -1,0 +1,8 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+           omit-tag="True">
+
+  <div class="panel">
+    <tal:settings replace="structure tile('editform')" />
+  </div>
+
+</tal:block>

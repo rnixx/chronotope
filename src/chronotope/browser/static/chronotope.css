@@ -101,6 +101,7 @@ tr.state-declined td.state,
 #submitter_contents .panel-heading {
     border-top-left-radius:0;
     border-top-right-radius:0;
+    border-top:#ddd 1px solid;
 }
 #submitter_contents .panel-footer {
     border-bottom-left-radius:0;

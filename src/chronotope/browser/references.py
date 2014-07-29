@@ -40,6 +40,7 @@ from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
     get_submitter,
+    submitter_came_from,
 )
 
 
@@ -120,10 +121,9 @@ class ReferencesBatch(Batch):
         if count % slicesize != 0:
             pages += 1
         current = self.request.params.get('b_page', '0')
-        submitter_came_from = self.request.params.get('submitter_came_from')
         params = {
             UX_IDENT: UX_FRONTEND,
-            'submitter_came_from': submitter_came_from,
+            'submitter_came_from': submitter_came_from(self.request),
             'size': slicesize,
         }
         for i in range(pages):
@@ -189,7 +189,6 @@ class References(Tile, UXMixin):
 
     def references(self, start, end):
         ret = list()
-        submitter_came_from = self.request.params.get('submitter_came_from')
         for record in self.visible_references[start:end]:
             # ref title and path
             title = self.reference_title(record)
@@ -198,7 +197,7 @@ class References(Tile, UXMixin):
             if self.is_frontend:
                 query = make_query(**{
                     UX_IDENT: UX_FRONTEND,
-                    'submitter_came_from': submitter_came_from,
+                    'submitter_came_from': submitter_came_from(self.request),
                 })
                 ref = self._make_reference(
                     title,

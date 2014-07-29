@@ -57,6 +57,7 @@ from chronotope.browser.ux import (
 from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
+    submitter_came_from,
 )
 
 
@@ -232,7 +233,7 @@ class LocationOverlayAddForm(LocationAdding):
                     AjaxEvent(root_url, 'datachanged', '#chronotope-map')]
         came_from_url += make_query(**{
             UX_IDENT: UX_FRONTEND,
-            'submitter_came_from': request.get('submitter_came_from'),
+            'submitter_came_from': submitter_came_from(self.request),
         })
         came_from_tile = request.get('came_from_tile')
         return [AjaxOverlay(action=came_from_tile, target=came_from_url),

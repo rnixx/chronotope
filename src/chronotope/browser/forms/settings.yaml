@@ -1,0 +1,54 @@
+factory: form
+name: chronotopesettingsform
+props:
+    action: context.form_action
+    class: form-horizontal
+widgets:
+- recaptcha_public_key:
+    factory: field:label:div:error:text
+    value: expr:context.model.attrs.get('recaptcha_public_key')
+    props:
+        label: i18n:recaptcha_public_key_label:reCAPTCHA public key
+        required: i18n:recaptcha_public_key_required:Key is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- recaptcha_private_key:
+    factory: field:label:div:error:text
+    value: expr:context.model.attrs.get('recaptcha_private_key')
+    props:
+        label: i18n:recaptcha_private_key_label:reCAPTCHA private key
+        required: i18n:recaptcha_private_key_required:Key is required
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- project_description:
+    factory: field:label:div:error:wysihtml5
+    value: expr:context.model.attrs.get('project_description')
+    props:
+        label: i18n:project_description_label:Project Description
+        required: i18n:project_description_required:Description is required
+        size: sm
+        color: True
+        emphasis: True
+        font-styles: True
+        html: True
+        image: True
+        justify: True
+        link: True
+        lists: True
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- controls:
+    factory: field:div
+    props:
+        structural: True
+        div.class_add: col-sm-offset-2 col-sm-10
+    widgets:
+    - save:
+        factory: submit
+        props:
+            action: save
+            expression: True
+            handler: context.save
+            next: context.next
+            label: i18n:save:Save
+            class_add: btn-default

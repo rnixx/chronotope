@@ -27,6 +27,10 @@ def save_decode(val):
 
 # /XXX: end move
 
+def get_settings_path():
+    return os.environ['chronotope.settings.path']
+
+
 def html_2_text(value):
     if not isinstance(value, unicode):
         value = value.decode('utf-8')
@@ -41,9 +45,13 @@ def get_submitter(request):
     return request.cookies.get('chronotope.submitter')
 
 
-def get_recaptcha_public_key():
-    return os.environ['chronotope.recaptcha.public_key']
+def submitter_came_from(request):
+    return request.params.get('submitter_came_from')
 
 
-def get_recaptcha_private_key():
-    return os.environ['chronotope.recaptcha.private_key']
+def get_recaptcha_public_key(model):
+    return model.root['settings'].attrs['recaptcha_public_key']
+
+
+def get_recaptcha_private_key(model):
+    return model.root['settings'].attrs['recaptcha_private_key']

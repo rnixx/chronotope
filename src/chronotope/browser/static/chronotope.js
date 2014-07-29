@@ -31,6 +31,16 @@
             L.Util.extend(this.options, options);
         },
 
+        pending_action: null,
+
+        prevent_pending: function() {
+            if (this.pending_action === null) {
+                return;
+            }
+            this.map.off('click', this.pending_action);
+            this.pending_action = null;
+        },
+
         onAdd: function (map) {
             this.map = map;
             var controls = $('<div class="leaflet-control-location"></div>');
@@ -60,11 +70,13 @@
         },
 
         add_location: function() {
+            var that = this;
             var map = this.map;
+            this.prevent_pending();
             map.once('click', function(evt) {
                 var map_container = $(map.getContainer());
                 map_container.css('cursor', 'crosshair');
-                map.once('click', function(evt) {
+                var handler = function(evt) {
                     map_container.css('cursor', '');
                     var latlng = evt.latlng;
                     var zoom = map.getZoom();
@@ -78,16 +90,20 @@
                         action: 'overlayadd',
                         target: target
                     });
-                });
+                };
+                that.pending_action = handler;
+                map.once('click', handler);
             });
         },
 
         set_default_center: function() {
+            var that = this;
             var map = this.map;
+            this.prevent_pending();
             map.once('click', function(evt) {
                 var map_container = $(map.getContainer());
                 map_container.css('cursor', 'crosshair');
-                map.once('click', function(evt) {
+                var handler = function(evt) {
                     map_container.css('cursor', '');
                     var center = map.getCenter();
                     chronotope.set_default_center(center);
@@ -97,11 +113,14 @@
                               '<br/>' +
                               '&nbsp;&nbsp;* Longitude: ' + center.lng;
                     bdajax.info(msg);
-                });
+                };
+                that.pending_action = handler;
+                map.once('click', handler);
             });
         },
 
         set_default_zoom: function() {
+            this.prevent_pending();
             var map = this.map;
             var zoom = map.getZoom();
             chronotope.set_default_zoom(zoom);
@@ -110,6 +129,7 @@
         },
 
         show_submitter_contents: function(elem) {
+            this.prevent_pending();
             bdajax.overlay({
                 action: 'submitter_contents',
                 target: elem.data('target')

@@ -139,6 +139,16 @@
 
         bind_actions: function() {
             var that = this;
+            $('.dropdown-menu', this.controls).on('click dblclick mousemove',
+                                                  function(evt) {
+                if ($(evt.target).hasClass('dropdown-menu')) {
+                    evt.stopPropagation();
+                }
+            });
+            $('.dropdown-menu li', this.controls).on('dblclick mousemove',
+                                                     function(evt) {
+                evt.stopPropagation();
+            });
             $('.dropdown-menu li', this.controls).on('click', function(evt) {
                 return that.dispatch_action($(this));
             });

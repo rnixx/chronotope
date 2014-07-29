@@ -50,8 +50,8 @@ def submitter_came_from(request):
 
 
 def get_recaptcha_public_key(model):
-    return model.root['settings'].attrs['recaptcha_public_key']
+    return model.root['settings']['chronotope'].attrs['recaptcha_public_key']
 
 
 def get_recaptcha_private_key(model):
-    return model.root['settings'].attrs['recaptcha_private_key']
+    return model.root['settings']['chronotope'].attrs['recaptcha_private_key']

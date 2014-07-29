@@ -1,4 +1,6 @@
 from pyramid.i18n import TranslationStringFactory
+from pyramid.security import authenticated_userid
+from pyramid.threadlocal import get_current_request
 from cone.app.model import (
     BaseNode,
     Metadata,
@@ -33,6 +35,8 @@ class About(BaseNode):
         layout.mainmenu_fluid = False
         layout.livesearch = False
         layout.personaltools = False
+        if authenticated_userid(get_current_request()):
+            layout.personaltools = True
         layout.columns_fluid = False
         layout.pathbar = False
         layout.sidebar_left = []

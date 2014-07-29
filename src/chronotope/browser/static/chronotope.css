@@ -123,6 +123,12 @@ tr.state-declined td.state,
     width:26px;
     background-color:#ffffff;
 }
+.leaflet-touch #location-controls-dropdown {
+    font-size:24px;
+    height:34px;
+    line-height:34px;
+    width:34px;
+}
 #location-controls-dropdown span {
     line-height:24px;
 }

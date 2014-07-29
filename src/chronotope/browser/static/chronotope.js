@@ -187,6 +187,9 @@
         bind_submitter: function() {
             var controls = this.controls;
             var that = this;
+            $('#submitter_email', controls).on('click', function(evt) {
+                $(this).focus();
+            });
             $('#submitter_email', controls).on('keyup blur', function(evt) {
                 var input = $(evt.target);
                 var value = input.val();

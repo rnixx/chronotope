@@ -225,10 +225,9 @@
         default_zoom: 10,
         min_zoom: 2,
         max_zoom: 18,
-        map_attrib: 'Map data © <a href="http://openstreetmap.org">OSM</a>',
-        map_tiles: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         map: null,
         markers: null,
+        default_layer_cookie: 'chronotope.default_layer',
         default_lon_cookie: 'chronotope.default_lon',
         default_lat_cookie: 'chronotope.default_lat',
         default_zoom_cookie: 'chronotope.default_zoom',
@@ -253,16 +252,28 @@
             };
         },
 
-        set_default_zoom: function(zoom) {
-            createCookie(this.default_zoom_cookie, zoom);
-        },
-
         get_default_zoom: function() {
             var zoom = readCookie(this.default_zoom_cookie);
             if (zoom !== null) {
                 return zoom;
             }
             return this.default_zoom;
+        },
+
+        set_default_zoom: function(zoom) {
+            createCookie(this.default_zoom_cookie, zoom);
+        },
+
+        get_default_layer_index: function() {
+            var index = readCookie(this.default_layer_cookie);
+            if (index) {
+                return parseInt(index);
+            }
+            return 0;
+        },
+
+        set_default_layer_index: function(index) {
+            createCookie(this.default_layer_cookie, index);
         },
 
         binder: function(context) {
@@ -345,15 +356,8 @@
             var lat = el.data('lat') ? el.data('lat') : default_center.lat;
             var lon = el.data('lon') ? el.data('lon') : default_center.lon;
             var zoom = el.data('zoom') ? el.data('zoom') : default_zoom;
-            var map = new L.map(el.attr('id'), options);
-            this.map = map;
+            var map = this.map = new L.map(el.attr('id'), options);
             map.setView([lat, lon], zoom);
-            var tiles = new L.tileLayer(this.map_tiles, {
-                attribution: this.map_attrib,
-                minZoom: this.min_zoom,
-                maxZoom: this.max_zoom
-            });
-            tiles.addTo(map);
             return map;
         },
 
@@ -384,6 +388,58 @@
             var location_control = new L.Control.LocationControl();
             location_control.addTo(map);
             return location_control;
+        },
+
+        add_layers_control: function(map) {
+            var layers = this.create_layers();
+            var default_layer = layers[this.get_default_layer_index()].layer;
+            default_layer.addTo(map);
+            var layer_mapping = {};
+            for (var idx in layers) {
+                var layer_defs = layers[idx];
+                layer_mapping[layer_defs.title] = layer_defs.layer;
+            }
+            var layer_controls = L.control.layers(layer_mapping);
+            layer_controls.addTo(map);
+            map.on('baselayerchange', function(evt) {
+                var layer_name = evt.name;
+                for (var idx in layers) {
+                    if (layer_name == layers[idx].title) {
+                        chronotope.set_default_layer_index(idx);
+                        break;
+                    }
+                }
+            });
+            return layer_controls;
+        },
+
+        available_layers: [
+            {
+                title: 'Openstreetmap',
+                tiles: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attrib: 'OSM map data © <a href="http://openstreetmap.org">OSM</a>'
+            }, {
+                title: 'Stamen toner',
+                tiles: '//{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+                attrib: 'Stamen map data © <a href="http://stamen.com">Stamen Design</a>'
+            }
+        ],
+
+        create_layers: function() {
+            var layers = [];
+            for (var idx in this.available_layers) {
+                var layer_def = this.available_layers[idx];
+                layer = new L.tileLayer(layer_def.tiles, {
+                    attribution: layer_def.attrib,
+                    minZoom: this.min_zoom,
+                    maxZoom: this.max_zoom
+                });
+                layers.push({
+                    title: layer_def.title,
+                    layer: layer
+                });
+            }
+            return layers;
         },
 
         create_markers: function(map) {
@@ -458,6 +514,7 @@
             var map = this.create_map(map_elem, {
                 zoomControl: false
             });
+            this.add_layers_control(map);
             this.create_markers(map);
             this.add_geosearch_control(map);
             this.add_zoom_control(map);
@@ -484,6 +541,7 @@
             $(map_elems).each(function() {
                 var map_elem = $(this);
                 var map = chronotope.create_map(map_elem);
+                chronotope.add_layers_control(map);
                 var markers = new L.FeatureGroup();
                 map.addLayer(markers);
                 var marker = new L.marker(

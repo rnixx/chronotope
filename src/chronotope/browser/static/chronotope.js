@@ -266,7 +266,7 @@
 
         get_default_layer_index: function() {
             var index = readCookie(this.default_layer_cookie);
-            if (index) {
+            if (index !== undefined) {
                 return parseInt(index);
             }
             return 0;
@@ -392,7 +392,11 @@
 
         add_layers_control: function(map) {
             var layers = this.create_layers();
-            var default_layer = layers[this.get_default_layer_index()].layer;
+            var default_layer_index = this.get_default_layer_index();
+            if (default_layer_index >= layers.length) {
+                default_layer_index = 0;
+            }
+            var default_layer = layers[default_layer_index].layer;
             default_layer.addTo(map);
             var layer_mapping = {};
             for (var idx in layers) {
@@ -421,6 +425,10 @@
             }, {
                 title: 'Stamen toner',
                 tiles: '//{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+                attrib: 'Stamen map data © <a href="http://stamen.com">Stamen Design</a>'
+            }, {
+                title: 'Stamen hybrid',
+                tiles: '//{s}.tile.stamen.com/toner-hybrid/{z}/{x}/{y}.png',
                 attrib: 'Stamen map data © <a href="http://stamen.com">Stamen Design</a>'
             }
         ],

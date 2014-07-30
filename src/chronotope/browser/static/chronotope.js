@@ -107,12 +107,14 @@
                     map_container.css('cursor', '');
                     var center = map.getCenter();
                     chronotope.set_default_center(center);
-                    var msg = 'Default center has been set to:' +
-                              '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' +
-                              'Latitude: ' + center.lat +
-                              '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' +
-                              'Longitude: ' + center.lng;
-                    bdajax.info(msg);
+                    var messages = chronotope.get_messages();
+                    bdajax.info(
+                        messages.default_center_set +
+                        '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        messages.longitude + ': ' + center.lng +
+                        '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        messages.latitude + ': ' + center.lat
+                    );
                 };
                 that.pending_action = handler;
                 map.once('click', handler);
@@ -124,8 +126,8 @@
             var map = this.map;
             var zoom = map.getZoom();
             chronotope.set_default_zoom(zoom);
-            var msg = 'Default zoom has been set to ' + zoom;
-            bdajax.info(msg);
+            var messages = chronotope.get_messages();
+            bdajax.info(messages.default_zoom_set);
         },
 
         show_submitter_contents: function(elem) {
@@ -274,6 +276,30 @@
         default_lon_cookie: 'chronotope.default_lon',
         default_lat_cookie: 'chronotope.default_lat',
         default_zoom_cookie: 'chronotope.default_zoom',
+        lang: 'de',
+
+        messages: {
+            en: {
+                default_center_set: 'Default center has been set to',
+                latitude: 'Latitude',
+                longitude: 'Longitude',
+                default_zoom_set: 'Default zoom has been set',
+                search_label: 'search for address ...',
+                not_found_message: 'Sorry, that address could not be found'
+            },
+            de: {
+                default_center_set: 'Standard Zentrum gesetzt',
+                latitude: 'Breitengrad',
+                longitude: 'Längengrad',
+                default_zoom_set: 'Standard Ansicht gesetzt',
+                search_label: 'Nach Adresse suchen ...',
+                not_found_message: 'Diese Adresse konnte nicht gefunden werden'
+            }
+        },
+
+        get_messages: function() {
+            return this.messages[this.lang];
+        },
 
         set_default_center: function(latlon) {
             createCookie(this.default_lat_cookie, latlon.lat);
@@ -412,10 +438,13 @@
         },
 
         add_geosearch_control: function(map) {
+            var messages = this.get_messages();
             var geosearch_control = new L.Control.GeoSearch({
                 provider: new L.GeoSearch.Provider.OpenStreetMap(),
                 position: 'topleft',
-                showMarker: false
+                showMarker: false,
+                searchLabel: messages.search_label,
+                notFoundMessage: messages.not_found_message
             });
             geosearch_control.addTo(map);
             return geosearch_control;

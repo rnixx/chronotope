@@ -57,13 +57,6 @@ setup(name='chronotope',
           'interlude',
       ],
       test_suite = "chronotope.tests.test_suite",
-      message_extractors = {
-          '.': [
-              ('**.py', 'lingua_python', None),
-              ('**.pt', 'lingua_xml', None),
-              ('**.yaml', 'yafowil_yaml', None),
-          ]
-      },
       entry_points = """\
       [paste.filter_app_factory]
       session = chronotope.sql:make_app

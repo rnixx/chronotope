@@ -189,7 +189,7 @@ msgstr "Anhang"
 #: src/chronotope/browser/forms/attachment.yaml:37
 msgid "help_attachment_type"
 msgstr ""
-"Achtung -wenn Sie den Anhangtyp eines existierenden Anhangs ändern werden "
+"Achtung - wenn Sie den Anhangtyp eines existierenden Anhangs ändern werden "
 "die bisherigen Daten verworfen"
 
 #. Default: Enter attachment text

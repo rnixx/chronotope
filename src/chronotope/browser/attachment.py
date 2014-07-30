@@ -152,8 +152,11 @@ class AttachmentForm(Form, UXMixin):
 
     form_name = 'attachmentform'
     form_template = 'chronotope.browser:forms/attachment.yaml'
-    message_factory = _
     default_attachment_type = 'text'
+
+    @property
+    def message_factory(self):
+        return _
 
     def _fetch_data(self, data, name):
         return data.fetch('{0}.{1}'.format(self.form_name, name))

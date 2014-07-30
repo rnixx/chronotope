@@ -87,7 +87,10 @@ class FacilityForm(Form, UXMixin):
 
     form_name = 'facilityform'
     form_template = 'chronotope.browser:forms/facility.yaml'
-    message_factory = _
+
+    @property
+    def message_factory(self):
+        return _
 
     def save(self, widget, data):
         def fetch(name):

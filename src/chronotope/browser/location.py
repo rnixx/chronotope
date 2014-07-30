@@ -139,8 +139,11 @@ class LocationForm(Form, UXMixin):
 
     form_name = 'locationform'
     form_template = 'chronotope.browser:forms/location.yaml'
-    message_factory = _
     location_zoom = 15
+
+    @property
+    def message_factory(self):
+        return _
 
     @property
     def coordinates_mode(self):

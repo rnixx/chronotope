@@ -48,6 +48,13 @@ tr.state-declined td.state,
     display:none;
 }
 
+/* date and time picker buttons */
+.ui-datepicker-trigger,
+.ui-timepicker-trigger {
+    padding-left:3px;
+    padding-right:3px;
+}
+
 /* content tiles */
 .overlay-view-heading {
     margin-top:4px;

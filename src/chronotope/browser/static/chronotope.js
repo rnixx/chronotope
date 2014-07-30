@@ -107,11 +107,11 @@
                     map_container.css('cursor', '');
                     var center = map.getCenter();
                     chronotope.set_default_center(center);
-                    var msg = 'Default center has been set to:<br/>' +
-                              '<br/>' +
-                              '&nbsp;&nbsp;* Latitude: ' + center.lat +
-                              '<br/>' +
-                              '&nbsp;&nbsp;* Longitude: ' + center.lng;
+                    var msg = 'Default center has been set to:' +
+                              '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                              'Latitude: ' + center.lat +
+                              '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                              'Longitude: ' + center.lng;
                     bdajax.info(msg);
                 };
                 that.pending_action = handler;

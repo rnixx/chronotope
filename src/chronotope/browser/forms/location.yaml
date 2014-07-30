@@ -47,7 +47,7 @@ widgets:
     props:
         label: i18n:city_label:City
         help: i18n:location_city_help:Enter city of location
-        required: i18n:lat_required:City is required
+        required: i18n:city_required:City is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - country:
@@ -56,7 +56,7 @@ widgets:
     props:
         label: i18n:country_label:Country
         help: i18n:location_country_help:Enter country of location
-        required: i18n:lat_required:Country is required
+        required: i18n:country_required:Country is required
         vocabulary: expr:context.country_vocab
         label.class_add: col-sm-2
         div.class_add: col-sm-10

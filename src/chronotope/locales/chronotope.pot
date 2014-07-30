@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-07-30 12:28+0200\n"
+"POT-Creation-Date: 2014-07-30 13:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,11 +60,13 @@ msgstr ""
 msgid "attachment_type_image"
 msgstr ""
 
+#. Default: State
 #: ./src/chronotope/browser/contents.py:23
 #: ./src/chronotope/browser/submitter.py:220
 msgid "state"
 msgstr ""
 
+#. Default: Sort on state
 #: ./src/chronotope/browser/contents.py:25
 #: ./src/chronotope/browser/submitter.py:222
 msgid "sort_on_state"
@@ -111,26 +113,32 @@ msgstr ""
 msgid "add_attachment"
 msgstr ""
 
+#. Default: Title
 #: ./src/chronotope/browser/submitter.py:202
 msgid "title"
 msgstr ""
 
+#. Default: Sort on title
 #: ./src/chronotope/browser/submitter.py:204
 msgid "sort_on_title"
 msgstr ""
 
+#. Default: Created
 #: ./src/chronotope/browser/submitter.py:208
 msgid "created"
 msgstr ""
 
+#. Default: Sort on created
 #: ./src/chronotope/browser/submitter.py:210
 msgid "sort_on_created"
 msgstr ""
 
+#. Default: Modified
 #: ./src/chronotope/browser/submitter.py:214
 msgid "modified"
 msgstr ""
 
+#. Default: Sort on modified
 #: ./src/chronotope/browser/submitter.py:216
 msgid "sort_on_modified"
 msgstr ""
@@ -140,89 +148,84 @@ msgstr ""
 msgid "verify"
 msgstr ""
 
-#. Location
 #. Default: Location
 #: ./src/chronotope/browser/forms/location_reference.yaml:4
 #: ./src/chronotope/model/location.py:98
 msgid "location_label"
 msgstr ""
 
-#. Select locations this object belongs to
+#. Default: Select locations this object belongs to
 #: ./src/chronotope/browser/forms/location_reference.yaml:5
 msgid "location_help"
 msgstr ""
 
-#. Select or add location
+#. Default: Select or add location
 #: ./src/chronotope/browser/forms/location_reference.yaml:10
 msgid "location_placeholder"
 msgstr ""
 
-#. Title
+#. Default: Title
 #: ./src/chronotope/browser/forms/attachment.yaml:18
 #: ./src/chronotope/browser/forms/occasion.yaml:18
 #: ./src/chronotope/browser/forms/facility.yaml:18
 msgid "title_label"
 msgstr ""
 
-#. Enter title of attachment
+#. Default: Enter title of attachment
 #: ./src/chronotope/browser/forms/attachment.yaml:19
 msgid "attachment_title_help"
 msgstr ""
 
-#. Title is required
-#. Description is required
+#. Default: Title is required
 #: ./src/chronotope/browser/forms/attachment.yaml:20
 #: ./src/chronotope/browser/forms/occasion.yaml:20
-#: ./src/chronotope/browser/forms/occasion.yaml:29
 #: ./src/chronotope/browser/forms/facility.yaml:20
-#: ./src/chronotope/browser/forms/facility.yaml:29
 msgid "title_required"
 msgstr ""
 
-#. Attachment
 #. Default: Attachment
 #: ./src/chronotope/browser/forms/attachment.yaml:28
 #: ./src/chronotope/model/attachment.py:94
 msgid "attachment_label"
 msgstr ""
 
-#. Warning - changing the attachment type on existing attachments will override
-#. existing data
+#. Default: Warning - changing the attachment type on existing attachments will
+#. override existing data
 #: ./src/chronotope/browser/forms/attachment.yaml:37
 msgid "help_attachment_type"
 msgstr ""
 
-#. Enter attachment text
+#. Default: Enter attachment text
 #: ./src/chronotope/browser/forms/attachment.yaml:43
 msgid "attachment_text_help"
 msgstr ""
 
-#. Text is required
+#. Default: Text is required
 #: ./src/chronotope/browser/forms/attachment.yaml:44
 msgid "attachment_text_required"
 msgstr ""
 
-#. Select file to attach
+#. Default: Select file to attach
 #: ./src/chronotope/browser/forms/attachment.yaml:63
 msgid "attachment_file_help"
 msgstr ""
 
-#. File is required
+#. Default: File is required
 #: ./src/chronotope/browser/forms/attachment.yaml:64
 msgid "attachment_file_required"
 msgstr ""
 
-#. Select image to attach
+#. Default: Select image to attach
 #: ./src/chronotope/browser/forms/attachment.yaml:75
 msgid "attachment_image_help"
 msgstr ""
 
-#. Image is required
+#. Default: Image is required
 #: ./src/chronotope/browser/forms/attachment.yaml:76
 msgid "attachment_image_required"
 msgstr ""
 
-#. Save
+#. Default: Save
 #: ./src/chronotope/browser/forms/attachment.yaml:105
 #: ./src/chronotope/browser/forms/location.yaml:76
 #: ./src/chronotope/browser/forms/occasion.yaml:88
@@ -231,7 +234,7 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#. Cancel
+#. Default: Cancel
 #: ./src/chronotope/browser/forms/attachment.yaml:114
 #: ./src/chronotope/browser/forms/location.yaml:85
 #: ./src/chronotope/browser/forms/occasion.yaml:97
@@ -239,207 +242,223 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#. Coordinates
+#. Default: Coordinates
 #: ./src/chronotope/browser/forms/location.yaml:18
 msgid "coordinates_label"
 msgstr ""
 
-#. Pick point on map to set coordinates
+#. Default: Pick point on map to set coordinates
 #: ./src/chronotope/browser/forms/location.yaml:19
 msgid "location_coordinates_help"
 msgstr ""
 
-#. Coordinates are required
+#. Default: Coordinates are required
 #: ./src/chronotope/browser/forms/location.yaml:20
 msgid "coordinates_required"
 msgstr ""
 
-#. Street
+#. Default: Street
 #: ./src/chronotope/browser/forms/location.yaml:31
 msgid "street_label"
 msgstr ""
 
-#. Enter street of location
+#. Default: Enter street of location
 #: ./src/chronotope/browser/forms/location.yaml:32
 msgid "location_street_help"
 msgstr ""
 
-#. Street is required
-#. City is required
-#. Country is required
+#. Default: Street is required
 #: ./src/chronotope/browser/forms/location.yaml:33
-#: ./src/chronotope/browser/forms/location.yaml:50
-#: ./src/chronotope/browser/forms/location.yaml:59
 msgid "lat_required"
 msgstr ""
 
-#. ZIP
+#. Default: ZIP
 #: ./src/chronotope/browser/forms/location.yaml:40
 msgid "zip_label"
 msgstr ""
 
-#. Enter ZIP of location
+#. Default: Enter ZIP of location
 #: ./src/chronotope/browser/forms/location.yaml:41
 msgid "location_zip_help"
 msgstr ""
 
-#. City
+#. Default: City
 #: ./src/chronotope/browser/forms/location.yaml:48
 msgid "city_label"
 msgstr ""
 
-#. Enter city of location
+#. Default: Enter city of location
 #: ./src/chronotope/browser/forms/location.yaml:49
 msgid "location_city_help"
 msgstr ""
 
-#. Country
+#. Default: City is required
+#: ./src/chronotope/browser/forms/location.yaml:50
+msgid "city_required"
+msgstr ""
+
+#. Default: Country
 #: ./src/chronotope/browser/forms/location.yaml:57
 msgid "country_label"
 msgstr ""
 
-#. Enter country of location
+#. Default: Enter country of location
 #: ./src/chronotope/browser/forms/location.yaml:58
 msgid "location_country_help"
 msgstr ""
 
-#. Enter title of occasion
+#. Default: Country is required
+#: ./src/chronotope/browser/forms/location.yaml:59
+msgid "country_required"
+msgstr ""
+
+#. Default: Enter title of occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:19
 msgid "occasion_title_help"
 msgstr ""
 
-#. Description
+#. Default: Description
 #: ./src/chronotope/browser/forms/occasion.yaml:27
 #: ./src/chronotope/browser/forms/facility.yaml:27
 msgid "description_label"
 msgstr ""
 
-#. Enter description of occasion
+#. Default: Enter description of occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:28
 msgid "occasion_description_help"
 msgstr ""
 
-#. Duration From
+#. Default: Description is required
+#: ./src/chronotope/browser/forms/occasion.yaml:29
+#: ./src/chronotope/browser/forms/facility.yaml:29
+msgid "description_required"
+msgstr ""
+
+#. Default: Duration From
 #: ./src/chronotope/browser/forms/occasion.yaml:51
 msgid "duration_from_label"
 msgstr ""
 
-#. Enter beginning date of occasion
+#. Default: Enter beginning date of occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:52
 msgid "occasion_duration_from_help"
 msgstr ""
 
-#. Duration To
+#. Default: Duration To
 #: ./src/chronotope/browser/forms/occasion.yaml:63
 msgid "duration_to_label"
 msgstr ""
 
-#. Enter end date of occasion
+#. Default: Enter end date of occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:64
 msgid "occasion_duration_to_help"
 msgstr ""
 
-#. Facility
 #. Default: Facility
 #: ./src/chronotope/browser/forms/facility_reference.yaml:4
 #: ./src/chronotope/model/facility.py:109
 msgid "facility_label"
 msgstr ""
 
-#. Select facilities this object belongs to
+#. Default: Select facilities this object belongs to
 #: ./src/chronotope/browser/forms/facility_reference.yaml:5
 msgid "facility_help"
 msgstr ""
 
-#. Select or add facility
-#. Select or add occasion
-#. Select or add category
+#. Default: Select or add facility
 #: ./src/chronotope/browser/forms/facility_reference.yaml:10
-#: ./src/chronotope/browser/forms/occasion_reference.yaml:10
-#: ./src/chronotope/browser/forms/facility.yaml:81
-msgid "category_placeholder"
+msgid "facility_placeholder"
 msgstr ""
 
-#. reCAPTCHA public key
+#. Default: reCAPTCHA public key
 #: ./src/chronotope/browser/forms/settings.yaml:11
 msgid "recaptcha_public_key_label"
 msgstr ""
 
-#. Key is required
+#. Default: Key is required
 #: ./src/chronotope/browser/forms/settings.yaml:12
 msgid "recaptcha_public_key_required"
 msgstr ""
 
-#. reCAPTCHA private key
+#. Default: reCAPTCHA private key
 #: ./src/chronotope/browser/forms/settings.yaml:19
 msgid "recaptcha_private_key_label"
 msgstr ""
 
-#. Key is required
+#. Default: Key is required
 #: ./src/chronotope/browser/forms/settings.yaml:20
 msgid "recaptcha_private_key_required"
 msgstr ""
 
-#. Project Description
+#. Default: Project Description
 #: ./src/chronotope/browser/forms/settings.yaml:27
 msgid "project_description_label"
 msgstr ""
 
-#. Description is required
+#. Default: Description is required
 #: ./src/chronotope/browser/forms/settings.yaml:28
 msgid "project_description_required"
 msgstr ""
 
-#. Occasion
 #. Default: Occasion
 #: ./src/chronotope/browser/forms/occasion_reference.yaml:4
 #: ./src/chronotope/model/occasion.py:109
 msgid "occasion_label"
 msgstr ""
 
-#. Select occasions this object belongs to
+#. Default: Select occasions this object belongs to
 #: ./src/chronotope/browser/forms/occasion_reference.yaml:5
 msgid "occasion_help"
 msgstr ""
 
-#. Enter title of facility
+#. Default: Select or add occasion
+#: ./src/chronotope/browser/forms/occasion_reference.yaml:10
+msgid "occasion_placeholder"
+msgstr ""
+
+#. Default: Enter title of facility
 #: ./src/chronotope/browser/forms/facility.yaml:19
 msgid "facility_title_help"
 msgstr ""
 
-#. Enter description of facility
+#. Default: Enter description of facility
 #: ./src/chronotope/browser/forms/facility.yaml:28
 msgid "facility_description_help"
 msgstr ""
 
-#. Exists From
+#. Default: Exists From
 #: ./src/chronotope/browser/forms/facility.yaml:51
 msgid "exists_from_label"
 msgstr ""
 
-#. Enter opening date of facility
+#. Default: Enter opening date of facility
 #: ./src/chronotope/browser/forms/facility.yaml:52
 msgid "facility_exists_from_help"
 msgstr ""
 
-#. Exists To
+#. Default: Exists To
 #: ./src/chronotope/browser/forms/facility.yaml:63
 msgid "exists_to_label"
 msgstr ""
 
-#. Enter closing date of facility
+#. Default: Enter closing date of facility
 #: ./src/chronotope/browser/forms/facility.yaml:64
 msgid "facility_exists_to_help"
 msgstr ""
 
-#. Category
+#. Default: Category
 #: ./src/chronotope/browser/forms/facility.yaml:75
 msgid "category_label"
 msgstr ""
 
-#. Select categories for facility
+#. Default: Select categories for facility
 #: ./src/chronotope/browser/forms/facility.yaml:76
 msgid "facility_category_help"
+msgstr ""
+
+#. Default: Select or add category
+#: ./src/chronotope/browser/forms/facility.yaml:81
+msgid "category_placeholder"
 msgstr ""
 
 #. Default: An attachment

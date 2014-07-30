@@ -199,27 +199,27 @@ class SubmitterContentsTile(ContentsTile):
     table_tile_name = 'submitter_contents'
     col_defs = [{
             'id': 'title',
-            'title': _('title', 'Title'),
+            'title': _('title', default='Title'),
             'sort_key': 'title',
-            'sort_title': _('sort_on_title', 'Sort on title'),
+            'sort_title': _('sort_on_title', default='Sort on title'),
             'content': 'structure'
         }, {
             'id': 'created',
-            'title': _('created', 'Created'),
+            'title': _('created', default='Created'),
             'sort_key': 'created',
-            'sort_title': _('sort_on_created', 'Sort on created'),
+            'sort_title': _('sort_on_created', default='Sort on created'),
             'content': 'datetime'
         }, {
             'id': 'modified',
-            'title': _('modified', 'Modified'),
+            'title': _('modified', default='Modified'),
             'sort_key': 'modified',
-            'sort_title': _('sort_on_modified', 'Sort on modified'),
+            'sort_title': _('sort_on_modified', default='Sort on modified'),
             'content': 'datetime'
         }, {
             'id': 'state',
-            'title': _('state', 'State'),
+            'title': _('state', default='State'),
             'sort_key': 'state',
-            'sort_title': _('sort_on_state', 'Sort on state'),
+            'sort_title': _('sort_on_state', default='Sort on state'),
             'content': 'string'
         }
     ]

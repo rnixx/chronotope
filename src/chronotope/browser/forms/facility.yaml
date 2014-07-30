@@ -26,7 +26,7 @@ widgets:
     props:
         label: i18n:description_label:Description
         help: i18n:facility_description_help:Enter description of facility
-        required: i18n:title_required:Description is required
+        required: i18n:description_required:Description is required
         size: sm
         color: True
         emphasis: True

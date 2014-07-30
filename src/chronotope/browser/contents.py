@@ -20,9 +20,9 @@ table_template = 'cone.app.browser:templates/table.pt'
 class ChronotopeContentsTile(ContentsTile):
     col_defs = ContentsTile.col_defs + [{
         'id': 'state',
-        'title': _('state', 'State'),
+        'title': _('state', default='State'),
         'sort_key': 'state',
-        'sort_title': _('sort_on_state', 'Sort on state'),
+        'sort_title': _('sort_on_state', default='Sort on state'),
         'content': 'string'
     }]
     sort_keys = ContentsTile.sort_keys.copy()

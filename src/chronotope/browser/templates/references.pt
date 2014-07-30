@@ -1,9 +1,7 @@
 <tal:references xmlns:tal="http://xml.zope.org/namespaces/tal"
-                xmlns:i18n="http://xml.zope.org/namespaces/i18n"
                 xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
-                i18n:domain="chronotope"
-                tal:define="references context.slice.references"
-                tal:condition="references"
+                define="references context.slice.references"
+                condition="references"
                 omit-tag="True">
 
   <div id="${context.references_id}"

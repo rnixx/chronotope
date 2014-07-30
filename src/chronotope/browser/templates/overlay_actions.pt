@@ -1,7 +1,5 @@
 <tal:actions xmlns:tal="http://xml.zope.org/namespaces/tal"
-             xmlns:i18n="http://xml.zope.org/namespaces/i18n"
              xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
-             i18n:domain="chronotope"
              define="actions context.actions"
              condition="actions"
              omit-tag="True">

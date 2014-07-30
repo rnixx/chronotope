@@ -1,6 +1,5 @@
 <tal:attachment xmlns:tal="http://xml.zope.org/namespaces/tal"
                 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-                xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
                 i18n:domain="chronotope"
                 omit-tag="True">
 
@@ -10,46 +9,55 @@
 
       <tr>
         <td colspan="2">
-          <h3 class="overlay-view-heading">Attachment</h3>
+          <h3 class="overlay-view-heading"
+              i18n:translate="attachment">Attachment</h3>
         </td>
       </tr>
 
       <tr>
-        <td class="row-title">Title</td>
+        <td class="row-title"
+            i18n:translate="title">Title</td>
         <td tal:content="model.attrs['title']">Title</td>
       </tr>
 
       <tr tal:condition="context.type == 'text'">
-        <td class="row-title">Text</td>
+        <td class="row-title"
+            i18n:translate="text">Text</td>
         <td tal:content="structure context.text">Text</td>
       </tr>
 
       <tal:filelike condition="context.type in ['file', 'image']"
                     define="fileinfo context.fileinfo">
         <tr>
-          <td class="row-title">Filename</td>
+          <td class="row-title"
+              i18n:translate="filename">Filename</td>
           <td tal:content="fileinfo['filename']"></td>
         </tr>
         <tr>
-          <td class="row-title">Mimetype</td>
+          <td class="row-title"
+              i18n:translate="mimetype">Mimetype</td>
           <td tal:content="fileinfo['mimetype']"></td>
         </tr>
         <tr tal:condition="context.type == 'image'">
-          <td class="row-title">Preview</td>
+          <td class="row-title"
+              i18n:translate="preview">Preview</td>
           <td><img src="${context.preview}" alt="preview" /></td>
         </tr>
       </tal:filelike>
 
       <tr>
-        <td class="row-title">Download</td>
+        <td class="row-title"
+            i18n:translate="download">Download</td>
         <td>
-          <a href="${context.download_url}">download</a>
+          <a href="${context.download_url}"
+             i18n:translate="download">Download</a>
         </td>
       </tr>
 
       <tr tal:define="related_locations tile('related_locations').strip()"
           tal:condition="related_locations">
-        <td class="row-title">Locations</td>
+        <td class="row-title"
+            i18n:translate="locations">Locations</td>
         <td>
           <tal:related replace="structure related_locations" />
         </td>
@@ -57,7 +65,8 @@
 
       <tr tal:define="related_facilities tile('related_facilities').strip()"
           tal:condition="related_facilities">
-        <td class="row-title">Facilities</td>
+        <td class="row-title"
+            i18n:translate="facilities">Facilities</td>
         <td>
           <tal:related replace="structure related_facilities" />
         </td>
@@ -65,7 +74,8 @@
 
       <tr tal:define="related_occasions tile('related_occasions').strip()"
           tal:condition="related_occasions">
-        <td class="row-title">Occasions</td>
+        <td class="row-title"
+            i18n:translate="occasions">Occasions</td>
         <td>
           <tal:related replace="structure related_occasions" />
         </td>
@@ -73,7 +83,8 @@
 
       <tr tal:define="overlay_actions tile('overlay_actions').strip()"
           tal:condition="overlay_actions">
-        <td class="row-title">Actions</td>
+        <td class="row-title"
+            i18n:translate="actions">Actions</td>
         <td>
           <tal:actions replace="structure overlay_actions" />
         </td>

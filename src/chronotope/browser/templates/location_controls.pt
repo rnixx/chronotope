@@ -1,4 +1,6 @@
 <tal:controls xmlns:tal="http://xml.zope.org/namespaces/tal"
+              xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+              i18n:domain="chronotope"
               omit-tag="True">
 
   <div class="${context.authenticated and 'authenticated' or None}">
@@ -16,23 +18,26 @@
         <tal:anon condition="not context.authenticated">
           <li>
             <div class="form-group submitter_email">
-              <label for="submitter_email">
-                Submitter
-              </label>
+              <label for="submitter_email"
+                     i18n:translate="submitter">Submitter</label>
               <input type="email"
                      class="form-control"
                      id="submitter_email"
-                     placeholder="Enter your email address" />
+                     placeholder="Enter your email address"
+                     i18n:attributes="placeholder submitter_email_placeholder" />
               <p class="help-block submitter-empty"
-                 style="display:none;">
+                 style="display:none;"
+                 i18n:translate="submitter_email_empty">
                 Needs to be filled in order to add contents.
               </p>
               <p class="help-block submitter-error"
-                 style="display:none;">
+                 style="display:none;"
+                 i18n:translate="submitter_email_error">
                 Input is not a valid email address.
               </p>
               <p class="help-block submitter-success"
-                 style="display:none;">
+                 style="display:none;"
+                 i18n:translate="submitter_email_success">
                 OK! You can create content.
               </p>
             </div>
@@ -43,21 +48,27 @@
         <li class="disabled add-location-action">
           <a href="#">
             <span class="glyphicon glyphicon-plus-sign"></span>
-            Add new location
+            <span i18n:translate="add_new_location">
+              Add new location
+            </span>
           </a>
         </li>
 
         <li class="set-default-center-action">
           <a href="#">
             <span class="glyphicon glyphicon-screenshot"></span>
-            Set default center
+            <span i18n:translate="set_default_center">
+              Set default center
+            </span>
           </a>
         </li>
 
         <li class="set-default-zoom-action">
           <a href="#">
             <span class="glyphicon glyphicon-zoom-in"></span>
-            Set current zoom level as default
+            <span i18n:translate="set_zoom_level">
+              Set current zoom level as default
+            </span>
           </a>
         </li>
 
@@ -66,7 +77,9 @@
             data-target="${context.nodeurl}">
           <a href="#">
             <span class="glyphicon glyphicon-th-list"></span>
-            Show my Items
+            <span i18n:translate="show_my_items">
+              Show my Items
+            </span>
           </a>
         </li>
 

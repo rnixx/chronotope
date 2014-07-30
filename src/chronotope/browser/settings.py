@@ -32,7 +32,10 @@ class SettingsForm(Form):
     action_resource = 'edit'
     form_name = 'chronotopesettingsform'
     form_template = 'chronotope.browser:forms/settings.yaml'
-    message_factory = _
+
+    @property
+    def message_factory(self):
+        return _
 
     def save(self, widget, data):
         def fetch(name):

@@ -164,8 +164,9 @@ class AttachmentForm(Form, UXMixin):
     @property
     def file_action_vocabulary(self):
         return [
-            ('keep', u'Keep Existing image'),
-            ('replace', u'Replace existing image'),
+            ('keep', _('keep_existing_image', default=u'Keep Existing image')),
+            ('replace', _('replace_existing_image',
+                          default=u'Replace existing image')),
         ]
 
     @property

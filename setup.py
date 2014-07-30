@@ -61,6 +61,7 @@ setup(name='chronotope',
           '.': [
               ('**.py', 'lingua_python', None),
               ('**.pt', 'lingua_xml', None),
+              ('**.yaml', 'yafowil_yaml', None),
           ]
       },
       entry_points = """\

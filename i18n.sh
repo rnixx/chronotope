@@ -4,7 +4,7 @@
 # Date: 2014-07-20
 #
 # Requirements:
-#     - python lingua (sudo pip install lingua)
+#     - yafowil.lingua (sudo pip install yafowil.lingua)
 #     - gettext
 #
 # Usage:
@@ -34,7 +34,7 @@ fi
 # no arguments, extract and update
 if [ $# -eq 0 ]; then
     echo "Extract messages"
-    pot-create $SEACH_PATH -o $LOCALES_PATH/$DOMAIN.pot
+    xpot-create $SEACH_PATH -o $LOCALES_PATH/$DOMAIN.pot
 
     echo "Update translations"
     for po in $LOCALES_PATH/*/LC_MESSAGES/$DOMAIN.po; do

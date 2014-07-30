@@ -7,7 +7,7 @@ props:
     inputtag: True
     minimumInputLength: 3
     multiple: True
-    placeholder: i18n:occasion_placeholder:Select or add occasion
+    placeholder: i18n:occasion_placeholder:Select occasion
     ajaxurl: chronotope.occasion
     label.class_add: col-sm-2
     div.class_add: col-sm-10

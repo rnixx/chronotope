@@ -7,7 +7,7 @@ props:
     inputtag: True
     minimumInputLength: 3
     multiple: True
-    placeholder: i18n:location_placeholder:Select or add location
+    placeholder: i18n:location_placeholder:Select location
     ajaxurl: chronotope.location
     label.class_add: col-sm-2
     div.class_add: col-sm-10

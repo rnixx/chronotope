@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-07-30 13:33+0200\n"
+"POT-Creation-Date: 2014-07-30 14:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,18 +45,28 @@ msgstr ""
 msgid "declined_2_published"
 msgstr ""
 
+#. Default: Keep Existing image
+#: ./src/chronotope/browser/attachment.py:167
+msgid "keep_existing_image"
+msgstr ""
+
+#. Default: Replace existing image
+#: ./src/chronotope/browser/attachment.py:168
+msgid "replace_existing_image"
+msgstr ""
+
 #. Default: Text
-#: ./src/chronotope/browser/attachment.py:176
+#: ./src/chronotope/browser/attachment.py:180
 msgid "attachment_type_text"
 msgstr ""
 
 #. Default: File
-#: ./src/chronotope/browser/attachment.py:177
+#: ./src/chronotope/browser/attachment.py:181
 msgid "attachment_type_file"
 msgstr ""
 
 #. Default: Image
-#: ./src/chronotope/browser/attachment.py:178
+#: ./src/chronotope/browser/attachment.py:182
 msgid "attachment_type_image"
 msgstr ""
 
@@ -73,17 +83,17 @@ msgid "sort_on_state"
 msgstr ""
 
 #. Default: Germany
-#: ./src/chronotope/browser/location.py:163
+#: ./src/chronotope/browser/location.py:166
 msgid "germany"
 msgstr ""
 
 #. Default: Austria
-#: ./src/chronotope/browser/location.py:164
+#: ./src/chronotope/browser/location.py:167
 msgid "austria"
 msgstr ""
 
 #. Default: Swizerland
-#: ./src/chronotope/browser/location.py:165
+#: ./src/chronotope/browser/location.py:168
 msgid "swizerland"
 msgstr ""
 
@@ -115,6 +125,9 @@ msgstr ""
 
 #. Default: Title
 #: ./src/chronotope/browser/submitter.py:202
+#: ./src/chronotope/browser/templates/facility.pt:24
+#: ./src/chronotope/browser/templates/attachment.pt:24
+#: ./src/chronotope/browser/templates/occasion.pt:24
 msgid "title"
 msgstr ""
 
@@ -159,7 +172,7 @@ msgstr ""
 msgid "location_help"
 msgstr ""
 
-#. Default: Select or add location
+#. Default: Select location
 #: ./src/chronotope/browser/forms/location_reference.yaml:10
 msgid "location_placeholder"
 msgstr ""
@@ -365,7 +378,7 @@ msgstr ""
 msgid "facility_help"
 msgstr ""
 
-#. Default: Select or add facility
+#. Default: Select facility
 #: ./src/chronotope/browser/forms/facility_reference.yaml:10
 msgid "facility_placeholder"
 msgstr ""
@@ -411,7 +424,7 @@ msgstr ""
 msgid "occasion_help"
 msgstr ""
 
-#. Default: Select or add occasion
+#. Default: Select occasion
 #: ./src/chronotope/browser/forms/occasion_reference.yaml:10
 msgid "occasion_placeholder"
 msgstr ""
@@ -459,6 +472,194 @@ msgstr ""
 #. Default: Select or add category
 #: ./src/chronotope/browser/forms/facility.yaml:81
 msgid "category_placeholder"
+msgstr ""
+
+#. Default: Location
+#: ./src/chronotope/browser/templates/location.pt:14
+msgid "location"
+msgstr ""
+
+#. Default: Coordinates
+#: ./src/chronotope/browser/templates/location.pt:24
+msgid "coordinates"
+msgstr ""
+
+#. Default: Street
+#: ./src/chronotope/browser/templates/location.pt:38
+msgid "street"
+msgstr ""
+
+#. Default: ZIP
+#: ./src/chronotope/browser/templates/location.pt:49
+msgid "zip"
+msgstr ""
+
+#. Default: City
+#: ./src/chronotope/browser/templates/location.pt:60
+msgid "city"
+msgstr ""
+
+#. Default: Country
+#: ./src/chronotope/browser/templates/location.pt:71
+msgid "country"
+msgstr ""
+
+#. Default: Facilities
+#: ./src/chronotope/browser/templates/location.pt:82
+#: ./src/chronotope/browser/templates/attachment.pt:107
+#: ./src/chronotope/browser/templates/occasion.pt:84
+msgid "facilities"
+msgstr ""
+
+#. Default: Occasions
+#: ./src/chronotope/browser/templates/location.pt:96
+#: ./src/chronotope/browser/templates/facility.pt:107
+#: ./src/chronotope/browser/templates/attachment.pt:121
+msgid "occasions"
+msgstr ""
+
+#. Default: Attachments
+#: ./src/chronotope/browser/templates/location.pt:110
+#: ./src/chronotope/browser/templates/facility.pt:121
+#: ./src/chronotope/browser/templates/occasion.pt:98
+msgid "attachments"
+msgstr ""
+
+#. Default: Actions
+#: ./src/chronotope/browser/templates/location.pt:124
+#: ./src/chronotope/browser/templates/facility.pt:135
+#: ./src/chronotope/browser/templates/attachment.pt:135
+#: ./src/chronotope/browser/templates/occasion.pt:112
+msgid "actions"
+msgstr ""
+
+#. Default: Facility
+#: ./src/chronotope/browser/templates/facility.pt:14
+msgid "facility"
+msgstr ""
+
+#. Default: Description
+#: ./src/chronotope/browser/templates/facility.pt:35
+#: ./src/chronotope/browser/templates/occasion.pt:35
+msgid "description"
+msgstr ""
+
+#. Default: Exists from
+#: ./src/chronotope/browser/templates/facility.pt:48
+msgid "exists_from"
+msgstr ""
+
+#. Default: Exists to
+#: ./src/chronotope/browser/templates/facility.pt:59
+msgid "exists_to"
+msgstr ""
+
+#. Default: Categories
+#: ./src/chronotope/browser/templates/facility.pt:70
+msgid "categories"
+msgstr ""
+
+#. Default: Locations
+#: ./src/chronotope/browser/templates/facility.pt:93
+#: ./src/chronotope/browser/templates/attachment.pt:93
+#: ./src/chronotope/browser/templates/occasion.pt:70
+msgid "locations"
+msgstr ""
+
+#. Default: Attachment
+#: ./src/chronotope/browser/templates/attachment.pt:14
+msgid "attachment"
+msgstr ""
+
+#. Default: Text
+#: ./src/chronotope/browser/templates/attachment.pt:35
+msgid "text"
+msgstr ""
+
+#. Default: Filename
+#: ./src/chronotope/browser/templates/attachment.pt:48
+msgid "filename"
+msgstr ""
+
+#. Default: Mimetype
+#: ./src/chronotope/browser/templates/attachment.pt:57
+msgid "mimetype"
+msgstr ""
+
+#. Default: Preview
+#: ./src/chronotope/browser/templates/attachment.pt:66
+msgid "preview"
+msgstr ""
+
+#. Default: Download
+#: ./src/chronotope/browser/templates/attachment.pt:78
+#: ./src/chronotope/browser/templates/attachment.pt:83
+msgid "download"
+msgstr ""
+
+#. Default: Submitter
+#: ./src/chronotope/browser/templates/location_controls.pt:25
+msgid "submitter"
+msgstr ""
+
+#. Default: Enter your email address
+#: ./src/chronotope/browser/templates/location_controls.pt:28
+msgid "submitter_email_placeholder"
+msgstr ""
+
+#. Default: Needs to be filled in order to add contents.
+#: ./src/chronotope/browser/templates/location_controls.pt:30
+msgid "submitter_email_empty"
+msgstr ""
+
+#. Default: Input is not a valid email address.
+#: ./src/chronotope/browser/templates/location_controls.pt:35
+msgid "submitter_email_error"
+msgstr ""
+
+#. Default: OK! You can create content.
+#: ./src/chronotope/browser/templates/location_controls.pt:40
+msgid "submitter_email_success"
+msgstr ""
+
+#. Default: Add new location
+#: ./src/chronotope/browser/templates/location_controls.pt:60
+msgid "add_new_location"
+msgstr ""
+
+#. Default: Set default center
+#: ./src/chronotope/browser/templates/location_controls.pt:76
+msgid "set_default_center"
+msgstr ""
+
+#. Default: Set current zoom level as default
+#: ./src/chronotope/browser/templates/location_controls.pt:92
+msgid "set_zoom_level"
+msgstr ""
+
+#. Default: Show my Items
+#: ./src/chronotope/browser/templates/location_controls.pt:108
+msgid "show_my_items"
+msgstr ""
+
+#. Default: Occasion
+#: ./src/chronotope/browser/templates/occasion.pt:14
+msgid "occasion"
+msgstr ""
+
+#. Default: Duration from
+#: ./src/chronotope/browser/templates/occasion.pt:48
+msgid "duration_from"
+msgstr ""
+
+#. Default: Duration to
+#: ./src/chronotope/browser/templates/occasion.pt:59
+msgid "duration_to"
+msgstr ""
+
+#. Default: View
+#: ./src/chronotope/browser/templates/view.pt:15
+msgid "view"
 msgstr ""
 
 #. Default: An attachment

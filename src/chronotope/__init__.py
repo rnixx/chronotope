@@ -63,6 +63,12 @@ def initialize_chronotope(config, global_config, local_config):
     # add translation
     config.add_translation_dirs('chronotope:locales/')
 
+    # XXX: generalize
+    config.add_translation_dirs('yafowil.i18n:locales/')
+    config.add_translation_dirs('yafowil.widget.datetime:locales/')
+    config.add_translation_dirs('yafowil.widget.image:locales/')
+    config.add_translation_dirs('yafowil.widget.recaptcha:locales/')
+
     # static resources
     config.add_view('chronotope.browser.static_resources',
                     name='chronotope-static')

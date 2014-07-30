@@ -1,8 +1,23 @@
 #!/bin/bash
+# Author: Robert Niederreiter <rnix@squarewave.at>
+# License: no license
+# Date: 2014-07-20
+#
+# Requirements:
+#     - python lingua (sudo pip install lingua)
+#     - gettext
+#
+# Usage:
+#     Initial catalog creation (lang is the language identifier):
+#         ./i18n.sh lang
+#     Updating translation and compile catalog:
+#         ./i18n.sh
 
+# configuration
 DOMAIN="chronotope"
 SEACH_PATH=src/chronotope
 LOCALES_PATH=src/chronotope/locales
+# end configuration
 
 # create locales folder if not exists
 if [ ! -d "$LOCALES_PATH" ]; then

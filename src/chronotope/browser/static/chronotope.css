@@ -42,6 +42,20 @@ tr.state-declined td.state,
     margin-left:25%;
 }
 
+/* location form */
+#form-locationform .location_picker {
+    padding-top:8px;
+}
+#form-locationform .change_coordinates {
+    padding-left:4px;
+}
+#display-locationform-coordinates-lat,
+#display-locationform-coordinates-lon {
+    border:none;
+    box-shadow:none;
+    display:inline;
+}
+
 /* attachment form */
 .attachment_payload {
     margin-top:1em;

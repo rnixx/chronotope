@@ -4,6 +4,7 @@ from plumber import (
     Behavior,
     plumbing,
     plumb,
+    default,
 )
 from node.utils import UNSET
 from pyramid.i18n import TranslationStringFactory
@@ -115,6 +116,14 @@ class LocationTile(SubmitterAccessTile, UXMixin):
 
 class CoordinatesProxy(Behavior):
 
+    @default
+    def location_picker(self, widget, data):
+        map_icon = data.tag(
+            'span', ' ', class_='glyphicon glyphicon-map-marker')
+        pick_location = _('pick_location', default='Pick other location')
+        link = data.tag('a', pick_location, class_='change_coordinates')
+        return data.tag('div', map_icon, link, class_='location_picker')
+
     @plumb
     def prepare(_next, self):
         _next(self)
@@ -123,9 +132,41 @@ class CoordinatesProxy(Behavior):
         def fname(name):
             return '{0}.coordinates.{1}'.format(self.form_name, name)
         params = self.request.params
-        coordinates = self.form['coordinates'] = factory('compound')
-        coordinates['lat'] = factory('hidden', value=params[fname('lat')])
-        coordinates['lon'] = factory('hidden', value=params[fname('lon')])
+        coordinates = self.form['coordinates'] = factory(
+            'field:label:div',
+            props={
+                'label': _('coordinates_label', default='Coordinates'),
+                'label.class_add': 'col-sm-2',
+                'div.class_add': 'col-sm-10',
+            })
+        coordinates['lat'] = factory(
+            'div:label:text',
+            value=params[fname('lat')],
+            props={
+                'div.class': 'inner-field',
+                'label': _('lat', default='Latitude'),
+                'display_proxy': True,
+            },
+            mode='display')
+        coordinates['lon'] = factory(
+            'div:label:text',
+            value=params[fname('lon')],
+            props={
+                'div.class': 'inner-field',
+                'label': _('lon', default='Longitude'),
+                'display_proxy': True,
+            },
+            mode='display')
+        coordinates['location_picker'] = factory(
+            '*location_picker',
+            props={
+                'structural': True,
+            },
+            custom={
+                'location_picker': {
+                    'edit_renderers': [self.location_picker],
+                }
+            })
         coordinates['zoom'] = factory('hidden', value=params[fname('zoom')])
 
 
@@ -239,4 +280,14 @@ class LocationOverlayAddForm(LocationAdding):
 @tile('overlayeditform', interface=Location, permission="edit")
 @plumbing(SubmitterAccessEditForm, OverlayEditForm)
 class LocationOverlayEditForm(LocationEditing):
-    pass
+
+    def next(self, request):
+        came_from_url = urllib2.unquote(request.get('authoring_came_from'))
+        came_from_url += make_query(**{
+            UX_IDENT: UX_FRONTEND,
+            'submitter_came_from': submitter_came_from(self.request),
+        })
+        came_from_tile = request.get('came_from_tile')
+        root_url = make_url(self.request, node=self.model.root)
+        return [AjaxOverlay(action=came_from_tile, target=came_from_url),
+                AjaxEvent(root_url, 'datachanged', '#chronotope-map')]

@@ -39,6 +39,7 @@
             }
             this.map.off('click', this.pending_action);
             this.pending_action = null;
+            $(this.map.getContainer()).css('cursor', '');
         },
 
         onAdd: function (map) {
@@ -272,6 +273,7 @@
         max_zoom: 18,
         map: null,
         markers: null,
+        location_control: null,
         default_layer_cookie: 'chronotope.default_layer',
         default_lon_cookie: 'chronotope.default_lon',
         default_lat_cookie: 'chronotope.default_lat',
@@ -349,6 +351,7 @@
             chronotope.livesearch(context);
             chronotope.chronotope_map(context);
             chronotope.location_map(context);
+            chronotope.location_form(context);
             chronotope.attachment_form(context);
         },
 
@@ -554,6 +557,7 @@
                 });
                 marker.addTo(markers);
                 marker.on('click', function(evt) {
+                    chronotope.location_control.prevent_pending();
                     bdajax.overlay({
                         action: datum.action,
                         target: datum.target
@@ -598,7 +602,7 @@
             this.create_markers(map);
             this.add_geosearch_control(map);
             this.add_zoom_control(map);
-            this.add_location_control(map);
+            this.location_control = this.add_location_control(map);
             map.on('moveend', function() {
                 var input = $('input#search-text');
                 if (input.val()) {
@@ -628,6 +632,34 @@
                     [map_elem.data('lat'), map_elem.data('lon')]
                 );
                 marker.addTo(markers);
+            });
+        },
+
+        location_form: function(context) {
+            var that = this;
+            var map = this.map;
+            var form_sel = '#form-locationform';
+            var trigger_sel = form_sel + ' a.change_coordinates';
+            $(trigger_sel, context).bind('click', function(evt) {
+                evt.preventDefault();
+                var map_container = $(map.getContainer());
+                var overly = $('#ajax-overlay');
+                overly.fadeOut(300);
+                map_container.css('cursor', 'crosshair');
+                var handler = function(evt) {
+                    map_container.css('cursor', '');
+                    var latlng = evt.latlng;
+                    var form = $(form_sel);
+                    $('#display-locationform-coordinates-lat').html(latlng.lat);
+                    $('#display-locationform-coordinates-lon').html(latlng.lng);
+                    $('input[name="locationform.coordinates.lat"]').val(
+                        latlng.lat);
+                    $('input[name="locationform.coordinates.lon"]').val(
+                        latlng.lng);
+                    overly.fadeIn(300);
+                };
+                that.location_control.pending_action = handler;
+                map.once('click', handler);
             });
         },
 

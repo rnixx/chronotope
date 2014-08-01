@@ -34,5 +34,5 @@ class ChronotopeContentsTile(ContentsTile):
         row_data = super(ChronotopeContentsTile, self).row_data(node)
         row_data['creator'] = node.attrs['submitter'] \
             and node.attrs['submitter'] or node.metadata.creator
-        row_data['state'] = node.attrs['state']
+        row_data['state'] = _(node.attrs['state'])
         return row_data

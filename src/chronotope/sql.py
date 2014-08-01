@@ -196,9 +196,12 @@ class SQLRowNodeAttributes(NodeAttributes):
 @plumbing(WorkflowState, WorkflowACL)
 class SQLRowNode(BaseNode):
     workflow_name = 'publication'
-    workflow_tsf = _
     state_acls = publication_state_acls
     record_factory = None
+
+    @property
+    def workflow_tsf(self):
+        return _
 
     def __init__(self, name=None, parent=None, record=None):
         self.__name__ = name

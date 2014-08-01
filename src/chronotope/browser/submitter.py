@@ -232,7 +232,7 @@ class SubmitterContentsTile(ContentsTile):
 
     def row_data(self, node):
         row_data = super(SubmitterContentsTile, self).row_data(node)
-        row_data['state'] = node.attrs['state']
+        row_data['state'] = _(node.attrs['state'])
         return row_data
 
     def sorted_rows(self, start, end, sort, order):

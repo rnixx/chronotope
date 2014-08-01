@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-08-01 09:50+0200\n"
+"POT-Creation-Date: 2014-08-01 13:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,19 +88,40 @@ msgstr ""
 msgid "sort_on_state"
 msgstr ""
 
+#. Default: Pick other location
+#: ./src/chronotope/browser/location.py:123
+msgid "pick_location"
+msgstr ""
+
 #. Default: Germany
-#: ./src/chronotope/browser/location.py:163
+#: ./src/chronotope/browser/location.py:204
 msgid "germany"
 msgstr ""
 
 #. Default: Austria
-#: ./src/chronotope/browser/location.py:164
+#: ./src/chronotope/browser/location.py:205
 msgid "austria"
 msgstr ""
 
 #. Default: Swizerland
-#: ./src/chronotope/browser/location.py:165
+#: ./src/chronotope/browser/location.py:206
 msgid "swizerland"
+msgstr ""
+
+#. Default: Coordinates
+#: ./src/chronotope/browser/location.py:138
+#: ./src/chronotope/browser/forms/location.yaml:18
+msgid "coordinates_label"
+msgstr ""
+
+#. Default: Latitude
+#: ./src/chronotope/browser/location.py:147
+msgid "lat"
+msgstr ""
+
+#. Default: Longitude
+#: ./src/chronotope/browser/location.py:156
+msgid "lon"
 msgstr ""
 
 #. Default: My Items
@@ -246,7 +267,7 @@ msgstr ""
 
 #. Default: Save
 #: ./src/chronotope/browser/forms/attachment.yaml:105
-#: ./src/chronotope/browser/forms/location.yaml:76
+#: ./src/chronotope/browser/forms/location.yaml:75
 #: ./src/chronotope/browser/forms/occasion.yaml:88
 #: ./src/chronotope/browser/forms/settings.yaml:53
 #: ./src/chronotope/browser/forms/facility.yaml:101
@@ -255,15 +276,10 @@ msgstr ""
 
 #. Default: Cancel
 #: ./src/chronotope/browser/forms/attachment.yaml:114
-#: ./src/chronotope/browser/forms/location.yaml:85
+#: ./src/chronotope/browser/forms/location.yaml:84
 #: ./src/chronotope/browser/forms/occasion.yaml:97
 #: ./src/chronotope/browser/forms/facility.yaml:110
 msgid "cancel"
-msgstr ""
-
-#. Default: Coordinates
-#: ./src/chronotope/browser/forms/location.yaml:18
-msgid "coordinates_label"
 msgstr ""
 
 #. Default: Pick point on map to set coordinates
@@ -277,57 +293,57 @@ msgid "coordinates_required"
 msgstr ""
 
 #. Default: Street
-#: ./src/chronotope/browser/forms/location.yaml:31
+#: ./src/chronotope/browser/forms/location.yaml:30
 msgid "street_label"
 msgstr ""
 
 #. Default: Enter street of location
-#: ./src/chronotope/browser/forms/location.yaml:32
+#: ./src/chronotope/browser/forms/location.yaml:31
 msgid "location_street_help"
 msgstr ""
 
 #. Default: Street is required
-#: ./src/chronotope/browser/forms/location.yaml:33
+#: ./src/chronotope/browser/forms/location.yaml:32
 msgid "lat_required"
 msgstr ""
 
 #. Default: ZIP
-#: ./src/chronotope/browser/forms/location.yaml:40
+#: ./src/chronotope/browser/forms/location.yaml:39
 msgid "zip_label"
 msgstr ""
 
 #. Default: Enter ZIP of location
-#: ./src/chronotope/browser/forms/location.yaml:41
+#: ./src/chronotope/browser/forms/location.yaml:40
 msgid "location_zip_help"
 msgstr ""
 
 #. Default: City
-#: ./src/chronotope/browser/forms/location.yaml:48
+#: ./src/chronotope/browser/forms/location.yaml:47
 msgid "city_label"
 msgstr ""
 
 #. Default: Enter city of location
-#: ./src/chronotope/browser/forms/location.yaml:49
+#: ./src/chronotope/browser/forms/location.yaml:48
 msgid "location_city_help"
 msgstr ""
 
 #. Default: City is required
-#: ./src/chronotope/browser/forms/location.yaml:50
+#: ./src/chronotope/browser/forms/location.yaml:49
 msgid "city_required"
 msgstr ""
 
 #. Default: Country
-#: ./src/chronotope/browser/forms/location.yaml:57
+#: ./src/chronotope/browser/forms/location.yaml:56
 msgid "country_label"
 msgstr ""
 
 #. Default: Enter country of location
-#: ./src/chronotope/browser/forms/location.yaml:58
+#: ./src/chronotope/browser/forms/location.yaml:57
 msgid "location_country_help"
 msgstr ""
 
 #. Default: Country is required
-#: ./src/chronotope/browser/forms/location.yaml:59
+#: ./src/chronotope/browser/forms/location.yaml:58
 msgid "country_required"
 msgstr ""
 

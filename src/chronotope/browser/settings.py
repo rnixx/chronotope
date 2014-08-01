@@ -1,4 +1,4 @@
-from plumber import plumber
+from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from cone.tile import (
     tile,
@@ -22,13 +22,8 @@ registerTile('content',
 
 
 @tile('editform', interface=Settings, permission='manage')
+@plumbing(YAMLForm, SettingsBehavior)
 class SettingsForm(Form):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        YAMLForm,
-        SettingsBehavior,
-    )
-
     action_resource = 'edit'
     form_name = 'chronotopesettingsform'
     form_template = 'chronotope.browser:forms/settings.yaml'

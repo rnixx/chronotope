@@ -1,5 +1,5 @@
 import uuid
-from plumber import plumber
+from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from cone.tile import tile
@@ -75,15 +75,12 @@ class OccasionTile(SubmitterAccessTile):
         return format_date(duration_to, long=False)
 
 
+@plumbing(
+    YAMLForm,
+    UXMixinProxy,
+    LocationReferencing,
+    FacilityReferencing)
 class OccasionForm(Form, UXMixin):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        YAMLForm,
-        UXMixinProxy,
-        LocationReferencing,
-        FacilityReferencing,
-    )
-
     form_name = 'occasionform'
     form_template = 'chronotope.browser:forms/occasion.yaml'
 
@@ -126,30 +123,24 @@ class OccasionEditing(OccasionForm):
 
 
 @tile('addform', interface=Occasion, permission="add")
+@plumbing(ContentAddForm)
 class OccasionAddForm(OccasionAdding):
-    __metaclass__ = plumber
-    __plumbing__ = ContentAddForm
+    pass
 
 
 @tile('editform', interface=Occasion, permission="edit")
+@plumbing(ContentEditForm)
 class OccasionEditForm(OccasionEditing):
-    __metaclass__ = plumber
-    __plumbing__ = ContentEditForm
+    pass
 
 
 @tile('overlayaddform', interface=Occasion, permission="add")
+@plumbing(SubmitterAccessAddForm, OverlayAddForm)
 class OccasionOverlayAddForm(OccasionAdding):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessAddForm,
-        OverlayAddForm,
-    )
+    pass
 
 
 @tile('overlayeditform', interface=Occasion, permission="edit")
+@plumbing(SubmitterAccessEditForm, OverlayEditForm)
 class OccasionOverlayEditForm(OccasionEditing):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessEditForm,
-        OverlayEditForm,
-    )
+    pass

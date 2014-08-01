@@ -1,6 +1,6 @@
 import uuid
 import pickle
-from plumber import plumber
+from plumber import plumbing
 from node.behaviors import NodeAttributes
 from sqlalchemy import inspect
 from sqlalchemy import event
@@ -16,19 +16,17 @@ from sqlalchemy.types import (
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from pyramid.threadlocal import get_current_request
-from cone.app.model import (
-    BaseNode,
-    Properties,
-)
+from pyramid.i18n import TranslationStringFactory
+from cone.app.model import BaseNode
 from cone.app.workflow import (
     WorkflowState,
     WorkflowACL,
 )
-from chronotope.publication import (
-    publication_transition_names,
-    publication_state_acls,
-)
+from chronotope.publication import publication_state_acls
 from chronotope.index import get_index
+
+
+_ = TranslationStringFactory('chronotope')
 
 
 ###############################################################################
@@ -195,13 +193,10 @@ class SQLRowNodeAttributes(NodeAttributes):
         return name in self._columns
 
 
+@plumbing(WorkflowState, WorkflowACL)
 class SQLRowNode(BaseNode):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        WorkflowState,
-        WorkflowACL,
-    )
-
+    workflow_name = 'publication'
+    workflow_tsf = _
     state_acls = publication_state_acls
     record_factory = None
 
@@ -213,13 +208,6 @@ class SQLRowNode(BaseNode):
             self._new = True
             record = self.record_factory()
         self.record = record
-
-    @property
-    def properties(self):
-        props = Properties()
-        props.wf_name = u'publication'
-        props.wf_transition_names = publication_transition_names
-        return props
 
     def attributes_factory(self, name, parent):
         return SQLRowNodeAttributes(name, parent, self.record)

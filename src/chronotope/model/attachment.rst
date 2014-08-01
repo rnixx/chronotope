@@ -186,7 +186,7 @@ Attachment workflow state::
     True
 
     >>> workflow = get_workflow(attachment.__class__,
-    ...                         attachment.properties.wf_name)
+    ...                         attachment.workflow_name)
     >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 

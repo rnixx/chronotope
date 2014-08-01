@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-07-30 14:26+0200\n"
+"POT-Creation-Date: 2014-07-31 16:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,33 +10,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/chronotope/publication.zcml:10
+msgid "draft"
+msgstr "Entwurf"
+
+#: src/chronotope/publication.zcml:19
+msgid "published"
+msgstr "Veröffentlicht"
+
+#: src/chronotope/publication.zcml:28
+msgid "declined"
+msgstr "Abgelehnt"
+
 #. Default: Publish
-#: src/chronotope/publication.py:21
+#: src/chronotope/publication.zcml:37 src/chronotope/publication.py:21
 msgid "draft_2_published"
 msgstr "Veröffentlichen"
 
 #. Default: Decline
-#: src/chronotope/publication.py:22
+#: src/chronotope/publication.zcml:40 src/chronotope/publication.py:22
 msgid "draft_2_declined"
 msgstr "Ablehnen"
 
 #. Default: Retract
-#: src/chronotope/publication.py:23
+#: src/chronotope/publication.zcml:43 src/chronotope/publication.py:23
 msgid "published_2_draft"
 msgstr "Zurückziehen"
 
 #. Default: Decline
-#: src/chronotope/publication.py:24
+#: src/chronotope/publication.zcml:46 src/chronotope/publication.py:24
 msgid "published_2_declined"
 msgstr "Ablehnen"
 
 #. Default: Retract
-#: src/chronotope/publication.py:25
+#: src/chronotope/publication.zcml:49 src/chronotope/publication.py:25
 msgid "declined_2_draft"
 msgstr "Zurückziehen"
 
 #. Default: Publish
-#: src/chronotope/publication.py:26
+#: src/chronotope/publication.zcml:52 src/chronotope/publication.py:26
 msgid "declined_2_published"
 msgstr "Veröffentlichen"
 

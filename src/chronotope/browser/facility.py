@@ -1,5 +1,5 @@
 import uuid
-from plumber import plumber
+from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
 from cone.tile import tile
@@ -76,15 +76,12 @@ class FacilityTile(SubmitterAccessTile, CategoriesTile):
         return format_date(exists_to, long=False)
 
 
+@plumbing(
+    YAMLForm,
+    UXMixinProxy,
+    CategoryReferencing,
+    LocationReferencing)
 class FacilityForm(Form, UXMixin):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        YAMLForm,
-        UXMixinProxy,
-        CategoryReferencing,
-        LocationReferencing,
-    )
-
     form_name = 'facilityform'
     form_template = 'chronotope.browser:forms/facility.yaml'
 
@@ -127,30 +124,24 @@ class FacilityEditing(FacilityForm):
 
 
 @tile('addform', interface=Facility, permission="add")
+@plumbing(ContentAddForm)
 class FacilityAddForm(FacilityAdding):
-    __metaclass__ = plumber
-    __plumbing__ = ContentAddForm
+    pass
 
 
 @tile('editform', interface=Facility, permission="edit")
+@plumbing(ContentEditForm)
 class FacilityEditForm(FacilityEditing):
-    __metaclass__ = plumber
-    __plumbing__ = ContentEditForm
+    pass
 
 
 @tile('overlayaddform', interface=Facility, permission="add")
+@plumbing(SubmitterAccessAddForm, OverlayAddForm)
 class FacilityOverlayAddForm(FacilityAdding):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessAddForm,
-        OverlayAddForm,
-    )
+    pass
 
 
 @tile('overlayeditform', interface=Facility, permission="edit")
+@plumbing(SubmitterAccessEditForm, OverlayEditForm)
 class FacilityOverlayEditForm(FacilityEditing):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessEditForm,
-        OverlayEditForm,
-    )
+    pass

@@ -187,7 +187,7 @@ Occasion workflow state::
     True
 
     >>> workflow = get_workflow(occasion.__class__,
-    ...                         occasion.properties.wf_name)
+    ...                         occasion.workflow_name)
     >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 

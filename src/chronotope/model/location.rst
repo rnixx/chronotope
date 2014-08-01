@@ -193,7 +193,7 @@ Location workflow state::
     True
 
     >>> workflow = get_workflow(location.__class__,
-    ...                         location.properties.wf_name)
+    ...                         location.workflow_name)
     >>> workflow
     <repoze.workflow.workflow.Workflow object at ...>
 

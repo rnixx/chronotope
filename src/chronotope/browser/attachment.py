@@ -1,7 +1,7 @@
 import uuid
 import pickle
 from StringIO import StringIO
-from plumber import plumber
+from plumber import plumbing
 from node.utils import UNSET
 from yafowil.base import ExtractionError
 from pyramid.i18n import TranslationStringFactory
@@ -140,16 +140,13 @@ class AttachmentTile(SubmitterAccessTile):
         return make_url(self.request, node=self.model, resource='download')
 
 
+@plumbing(
+    YAMLForm,
+    UXMixinProxy,
+    LocationReferencing,
+    FacilityReferencing,
+    OccasionReferencing)
 class AttachmentForm(Form, UXMixin):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        YAMLForm,
-        UXMixinProxy,
-        LocationReferencing,
-        FacilityReferencing,
-        OccasionReferencing,
-    )
-
     form_name = 'attachmentform'
     form_template = 'chronotope.browser:forms/attachment.yaml'
     default_attachment_type = 'text'
@@ -309,30 +306,24 @@ class AttachmentEditing(AttachmentForm):
 
 
 @tile('addform', interface=Attachment, permission="add")
+@plumbing(ContentAddForm)
 class AttachmentAddForm(AttachmentAdding):
-    __metaclass__ = plumber
-    __plumbing__ = ContentAddForm
+    pass
 
 
 @tile('editform', interface=Attachment, permission="edit")
+@plumbing(ContentEditForm)
 class AttachmentEditForm(AttachmentEditing):
-    __metaclass__ = plumber
-    __plumbing__ = ContentEditForm
+    pass
 
 
 @tile('overlayaddform', interface=Attachment, permission="add")
+@plumbing(SubmitterAccessAddForm, OverlayAddForm)
 class AttachmentOverlayAddForm(AttachmentAdding):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessAddForm,
-        OverlayAddForm,
-    )
+    pass
 
 
 @tile('overlayeditform', interface=Attachment, permission="edit")
+@plumbing(SubmitterAccessEditForm, OverlayEditForm)
 class AttachmentOverlayEditForm(AttachmentEditing):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessEditForm,
-        OverlayEditForm,
-    )
+    pass

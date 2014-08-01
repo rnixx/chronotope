@@ -2,7 +2,7 @@ import uuid
 import urllib2
 from plumber import (
     Behavior,
-    plumber,
+    plumbing,
     plumb,
 )
 from node.utils import UNSET
@@ -129,14 +129,11 @@ class CoordinatesProxy(Behavior):
         coordinates['zoom'] = factory('hidden', value=params[fname('zoom')])
 
 
+@plumbing(
+    YAMLForm,
+    UXMixinProxy,
+    CoordinatesProxy)
 class LocationForm(Form, UXMixin):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        YAMLForm,
-        UXMixinProxy,
-        CoordinatesProxy,
-    )
-
     form_name = 'locationform'
     form_template = 'chronotope.browser:forms/location.yaml'
     location_zoom = 15
@@ -203,24 +200,20 @@ class LocationEditing(LocationForm):
 
 
 @tile('addform', interface=Location, permission="add")
+@plumbing(ContentAddForm)
 class LocationAddForm(LocationAdding):
-    __metaclass__ = plumber
-    __plumbing__ = ContentAddForm
+    pass
 
 
 @tile('editform', interface=Location, permission="edit")
+@plumbing(ContentEditForm)
 class LocationEditForm(LocationEditing):
-    __metaclass__ = plumber
-    __plumbing__ = ContentEditForm
+    pass
 
 
 @tile('overlayaddform', interface=Location, permission="add")
+@plumbing(SubmitterAccessAddForm, OverlayAddForm)
 class LocationOverlayAddForm(LocationAdding):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessAddForm,
-        OverlayAddForm,
-    )
 
     def next(self, request):
         came_from_url = urllib2.unquote(request.get('authoring_came_from'))
@@ -244,9 +237,6 @@ class LocationOverlayAddForm(LocationAdding):
 
 
 @tile('overlayeditform', interface=Location, permission="edit")
+@plumbing(SubmitterAccessEditForm, OverlayEditForm)
 class LocationOverlayEditForm(LocationEditing):
-    __metaclass__ = plumber
-    __plumbing__ = (
-        SubmitterAccessEditForm,
-        OverlayEditForm,
-    )
+    pass

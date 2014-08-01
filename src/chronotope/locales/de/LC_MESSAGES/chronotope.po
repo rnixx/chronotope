@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-07-31 16:49+0200\n"
+"POT-Creation-Date: 2014-08-01 09:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,58 +22,52 @@ msgstr "Veröffentlicht"
 msgid "declined"
 msgstr "Abgelehnt"
 
-#. Default: Publish
-#: src/chronotope/publication.zcml:37 src/chronotope/publication.py:21
+#: src/chronotope/publication.zcml:37
 msgid "draft_2_published"
 msgstr "Veröffentlichen"
 
-#. Default: Decline
-#: src/chronotope/publication.zcml:40 src/chronotope/publication.py:22
+#: src/chronotope/publication.zcml:40
 msgid "draft_2_declined"
 msgstr "Ablehnen"
 
-#. Default: Retract
-#: src/chronotope/publication.zcml:43 src/chronotope/publication.py:23
+#: src/chronotope/publication.zcml:43
 msgid "published_2_draft"
 msgstr "Zurückziehen"
 
-#. Default: Decline
-#: src/chronotope/publication.zcml:46 src/chronotope/publication.py:24
+#: src/chronotope/publication.zcml:46
 msgid "published_2_declined"
 msgstr "Ablehnen"
 
-#. Default: Retract
-#: src/chronotope/publication.zcml:49 src/chronotope/publication.py:25
+#: src/chronotope/publication.zcml:49
 msgid "declined_2_draft"
 msgstr "Zurückziehen"
 
-#. Default: Publish
-#: src/chronotope/publication.zcml:52 src/chronotope/publication.py:26
+#: src/chronotope/publication.zcml:52
 msgid "declined_2_published"
 msgstr "Veröffentlichen"
 
 #. Default: Keep Existing image
-#: src/chronotope/browser/attachment.py:167
+#: src/chronotope/browser/attachment.py:164
 msgid "keep_existing_image"
 msgstr "Bestehendes Bild beibehalten"
 
 #. Default: Replace existing image
-#: src/chronotope/browser/attachment.py:168
+#: src/chronotope/browser/attachment.py:165
 msgid "replace_existing_image"
 msgstr "Bestehendes Bild ersetzen"
 
 #. Default: Text
-#: src/chronotope/browser/attachment.py:180
+#: src/chronotope/browser/attachment.py:177
 msgid "attachment_type_text"
 msgstr "Text"
 
 #. Default: File
-#: src/chronotope/browser/attachment.py:181
+#: src/chronotope/browser/attachment.py:178
 msgid "attachment_type_file"
 msgstr "Datei"
 
 #. Default: Image
-#: src/chronotope/browser/attachment.py:182
+#: src/chronotope/browser/attachment.py:179
 msgid "attachment_type_image"
 msgstr "Bild"
 
@@ -90,17 +84,17 @@ msgid "sort_on_state"
 msgstr "Nach Status sortieren"
 
 #. Default: Germany
-#: src/chronotope/browser/location.py:166
+#: src/chronotope/browser/location.py:163
 msgid "germany"
 msgstr "Deutschland"
 
 #. Default: Austria
-#: src/chronotope/browser/location.py:167
+#: src/chronotope/browser/location.py:164
 msgid "austria"
 msgstr "Österreich"
 
 #. Default: Swizerland
-#: src/chronotope/browser/location.py:168
+#: src/chronotope/browser/location.py:165
 msgid "swizerland"
 msgstr "Schweiz"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-08-01 13:21+0200\n"
+"POT-Creation-Date: 2014-08-25 09:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,13 +78,13 @@ msgstr ""
 
 #. Default: State
 #: ./src/chronotope/browser/contents.py:23
-#: ./src/chronotope/browser/submitter.py:220
+#: ./src/chronotope/browser/submitter.py:228
 msgid "state"
 msgstr ""
 
 #. Default: Sort on state
 #: ./src/chronotope/browser/contents.py:25
-#: ./src/chronotope/browser/submitter.py:222
+#: ./src/chronotope/browser/submitter.py:230
 msgid "sort_on_state"
 msgstr ""
 
@@ -151,7 +151,7 @@ msgid "add_attachment"
 msgstr ""
 
 #. Default: Title
-#: ./src/chronotope/browser/submitter.py:202
+#: ./src/chronotope/browser/submitter.py:210
 #: ./src/chronotope/browser/templates/facility.pt:24
 #: ./src/chronotope/browser/templates/attachment.pt:24
 #: ./src/chronotope/browser/templates/occasion.pt:24
@@ -159,32 +159,32 @@ msgid "title"
 msgstr ""
 
 #. Default: Sort on title
-#: ./src/chronotope/browser/submitter.py:204
+#: ./src/chronotope/browser/submitter.py:212
 msgid "sort_on_title"
 msgstr ""
 
 #. Default: Created
-#: ./src/chronotope/browser/submitter.py:208
+#: ./src/chronotope/browser/submitter.py:216
 msgid "created"
 msgstr ""
 
 #. Default: Sort on created
-#: ./src/chronotope/browser/submitter.py:210
+#: ./src/chronotope/browser/submitter.py:218
 msgid "sort_on_created"
 msgstr ""
 
 #. Default: Modified
-#: ./src/chronotope/browser/submitter.py:214
+#: ./src/chronotope/browser/submitter.py:222
 msgid "modified"
 msgstr ""
 
 #. Default: Sort on modified
-#: ./src/chronotope/browser/submitter.py:216
+#: ./src/chronotope/browser/submitter.py:224
 msgid "sort_on_modified"
 msgstr ""
 
 #. Default: Verify
-#: ./src/chronotope/browser/submitter.py:101
+#: ./src/chronotope/browser/submitter.py:109
 msgid "verify"
 msgstr ""
 
@@ -501,57 +501,65 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#. Default: Coordinates
+#. Default: Creator
 #: ./src/chronotope/browser/templates/location.pt:24
+#: ./src/chronotope/browser/templates/facility.pt:35
+#: ./src/chronotope/browser/templates/attachment.pt:35
+#: ./src/chronotope/browser/templates/occasion.pt:35
+msgid "creator"
+msgstr ""
+
+#. Default: Coordinates
+#: ./src/chronotope/browser/templates/location.pt:35
 msgid "coordinates"
 msgstr ""
 
 #. Default: Street
-#: ./src/chronotope/browser/templates/location.pt:38
+#: ./src/chronotope/browser/templates/location.pt:49
 msgid "street"
 msgstr ""
 
 #. Default: ZIP
-#: ./src/chronotope/browser/templates/location.pt:49
+#: ./src/chronotope/browser/templates/location.pt:60
 msgid "zip"
 msgstr ""
 
 #. Default: City
-#: ./src/chronotope/browser/templates/location.pt:60
+#: ./src/chronotope/browser/templates/location.pt:71
 msgid "city"
 msgstr ""
 
 #. Default: Country
-#: ./src/chronotope/browser/templates/location.pt:71
+#: ./src/chronotope/browser/templates/location.pt:82
 msgid "country"
 msgstr ""
 
 #. Default: Facilities
-#: ./src/chronotope/browser/templates/location.pt:82
-#: ./src/chronotope/browser/templates/attachment.pt:107
-#: ./src/chronotope/browser/templates/occasion.pt:84
+#: ./src/chronotope/browser/templates/location.pt:93
+#: ./src/chronotope/browser/templates/attachment.pt:118
+#: ./src/chronotope/browser/templates/occasion.pt:95
 msgid "facilities"
 msgstr ""
 
 #. Default: Occasions
-#: ./src/chronotope/browser/templates/location.pt:96
-#: ./src/chronotope/browser/templates/facility.pt:107
-#: ./src/chronotope/browser/templates/attachment.pt:121
+#: ./src/chronotope/browser/templates/location.pt:107
+#: ./src/chronotope/browser/templates/facility.pt:118
+#: ./src/chronotope/browser/templates/attachment.pt:132
 msgid "occasions"
 msgstr ""
 
 #. Default: Attachments
-#: ./src/chronotope/browser/templates/location.pt:110
-#: ./src/chronotope/browser/templates/facility.pt:121
-#: ./src/chronotope/browser/templates/occasion.pt:98
+#: ./src/chronotope/browser/templates/location.pt:121
+#: ./src/chronotope/browser/templates/facility.pt:132
+#: ./src/chronotope/browser/templates/occasion.pt:109
 msgid "attachments"
 msgstr ""
 
 #. Default: Actions
-#: ./src/chronotope/browser/templates/location.pt:124
-#: ./src/chronotope/browser/templates/facility.pt:135
-#: ./src/chronotope/browser/templates/attachment.pt:135
-#: ./src/chronotope/browser/templates/occasion.pt:112
+#: ./src/chronotope/browser/templates/location.pt:135
+#: ./src/chronotope/browser/templates/facility.pt:146
+#: ./src/chronotope/browser/templates/attachment.pt:146
+#: ./src/chronotope/browser/templates/occasion.pt:123
 msgid "actions"
 msgstr ""
 
@@ -561,30 +569,30 @@ msgid "facility"
 msgstr ""
 
 #. Default: Description
-#: ./src/chronotope/browser/templates/facility.pt:35
-#: ./src/chronotope/browser/templates/occasion.pt:35
+#: ./src/chronotope/browser/templates/facility.pt:46
+#: ./src/chronotope/browser/templates/occasion.pt:46
 msgid "description"
 msgstr ""
 
 #. Default: Exists from
-#: ./src/chronotope/browser/templates/facility.pt:48
+#: ./src/chronotope/browser/templates/facility.pt:59
 msgid "exists_from"
 msgstr ""
 
 #. Default: Exists to
-#: ./src/chronotope/browser/templates/facility.pt:59
+#: ./src/chronotope/browser/templates/facility.pt:70
 msgid "exists_to"
 msgstr ""
 
 #. Default: Categories
-#: ./src/chronotope/browser/templates/facility.pt:70
+#: ./src/chronotope/browser/templates/facility.pt:81
 msgid "categories"
 msgstr ""
 
 #. Default: Locations
-#: ./src/chronotope/browser/templates/facility.pt:93
-#: ./src/chronotope/browser/templates/attachment.pt:93
-#: ./src/chronotope/browser/templates/occasion.pt:70
+#: ./src/chronotope/browser/templates/facility.pt:104
+#: ./src/chronotope/browser/templates/attachment.pt:104
+#: ./src/chronotope/browser/templates/occasion.pt:81
 msgid "locations"
 msgstr ""
 
@@ -594,28 +602,28 @@ msgid "attachment"
 msgstr ""
 
 #. Default: Text
-#: ./src/chronotope/browser/templates/attachment.pt:35
+#: ./src/chronotope/browser/templates/attachment.pt:46
 msgid "text"
 msgstr ""
 
 #. Default: Filename
-#: ./src/chronotope/browser/templates/attachment.pt:48
+#: ./src/chronotope/browser/templates/attachment.pt:59
 msgid "filename"
 msgstr ""
 
 #. Default: Mimetype
-#: ./src/chronotope/browser/templates/attachment.pt:57
+#: ./src/chronotope/browser/templates/attachment.pt:68
 msgid "mimetype"
 msgstr ""
 
 #. Default: Preview
-#: ./src/chronotope/browser/templates/attachment.pt:66
+#: ./src/chronotope/browser/templates/attachment.pt:77
 msgid "preview"
 msgstr ""
 
 #. Default: Download
-#: ./src/chronotope/browser/templates/attachment.pt:78
-#: ./src/chronotope/browser/templates/attachment.pt:83
+#: ./src/chronotope/browser/templates/attachment.pt:89
+#: ./src/chronotope/browser/templates/attachment.pt:94
 msgid "download"
 msgstr ""
 
@@ -670,12 +678,12 @@ msgid "occasion"
 msgstr ""
 
 #. Default: Duration from
-#: ./src/chronotope/browser/templates/occasion.pt:48
+#: ./src/chronotope/browser/templates/occasion.pt:59
 msgid "duration_from"
 msgstr ""
 
 #. Default: Duration to
-#: ./src/chronotope/browser/templates/occasion.pt:59
+#: ./src/chronotope/browser/templates/occasion.pt:70
 msgid "duration_to"
 msgstr ""
 

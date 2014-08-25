@@ -68,6 +68,12 @@ tr.state-declined td.state,
     padding-left:3px;
     padding-right:3px;
 }
+input.datepicker {
+    width:80px;
+}
+input.timepicker {
+    width:50px;
+}
 
 /* content tiles */
 .overlay-view-heading {

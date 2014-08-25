@@ -266,9 +266,9 @@
 
     chronotope = {
 
-        default_lon: 10.4144,
-        default_lat: 53.2525,
-        default_zoom: 10,
+        default_lon: 9.6967,
+        default_lat: 52.8675,
+        default_zoom: 8,
         min_zoom: 2,
         max_zoom: 18,
         map: null,

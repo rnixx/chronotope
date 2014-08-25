@@ -20,6 +20,13 @@
         <td tal:content="model.attrs['title']">Title</td>
       </tr>
 
+      <tr tal:define="creator context.creator"
+          tal:condition="creator">
+        <td class="row-title"
+            i18n:translate="creator">Creator</td>
+        <td tal:content="creator">Creator</td>
+      </tr>
+
       <tr>
         <td class="row-title"
             i18n:translate="description">Description</td>

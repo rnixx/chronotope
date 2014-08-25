@@ -14,6 +14,13 @@
         </td>
       </tr>
 
+      <tr tal:define="creator context.creator"
+          tal:condition="creator">
+        <td class="row-title"
+            i18n:translate="creator">Creator</td>
+        <td tal:content="creator">Creator</td>
+      </tr>
+
       <tr tal:condition="context.is_backend">
         <td class="row-title"
             i18n:translate="coordinates">Coordinates</td>

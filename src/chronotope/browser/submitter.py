@@ -65,6 +65,14 @@ def check_submitter_access(model, request):
 
 class SubmitterAccessTile(Tile):
 
+    @property
+    def creator(self):
+        if not authenticated_userid(self.request):
+            return None
+        if self.model.attrs['submitter']:
+            return self.model.attrs['submitter']
+        return self.model.metadata.creator
+
     def __call__(self, model, request):
         check_submitter_access(model, request)
         return super(SubmitterAccessTile, self).__call__(model, request)

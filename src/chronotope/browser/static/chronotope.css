@@ -172,6 +172,12 @@ tr.state-declined td.state,
 }
 
 /* footer */
+.footer-leuphana {
+    margin:10px 0;
+}
+.footer-dfg {
+    margin:10px 0 10px 20px;
+}
 .footer-ae {
     margin:12px 0;
 }

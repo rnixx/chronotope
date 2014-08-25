@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-08-25 09:26+0200\n"
+"POT-Creation-Date: 2014-08-25 09:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,38 +84,38 @@ msgid "sort_on_state"
 msgstr "Nach Status sortieren"
 
 #. Default: Pick other location
-#: src/chronotope/browser/location.py:123
+#: src/chronotope/browser/location.py:127
 msgid "pick_location"
 msgstr "Wähle andere Koordinaten auf der Karte"
 
 #. Default: Germany
-#: src/chronotope/browser/location.py:204
+#: src/chronotope/browser/location.py:210
 msgid "germany"
 msgstr "Deutschland"
 
 #. Default: Austria
-#: src/chronotope/browser/location.py:205
+#: src/chronotope/browser/location.py:211
 msgid "austria"
 msgstr "Österreich"
 
 #. Default: Swizerland
-#: src/chronotope/browser/location.py:206
+#: src/chronotope/browser/location.py:212
 msgid "swizerland"
 msgstr "Schweiz"
 
 #. Default: Coordinates
-#: src/chronotope/browser/location.py:138
+#: src/chronotope/browser/location.py:142
 #: src/chronotope/browser/forms/location.yaml:18
 msgid "coordinates_label"
 msgstr "Koordinaten"
 
 #. Default: Latitude
-#: src/chronotope/browser/location.py:147
+#: src/chronotope/browser/location.py:151
 msgid "lat"
 msgstr "Breitengrad"
 
 #. Default: Longitude
-#: src/chronotope/browser/location.py:156
+#: src/chronotope/browser/location.py:160
 msgid "lon"
 msgstr "Längengrad"
 
@@ -264,18 +264,18 @@ msgstr "Bild ist erforderlich"
 
 #. Default: Save
 #: src/chronotope/browser/forms/attachment.yaml:105
-#: src/chronotope/browser/forms/location.yaml:75
+#: src/chronotope/browser/forms/location.yaml:79
 #: src/chronotope/browser/forms/occasion.yaml:88
 #: src/chronotope/browser/forms/settings.yaml:53
-#: src/chronotope/browser/forms/facility.yaml:101
+#: src/chronotope/browser/forms/facility.yaml:103
 msgid "save"
 msgstr "Speichern"
 
 #. Default: Cancel
 #: src/chronotope/browser/forms/attachment.yaml:114
-#: src/chronotope/browser/forms/location.yaml:84
+#: src/chronotope/browser/forms/location.yaml:88
 #: src/chronotope/browser/forms/occasion.yaml:97
-#: src/chronotope/browser/forms/facility.yaml:110
+#: src/chronotope/browser/forms/facility.yaml:112
 msgid "cancel"
 msgstr "Abbrechen"
 
@@ -543,14 +543,14 @@ msgstr "Einrichtungen"
 #: src/chronotope/browser/templates/facility.pt:118
 #: src/chronotope/browser/templates/attachment.pt:132
 msgid "occasions"
-msgstr "Ereignis hinzufügen"
+msgstr "Ereignisse"
 
 #. Default: Attachments
 #: src/chronotope/browser/templates/location.pt:121
 #: src/chronotope/browser/templates/facility.pt:132
 #: src/chronotope/browser/templates/occasion.pt:109
 msgid "attachments"
-msgstr "Anhang hinzufügen"
+msgstr "Anhänge"
 
 #. Default: Actions
 #: src/chronotope/browser/templates/location.pt:135

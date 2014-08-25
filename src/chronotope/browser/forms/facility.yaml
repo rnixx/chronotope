@@ -85,6 +85,8 @@ widgets:
         div.class_add: col-sm-10
 - location:
     nest: location_reference.yaml
+- occasion:
+    nest: occasion_reference.yaml
 - controls:
     factory: field:div
     props:

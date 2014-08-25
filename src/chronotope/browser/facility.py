@@ -26,8 +26,9 @@ from chronotope.model.facility import (
 from chronotope.browser.category import CategoriesTile
 from chronotope.browser.references import (
     json_references,
-    LocationReferencing,
     CategoryReferencing,
+    LocationReferencing,
+    OccasionReferencing,
 )
 from chronotope.browser.submitter import (
     SubmitterAccessTile,
@@ -80,7 +81,8 @@ class FacilityTile(SubmitterAccessTile, CategoriesTile):
     YAMLForm,
     UXMixinProxy,
     CategoryReferencing,
-    LocationReferencing)
+    LocationReferencing,
+    OccasionReferencing)
 class FacilityForm(Form, UXMixin):
     form_name = 'facilityform'
     form_template = 'chronotope.browser:forms/facility.yaml'

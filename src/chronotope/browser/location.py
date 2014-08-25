@@ -45,7 +45,11 @@ from chronotope.model.location import (
     search_locations,
     location_title,
 )
-from chronotope.browser.references import json_references
+from chronotope.browser.references import (
+    json_references,
+    FacilityReferencing,
+    OccasionReferencing,
+)
 from chronotope.browser.submitter import (
     SubmitterAccessTile,
     SubmitterAccessAddForm,
@@ -173,7 +177,9 @@ class CoordinatesProxy(Behavior):
 @plumbing(
     YAMLForm,
     UXMixinProxy,
-    CoordinatesProxy)
+    CoordinatesProxy,
+    FacilityReferencing,
+    OccasionReferencing)
 class LocationForm(Form, UXMixin):
     form_name = 'locationform'
     form_template = 'chronotope.browser:forms/location.yaml'

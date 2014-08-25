@@ -59,6 +59,10 @@ widgets:
         vocabulary: expr:context.country_vocab
         label.class_add: col-sm-2
         div.class_add: col-sm-10
+- facility:
+    nest: facility_reference.yaml
+- occasion:
+    nest: occasion_reference.yaml
 - controls:
     factory: field:div
     props:

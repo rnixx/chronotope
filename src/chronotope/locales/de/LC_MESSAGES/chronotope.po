@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 17:05+0200\n"
+"POT-Creation-Date: 2014-09-08 17:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,7 +213,7 @@ msgstr "Ort wählen"
 #. Default: Title/Description
 #: src/chronotope/browser/forms/attachment.yaml:18
 msgid "title_description_label"
-msgstr "Titel/Beschreibung"
+msgstr "Titel / Beschreibung"
 
 #. Default: Enter title/description of attachment
 #: src/chronotope/browser/forms/attachment.yaml:19
@@ -225,7 +225,7 @@ msgstr ""
 #. Default: Title/description is required
 #: src/chronotope/browser/forms/attachment.yaml:20
 msgid "title_description_required"
-msgstr "Titel/Beschreibung ist erforderlich"
+msgstr "Titel / Beschreibung ist erforderlich"
 
 #. Default: Attachment
 #: src/chronotope/browser/forms/attachment.yaml:28
@@ -237,7 +237,7 @@ msgstr "Material"
 #: src/chronotope/browser/forms/attachment.yaml:37
 msgid "help_attachment_type"
 msgstr ""
-"Du kannst als Material entweder Text eingeben, oder ein Bild oder eine Datei "
+"Du kannst als Material entweder Text eingeben oder ein Bild oder eine Datei "
 "hochladen. Achtung - wenn du den Typ eines existierenden Materials änderst, "
 "werden die bisherigen Daten verworfen."
 

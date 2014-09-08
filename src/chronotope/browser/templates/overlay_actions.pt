@@ -4,14 +4,40 @@
              condition="actions"
              omit-tag="True">
 
-  <tal:btn repeat="action actions">
-    <button class="btn btn-sm btn-${action.btn}"
-            ajax:bind="click"
-            ajax:target="${action.target}"
-            ajax:overlay="${action.overlay}">
-      <span class="${action.icon}"></span>
-      <span tal:content="action.title">Action Title</span>
-    </button>
-  </tal:btn>
+  <div class="action-group">
+    <tal:btn repeat="action context.context_actions">
+      <button class="btn btn-sm btn-${action.btn}"
+              ajax:bind="click"
+              ajax:target="${action.target}"
+              ajax:overlay="${action.overlay}">
+        <span class="${action.icon}"></span>
+        <span tal:content="action.title">Action Title</span>
+      </button>
+    </tal:btn>
+  </div>
+
+  <div class="action-group">
+    <tal:btn repeat="action context.user_actions">
+      <button class="btn btn-sm btn-${action.btn}"
+              ajax:bind="click"
+              ajax:target="${action.target}"
+              ajax:overlay="${action.overlay}">
+        <span class="${action.icon}"></span>
+        <span tal:content="action.title">Action Title</span>
+      </button>
+    </tal:btn>
+  </div>
+
+  <div class="action-group">
+    <tal:btn repeat="action context.authoring_actions">
+      <button class="btn btn-sm btn-${action.btn}"
+              ajax:bind="click"
+              ajax:target="${action.target}"
+              ajax:overlay="${action.overlay}">
+        <span class="${action.icon}"></span>
+        <span tal:content="action.title">Action Title</span>
+      </button>
+    </tal:btn>
+  </div>
 
 </tal:actions>

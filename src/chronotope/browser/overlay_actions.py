@@ -33,15 +33,32 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def actions(self):
-        actions = list()
         if self.is_backend:
-            return actions
+            return False
         authenticated = bool(authenticated_userid(self.request))
         if not authenticated and not get_submitter(self.request):
-            return actions
+            return False
+        return True
+
+    @property
+    def context_actions(self):
+        actions = [
+            self.edit,
+        ]
+        actions = [action for action in actions if action]
+        return actions
+
+    @property
+    def user_actions(self):
         actions = [
             self.contents,
-            self.edit,
+        ]
+        actions = [action for action in actions if action]
+        return actions
+
+    @property
+    def authoring_actions(self):
+        actions = [
             self.add_facility,
             self.add_occasion,
             self.add_attachment,

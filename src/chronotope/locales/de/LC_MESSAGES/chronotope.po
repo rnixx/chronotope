@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 10:14+0200\n"
+"POT-Creation-Date: 2014-09-08 10:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,30 +120,30 @@ msgid "lon"
 msgstr "Längengrad"
 
 #. Default: My Items
-#: src/chronotope/browser/overlay_actions.py:82
+#: src/chronotope/browser/overlay_actions.py:99
 msgid "my_items"
 msgstr "Meine Einträge anzeigen"
 
 #. Default: Edit
-#: src/chronotope/browser/overlay_actions.py:102
-#: src/chronotope/browser/overlay_actions.py:198
+#: src/chronotope/browser/overlay_actions.py:119
+#: src/chronotope/browser/overlay_actions.py:215
 msgid "edit"
 msgstr "Diesen Eintrag editieren"
 
 #. Default: Add Facility
-#: src/chronotope/browser/overlay_actions.py:125
+#: src/chronotope/browser/overlay_actions.py:142
 msgid "add_facility"
 msgstr "Einrichtung hinzufügen"
 
 #. Default: Add Occasion
-#: src/chronotope/browser/overlay_actions.py:148
+#: src/chronotope/browser/overlay_actions.py:165
 msgid "add_occasion"
 msgstr "Ereignis hinzufügen"
 
 #. Default: Add Attachment
-#: src/chronotope/browser/overlay_actions.py:171
+#: src/chronotope/browser/overlay_actions.py:188
 msgid "add_attachment"
-msgstr "Anhang hinzufügen"
+msgstr "Material/Text hinzufügen"
 
 #. Default: Title
 #: src/chronotope/browser/submitter.py:210
@@ -687,7 +687,7 @@ msgstr "Setze Standard Ansicht"
 #. Default: Show my Items
 #: src/chronotope/browser/templates/location_controls.pt:108
 msgid "show_my_items"
-msgstr "Zeige meine Einträge"
+msgstr "Meine Einträge anzeigen"
 
 #. Default: Occasion
 #: src/chronotope/browser/templates/occasion.pt:14

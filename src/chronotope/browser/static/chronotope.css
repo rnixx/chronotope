@@ -26,6 +26,11 @@ tr.state-declined td.state,
     margin-bottom:16px;
 }
 
+/* overlay forms */
+.action-group {
+    margin-bottom:4px;
+}
+
 /* login form */
 #form-loginform {
     width:450px;

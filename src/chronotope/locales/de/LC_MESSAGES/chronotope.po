@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 16:31+0200\n"
+"POT-Creation-Date: 2014-09-08 16:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -506,8 +506,8 @@ msgstr "Beschreibung"
 msgid "facility_description_help"
 msgstr ""
 "Du kannst hier Text nach Belieben eingeben. Solltest du nur einen ungefähren "
-"Zeitraum wissen, in dem die Einrichtung existiert (hat), trag ihn bitte hier "
-"im Beschreibungstext anstelle der folgenden Datumsfelder ein."
+"Zeitraum (z.B das Jahr) wissen, in dem die Einrichtung existiert (hat), trag "
+"ihn bitte hier im Beschreibungstext anstelle der folgenden Datumsfelder ein."
 
 #. Default: Exists From
 #: src/chronotope/browser/forms/facility.yaml:50
@@ -557,8 +557,23 @@ msgstr "Schlagwörter wählen oder hinzufügen"
 msgid "location"
 msgstr "Ort"
 
-#. Default: Creator
+#. Default: Note
 #: src/chronotope/browser/templates/location.pt:24
+msgid "note"
+msgstr "Anmerkung"
+
+#. Default: Description Text.
+#: src/chronotope/browser/templates/location.pt:27
+msgid "location_general_description"
+msgstr ""
+"Hier nochmal die Angaben zum Ort, sie können über 'editieren' noch geändert "
+"werden. Über 'Meine Einträge' kannst du auch ggf. schon getätigte Eingaben "
+"ändern. Außerdem kannst du nun 'Einrichtungen' (wie Discos, Clubs etc.) oder "
+"'Ereignisse' (Konzerte, Festivals etc.) eingeben. Deine Einträge werden von "
+"uns gesichtet und freigeschaltet."
+
+#. Default: Creator
+#: src/chronotope/browser/templates/location.pt:37
 #: src/chronotope/browser/templates/facility.pt:35
 #: src/chronotope/browser/templates/attachment.pt:35
 #: src/chronotope/browser/templates/occasion.pt:35
@@ -566,53 +581,53 @@ msgid "creator"
 msgstr "Ersteller"
 
 #. Default: Coordinates
-#: src/chronotope/browser/templates/location.pt:35
+#: src/chronotope/browser/templates/location.pt:48
 msgid "coordinates"
 msgstr "Koordinaten"
 
 #. Default: Street
-#: src/chronotope/browser/templates/location.pt:49
+#: src/chronotope/browser/templates/location.pt:62
 msgid "street"
 msgstr "Straße"
 
 #. Default: ZIP
-#: src/chronotope/browser/templates/location.pt:60
+#: src/chronotope/browser/templates/location.pt:73
 msgid "zip"
 msgstr "Postleizahl"
 
 #. Default: City
-#: src/chronotope/browser/templates/location.pt:71
+#: src/chronotope/browser/templates/location.pt:84
 msgid "city"
 msgstr "Ort"
 
 #. Default: Country
-#: src/chronotope/browser/templates/location.pt:82
+#: src/chronotope/browser/templates/location.pt:95
 msgid "country"
 msgstr "Land"
 
 #. Default: Facilities
-#: src/chronotope/browser/templates/location.pt:93
+#: src/chronotope/browser/templates/location.pt:106
 #: src/chronotope/browser/templates/attachment.pt:118
 #: src/chronotope/browser/templates/occasion.pt:95
 msgid "facilities"
 msgstr "Einrichtungen"
 
 #. Default: Occasions
-#: src/chronotope/browser/templates/location.pt:107
+#: src/chronotope/browser/templates/location.pt:120
 #: src/chronotope/browser/templates/facility.pt:118
 #: src/chronotope/browser/templates/attachment.pt:132
 msgid "occasions"
 msgstr "Ereignisse"
 
 #. Default: Attachments
-#: src/chronotope/browser/templates/location.pt:121
+#: src/chronotope/browser/templates/location.pt:134
 #: src/chronotope/browser/templates/facility.pt:132
 #: src/chronotope/browser/templates/occasion.pt:109
 msgid "attachments"
 msgstr "Materialien/Texte"
 
 #. Default: Actions
-#: src/chronotope/browser/templates/location.pt:135
+#: src/chronotope/browser/templates/location.pt:148
 #: src/chronotope/browser/templates/facility.pt:146
 #: src/chronotope/browser/templates/attachment.pt:146
 #: src/chronotope/browser/templates/occasion.pt:123

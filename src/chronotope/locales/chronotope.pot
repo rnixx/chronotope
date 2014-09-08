@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 16:31+0200\n"
+"POT-Creation-Date: 2014-09-08 16:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -535,8 +535,18 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#. Default: Creator
+#. Default: Note
 #: ./src/chronotope/browser/templates/location.pt:24
+msgid "note"
+msgstr ""
+
+#. Default: Description Text.
+#: ./src/chronotope/browser/templates/location.pt:27
+msgid "location_general_description"
+msgstr ""
+
+#. Default: Creator
+#: ./src/chronotope/browser/templates/location.pt:37
 #: ./src/chronotope/browser/templates/facility.pt:35
 #: ./src/chronotope/browser/templates/attachment.pt:35
 #: ./src/chronotope/browser/templates/occasion.pt:35
@@ -544,53 +554,53 @@ msgid "creator"
 msgstr ""
 
 #. Default: Coordinates
-#: ./src/chronotope/browser/templates/location.pt:35
+#: ./src/chronotope/browser/templates/location.pt:48
 msgid "coordinates"
 msgstr ""
 
 #. Default: Street
-#: ./src/chronotope/browser/templates/location.pt:49
+#: ./src/chronotope/browser/templates/location.pt:62
 msgid "street"
 msgstr ""
 
 #. Default: ZIP
-#: ./src/chronotope/browser/templates/location.pt:60
+#: ./src/chronotope/browser/templates/location.pt:73
 msgid "zip"
 msgstr ""
 
 #. Default: City
-#: ./src/chronotope/browser/templates/location.pt:71
+#: ./src/chronotope/browser/templates/location.pt:84
 msgid "city"
 msgstr ""
 
 #. Default: Country
-#: ./src/chronotope/browser/templates/location.pt:82
+#: ./src/chronotope/browser/templates/location.pt:95
 msgid "country"
 msgstr ""
 
 #. Default: Facilities
-#: ./src/chronotope/browser/templates/location.pt:93
+#: ./src/chronotope/browser/templates/location.pt:106
 #: ./src/chronotope/browser/templates/attachment.pt:118
 #: ./src/chronotope/browser/templates/occasion.pt:95
 msgid "facilities"
 msgstr ""
 
 #. Default: Occasions
-#: ./src/chronotope/browser/templates/location.pt:107
+#: ./src/chronotope/browser/templates/location.pt:120
 #: ./src/chronotope/browser/templates/facility.pt:118
 #: ./src/chronotope/browser/templates/attachment.pt:132
 msgid "occasions"
 msgstr ""
 
 #. Default: Attachments
-#: ./src/chronotope/browser/templates/location.pt:121
+#: ./src/chronotope/browser/templates/location.pt:134
 #: ./src/chronotope/browser/templates/facility.pt:132
 #: ./src/chronotope/browser/templates/occasion.pt:109
 msgid "attachments"
 msgstr ""
 
 #. Default: Actions
-#: ./src/chronotope/browser/templates/location.pt:135
+#: ./src/chronotope/browser/templates/location.pt:148
 #: ./src/chronotope/browser/templates/facility.pt:146
 #: ./src/chronotope/browser/templates/attachment.pt:146
 #: ./src/chronotope/browser/templates/occasion.pt:123

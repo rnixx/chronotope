@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:01+0200\n"
+"POT-Creation-Date: 2014-09-08 12:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -224,7 +224,6 @@ msgstr ""
 #. Default: Title is required
 #: ./src/chronotope/browser/forms/attachment.yaml:20
 #: ./src/chronotope/browser/forms/occasion.yaml:20
-#: ./src/chronotope/browser/forms/facility.yaml:20
 msgid "title_required"
 msgstr ""
 
@@ -275,7 +274,7 @@ msgstr ""
 #: ./src/chronotope/browser/forms/location.yaml:86
 #: ./src/chronotope/browser/forms/occasion.yaml:88
 #: ./src/chronotope/browser/forms/settings.yaml:87
-#: ./src/chronotope/browser/forms/facility.yaml:99
+#: ./src/chronotope/browser/forms/facility.yaml:98
 msgid "save"
 msgstr ""
 
@@ -283,7 +282,7 @@ msgstr ""
 #: ./src/chronotope/browser/forms/attachment.yaml:114
 #: ./src/chronotope/browser/forms/location.yaml:95
 #: ./src/chronotope/browser/forms/occasion.yaml:97
-#: ./src/chronotope/browser/forms/facility.yaml:108
+#: ./src/chronotope/browser/forms/facility.yaml:107
 msgid "cancel"
 msgstr ""
 
@@ -360,7 +359,6 @@ msgstr ""
 
 #. Default: Description is required
 #: ./src/chronotope/browser/forms/occasion.yaml:29
-#: ./src/chronotope/browser/forms/facility.yaml:29
 msgid "description_required"
 msgstr ""
 
@@ -476,43 +474,48 @@ msgstr ""
 msgid "facility_title_help"
 msgstr ""
 
+#. Default: Title is required
+#: ./src/chronotope/browser/forms/facility.yaml:20
+msgid "facility_title_required"
+msgstr ""
+
 #. Default: Enter description of facility
 #: ./src/chronotope/browser/forms/facility.yaml:28
 msgid "facility_description_help"
 msgstr ""
 
 #. Default: Exists From
-#: ./src/chronotope/browser/forms/facility.yaml:51
+#: ./src/chronotope/browser/forms/facility.yaml:50
 msgid "exists_from_label"
 msgstr ""
 
 #. Default: Enter opening date of facility
-#: ./src/chronotope/browser/forms/facility.yaml:52
+#: ./src/chronotope/browser/forms/facility.yaml:51
 msgid "facility_exists_from_help"
 msgstr ""
 
 #. Default: Exists To
-#: ./src/chronotope/browser/forms/facility.yaml:61
+#: ./src/chronotope/browser/forms/facility.yaml:60
 msgid "exists_to_label"
 msgstr ""
 
 #. Default: Enter closing date of facility
-#: ./src/chronotope/browser/forms/facility.yaml:62
+#: ./src/chronotope/browser/forms/facility.yaml:61
 msgid "facility_exists_to_help"
 msgstr ""
 
 #. Default: Category
-#: ./src/chronotope/browser/forms/facility.yaml:71
+#: ./src/chronotope/browser/forms/facility.yaml:70
 msgid "category_label"
 msgstr ""
 
 #. Default: Select categories for facility
-#: ./src/chronotope/browser/forms/facility.yaml:72
+#: ./src/chronotope/browser/forms/facility.yaml:71
 msgid "facility_category_help"
 msgstr ""
 
 #. Default: Select or add category
-#: ./src/chronotope/browser/forms/facility.yaml:77
+#: ./src/chronotope/browser/forms/facility.yaml:76
 msgid "category_placeholder"
 msgstr ""
 
@@ -800,9 +803,9 @@ msgstr ""
 msgid "occasions_description"
 msgstr ""
 
-#. Default: Chronotope Settings
+#. Default: Poptraces Settings
 #: ./src/chronotope/model/settings.py:40
-msgid "chronotope_settings"
+msgid "poptraces_settings"
 msgstr ""
 
 #. Default: About the Project

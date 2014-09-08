@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:01+0200\n"
+"POT-Creation-Date: 2014-09-08 12:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,12 +217,11 @@ msgstr "Titel"
 #. Default: Enter title of attachment
 #: src/chronotope/browser/forms/attachment.yaml:19
 msgid "attachment_title_help"
-msgstr "Geben Sie den Titel des Anhangs ein"
+msgstr "Gib bitte den Titel des Anhangs ein"
 
 #. Default: Title is required
 #: src/chronotope/browser/forms/attachment.yaml:20
 #: src/chronotope/browser/forms/occasion.yaml:20
-#: src/chronotope/browser/forms/facility.yaml:20
 msgid "title_required"
 msgstr "Titel ist erforderlich"
 
@@ -237,13 +236,13 @@ msgstr "Anhang"
 #: src/chronotope/browser/forms/attachment.yaml:37
 msgid "help_attachment_type"
 msgstr ""
-"Achtung - wenn Sie den Anhangtyp eines existierenden Anhangs ändern werden "
+"Achtung - wenn du den Anhangtyp eines existierenden Anhangs änderst, werden "
 "die bisherigen Daten verworfen"
 
 #. Default: Enter attachment text
 #: src/chronotope/browser/forms/attachment.yaml:43
 msgid "attachment_text_help"
-msgstr "Geben Sie den Anhangtext ein"
+msgstr "Gib bitte den Anhangtext ein"
 
 #. Default: Text is required
 #: src/chronotope/browser/forms/attachment.yaml:44
@@ -253,7 +252,7 @@ msgstr "Anhangtext ist erforderlich"
 #. Default: Select file to attach
 #: src/chronotope/browser/forms/attachment.yaml:63
 msgid "attachment_file_help"
-msgstr "Wählen Sie die Datei zum anhängen"
+msgstr "Wähle die Datei zum anhängen"
 
 #. Default: File is required
 #: src/chronotope/browser/forms/attachment.yaml:64
@@ -263,7 +262,7 @@ msgstr "Datei ist erforderlich"
 #. Default: Select image to attach
 #: src/chronotope/browser/forms/attachment.yaml:75
 msgid "attachment_image_help"
-msgstr "Wählen Sie das Bild zum anhängen"
+msgstr "Wähle das Bild zum anhängen"
 
 #. Default: Image is required
 #: src/chronotope/browser/forms/attachment.yaml:76
@@ -275,7 +274,7 @@ msgstr "Bild ist erforderlich"
 #: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/occasion.yaml:88
 #: src/chronotope/browser/forms/settings.yaml:87
-#: src/chronotope/browser/forms/facility.yaml:99
+#: src/chronotope/browser/forms/facility.yaml:98
 msgid "save"
 msgstr "Speichern"
 
@@ -283,7 +282,7 @@ msgstr "Speichern"
 #: src/chronotope/browser/forms/attachment.yaml:114
 #: src/chronotope/browser/forms/location.yaml:95
 #: src/chronotope/browser/forms/occasion.yaml:97
-#: src/chronotope/browser/forms/facility.yaml:108
+#: src/chronotope/browser/forms/facility.yaml:107
 msgid "cancel"
 msgstr "Abbrechen"
 
@@ -295,7 +294,7 @@ msgstr "Beschreibung"
 #. Default: Pick point on map to set coordinates
 #: src/chronotope/browser/forms/location.yaml:29
 msgid "location_coordinates_help"
-msgstr "Wählen Sie einen Punkt auf der Karte um die Koordinaten zu setzen"
+msgstr "Wähle bitte einen Punkt auf der Karte um die Koordinaten zu setzen"
 
 #. Default: Coordinates are required
 #: src/chronotope/browser/forms/location.yaml:30
@@ -310,7 +309,7 @@ msgstr "Straße"
 #. Default: Enter street of location
 #: src/chronotope/browser/forms/location.yaml:41
 msgid "location_street_help"
-msgstr "Geben Sie den Straßennamen des Ortes an"
+msgstr "Gib bitte den Straßennamen des Ortes an"
 
 #. Default: ZIP
 #: src/chronotope/browser/forms/location.yaml:48
@@ -320,7 +319,7 @@ msgstr "Postleitzahl"
 #. Default: Enter ZIP of location
 #: src/chronotope/browser/forms/location.yaml:49
 msgid "location_zip_help"
-msgstr "Geben Sie die Postleitzahl des Ortes an"
+msgstr "Gib bitte die Postleitzahl des Ortes an"
 
 #. Default: City
 #: src/chronotope/browser/forms/location.yaml:56
@@ -330,7 +329,7 @@ msgstr "Stadt"
 #. Default: Enter city of location
 #: src/chronotope/browser/forms/location.yaml:57
 msgid "location_city_help"
-msgstr "Geben Sie die Stadt an in der sich der Ort befindet"
+msgstr "Gib bitte die Stadt an in der sich der Ort befindet"
 
 #. Default: Country
 #: src/chronotope/browser/forms/location.yaml:64
@@ -340,12 +339,12 @@ msgstr "Land"
 #. Default: Enter country of location
 #: src/chronotope/browser/forms/location.yaml:65
 msgid "location_country_help"
-msgstr "Wählen Sie das Land in dem sich der Ort befindet"
+msgstr "Wähle das Land in dem sich der Ort befindet"
 
 #. Default: Enter title of occasion
 #: src/chronotope/browser/forms/occasion.yaml:19
 msgid "occasion_title_help"
-msgstr "Geben Sie den Titel des Ereignisses an"
+msgstr "Gib bitte den Titel des Ereignisses an"
 
 #. Default: Description
 #: src/chronotope/browser/forms/occasion.yaml:27
@@ -356,11 +355,10 @@ msgstr "Beschreibung"
 #. Default: Enter description of occasion
 #: src/chronotope/browser/forms/occasion.yaml:28
 msgid "occasion_description_help"
-msgstr "Geben Sie eine Beschreibung des Ereignissen an"
+msgstr "Gib bitte eine Beschreibung des Ereignissen an"
 
 #. Default: Description is required
 #: src/chronotope/browser/forms/occasion.yaml:29
-#: src/chronotope/browser/forms/facility.yaml:29
 msgid "description_required"
 msgstr "Beschreibung ist erforderlich"
 
@@ -372,7 +370,7 @@ msgstr "Dauer von"
 #. Default: Enter beginning date of occasion
 #: src/chronotope/browser/forms/occasion.yaml:52
 msgid "occasion_duration_from_help"
-msgstr "Geben Sie das Startdatum des Ereignisses an"
+msgstr "Gib bitte das Startdatum des Ereignisses an"
 
 #. Default: Duration To
 #: src/chronotope/browser/forms/occasion.yaml:63
@@ -382,7 +380,7 @@ msgstr "Dauer bis"
 #. Default: Enter end date of occasion
 #: src/chronotope/browser/forms/occasion.yaml:64
 msgid "occasion_duration_to_help"
-msgstr "Geben Sie das Enddatum des Ereignisses an"
+msgstr "Gib bitte das Enddatum des Ereignisses an"
 
 #. Default: Facility
 #: src/chronotope/browser/forms/facility_reference.yaml:4
@@ -393,7 +391,7 @@ msgstr "Einrichtung"
 #. Default: Select facilities this object belongs to
 #: src/chronotope/browser/forms/facility_reference.yaml:5
 msgid "facility_help"
-msgstr "Wählen Sie die Einrichtungen die mit diesem Eintrag zu tun haben"
+msgstr "Wähle die Einrichtungen die mit diesem Eintrag zu tun haben"
 
 #. Default: Select facility
 #: src/chronotope/browser/forms/facility_reference.yaml:10
@@ -459,7 +457,7 @@ msgstr "Ereignis"
 #. Default: Select occasions this object belongs to
 #: src/chronotope/browser/forms/occasion_reference.yaml:5
 msgid "occasion_help"
-msgstr "Wählen Sie die Ereignisse die mit diesem Eintrag zu tun haben"
+msgstr "Wähle die Ereignisse die mit diesem Eintrag zu tun haben"
 
 #. Default: Select occasion
 #: src/chronotope/browser/forms/occasion_reference.yaml:10
@@ -476,6 +474,11 @@ msgstr "Name der Einrichtung"
 msgid "facility_title_help"
 msgstr "Bitte gib den Namen der Einrichtung an"
 
+#. Default: Title is required
+#: src/chronotope/browser/forms/facility.yaml:20
+msgid "facility_title_required"
+msgstr "Name der Einrichtung ist erforderlich"
+
 #. Default: Enter description of facility
 #: src/chronotope/browser/forms/facility.yaml:28
 msgid "facility_description_help"
@@ -485,24 +488,24 @@ msgstr ""
 "im Beschreibungstext anstelle der folgenden Datumsfelder ein."
 
 #. Default: Exists From
-#: src/chronotope/browser/forms/facility.yaml:51
+#: src/chronotope/browser/forms/facility.yaml:50
 msgid "exists_from_label"
 msgstr "Existiert von"
 
 #. Default: Enter opening date of facility
-#: src/chronotope/browser/forms/facility.yaml:52
+#: src/chronotope/browser/forms/facility.yaml:51
 msgid "facility_exists_from_help"
 msgstr ""
 "Wenn bekannt, gib bitte das Datum an seit dem die Einrichtung existiert "
 "(hat). Format DD.MM.YYYY"
 
 #. Default: Exists To
-#: src/chronotope/browser/forms/facility.yaml:61
+#: src/chronotope/browser/forms/facility.yaml:60
 msgid "exists_to_label"
 msgstr "Existiert bis"
 
 #. Default: Enter closing date of facility
-#: src/chronotope/browser/forms/facility.yaml:62
+#: src/chronotope/browser/forms/facility.yaml:61
 msgid "facility_exists_to_help"
 msgstr ""
 "Wenn bekannt, gib bitte das Datum an bis zu dem die Einrichtung existiert "
@@ -510,19 +513,19 @@ msgstr ""
 "leer lassen"
 
 #. Default: Category
-#: src/chronotope/browser/forms/facility.yaml:71
+#: src/chronotope/browser/forms/facility.yaml:70
 msgid "category_label"
-msgstr "Kategorie"
+msgstr "Schlagwörter"
 
 #. Default: Select categories for facility
-#: src/chronotope/browser/forms/facility.yaml:72
+#: src/chronotope/browser/forms/facility.yaml:71
 msgid "facility_category_help"
-msgstr "Wählen oder setzen Sie Kategorien für diese Einrichtung"
+msgstr "Wähle oder setze die Schlagwörter für diese Einrichtung"
 
 #. Default: Select or add category
-#: src/chronotope/browser/forms/facility.yaml:77
+#: src/chronotope/browser/forms/facility.yaml:76
 msgid "category_placeholder"
-msgstr "Kategorie wählen oder hinzufügen"
+msgstr "Schlagwörter wählen oder hinzufügen"
 
 #. Default: Location
 #: src/chronotope/browser/templates/location.pt:14
@@ -615,7 +618,7 @@ msgstr "Existiert bis"
 #. Default: Categories
 #: src/chronotope/browser/templates/facility.pt:81
 msgid "categories"
-msgstr "Kategorie"
+msgstr "Schlagwörter"
 
 #. Default: Locations
 #: src/chronotope/browser/templates/facility.pt:104
@@ -663,7 +666,7 @@ msgstr "Ersteller"
 #. Default: Enter your email address
 #: src/chronotope/browser/templates/location_controls.pt:28
 msgid "submitter_email_placeholder"
-msgstr "Geben Sie Ihre E-Mail Adresse ein"
+msgstr "Gib bitte deine E-Mail Adresse ein"
 
 #. Default: Needs to be filled in order to add contents.
 #: src/chronotope/browser/templates/location_controls.pt:30
@@ -804,10 +807,10 @@ msgstr "Ereignisse"
 msgid "occasions_description"
 msgstr "Container für Ereignisse"
 
-#. Default: Chronotope Settings
+#. Default: Poptraces Settings
 #: src/chronotope/model/settings.py:40
-msgid "chronotope_settings"
-msgstr "Chronotope Einstellungen"
+msgid "poptraces_settings"
+msgstr "Poptraces Einstellungen"
 
 #. Default: About the Project
 #: src/chronotope/model/about.py:30
@@ -828,12 +831,3 @@ msgstr "Impressum/Kontakt"
 #: src/chronotope/model/about.py:96
 msgid "about"
 msgstr "Über"
-
-#~ msgid "lat_required"
-#~ msgstr "Straße ist erforderlich"
-
-#~ msgid "city_required"
-#~ msgstr "Stadt ist erforderlich"
-
-#~ msgid "country_required"
-#~ msgstr "Landeingabe ist erforderlich"

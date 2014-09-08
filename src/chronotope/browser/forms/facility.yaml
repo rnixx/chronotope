@@ -17,7 +17,7 @@ widgets:
     props:
         label: i18n:facility_title:Facility title
         help: i18n:facility_title_help:Enter title of facility
-        required: i18n:title_required:Title is required
+        required: i18n:facility_title_required:Title is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - description:
@@ -26,7 +26,6 @@ widgets:
     props:
         label: i18n:description_label:Description
         help: i18n:facility_description_help:Enter description of facility
-        required: i18n:description_required:Description is required
         size: sm
         color: True
         emphasis: True

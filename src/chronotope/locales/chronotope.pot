@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 11:38+0200\n"
+"POT-Creation-Date: 2014-09-08 12:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,7 +213,6 @@ msgstr ""
 #. Default: Title
 #: ./src/chronotope/browser/forms/attachment.yaml:18
 #: ./src/chronotope/browser/forms/occasion.yaml:18
-#: ./src/chronotope/browser/forms/facility.yaml:18
 msgid "title_label"
 msgstr ""
 
@@ -276,7 +275,7 @@ msgstr ""
 #: ./src/chronotope/browser/forms/location.yaml:86
 #: ./src/chronotope/browser/forms/occasion.yaml:88
 #: ./src/chronotope/browser/forms/settings.yaml:87
-#: ./src/chronotope/browser/forms/facility.yaml:103
+#: ./src/chronotope/browser/forms/facility.yaml:99
 msgid "save"
 msgstr ""
 
@@ -284,7 +283,7 @@ msgstr ""
 #: ./src/chronotope/browser/forms/attachment.yaml:114
 #: ./src/chronotope/browser/forms/location.yaml:95
 #: ./src/chronotope/browser/forms/occasion.yaml:97
-#: ./src/chronotope/browser/forms/facility.yaml:112
+#: ./src/chronotope/browser/forms/facility.yaml:108
 msgid "cancel"
 msgstr ""
 
@@ -467,6 +466,11 @@ msgstr ""
 msgid "occasion_placeholder"
 msgstr ""
 
+#. Default: Facility title
+#: ./src/chronotope/browser/forms/facility.yaml:18
+msgid "facility_title"
+msgstr ""
+
 #. Default: Enter title of facility
 #: ./src/chronotope/browser/forms/facility.yaml:19
 msgid "facility_title_help"
@@ -488,27 +492,27 @@ msgid "facility_exists_from_help"
 msgstr ""
 
 #. Default: Exists To
-#: ./src/chronotope/browser/forms/facility.yaml:63
+#: ./src/chronotope/browser/forms/facility.yaml:61
 msgid "exists_to_label"
 msgstr ""
 
 #. Default: Enter closing date of facility
-#: ./src/chronotope/browser/forms/facility.yaml:64
+#: ./src/chronotope/browser/forms/facility.yaml:62
 msgid "facility_exists_to_help"
 msgstr ""
 
 #. Default: Category
-#: ./src/chronotope/browser/forms/facility.yaml:75
+#: ./src/chronotope/browser/forms/facility.yaml:71
 msgid "category_label"
 msgstr ""
 
 #. Default: Select categories for facility
-#: ./src/chronotope/browser/forms/facility.yaml:76
+#: ./src/chronotope/browser/forms/facility.yaml:72
 msgid "facility_category_help"
 msgstr ""
 
 #. Default: Select or add category
-#: ./src/chronotope/browser/forms/facility.yaml:81
+#: ./src/chronotope/browser/forms/facility.yaml:77
 msgid "category_placeholder"
 msgstr ""
 

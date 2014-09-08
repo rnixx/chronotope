@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 11:38+0200\n"
+"POT-Creation-Date: 2014-09-08 12:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,7 +211,6 @@ msgstr "Ort wählen"
 #. Default: Title
 #: src/chronotope/browser/forms/attachment.yaml:18
 #: src/chronotope/browser/forms/occasion.yaml:18
-#: src/chronotope/browser/forms/facility.yaml:18
 msgid "title_label"
 msgstr "Titel"
 
@@ -276,7 +275,7 @@ msgstr "Bild ist erforderlich"
 #: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/occasion.yaml:88
 #: src/chronotope/browser/forms/settings.yaml:87
-#: src/chronotope/browser/forms/facility.yaml:103
+#: src/chronotope/browser/forms/facility.yaml:99
 msgid "save"
 msgstr "Speichern"
 
@@ -284,7 +283,7 @@ msgstr "Speichern"
 #: src/chronotope/browser/forms/attachment.yaml:114
 #: src/chronotope/browser/forms/location.yaml:95
 #: src/chronotope/browser/forms/occasion.yaml:97
-#: src/chronotope/browser/forms/facility.yaml:112
+#: src/chronotope/browser/forms/facility.yaml:108
 msgid "cancel"
 msgstr "Abbrechen"
 
@@ -467,15 +466,23 @@ msgstr "Wählen Sie die Ereignisse die mit diesem Eintrag zu tun haben"
 msgid "occasion_placeholder"
 msgstr "Ereignis wählen"
 
+#. Default: Facility title
+#: src/chronotope/browser/forms/facility.yaml:18
+msgid "facility_title"
+msgstr "Name der Einrichtung"
+
 #. Default: Enter title of facility
 #: src/chronotope/browser/forms/facility.yaml:19
 msgid "facility_title_help"
-msgstr "Geben Sie den Titel der Einrichtung an"
+msgstr "Bitte gib den Namen der Einrichtung an"
 
 #. Default: Enter description of facility
 #: src/chronotope/browser/forms/facility.yaml:28
 msgid "facility_description_help"
-msgstr "Gebe Sie die Beschreibung der Einrichtung an"
+msgstr ""
+"Du kannst hier Text nach Belieben eingeben. Solltest du nur einen ungefähren "
+"Zeitraum wissen in dem die Einrichtung existiert (hat), trag ihn bitte hier "
+"im Beschreibungstext anstelle der folgenden Datumsfelder ein."
 
 #. Default: Exists From
 #: src/chronotope/browser/forms/facility.yaml:51
@@ -485,30 +492,35 @@ msgstr "Existiert von"
 #. Default: Enter opening date of facility
 #: src/chronotope/browser/forms/facility.yaml:52
 msgid "facility_exists_from_help"
-msgstr "Geben Sie das Datum an seit dem die Einrichtung existiert"
+msgstr ""
+"Wenn bekannt, gib bitte das Datum an seit dem die Einrichtung existiert "
+"(hat). Format DD.MM.YYYY"
 
 #. Default: Exists To
-#: src/chronotope/browser/forms/facility.yaml:63
+#: src/chronotope/browser/forms/facility.yaml:61
 msgid "exists_to_label"
 msgstr "Existiert bis"
 
 #. Default: Enter closing date of facility
-#: src/chronotope/browser/forms/facility.yaml:64
+#: src/chronotope/browser/forms/facility.yaml:62
 msgid "facility_exists_to_help"
-msgstr "Geben Sie das Datum an bis zu dem die Einrichtung existiert"
+msgstr ""
+"Wenn bekannt, gib bitte das Datum an bis zu dem die Einrichtung existiert "
+"(hat). Sollte die Einrichtung noch immer existieren, kannst du dieses Feld "
+"leer lassen"
 
 #. Default: Category
-#: src/chronotope/browser/forms/facility.yaml:75
+#: src/chronotope/browser/forms/facility.yaml:71
 msgid "category_label"
 msgstr "Kategorie"
 
 #. Default: Select categories for facility
-#: src/chronotope/browser/forms/facility.yaml:76
+#: src/chronotope/browser/forms/facility.yaml:72
 msgid "facility_category_help"
 msgstr "Wählen oder setzen Sie Kategorien für diese Einrichtung"
 
 #. Default: Select or add category
-#: src/chronotope/browser/forms/facility.yaml:81
+#: src/chronotope/browser/forms/facility.yaml:77
 msgid "category_placeholder"
 msgstr "Kategorie wählen oder hinzufügen"
 

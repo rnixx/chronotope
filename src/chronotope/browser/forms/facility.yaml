@@ -15,7 +15,7 @@ widgets:
     factory: field:label:div:help:error:text
     value: expr:context.model.attrs['title']
     props:
-        label: i18n:title_label:Title
+        label: i18n:facility_title:Facility title
         help: i18n:facility_title_help:Enter title of facility
         required: i18n:title_required:Title is required
         label.class_add: col-sm-2
@@ -50,9 +50,7 @@ widgets:
         props:
             label: i18n:exists_from_label:Exists From
             help: i18n:facility_exists_from_help:Enter opening date of facility
-            time: True
             datepicker: True
-            timepicker: True
             locale: de
             label.class_add: col-sm-2
             div.class_add: col-sm-4
@@ -62,9 +60,7 @@ widgets:
         props:
             label: i18n:exists_to_label:Exists To
             help: i18n:facility_exists_to_help:Enter closing date of facility
-            time: True
             datepicker: True
-            timepicker: True
             locale: de
             label.class_add: col-sm-2
             div.class_add: col-sm-4

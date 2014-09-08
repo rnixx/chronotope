@@ -16,6 +16,7 @@ _ = TranslationStringFactory('chronotope')
 
 
 class AboutProject(BaseNode):
+    __acl__ = chronotope_about_acl
 
     @property
     def properties(self):
@@ -35,6 +36,7 @@ class AboutProject(BaseNode):
 
 
 class AboutMap(BaseNode):
+    __acl__ = chronotope_about_acl
 
     @property
     def properties(self):
@@ -54,6 +56,7 @@ class AboutMap(BaseNode):
 
 
 class AboutImprint(BaseNode):
+    __acl__ = chronotope_about_acl
 
     @property
     def properties(self):

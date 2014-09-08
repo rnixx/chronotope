@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-08-25 09:50+0200\n"
+"POT-Creation-Date: 2014-09-08 10:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,7 +269,7 @@ msgstr ""
 #: ./src/chronotope/browser/forms/attachment.yaml:105
 #: ./src/chronotope/browser/forms/location.yaml:79
 #: ./src/chronotope/browser/forms/occasion.yaml:88
-#: ./src/chronotope/browser/forms/settings.yaml:53
+#: ./src/chronotope/browser/forms/settings.yaml:87
 #: ./src/chronotope/browser/forms/facility.yaml:103
 msgid "save"
 msgstr ""
@@ -433,6 +433,26 @@ msgstr ""
 #. Default: Description is required
 #: ./src/chronotope/browser/forms/settings.yaml:28
 msgid "project_description_required"
+msgstr ""
+
+#. Default: Map Description
+#: ./src/chronotope/browser/forms/settings.yaml:44
+msgid "map_description_label"
+msgstr ""
+
+#. Default: Description is required
+#: ./src/chronotope/browser/forms/settings.yaml:45
+msgid "map_description_required"
+msgstr ""
+
+#. Default: Imprint/Contact
+#: ./src/chronotope/browser/forms/settings.yaml:61
+msgid "imprint_contact_label"
+msgstr ""
+
+#. Default: Imprint/Contact is required
+#: ./src/chronotope/browser/forms/settings.yaml:62
+msgid "imprint_contact_required"
 msgstr ""
 
 #. Default: Occasion
@@ -765,7 +785,22 @@ msgstr ""
 msgid "chronotope_settings"
 msgstr ""
 
+#. Default: About the Project
+#: ./src/chronotope/model/about.py:30
+msgid "about_project"
+msgstr ""
+
+#. Default: About the Map
+#: ./src/chronotope/model/about.py:50
+msgid "about_map"
+msgstr ""
+
+#. Default: Imprint/Contact
+#: ./src/chronotope/model/about.py:70
+msgid "about_imprint"
+msgstr ""
+
 #. Default: About
-#: ./src/chronotope/model/about.py:28
+#: ./src/chronotope/model/about.py:96
 msgid "about"
 msgstr ""

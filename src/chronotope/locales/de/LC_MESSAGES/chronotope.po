@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-08-25 09:50+0200\n"
+"POT-Creation-Date: 2014-09-08 10:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,13 +122,13 @@ msgstr "Längengrad"
 #. Default: My Items
 #: src/chronotope/browser/overlay_actions.py:82
 msgid "my_items"
-msgstr "Meine Einträge"
+msgstr "Meine Einträge anzeigen"
 
 #. Default: Edit
 #: src/chronotope/browser/overlay_actions.py:102
 #: src/chronotope/browser/overlay_actions.py:198
 msgid "edit"
-msgstr "Editieren"
+msgstr "Diesen Eintrag editieren"
 
 #. Default: Add Facility
 #: src/chronotope/browser/overlay_actions.py:125
@@ -266,7 +266,7 @@ msgstr "Bild ist erforderlich"
 #: src/chronotope/browser/forms/attachment.yaml:105
 #: src/chronotope/browser/forms/location.yaml:79
 #: src/chronotope/browser/forms/occasion.yaml:88
-#: src/chronotope/browser/forms/settings.yaml:53
+#: src/chronotope/browser/forms/settings.yaml:87
 #: src/chronotope/browser/forms/facility.yaml:103
 msgid "save"
 msgstr "Speichern"
@@ -431,6 +431,26 @@ msgstr "Projektbeschreibung"
 #: src/chronotope/browser/forms/settings.yaml:28
 msgid "project_description_required"
 msgstr "Projektbeschreibung ist erforderlich"
+
+#. Default: Map Description
+#: src/chronotope/browser/forms/settings.yaml:44
+msgid "map_description_label"
+msgstr "Über die Karte"
+
+#. Default: Description is required
+#: src/chronotope/browser/forms/settings.yaml:45
+msgid "map_description_required"
+msgstr "Kartenbeschreibung ist erforderlich"
+
+#. Default: Imprint/Contact
+#: src/chronotope/browser/forms/settings.yaml:61
+msgid "imprint_contact_label"
+msgstr "Impressum/Kontakt"
+
+#. Default: Imprint/Contact is required
+#: src/chronotope/browser/forms/settings.yaml:62
+msgid "imprint_contact_required"
+msgstr "Impressum/Kontakt ist erforderlich"
 
 #. Default: Occasion
 #: src/chronotope/browser/forms/occasion_reference.yaml:4
@@ -756,7 +776,22 @@ msgstr "Container für Ereignisse"
 msgid "chronotope_settings"
 msgstr "Chronotope Einstellungen"
 
+#. Default: About the Project
+#: src/chronotope/model/about.py:30
+msgid "about_project"
+msgstr "Über das Projekt"
+
+#. Default: About the Map
+#: src/chronotope/model/about.py:50
+msgid "about_map"
+msgstr "Über die Karte"
+
+#. Default: Imprint/Contact
+#: src/chronotope/model/about.py:70
+msgid "about_imprint"
+msgstr "Impressum/Kontakt"
+
 #. Default: About
-#: src/chronotope/model/about.py:28
+#: src/chronotope/model/about.py:96
 msgid "about"
 msgstr "Über"

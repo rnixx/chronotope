@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:13+0200\n"
+"POT-Creation-Date: 2014-09-08 12:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,7 +210,6 @@ msgstr "Ort wählen"
 
 #. Default: Title
 #: src/chronotope/browser/forms/attachment.yaml:18
-#: src/chronotope/browser/forms/occasion.yaml:18
 msgid "title_label"
 msgstr "Titel"
 
@@ -221,7 +220,6 @@ msgstr "Gib bitte den Titel des Anhangs ein"
 
 #. Default: Title is required
 #: src/chronotope/browser/forms/attachment.yaml:20
-#: src/chronotope/browser/forms/occasion.yaml:20
 msgid "title_required"
 msgstr "Titel ist erforderlich"
 
@@ -341,25 +339,38 @@ msgstr "Land"
 msgid "location_country_help"
 msgstr "Wähle das Land in dem sich der Ort befindet"
 
+#. Default: Title
+#: src/chronotope/browser/forms/occasion.yaml:18
+msgid "occasion_title"
+msgstr "Bezeichnung"
+
 #. Default: Enter title of occasion
 #: src/chronotope/browser/forms/occasion.yaml:19
 msgid "occasion_title_help"
-msgstr "Gib bitte den Titel des Ereignisses an"
+msgstr "Gib bitte die Bezeichnung des Ereignisses an (z.B. Guru Guru-Konzert)"
+
+#. Default: Title is required
+#: src/chronotope/browser/forms/occasion.yaml:20
+msgid "occasion_title_required"
+msgstr "Bezeichnung ist erforderlich"
 
 #. Default: Description
+#. Default: An Occasion
 #: src/chronotope/browser/forms/occasion.yaml:27
-#: src/chronotope/browser/forms/facility.yaml:27
-msgid "description_label"
-msgstr "Beschreibung"
+#: src/chronotope/model/occasion.py:110
+msgid "occasion_description"
+msgstr "Ereignis"
 
 #. Default: Enter description of occasion
 #: src/chronotope/browser/forms/occasion.yaml:28
 msgid "occasion_description_help"
-msgstr "Gib bitte eine Beschreibung des Ereignissen an"
+msgstr ""
+"Gib bitte eine Beschreibung des Ereignissen an. Du kannst hier Text nach "
+"Belieben eingeben"
 
 #. Default: Description is required
 #: src/chronotope/browser/forms/occasion.yaml:29
-msgid "description_required"
+msgid "occasion_description_required"
 msgstr "Beschreibung ist erforderlich"
 
 #. Default: Duration From
@@ -370,7 +381,10 @@ msgstr "Dauer von"
 #. Default: Enter beginning date of occasion
 #: src/chronotope/browser/forms/occasion.yaml:52
 msgid "occasion_duration_from_help"
-msgstr "Gib bitte das Startdatum des Ereignisses an"
+msgstr ""
+"Wenn bekannt, gib bitte das Startdatum an, an dem das Ereignis statt "
+"gefunden hat. Format DD.MM.YYYY. Bei wiederholt stattfindenden Ereignissen, "
+"trage bitte den Rhythmus oben unter 'Bescheibung' ein"
 
 #. Default: Duration To
 #: src/chronotope/browser/forms/occasion.yaml:63
@@ -380,7 +394,7 @@ msgstr "Dauer bis"
 #. Default: Enter end date of occasion
 #: src/chronotope/browser/forms/occasion.yaml:64
 msgid "occasion_duration_to_help"
-msgstr "Gib bitte das Enddatum des Ereignisses an"
+msgstr "Wenn bekannt, gib bitte das Enddatum des Ereignisses an"
 
 #. Default: Facility
 #: src/chronotope/browser/forms/facility_reference.yaml:4
@@ -479,13 +493,15 @@ msgstr "Bitte gib den Namen der Einrichtung an"
 msgid "facility_title_required"
 msgstr "Name der Einrichtung ist erforderlich"
 
+#. Default: Description
+#: src/chronotope/browser/forms/facility.yaml:27
+msgid "facility_description_label"
+msgstr "Beschreibung"
+
 #. Default: Enter description of facility
 #: src/chronotope/browser/forms/facility.yaml:28
 msgid "facility_description_help"
-msgstr ""
-"Du kannst hier Text nach Belieben eingeben. Solltest du nur einen ungefähren "
-"Zeitraum wissen in dem die Einrichtung existiert (hat), trag ihn bitte hier "
-"im Beschreibungstext anstelle der folgenden Datumsfelder ein."
+msgstr "Du kannst hier Text nach Belieben eingeben."
 
 #. Default: Exists From
 #: src/chronotope/browser/forms/facility.yaml:50
@@ -520,7 +536,10 @@ msgstr "Schlagwörter"
 #. Default: Select categories for facility
 #: src/chronotope/browser/forms/facility.yaml:71
 msgid "facility_category_help"
-msgstr "Wähle oder setze die Schlagwörter für diese Einrichtung"
+msgstr ""
+"Wähle oder setze die Schlagwörter für diese Einrichtung. Du kannst hier nach "
+"Belieben Schlagwörter wie Disco, Jugendzentrum etc. oder den Musikstil "
+"eingeben."
 
 #. Default: Select or add category
 #: src/chronotope/browser/forms/facility.yaml:76
@@ -791,11 +810,6 @@ msgstr "Orte"
 #: src/chronotope/model/location.py:176 src/chronotope/model/location.py:153
 msgid "locations_description"
 msgstr "Container für Orte"
-
-#. Default: An Occasion
-#: src/chronotope/model/occasion.py:110
-msgid "occasion_description"
-msgstr "Ein Ereignis"
 
 #. Default: Occasions
 #: src/chronotope/model/occasion.py:159 src/chronotope/model/occasion.py:138

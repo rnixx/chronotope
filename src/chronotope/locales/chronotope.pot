@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:13+0200\n"
+"POT-Creation-Date: 2014-09-08 12:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,7 +212,6 @@ msgstr ""
 
 #. Default: Title
 #: ./src/chronotope/browser/forms/attachment.yaml:18
-#: ./src/chronotope/browser/forms/occasion.yaml:18
 msgid "title_label"
 msgstr ""
 
@@ -223,7 +222,6 @@ msgstr ""
 
 #. Default: Title is required
 #: ./src/chronotope/browser/forms/attachment.yaml:20
-#: ./src/chronotope/browser/forms/occasion.yaml:20
 msgid "title_required"
 msgstr ""
 
@@ -341,15 +339,26 @@ msgstr ""
 msgid "location_country_help"
 msgstr ""
 
+#. Default: Title
+#: ./src/chronotope/browser/forms/occasion.yaml:18
+msgid "occasion_title"
+msgstr ""
+
 #. Default: Enter title of occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:19
 msgid "occasion_title_help"
 msgstr ""
 
+#. Default: Title is required
+#: ./src/chronotope/browser/forms/occasion.yaml:20
+msgid "occasion_title_required"
+msgstr ""
+
 #. Default: Description
+#. Default: An Occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:27
-#: ./src/chronotope/browser/forms/facility.yaml:27
-msgid "description_label"
+#: ./src/chronotope/model/occasion.py:110
+msgid "occasion_description"
 msgstr ""
 
 #. Default: Enter description of occasion
@@ -359,7 +368,7 @@ msgstr ""
 
 #. Default: Description is required
 #: ./src/chronotope/browser/forms/occasion.yaml:29
-msgid "description_required"
+msgid "occasion_description_required"
 msgstr ""
 
 #. Default: Duration From
@@ -477,6 +486,11 @@ msgstr ""
 #. Default: Title is required
 #: ./src/chronotope/browser/forms/facility.yaml:20
 msgid "facility_title_required"
+msgstr ""
+
+#. Default: Description
+#: ./src/chronotope/browser/forms/facility.yaml:27
+msgid "facility_description_label"
 msgstr ""
 
 #. Default: Enter description of facility
@@ -784,11 +798,6 @@ msgstr ""
 #: ./src/chronotope/model/location.py:176
 #: ./src/chronotope/model/location.py:153
 msgid "locations_description"
-msgstr ""
-
-#. Default: An Occasion
-#: ./src/chronotope/model/occasion.py:110
-msgid "occasion_description"
 msgstr ""
 
 #. Default: Occasions

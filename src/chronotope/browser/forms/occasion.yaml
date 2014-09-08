@@ -15,18 +15,18 @@ widgets:
     factory: field:label:div:help:error:text
     value: expr:context.model.attrs['title']
     props:
-        label: i18n:title_label:Title
+        label: i18n:occasion_title:Title
         help: i18n:occasion_title_help:Enter title of occasion
-        required: i18n:title_required:Title is required
+        required: i18n:occasion_title_required:Title is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - description:
     factory: field:label:div:help:error:wysihtml5
     value: expr:context.model.attrs['description']
     props:
-        label: i18n:description_label:Description
+        label: i18n:occasion_description:Description
         help: i18n:occasion_description_help:Enter description of occasion
-        required: i18n:description_required:Description is required
+        required: i18n:occasion_description_required:Description is required
         size: sm
         color: True
         emphasis: True

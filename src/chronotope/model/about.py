@@ -1,8 +1,10 @@
+from odict import odict
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from pyramid.threadlocal import get_current_request
 from cone.app.model import (
     BaseNode,
+    FactoryNode,
     Metadata,
     Properties,
     Layout,
@@ -13,13 +15,76 @@ from chronotope.security import chronotope_about_acl
 _ = TranslationStringFactory('chronotope')
 
 
-class About(BaseNode):
+class AboutProject(BaseNode):
+
+    @property
+    def properties(self):
+        props = Properties()
+        props.icon = 'glyphicon glyphicon-info-sign'
+        return props
+
+    @property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('about_project', default='About the Project')
+        return md
+
+    @property
+    def layout(self):
+        return self.parent.layout
+
+
+class AboutMap(BaseNode):
+
+    @property
+    def properties(self):
+        props = Properties()
+        props.icon = 'glyphicon glyphicon-info-sign'
+        return props
+
+    @property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('about_map', default='About the Map')
+        return md
+
+    @property
+    def layout(self):
+        return self.parent.layout
+
+
+class AboutImprint(BaseNode):
+
+    @property
+    def properties(self):
+        props = Properties()
+        props.icon = 'glyphicon glyphicon-info-sign'
+        return props
+
+    @property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('about_imprint', default='Imprint/Contact')
+        return md
+
+    @property
+    def layout(self):
+        return self.parent.layout
+
+
+class About(FactoryNode):
+    factories = odict()
+    factories['project'] = AboutProject
+    factories['map'] = AboutMap
+    factories['imprint'] = AboutImprint
+
     __acl__ = chronotope_about_acl
 
     @property
     def properties(self):
         props = Properties()
         props.icon = 'glyphicon glyphicon-info-sign'
+        props.mainmenu_display_children = True
         return props
 
     @property

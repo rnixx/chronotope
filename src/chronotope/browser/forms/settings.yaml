@@ -37,6 +37,40 @@ widgets:
         lists: True
         label.class_add: col-sm-2
         div.class_add: col-sm-10
+- map_description:
+    factory: field:label:div:error:wysihtml5
+    value: expr:context.model.attrs.get('map_description')
+    props:
+        label: i18n:map_description_label:Map Description
+        required: i18n:map_description_required:Description is required
+        size: sm
+        color: True
+        emphasis: True
+        font-styles: True
+        html: True
+        image: True
+        justify: True
+        link: True
+        lists: True
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+- imprint_contact:
+    factory: field:label:div:error:wysihtml5
+    value: expr:context.model.attrs.get('imprint_contact')
+    props:
+        label: i18n:imprint_contact_label:Imprint/Contact
+        required: i18n:imprint_contact_required:Imprint/Contact is required
+        size: sm
+        color: True
+        emphasis: True
+        font-styles: True
+        html: True
+        image: True
+        justify: True
+        link: True
+        lists: True
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - controls:
     factory: field:div
     props:

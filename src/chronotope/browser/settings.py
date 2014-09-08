@@ -39,4 +39,6 @@ class SettingsForm(Form):
         attrs['recaptcha_public_key'] = fetch('recaptcha_public_key')
         attrs['recaptcha_private_key'] = fetch('recaptcha_private_key')
         attrs['project_description'] = fetch('project_description')
+        attrs['map_description'] = fetch('map_description')
+        attrs['imprint_contact'] = fetch('imprint_contact')
         self.model()

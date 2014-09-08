@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:50+0200\n"
+"POT-Creation-Date: 2014-09-08 12:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -355,10 +355,8 @@ msgid "occasion_title_required"
 msgstr ""
 
 #. Default: Description
-#. Default: An Occasion
 #: ./src/chronotope/browser/forms/occasion.yaml:27
-#: ./src/chronotope/model/occasion.py:110
-msgid "occasion_description"
+msgid "occasion_description_label"
 msgstr ""
 
 #. Default: Enter description of occasion
@@ -798,6 +796,11 @@ msgstr ""
 #: ./src/chronotope/model/location.py:176
 #: ./src/chronotope/model/location.py:153
 msgid "locations_description"
+msgstr ""
+
+#. Default: An Occasion
+#: ./src/chronotope/model/occasion.py:110
+msgid "occasion_description"
 msgstr ""
 
 #. Default: Occasions

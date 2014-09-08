@@ -24,7 +24,7 @@ widgets:
     factory: field:label:div:help:error:wysihtml5
     value: expr:context.model.attrs['description']
     props:
-        label: i18n:occasion_description:Description
+        label: i18n:occasion_description_label:Description
         help: i18n:occasion_description_help:Enter description of occasion
         required: i18n:occasion_description_required:Description is required
         size: sm

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:50+0200\n"
+"POT-Creation-Date: 2014-09-08 12:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -355,11 +355,9 @@ msgid "occasion_title_required"
 msgstr "Bezeichnung ist erforderlich"
 
 #. Default: Description
-#. Default: An Occasion
 #: src/chronotope/browser/forms/occasion.yaml:27
-#: src/chronotope/model/occasion.py:110
-msgid "occasion_description"
-msgstr "Ereignis"
+msgid "occasion_description_label"
+msgstr "Beschreibung"
 
 #. Default: Enter description of occasion
 #: src/chronotope/browser/forms/occasion.yaml:28
@@ -501,7 +499,10 @@ msgstr "Beschreibung"
 #. Default: Enter description of facility
 #: src/chronotope/browser/forms/facility.yaml:28
 msgid "facility_description_help"
-msgstr "Du kannst hier Text nach Belieben eingeben."
+msgstr ""
+"Du kannst hier Text nach Belieben eingeben. Solltest du nur einen ungefähren "
+"Zeitraum wissen in dem die Einrichtung existiert (hat), trag ihn bitte hier "
+"im Beschreibungstext anstelle der folgenden Datumsfelder ein."
 
 #. Default: Exists From
 #: src/chronotope/browser/forms/facility.yaml:50
@@ -810,6 +811,11 @@ msgstr "Orte"
 #: src/chronotope/model/location.py:176 src/chronotope/model/location.py:153
 msgid "locations_description"
 msgstr "Container für Orte"
+
+#. Default: An Occasion
+#: src/chronotope/model/occasion.py:110
+msgid "occasion_description"
+msgstr "Ereignis"
 
 #. Default: Occasions
 #: src/chronotope/model/occasion.py:159 src/chronotope/model/occasion.py:138

@@ -68,7 +68,8 @@ def download(model, request):
         response.body = file_data.read()
         response.headers['Content-Type'] = payload['mimetype']
         response.headers['Content-Disposition'] = \
-            'attachment;filename={0}'.format(payload['filename'])
+            'attachment;filename={0}'.format(
+                payload['filename'].encode('utf-8'))
     elif a_type == 'image':
         payload = pickle.loads(payload)
         scale = request.params.get('scale')

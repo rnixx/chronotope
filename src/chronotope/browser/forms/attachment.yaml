@@ -15,9 +15,9 @@ widgets:
     factory: field:label:div:help:error:text
     value: expr:context.model.attrs['title']
     props:
-        label: i18n:title_label:Title
-        help: i18n:attachment_title_help:Enter title of attachment
-        required: i18n:title_required:Title is required
+        label: i18n:title_description_label:Title/Description
+        help: i18n:attachment_title_description_help:Enter title/description of attachment
+        required: i18n:title_description_required:Title/description is required
         label.class_add: col-sm-2
         div.class_add: col-sm-10
 - attachment:

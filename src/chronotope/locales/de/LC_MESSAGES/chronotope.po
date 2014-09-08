@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 16:49+0200\n"
+"POT-Creation-Date: 2014-09-08 17:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,33 +210,36 @@ msgstr ""
 msgid "location_placeholder"
 msgstr "Ort wählen"
 
-#. Default: Title
+#. Default: Title/Description
 #: src/chronotope/browser/forms/attachment.yaml:18
-msgid "title_label"
-msgstr "Titel"
+msgid "title_description_label"
+msgstr "Titel/Beschreibung"
 
-#. Default: Enter title of attachment
+#. Default: Enter title/description of attachment
 #: src/chronotope/browser/forms/attachment.yaml:19
-msgid "attachment_title_help"
-msgstr "Gib bitte den Titel des Materials/Textes ein."
+msgid "attachment_title_description_help"
+msgstr ""
+"Gib bitte den Titel des Textes oder eine kurze Beschreibung des Materials "
+"ein."
 
-#. Default: Title is required
+#. Default: Title/description is required
 #: src/chronotope/browser/forms/attachment.yaml:20
-msgid "title_required"
-msgstr "Titel ist erforderlich"
+msgid "title_description_required"
+msgstr "Titel/Beschreibung ist erforderlich"
 
 #. Default: Attachment
 #: src/chronotope/browser/forms/attachment.yaml:28
 msgid "attachment_compound_label"
-msgstr "Anhang"
+msgstr "Material"
 
 #. Default: Warning - changing the attachment type on existing attachments will
 #. override existing data
 #: src/chronotope/browser/forms/attachment.yaml:37
 msgid "help_attachment_type"
 msgstr ""
-"Achtung - wenn du den Typ eines existierenden Anhangs änderst, werden die "
-"bisherigen Daten verworfen."
+"Du kannst als Material entweder Text eingeben, oder ein Bild oder eine Datei "
+"hochladen. Achtung - wenn du den Typ eines existierenden Materials änderst, "
+"werden die bisherigen Daten verworfen."
 
 #. Default: Enter attachment text
 #: src/chronotope/browser/forms/attachment.yaml:43

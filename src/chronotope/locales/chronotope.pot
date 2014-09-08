@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 13:11+0200\n"
+"POT-Creation-Date: 2014-09-08 16:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,27 +52,27 @@ msgid "declined_2_published"
 msgstr ""
 
 #. Default: Keep Existing image
-#: ./src/chronotope/browser/attachment.py:164
+#: ./src/chronotope/browser/attachment.py:165
 msgid "keep_existing_image"
 msgstr ""
 
 #. Default: Replace existing image
-#: ./src/chronotope/browser/attachment.py:165
+#: ./src/chronotope/browser/attachment.py:166
 msgid "replace_existing_image"
 msgstr ""
 
 #. Default: Text
-#: ./src/chronotope/browser/attachment.py:177
+#: ./src/chronotope/browser/attachment.py:178
 msgid "attachment_type_text"
 msgstr ""
 
 #. Default: File
-#: ./src/chronotope/browser/attachment.py:178
+#: ./src/chronotope/browser/attachment.py:179
 msgid "attachment_type_file"
 msgstr ""
 
 #. Default: Image
-#: ./src/chronotope/browser/attachment.py:179
+#: ./src/chronotope/browser/attachment.py:180
 msgid "attachment_type_image"
 msgstr ""
 

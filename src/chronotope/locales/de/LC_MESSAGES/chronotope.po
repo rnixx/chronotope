@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 12:55+0200\n"
+"POT-Creation-Date: 2014-09-08 13:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,7 +201,9 @@ msgstr "Ort"
 #. Default: Select locations this object belongs to
 #: src/chronotope/browser/forms/location_reference.yaml:5
 msgid "location_help"
-msgstr "Wähle die Orte die mit diesem Eintrag zu tun haben"
+msgstr ""
+"Wähle die Orte die mit diesem Eintrag zu tun haben. Durch Eingabe von "
+"mindestens 3 Buchstaben wird über die vorhandenen Einträge gesucht"
 
 #. Default: Select location
 #: src/chronotope/browser/forms/location_reference.yaml:10
@@ -216,7 +218,7 @@ msgstr "Titel"
 #. Default: Enter title of attachment
 #: src/chronotope/browser/forms/attachment.yaml:19
 msgid "attachment_title_help"
-msgstr "Gib bitte den Titel des Anhangs ein"
+msgstr "Gib bitte den Titel des Materials/Textes ein"
 
 #. Default: Title is required
 #: src/chronotope/browser/forms/attachment.yaml:20
@@ -225,8 +227,7 @@ msgstr "Titel ist erforderlich"
 
 #. Default: Attachment
 #: src/chronotope/browser/forms/attachment.yaml:28
-#: src/chronotope/model/attachment.py:94
-msgid "attachment_label"
+msgid "attachment_compound_label"
 msgstr "Anhang"
 
 #. Default: Warning - changing the attachment type on existing attachments will
@@ -234,18 +235,18 @@ msgstr "Anhang"
 #: src/chronotope/browser/forms/attachment.yaml:37
 msgid "help_attachment_type"
 msgstr ""
-"Achtung - wenn du den Anhangtyp eines existierenden Anhangs änderst, werden "
-"die bisherigen Daten verworfen"
+"Achtung - wenn du den Typ eines existierenden Anhangs änderst, werden die "
+"bisherigen Daten verworfen"
 
 #. Default: Enter attachment text
 #: src/chronotope/browser/forms/attachment.yaml:43
 msgid "attachment_text_help"
-msgstr "Gib bitte den Anhangtext ein"
+msgstr "Gib bitte den Text ein"
 
 #. Default: Text is required
 #: src/chronotope/browser/forms/attachment.yaml:44
 msgid "attachment_text_required"
-msgstr "Anhangtext ist erforderlich"
+msgstr "Text ist erforderlich"
 
 #. Default: Select file to attach
 #: src/chronotope/browser/forms/attachment.yaml:63
@@ -403,7 +404,9 @@ msgstr "Einrichtung"
 #. Default: Select facilities this object belongs to
 #: src/chronotope/browser/forms/facility_reference.yaml:5
 msgid "facility_help"
-msgstr "Wähle die Einrichtungen die mit diesem Eintrag zu tun haben"
+msgstr ""
+"Wähle die Einrichtungen die mit diesem Eintrag zu tun haben. Durch Eingabe "
+"von mindestens 3 Buchstaben wird über die vorhandenen Einträge gesucht"
 
 #. Default: Select facility
 #: src/chronotope/browser/forms/facility_reference.yaml:10
@@ -469,7 +472,9 @@ msgstr "Ereignis"
 #. Default: Select occasions this object belongs to
 #: src/chronotope/browser/forms/occasion_reference.yaml:5
 msgid "occasion_help"
-msgstr "Wähle die Ereignisse die mit diesem Eintrag zu tun haben"
+msgstr ""
+"Wähle die Ereignisse die mit diesem Eintrag zu tun haben. Durch Eingabe von "
+"mindestens 3 Buchstaben wird über die vorhandenen Einträge gesucht"
 
 #. Default: Select occasion
 #: src/chronotope/browser/forms/occasion_reference.yaml:10
@@ -604,7 +609,7 @@ msgstr "Ereignisse"
 #: src/chronotope/browser/templates/facility.pt:132
 #: src/chronotope/browser/templates/occasion.pt:109
 msgid "attachments"
-msgstr "Anhänge"
+msgstr "Materialien/Texte"
 
 #. Default: Actions
 #: src/chronotope/browser/templates/location.pt:135
@@ -650,7 +655,7 @@ msgstr "Orte"
 #. Default: Attachment
 #: src/chronotope/browser/templates/attachment.pt:14
 msgid "attachment"
-msgstr "Anhang"
+msgstr "Material/Text"
 
 #. Default: Text
 #: src/chronotope/browser/templates/attachment.pt:46
@@ -745,22 +750,27 @@ msgstr "Dauer bis"
 msgid "view"
 msgstr "Anzeigen"
 
+#. Default: Attachment
+#: src/chronotope/model/attachment.py:94
+msgid "attachment_label"
+msgstr "Material/Text"
+
 #. Default: An attachment
 #: src/chronotope/model/attachment.py:95
 msgid "attachment_description"
-msgstr "Ein Anhang"
+msgstr "Material/Text"
 
 #. Default: Attachments
 #: src/chronotope/model/attachment.py:144
 #: src/chronotope/model/attachment.py:122
 msgid "attachments_label"
-msgstr "Anhänge"
+msgstr "Materialien/Texte"
 
 #. Default: Container for Attachments
 #: src/chronotope/model/attachment.py:146
 #: src/chronotope/model/attachment.py:123
 msgid "attachments_description"
-msgstr "Container für Anhänge"
+msgstr "Container für Materialien/Texte"
 
 #. Default: A Facility
 #: src/chronotope/model/facility.py:110
@@ -800,7 +810,7 @@ msgstr "O"
 #. Default: A location
 #: src/chronotope/model/location.py:119
 msgid "location_description"
-msgstr "Ein Ort"
+msgstr "Ort"
 
 #. Default: Locations
 #: src/chronotope/model/location.py:174 src/chronotope/model/location.py:152

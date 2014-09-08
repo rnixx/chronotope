@@ -25,7 +25,7 @@ widgets:
     props:
         structural: True
         field.class: context.attachment_field_class
-        label: i18n:attachment_label:Attachment
+        label: i18n:attachment_compound_label:Attachment
         label.class_add: col-sm-2
         div.class_add: col-sm-10
     widgets:

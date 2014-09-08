@@ -16,8 +16,8 @@
 
       <tr>
         <td class="row-title"
-            i18n:translate="title">Title</td>
-        <td tal:content="model.attrs['title']">Title</td>
+            i18n:translate="title_description_label">Title/Description</td>
+        <td tal:content="model.attrs['title']">Title/Description</td>
       </tr>
 
       <tr tal:define="creator context.creator"

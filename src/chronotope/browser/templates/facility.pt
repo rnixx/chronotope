@@ -16,7 +16,7 @@
 
       <tr>
         <td class="row-title"
-            i18n:translate="title">Title</td>
+            i18n:translate="facility_title">Title</td>
         <td tal:content="model.attrs['title']">Title</td>
       </tr>
 

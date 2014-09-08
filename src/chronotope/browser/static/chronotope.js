@@ -473,6 +473,8 @@
             }
             var default_layer = layers[default_layer_index].layer;
             default_layer.addTo(map);
+            return default_layer;
+            /* XXX: later - no layers wanted right now
             var layer_mapping = {};
             for (var idx in layers) {
                 var layer_defs = layers[idx];
@@ -490,6 +492,7 @@
                 }
             });
             return layer_controls;
+            */
         },
 
         available_layers: [

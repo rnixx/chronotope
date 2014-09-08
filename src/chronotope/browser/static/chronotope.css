@@ -27,6 +27,9 @@ tr.state-declined td.state,
 }
 
 /* overlay forms */
+.overlay-from-description {
+    margin-top:8px;
+}
 .action-group {
     margin-bottom:4px;
 }

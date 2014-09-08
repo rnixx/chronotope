@@ -186,6 +186,15 @@ class LocationForm(Form, UXMixin):
     location_zoom = 15
 
     @property
+    def description(self):
+        return _(
+            'location_form_description_text',
+            default='If you know the exact address, please enter it. If not, '
+                    'enter the information you know. The Captcha is required '
+                    'to avoid spam'
+        )
+
+    @property
     def message_factory(self):
         return _
 

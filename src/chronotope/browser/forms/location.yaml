@@ -11,6 +11,16 @@ widgets:
         text: expr:context.form_heading
         class: overlay-form-heading
     mode: expr:context.is_frontend and 'display' or 'skip'
+- description:
+    factory: field:label:div:tag
+    props:
+        label: i18n:location_form_description:Description
+        tag: p
+        text: expr:context.description
+        tag.class: overlay-from-description
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
+    mode: expr:context.is_frontend and 'display' or 'skip'
 - coordinates:
     factory: field:label:div:help:error:location
     value: expr:context.coordinates_value

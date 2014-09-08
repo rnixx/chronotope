@@ -107,7 +107,7 @@ class Attachment(SQLRowNode):
         props.action_delete = True
         return props
 
-    @instance_property
+    @property
     def metadata(self):
         md = Metadata()
         md.title = self.attrs['title']

@@ -315,7 +315,13 @@ class LocationReferences(References):
         return ['locations', str(record.uid)]
 
     def reference_title(self, record):
-        return location_title(record.street, record.zip, record.city)
+        return location_title(
+            self.request,
+            record.street,
+            record.zip,
+            record.city,
+            record.lat,
+            record.lon)
 
 
 class LocationReferencing(Referencing):
@@ -328,7 +334,13 @@ class LocationReferencing(Referencing):
     @default
     def location_vocab(self, widget, data):
         def extract_title(record):
-            return location_title(record.street, record.zip, record.city)
+            return location_title(
+                self.request,
+                record.street,
+                record.zip,
+                record.city,
+                record.lat,
+                record.lon)
         return self.references_vocab(
             widget, data, 'location', locations_by_uid, location_by_uid,
             extract_title=extract_title)

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 11:09+0200\n"
+"POT-Creation-Date: 2014-09-08 11:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,13 +84,13 @@ msgid "sort_on_state"
 msgstr "Nach Status sortieren"
 
 #. Default: Pick other location
-#: src/chronotope/browser/location.py:130
+#: src/chronotope/browser/location.py:133
 msgid "pick_location"
 msgstr "Wähle andere Koordinaten auf der Karte"
 
 #. Default: If you know the exact address, please enter it. If not, enter the
 #. information you know. The Captcha is required to avoid spam
-#: src/chronotope/browser/location.py:193
+#: src/chronotope/browser/location.py:196
 msgid "location_form_description_text"
 msgstr ""
 "Wenn du die genaue Adresse weißt, gib sie bitte ein. Falls nicht, gib die "
@@ -98,33 +98,33 @@ msgstr ""
 "Überprüfung dient der Spamvermeidung. Danke!"
 
 #. Default: Germany
-#: src/chronotope/browser/location.py:224
+#: src/chronotope/browser/location.py:225
 msgid "germany"
 msgstr "Deutschland"
 
 #. Default: Austria
-#: src/chronotope/browser/location.py:225
+#: src/chronotope/browser/location.py:226
 msgid "austria"
 msgstr "Österreich"
 
 #. Default: Swizerland
-#: src/chronotope/browser/location.py:226
+#: src/chronotope/browser/location.py:227
 msgid "swizerland"
 msgstr "Schweiz"
 
 #. Default: Coordinates
-#: src/chronotope/browser/location.py:145
+#: src/chronotope/browser/location.py:148
 #: src/chronotope/browser/forms/location.yaml:28
 msgid "coordinates_label"
 msgstr "Koordinaten"
 
 #. Default: Latitude
-#: src/chronotope/browser/location.py:154
+#: src/chronotope/browser/location.py:157
 msgid "lat"
 msgstr "Breitengrad"
 
 #. Default: Longitude
-#: src/chronotope/browser/location.py:163
+#: src/chronotope/browser/location.py:166
 msgid "lon"
 msgstr "Längengrad"
 
@@ -194,7 +194,7 @@ msgstr "Überprüfen"
 
 #. Default: Location
 #: src/chronotope/browser/forms/location_reference.yaml:4
-#: src/chronotope/model/location.py:98
+#: src/chronotope/model/location.py:118
 msgid "location_label"
 msgstr "Ort"
 
@@ -273,7 +273,7 @@ msgstr "Bild ist erforderlich"
 
 #. Default: Save
 #: src/chronotope/browser/forms/attachment.yaml:105
-#: src/chronotope/browser/forms/location.yaml:89
+#: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/occasion.yaml:88
 #: src/chronotope/browser/forms/settings.yaml:87
 #: src/chronotope/browser/forms/facility.yaml:103
@@ -282,7 +282,7 @@ msgstr "Speichern"
 
 #. Default: Cancel
 #: src/chronotope/browser/forms/attachment.yaml:114
-#: src/chronotope/browser/forms/location.yaml:98
+#: src/chronotope/browser/forms/location.yaml:95
 #: src/chronotope/browser/forms/occasion.yaml:97
 #: src/chronotope/browser/forms/facility.yaml:112
 msgid "cancel"
@@ -313,50 +313,35 @@ msgstr "Straße"
 msgid "location_street_help"
 msgstr "Geben Sie den Straßennamen des Ortes an"
 
-#. Default: Street is required
-#: src/chronotope/browser/forms/location.yaml:42
-msgid "lat_required"
-msgstr "Straße ist erforderlich"
-
 #. Default: ZIP
-#: src/chronotope/browser/forms/location.yaml:49
+#: src/chronotope/browser/forms/location.yaml:48
 msgid "zip_label"
 msgstr "Postleitzahl"
 
 #. Default: Enter ZIP of location
-#: src/chronotope/browser/forms/location.yaml:50
+#: src/chronotope/browser/forms/location.yaml:49
 msgid "location_zip_help"
 msgstr "Geben Sie die Postleitzahl des Ortes an"
 
 #. Default: City
-#: src/chronotope/browser/forms/location.yaml:57
+#: src/chronotope/browser/forms/location.yaml:56
 msgid "city_label"
 msgstr "Stadt"
 
 #. Default: Enter city of location
-#: src/chronotope/browser/forms/location.yaml:58
+#: src/chronotope/browser/forms/location.yaml:57
 msgid "location_city_help"
 msgstr "Geben Sie die Stadt an in der sich der Ort befindet"
 
-#. Default: City is required
-#: src/chronotope/browser/forms/location.yaml:59
-msgid "city_required"
-msgstr "Stadt ist erforderlich"
-
 #. Default: Country
-#: src/chronotope/browser/forms/location.yaml:66
+#: src/chronotope/browser/forms/location.yaml:64
 msgid "country_label"
 msgstr "Land"
 
 #. Default: Enter country of location
-#: src/chronotope/browser/forms/location.yaml:67
+#: src/chronotope/browser/forms/location.yaml:65
 msgid "location_country_help"
 msgstr "Wählen Sie das Land in dem sich der Ort befindet"
-
-#. Default: Country is required
-#: src/chronotope/browser/forms/location.yaml:68
-msgid "country_required"
-msgstr "Landeingabe ist erforderlich"
 
 #. Default: Enter title of occasion
 #: src/chronotope/browser/forms/occasion.yaml:19
@@ -757,18 +742,38 @@ msgstr "Einrichtungen"
 msgid "facilities_description"
 msgstr "Container für Einrichtungen"
 
-#. Default: A location
+#. Default: N
 #: src/chronotope/model/location.py:99
+msgid "north"
+msgstr "N"
+
+#. Default: S
+#: src/chronotope/model/location.py:100
+msgid "south"
+msgstr "S"
+
+#. Default: W
+#: src/chronotope/model/location.py:101
+msgid "west"
+msgstr "W"
+
+#. Default: E
+#: src/chronotope/model/location.py:102
+msgid "east"
+msgstr "O"
+
+#. Default: A location
+#: src/chronotope/model/location.py:119
 msgid "location_description"
 msgstr "Ein Ort"
 
 #. Default: Locations
-#: src/chronotope/model/location.py:149 src/chronotope/model/location.py:127
+#: src/chronotope/model/location.py:174 src/chronotope/model/location.py:152
 msgid "locations_label"
 msgstr "Orte"
 
 #. Default: Container for Locations
-#: src/chronotope/model/location.py:151 src/chronotope/model/location.py:128
+#: src/chronotope/model/location.py:176 src/chronotope/model/location.py:153
 msgid "locations_description"
 msgstr "Container für Orte"
 
@@ -811,3 +816,12 @@ msgstr "Impressum/Kontakt"
 #: src/chronotope/model/about.py:96
 msgid "about"
 msgstr "Über"
+
+#~ msgid "lat_required"
+#~ msgstr "Straße ist erforderlich"
+
+#~ msgid "city_required"
+#~ msgstr "Stadt ist erforderlich"
+
+#~ msgid "country_required"
+#~ msgstr "Landeingabe ist erforderlich"

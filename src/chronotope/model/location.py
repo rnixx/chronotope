@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from sqlalchemy import (
     Column,
     Float,
@@ -6,7 +7,11 @@ from sqlalchemy import (
     or_,
 )
 from node.utils import instance_property
-from pyramid.i18n import TranslationStringFactory
+from pyramid.i18n import (
+    TranslationStringFactory,
+    get_localizer,
+)
+from pyramid.threadlocal import get_current_request
 from cone.app.model import (
     Properties,
     Metadata,
@@ -63,7 +68,9 @@ def search_locations(request, term, state=[], submitter=None, limit=None):
     query = session.query(LocationRecord)
     query = query.filter(or_(LocationRecord.street.like(u'%{0}%'.format(term)),
                              LocationRecord.zip.like(u'%{0}%'.format(term)),
-                             LocationRecord.city.like(u'%{0}%'.format(term))))
+                             LocationRecord.city.like(u'%{0}%'.format(term)),
+                             LocationRecord.lat.like(u'%{0}%'.format(term)),
+                             LocationRecord.lon.like(u'%{0}%'.format(term))))
     if state:
         query = query.filter(LocationRecord.state.in_(state))
     if submitter:
@@ -89,7 +96,20 @@ def locations_in_bounds(request, north, south, west, east,
     return query.all()
 
 
-def location_title(street, zip_, city):
+north = _('north', default='N')
+south = _('south', default='S')
+west = _('west', default='W')
+east = _('east', default='E')
+
+
+def location_title(request, street, zip_, city, lat, lon):
+    if not street and not zip_ and not city:
+        localizer = get_localizer(request)
+        lon_dir = localizer.translate(lon >= 0 and east or west)
+        lat_dir = localizer.translate(lat >= 0 and north or south)
+        return u'{0}° {1} / {2}° {3}'.format(
+            abs(lat), lat_dir, abs(lon), lon_dir
+        )
     return u'{0} {1} {2}'.format(street, zip_, city)
 
 
@@ -111,11 +131,16 @@ class Location(SQLRowNode):
         props.action_delete = True
         return props
 
-    @instance_property
+    @property
     def metadata(self):
         md = Metadata()
         md.title = location_title(
-            self.attrs['street'], self.attrs['zip'], self.attrs['city'])
+            get_current_request(),
+            self.attrs['street'],
+            self.attrs['zip'],
+            self.attrs['city'],
+            self.attrs['lat'],
+            self.attrs['lon'])
         md.creator = self.attrs['creator']
         md.created = self.attrs['created']
         md.modified = self.attrs['modified']

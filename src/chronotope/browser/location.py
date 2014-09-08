@@ -91,7 +91,13 @@ class LocationControls(Tile):
              renderer='json')
 def json_location(model, request):
     def extract_title(record):
-        return location_title(record.street, record.zip, record.city)
+        return location_title(
+            request,
+            record.street,
+            record.zip,
+            record.city,
+            record.lat,
+            record.lon)
     return json_references(
         model, request, search_locations, LOCATION_LIMIT,
         extract_title=extract_title)

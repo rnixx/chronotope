@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 16:45+0200\n"
+"POT-Creation-Date: 2014-09-08 16:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -364,7 +364,7 @@ msgstr "Beschreibung"
 #: src/chronotope/browser/forms/occasion.yaml:28
 msgid "occasion_description_help"
 msgstr ""
-"Gib bitte eine Beschreibung des Ereignissen an. Du kannst hier Text nach "
+"Gib bitte eine Beschreibung des Ereignisses an. Du kannst hier Text nach "
 "Belieben eingeben."
 
 #. Default: Description is required
@@ -381,9 +381,9 @@ msgstr "Dauer von"
 #: src/chronotope/browser/forms/occasion.yaml:52
 msgid "occasion_duration_from_help"
 msgstr ""
-"Wenn bekannt, gib bitte das Startdatum an, an dem das Ereignis statt "
-"gefunden hat. Format DD.MM.YYYY. Bei wiederholt stattfindenden Ereignissen, "
-"trage bitte den Rhythmus oben unter 'Bescheibung' ein."
+"Wenn bekannt, gib bitte das Startdatum an, an dem das Ereignis stattgefunden "
+"hat. Format DD.MM.YYYY. Bei wiederholt stattfindenden Ereignissen trage "
+"bitte den Rhythmus oben unter 'Bescheibung' ein."
 
 #. Default: Duration To
 #: src/chronotope/browser/forms/occasion.yaml:63

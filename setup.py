@@ -5,8 +5,8 @@ from setuptools import (
 )
 
 
-version = '0.1.dev0'
-shortdesc = 'Chronotope - **Time has come today**'
+version = '0.1'
+shortdesc = 'Poptraces'
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 

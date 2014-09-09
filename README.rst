@@ -29,3 +29,18 @@ Contributors
 - Robert Niederreiter
 - Holger Schwetter
 - Leuphana Universität Lüneburg
+
+
+History
+=======
+
+0.2 (unreleased)
+----------------
+
+- no changes yet.
+
+0.1
+---
+
+- make it work
+  [rnix]

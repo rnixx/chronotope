@@ -14,7 +14,7 @@
         </td>
       </tr>
 
-      <tr tal:condition="context.is_frontend">
+      <tr tal:condition="context.is_frontend and context.show_note">
         <td class="row-title"
             i18n:translate="note">Note</td>
         <td i18n:translate="location_general_description">

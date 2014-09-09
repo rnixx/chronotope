@@ -63,6 +63,7 @@ from chronotope.utils import (
     UX_IDENT,
     UX_FRONTEND,
     submitter_came_from,
+    get_submitter,
 )
 
 
@@ -114,6 +115,16 @@ class LocationView(ProtectedContentTile):
       interface=Location, permission='login',
       strict=False)
 class LocationTile(SubmitterAccessTile, UXMixin):
+
+    @property
+    def show_note(self):
+        authenticated = authenticated_userid(self.request)
+        if authenticated:
+            return False
+        submitter = get_submitter(self.request)
+        if self.model.attrs['submitter'] != submitter:
+            return False
+        return True
 
     @property
     def coordinates(self):

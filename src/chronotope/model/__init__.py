@@ -4,6 +4,7 @@ from chronotope.model.about import (
     AboutProject,
     AboutMap,
     AboutImprint,
+    AboutTermsOfUse,
 )
 from chronotope.model.location import (
     LocationRecord,

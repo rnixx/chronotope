@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-08 17:06+0200\n"
+"POT-Creation-Date: 2014-09-15 10:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,13 +84,13 @@ msgid "sort_on_state"
 msgstr "Nach Status sortieren"
 
 #. Default: Pick other location
-#: src/chronotope/browser/location.py:133
+#: src/chronotope/browser/location.py:144
 msgid "pick_location"
 msgstr "Wähle andere Koordinaten auf der Karte"
 
 #. Default: If you know the exact address, please enter it. If not, enter the
 #. information you know. The Captcha is required to avoid spam
-#: src/chronotope/browser/location.py:196
+#: src/chronotope/browser/location.py:207
 msgid "location_form_description_text"
 msgstr ""
 "Wenn du die genaue Adresse weißt, gib sie bitte ein. Falls nicht, gib die "
@@ -98,33 +98,33 @@ msgstr ""
 "Überprüfung dient der Spamvermeidung. Danke!"
 
 #. Default: Germany
-#: src/chronotope/browser/location.py:225
+#: src/chronotope/browser/location.py:236
 msgid "germany"
 msgstr "Deutschland"
 
 #. Default: Austria
-#: src/chronotope/browser/location.py:226
+#: src/chronotope/browser/location.py:237
 msgid "austria"
 msgstr "Österreich"
 
 #. Default: Swizerland
-#: src/chronotope/browser/location.py:227
+#: src/chronotope/browser/location.py:238
 msgid "swizerland"
 msgstr "Schweiz"
 
 #. Default: Coordinates
-#: src/chronotope/browser/location.py:148
+#: src/chronotope/browser/location.py:159
 #: src/chronotope/browser/forms/location.yaml:28
 msgid "coordinates_label"
 msgstr "Koordinaten"
 
 #. Default: Latitude
-#: src/chronotope/browser/location.py:157
+#: src/chronotope/browser/location.py:168
 msgid "lat"
 msgstr "Breitengrad"
 
 #. Default: Longitude
-#: src/chronotope/browser/location.py:166
+#: src/chronotope/browser/location.py:177
 msgid "lon"
 msgstr "Längengrad"
 
@@ -156,9 +156,6 @@ msgstr "Material/Text hinzufügen"
 
 #. Default: Title
 #: src/chronotope/browser/submitter.py:210
-#: src/chronotope/browser/templates/facility.pt:24
-#: src/chronotope/browser/templates/attachment.pt:24
-#: src/chronotope/browser/templates/occasion.pt:24
 msgid "title"
 msgstr "Titel"
 
@@ -212,6 +209,7 @@ msgstr "Ort wählen"
 
 #. Default: Title/Description
 #: src/chronotope/browser/forms/attachment.yaml:18
+#: src/chronotope/browser/templates/attachment.pt:24
 msgid "title_description_label"
 msgstr "Titel / Beschreibung"
 
@@ -275,7 +273,7 @@ msgstr "Bild ist erforderlich"
 #: src/chronotope/browser/forms/attachment.yaml:105
 #: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/occasion.yaml:88
-#: src/chronotope/browser/forms/settings.yaml:87
+#: src/chronotope/browser/forms/settings.yaml:104
 #: src/chronotope/browser/forms/facility.yaml:98
 msgid "save"
 msgstr "Speichern"
@@ -466,6 +464,16 @@ msgstr "Impressum/Kontakt"
 msgid "imprint_contact_required"
 msgstr "Impressum/Kontakt ist erforderlich"
 
+#. Default: Terms of use
+#: src/chronotope/browser/forms/settings.yaml:78
+msgid "terms_of_use_label"
+msgstr "Nutzungsbedingungen"
+
+#. Default: Terms of use is required
+#: src/chronotope/browser/forms/settings.yaml:79
+msgid "terms_of_use_required"
+msgstr "Nutzungsbedingungen sind erforderlich"
+
 #. Default: Occasion
 #: src/chronotope/browser/forms/occasion_reference.yaml:4
 #: src/chronotope/model/occasion.py:109
@@ -485,7 +493,9 @@ msgid "occasion_placeholder"
 msgstr "Ereignis wählen"
 
 #. Default: Facility title
+#. Default: Title
 #: src/chronotope/browser/forms/facility.yaml:18
+#: src/chronotope/browser/templates/facility.pt:24
 msgid "facility_title"
 msgstr "Name der Einrichtung"
 
@@ -579,7 +589,7 @@ msgstr ""
 #: src/chronotope/browser/templates/location.pt:37
 #: src/chronotope/browser/templates/facility.pt:35
 #: src/chronotope/browser/templates/attachment.pt:35
-#: src/chronotope/browser/templates/occasion.pt:35
+#: src/chronotope/browser/templates/occasion.pt:34
 msgid "creator"
 msgstr "Ersteller"
 
@@ -611,7 +621,7 @@ msgstr "Land"
 #. Default: Facilities
 #: src/chronotope/browser/templates/location.pt:106
 #: src/chronotope/browser/templates/attachment.pt:118
-#: src/chronotope/browser/templates/occasion.pt:95
+#: src/chronotope/browser/templates/occasion.pt:94
 msgid "facilities"
 msgstr "Einrichtungen"
 
@@ -625,7 +635,7 @@ msgstr "Ereignisse"
 #. Default: Attachments
 #: src/chronotope/browser/templates/location.pt:134
 #: src/chronotope/browser/templates/facility.pt:132
-#: src/chronotope/browser/templates/occasion.pt:109
+#: src/chronotope/browser/templates/occasion.pt:108
 msgid "attachments"
 msgstr "Materialien/Texte"
 
@@ -633,7 +643,7 @@ msgstr "Materialien/Texte"
 #: src/chronotope/browser/templates/location.pt:148
 #: src/chronotope/browser/templates/facility.pt:146
 #: src/chronotope/browser/templates/attachment.pt:146
-#: src/chronotope/browser/templates/occasion.pt:123
+#: src/chronotope/browser/templates/occasion.pt:122
 msgid "actions"
 msgstr "Aktionen"
 
@@ -644,7 +654,7 @@ msgstr "Einrichtung"
 
 #. Default: Description
 #: src/chronotope/browser/templates/facility.pt:46
-#: src/chronotope/browser/templates/occasion.pt:46
+#: src/chronotope/browser/templates/occasion.pt:45
 msgid "description"
 msgstr "Beschreibung"
 
@@ -666,7 +676,7 @@ msgstr "Schlagwörter"
 #. Default: Locations
 #: src/chronotope/browser/templates/facility.pt:104
 #: src/chronotope/browser/templates/attachment.pt:104
-#: src/chronotope/browser/templates/occasion.pt:81
+#: src/chronotope/browser/templates/occasion.pt:80
 msgid "locations"
 msgstr "Orte"
 
@@ -754,12 +764,12 @@ msgid "occasion"
 msgstr "Ereignis"
 
 #. Default: Duration from
-#: src/chronotope/browser/templates/occasion.pt:59
+#: src/chronotope/browser/templates/occasion.pt:58
 msgid "duration_from"
 msgstr "Dauer von"
 
 #. Default: Duration to
-#: src/chronotope/browser/templates/occasion.pt:70
+#: src/chronotope/browser/templates/occasion.pt:69
 msgid "duration_to"
 msgstr "Dauer bis"
 
@@ -767,6 +777,11 @@ msgstr "Dauer bis"
 #: src/chronotope/browser/templates/view.pt:15
 msgid "view"
 msgstr "Anzeigen"
+
+#. Default: Terms of use
+#: src/chronotope/browser/templates/footer.pt:23
+msgid "terms_of_use"
+msgstr "Nutzungsbedingungen"
 
 #. Default: Attachment
 #: src/chronotope/model/attachment.py:94
@@ -875,7 +890,12 @@ msgstr "Über die Karte"
 msgid "about_imprint"
 msgstr "Impressum/Kontakt"
 
+#. Default: Terms of use
+#: src/chronotope/model/about.py:90
+msgid "about_terms_of_use"
+msgstr "Nutzungsbedingungen"
+
 #. Default: About
-#: src/chronotope/model/about.py:96
+#: src/chronotope/model/about.py:118
 msgid "about"
 msgstr "Über"

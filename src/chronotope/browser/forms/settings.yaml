@@ -71,6 +71,23 @@ widgets:
         lists: True
         label.class_add: col-sm-2
         div.class_add: col-sm-10
+- terms_of_use:
+    factory: field:label:div:error:wysihtml5
+    value: expr:context.model.attrs.get('terms_of_use')
+    props:
+        label: i18n:terms_of_use_label:Terms of use
+        required: i18n:terms_of_use_required:Terms of use is required
+        size: sm
+        color: True
+        emphasis: True
+        font-styles: True
+        html: True
+        image: True
+        justify: True
+        link: True
+        lists: True
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - controls:
     factory: field:div
     props:

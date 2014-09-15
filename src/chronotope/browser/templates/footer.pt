@@ -1,4 +1,7 @@
 <tal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+           xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
+           xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+           i18n:domain="chronotope"
            omit-tag="True">
 
   <footer class="navbar-default navbar-fixed-bottom">
@@ -12,6 +15,15 @@
       <a href="http://www.dfg.de/"
          class="footer-dfg pull-left">
         <img src="chronotope-static/images/dfg.png">
+      </a>
+
+      <a href="${request.application_url}/about/terms_of_use"
+         class="terms-of-use pull-left"
+         ajax:bind="click"
+         ajax:event="contextchanged:#layout"
+         ajax:target="${request.application_url}/about/terms_of_use"
+         i18n:translate="terms_of_use">
+        Terms of use
       </a>
 
       <a href="http://www.aesthetische-eigenzeiten.de/"

@@ -34,10 +34,11 @@ Contributors
 History
 =======
 
-0.2 (unreleased)
-----------------
+0.2
+---
 
-- no changes yet.
+- Add terms of use.
+  [rnix]
 
 0.1
 ---

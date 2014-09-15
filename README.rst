@@ -34,6 +34,11 @@ Contributors
 History
 =======
 
+0.3 (unreleased)
+----------------
+
+- no changes yet.
+
 0.2
 ---
 

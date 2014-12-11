@@ -265,7 +265,7 @@ class WSGISQLSession(object):
             result = self.next_app(environ, start_response)
             return result
         finally:
-            pass
+            session.close()
 
 
 def make_app(next_app, global_conf, **local_conf):

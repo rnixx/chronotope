@@ -34,10 +34,11 @@ Contributors
 History
 =======
 
-0.3 (unreleased)
-----------------
+0.3
+---
 
-- no changes yet.
+- Close SQL session properly.
+  [rnix]
 
 0.2
 ---

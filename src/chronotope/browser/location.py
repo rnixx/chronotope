@@ -121,8 +121,10 @@ class LocationTile(SubmitterAccessTile, UXMixin):
         authenticated = authenticated_userid(self.request)
         if authenticated:
             return False
+        if self.model.state == 'published':
+            return False
         submitter = get_submitter(self.request)
-        if self.model.attrs['submitter'] != submitter:
+        if not submitter or self.model.attrs['submitter'] != submitter:
             return False
         return True
 

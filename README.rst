@@ -38,6 +38,10 @@ History
 0.4 (unreleased)
 ----------------
 
+- Also check for empty submitter and published state when displaying edit note
+  for locations.
+  [rnix]
+
 - Add privacy policy to about section.
   [rnix]
 

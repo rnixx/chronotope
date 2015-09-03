@@ -35,6 +35,16 @@ Contributors
 History
 =======
 
+0.4.1
+-----
+
+- Display links to terms of use and privacy policy in german translation of
+  accept terms widget.
+  [rnix]
+
+- About dropdown reordering.
+  [rnix]
+
 0.4
 ---
 

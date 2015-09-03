@@ -55,26 +55,6 @@ class AboutMap(BaseNode):
         return self.parent.layout
 
 
-class AboutImprint(BaseNode):
-    __acl__ = chronotope_about_acl
-
-    @property
-    def properties(self):
-        props = Properties()
-        props.icon = 'glyphicon glyphicon-info-sign'
-        return props
-
-    @property
-    def metadata(self):
-        md = Metadata()
-        md.title = _('about_imprint', default='Imprint/Contact')
-        return md
-
-    @property
-    def layout(self):
-        return self.parent.layout
-
-
 class AboutTermsOfUse(BaseNode):
     __acl__ = chronotope_about_acl
 
@@ -117,13 +97,33 @@ class AboutPrivacyPolicy(BaseNode):
         return self.parent.layout
 
 
+class AboutImprint(BaseNode):
+    __acl__ = chronotope_about_acl
+
+    @property
+    def properties(self):
+        props = Properties()
+        props.icon = 'glyphicon glyphicon-info-sign'
+        return props
+
+    @property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('about_imprint', default='Imprint/Contact')
+        return md
+
+    @property
+    def layout(self):
+        return self.parent.layout
+
+
 class About(FactoryNode):
     factories = odict()
     factories['project'] = AboutProject
     factories['map'] = AboutMap
-    factories['imprint'] = AboutImprint
     factories['terms_of_use'] = AboutTermsOfUse
     factories['privacy_policy'] = AboutPrivacyPolicy
+    factories['imprint'] = AboutImprint
 
     __acl__ = chronotope_about_acl
 

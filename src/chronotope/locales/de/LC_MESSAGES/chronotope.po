@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2015-09-03 10:38+0200\n"
+"POT-Creation-Date: 2015-09-03 12:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,7 +197,12 @@ msgstr "Zustimmen"
 #. Default: I have read the Terms of Use and agree to
 #: src/chronotope/browser/submitter.py:128
 msgid "accept_terms_of_use_help"
-msgstr "Ich habe die Nutzungsbedingungen gelesen und bin damit einverstanden"
+msgstr ""
+"Ich habe die <a href=\"/about/privacy_policy\" target=\"blank\">Erklärung "
+"zum Datenschutz</a> sowie die <a href=\"/about/terms_of_use\" target=\"blank"
+"\">Nutzungsbedingungen</a> gelesen und verstanden. Ich willige unter den "
+"darin genannten Bedingungen freiwillig in die Verarbeitung meiner "
+"personenbezogenen Daten ein."
 
 #. Default: Verify
 #: src/chronotope/browser/submitter.py:146

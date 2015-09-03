@@ -35,8 +35,8 @@ Contributors
 History
 =======
 
-0.4 (unreleased)
-----------------
+0.4
+---
 
 - Add checkbox to accept terms of use for anonymous submitters.
   [rnix]

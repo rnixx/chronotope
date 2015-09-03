@@ -7,6 +7,7 @@ from chronotope.model import (
     AboutMap,
     AboutImprint,
     AboutTermsOfUse,
+    AboutPrivacyPolicy,
 )
 
 
@@ -47,3 +48,13 @@ class AboutTermsOfUseContent(Tile):
     def text(self):
         settings = self.model.root['settings']
         return settings['chronotope'].attrs['terms_of_use']
+
+
+@tile('content', 'templates/about.pt',
+      interface=AboutPrivacyPolicy, permission='view')
+class AboutPrivacyPolicyContent(Tile):
+
+    @property
+    def text(self):
+        settings = self.model.root['settings']
+        return settings['chronotope'].attrs['privacy_policy']

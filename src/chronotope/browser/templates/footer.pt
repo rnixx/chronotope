@@ -7,9 +7,9 @@
   <footer class="navbar-default navbar-fixed-bottom">
 
     <div class="container">
-      <a href="http://www.leuphana.de/"
-         class="footer-leuphana pull-left">
-        <img src="chronotope-static/images/leuphana.png">
+      <a href="http://www.tu-dresden.de/"
+         class="footer-tu-dresden pull-left">
+        <img src="chronotope-static/images/tu_dresden.png">
       </a>
 
       <a href="http://www.dfg.de/"

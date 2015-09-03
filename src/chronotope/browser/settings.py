@@ -42,4 +42,5 @@ class SettingsForm(Form):
         attrs['map_description'] = fetch('map_description')
         attrs['imprint_contact'] = fetch('imprint_contact')
         attrs['terms_of_use'] = fetch('terms_of_use')
+        attrs['privacy_policy'] = fetch('privacy_policy')
         self.model()

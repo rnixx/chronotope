@@ -28,7 +28,8 @@ cfg.css.public.append('chronotope-static/chronotope.css')
 # js resources
 cfg.js.public.append('chronotope-static/Leaflet/leaflet-src.js')
 cfg.js.public.append('chronotope-static/L.GeoSearch/l.control.geosearch.js')
-cfg.js.public.append('chronotope-static/L.GeoSearch/l.geosearch.provider.openstreetmap.js')
+cfg.js.public.append(
+    'chronotope-static/L.GeoSearch/l.geosearch.provider.openstreetmap.js')
 cfg.js.public.append('chronotope-static/L.mc/leaflet.markercluster-src.js')
 cfg.js.public.append('chronotope-static/chronotope.js')
 
@@ -49,10 +50,12 @@ cone.app.register_plugin_config('chronotope', model.Settings)
 # register ACL's for nodes
 if not os.environ.get('TESTRUN_MARKER'):
     acl_registry.register(chronotope_root_acl, AppRoot)
+
 acl_registry.register(chronotope_container_acl, model.Locations, 'locations')
 acl_registry.register(chronotope_container_acl, model.Facilities, 'facilities')
 acl_registry.register(chronotope_container_acl, model.Occasions, 'occasions')
-acl_registry.register(chronotope_container_acl, model.Attachments, 'attachments')
+acl_registry.register(
+    chronotope_container_acl, model.Attachments, 'attachments')
 
 
 # application startup initialization

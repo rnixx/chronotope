@@ -210,6 +210,7 @@ Cleanup::
         <class 'chronotope.model.about.AboutMap'>: map
         <class 'chronotope.model.about.AboutImprint'>: imprint
         <class 'chronotope.model.about.AboutTermsOfUse'>: terms_of_use
+        <class 'chronotope.model.about.AboutPrivacyPolicy'>: privacy_policy
       <class 'chronotope.model.location.Locations'>: locations
       <class 'chronotope.model.facility.Facilities'>: facilities
       <class 'chronotope.model.occasion.Occasions'>: occasions

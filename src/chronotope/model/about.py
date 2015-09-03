@@ -96,12 +96,34 @@ class AboutTermsOfUse(BaseNode):
         return self.parent.layout
 
 
+class AboutPrivacyPolicy(BaseNode):
+    __acl__ = chronotope_about_acl
+
+    @property
+    def properties(self):
+        props = Properties()
+        props.icon = 'glyphicon glyphicon-info-sign'
+        return props
+
+    @property
+    def metadata(self):
+        md = Metadata()
+        md.title = _('about_privacy_policy',
+                     default='Privacy policy')
+        return md
+
+    @property
+    def layout(self):
+        return self.parent.layout
+
+
 class About(FactoryNode):
     factories = odict()
     factories['project'] = AboutProject
     factories['map'] = AboutMap
     factories['imprint'] = AboutImprint
     factories['terms_of_use'] = AboutTermsOfUse
+    factories['privacy_policy'] = AboutPrivacyPolicy
 
     __acl__ = chronotope_about_acl
 

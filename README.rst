@@ -26,13 +26,23 @@ Credits
 Contributors
 ============
 
-- Robert Niederreiter
+- Robert Niederreiter (Author)
 - Holger Schwetter
 - Leuphana Universität Lüneburg
+- TU Dresden
 
 
 History
 =======
+
+0.4 (unreleased)
+----------------
+
+- Add privacy policy to about section.
+  [rnix]
+
+- Project has moved to TU Dresden. Adopt logo and link in footer.
+  [rnix]
 
 0.3
 ---

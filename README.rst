@@ -38,6 +38,9 @@ History
 0.4 (unreleased)
 ----------------
 
+- Add checkbox to accept terms of use for anonymous submitters.
+  [rnix]
+
 - Also check for empty submitter and published state when displaying edit note
   for locations.
   [rnix]

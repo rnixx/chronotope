@@ -4,11 +4,17 @@ from plumber import (
     plumb,
     default,
 )
-from node.utils import instance_property
+from node.utils import (
+    UNSET,
+    instance_property,
+)
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from pyramid.exceptions import Forbidden
-from yafowil.base import factory
+from yafowil.base import (
+    factory,
+    ExtractionError,
+)
 from cone.tile import (
     Tile,
     tile,
@@ -85,6 +91,17 @@ class SubmitterForm(Behavior):
     def authenticated(self):
         return bool(authenticated_userid(self.request))
 
+    @default
+    def accept_terms_of_use(self, widget, data):
+        extracted = data.extracted
+        if extracted is not UNSET and not extracted:
+            raise ExtractionError(
+                _('accept_terms_of_use_error',
+                  default='You need to accept the terms of use in order to '
+                          'contribute data')
+            )
+        return extracted
+
     @plumb
     def prepare(_next, self):
         _next(self)
@@ -102,6 +119,26 @@ class SubmitterForm(Behavior):
         )
         if self.authenticated:
             return
+        save_widget = self.form['controls']
+        accept_terms_of_use = factory(
+            'field:label:div:*accept_terms_of_use:error:help:checkbox',
+            name='accept_terms_of_use',
+            props={
+                'label': _('accept_terms_of_use', default='Accept'),
+                'help': _('accept_terms_of_use_help',
+                          default='I have read the Terms of Use and agree to'),
+                'label.class_add': 'col-sm-2',
+                'div.class_add': 'col-sm-10',
+                'error.position': 'after',
+                'checkbox.class_add': 'accept_terms_of_use',
+            },
+            custom={
+                'accept_terms_of_use': {
+                    'extractors': [self.accept_terms_of_use]
+                },
+            },
+        )
+        self.form.insertbefore(accept_terms_of_use, save_widget)
         captcha_widget = factory(
             'field:label:div:error:recaptcha',
             name='captcha',
@@ -116,7 +153,6 @@ class SubmitterForm(Behavior):
                 'error.position': 'after',
             },
         )
-        save_widget = self.form['controls']
         self.form.insertbefore(captcha_widget, save_widget)
 
     @plumb

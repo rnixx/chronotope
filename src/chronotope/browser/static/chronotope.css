@@ -25,6 +25,10 @@ tr.state-declined td.state,
     margin-top:0;
     margin-bottom:16px;
 }
+input.accept_terms_of_use {
+    float:left;
+    margin-right:0.4em;
+}
 
 /* overlay forms */
 .overlay-from-description {

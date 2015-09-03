@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-09-15 10:08+0200\n"
+"POT-Creation-Date: 2015-09-03 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -273,7 +273,7 @@ msgstr "Bild ist erforderlich"
 #: src/chronotope/browser/forms/attachment.yaml:105
 #: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/occasion.yaml:88
-#: src/chronotope/browser/forms/settings.yaml:104
+#: src/chronotope/browser/forms/settings.yaml:121
 #: src/chronotope/browser/forms/facility.yaml:98
 msgid "save"
 msgstr "Speichern"
@@ -473,6 +473,16 @@ msgstr "Nutzungsbedingungen"
 #: src/chronotope/browser/forms/settings.yaml:79
 msgid "terms_of_use_required"
 msgstr "Nutzungsbedingungen sind erforderlich"
+
+#. Default: Privacy policy
+#: src/chronotope/browser/forms/settings.yaml:95
+msgid "privacy_policy_label"
+msgstr "Erklärung zum Datenschutz"
+
+#. Default: Privacy policy is required
+#: src/chronotope/browser/forms/settings.yaml:96
+msgid "privacy_policy_required"
+msgstr "Erklärung zum Datenschutz sind erforderlich"
 
 #. Default: Occasion
 #: src/chronotope/browser/forms/occasion_reference.yaml:4
@@ -895,7 +905,12 @@ msgstr "Impressum/Kontakt"
 msgid "about_terms_of_use"
 msgstr "Nutzungsbedingungen"
 
+#. Default: Privacy policy
+#: src/chronotope/model/about.py:111
+msgid "about_privacy_policy"
+msgstr "Erklärung zum Datenschutz"
+
 #. Default: About
-#: src/chronotope/model/about.py:118
+#: src/chronotope/model/about.py:140
 msgid "about"
 msgstr "Über"

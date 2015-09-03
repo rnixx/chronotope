@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2015-09-03 09:36+0200\n"
+"POT-Creation-Date: 2015-09-03 10:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,24 +73,24 @@ msgstr "Bild"
 
 #. Default: State
 #: src/chronotope/browser/contents.py:23
-#: src/chronotope/browser/submitter.py:228
+#: src/chronotope/browser/submitter.py:264
 msgid "state"
 msgstr "Status"
 
 #. Default: Sort on state
 #: src/chronotope/browser/contents.py:25
-#: src/chronotope/browser/submitter.py:230
+#: src/chronotope/browser/submitter.py:266
 msgid "sort_on_state"
 msgstr "Nach Status sortieren"
 
 #. Default: Pick other location
-#: src/chronotope/browser/location.py:144
+#: src/chronotope/browser/location.py:146
 msgid "pick_location"
 msgstr "Wähle andere Koordinaten auf der Karte"
 
 #. Default: If you know the exact address, please enter it. If not, enter the
 #. information you know. The Captcha is required to avoid spam
-#: src/chronotope/browser/location.py:207
+#: src/chronotope/browser/location.py:209
 msgid "location_form_description_text"
 msgstr ""
 "Wenn du die genaue Adresse weißt, gib sie bitte ein. Falls nicht, gib die "
@@ -98,33 +98,33 @@ msgstr ""
 "Überprüfung dient der Spamvermeidung. Danke!"
 
 #. Default: Germany
-#: src/chronotope/browser/location.py:236
+#: src/chronotope/browser/location.py:238
 msgid "germany"
 msgstr "Deutschland"
 
 #. Default: Austria
-#: src/chronotope/browser/location.py:237
+#: src/chronotope/browser/location.py:239
 msgid "austria"
 msgstr "Österreich"
 
 #. Default: Swizerland
-#: src/chronotope/browser/location.py:238
+#: src/chronotope/browser/location.py:240
 msgid "swizerland"
 msgstr "Schweiz"
 
 #. Default: Coordinates
-#: src/chronotope/browser/location.py:159
+#: src/chronotope/browser/location.py:161
 #: src/chronotope/browser/forms/location.yaml:28
 msgid "coordinates_label"
 msgstr "Koordinaten"
 
 #. Default: Latitude
-#: src/chronotope/browser/location.py:168
+#: src/chronotope/browser/location.py:170
 msgid "lat"
 msgstr "Breitengrad"
 
 #. Default: Longitude
-#: src/chronotope/browser/location.py:177
+#: src/chronotope/browser/location.py:179
 msgid "lon"
 msgstr "Längengrad"
 
@@ -155,37 +155,52 @@ msgid "add_attachment"
 msgstr "Material/Text hinzufügen"
 
 #. Default: Title
-#: src/chronotope/browser/submitter.py:210
+#: src/chronotope/browser/submitter.py:246
 msgid "title"
 msgstr "Titel"
 
 #. Default: Sort on title
-#: src/chronotope/browser/submitter.py:212
+#: src/chronotope/browser/submitter.py:248
 msgid "sort_on_title"
 msgstr "Nach Titel sortieren"
 
 #. Default: Created
-#: src/chronotope/browser/submitter.py:216
+#: src/chronotope/browser/submitter.py:252
 msgid "created"
 msgstr "Erstellt"
 
 #. Default: Sort on created
-#: src/chronotope/browser/submitter.py:218
+#: src/chronotope/browser/submitter.py:254
 msgid "sort_on_created"
 msgstr "Nach Erstelldatum sortieren"
 
 #. Default: Modified
-#: src/chronotope/browser/submitter.py:222
+#: src/chronotope/browser/submitter.py:258
 msgid "modified"
 msgstr "Geändert"
 
 #. Default: Sort on modified
-#: src/chronotope/browser/submitter.py:224
+#: src/chronotope/browser/submitter.py:260
 msgid "sort_on_modified"
 msgstr "Nach Änderungsdatum sortieren"
 
+#. Default: You need to accept the terms of use in order to contribute data
+#: src/chronotope/browser/submitter.py:99
+msgid "accept_terms_of_use_error"
+msgstr "Sie müssen den Nutzungebedingungen zustimmen"
+
+#. Default: Accept
+#: src/chronotope/browser/submitter.py:127
+msgid "accept_terms_of_use"
+msgstr "Zustimmen"
+
+#. Default: I have read the Terms of Use and agree to
+#: src/chronotope/browser/submitter.py:128
+msgid "accept_terms_of_use_help"
+msgstr "Ich habe die Nutzungsbedingungen gelesen und bin damit einverstanden"
+
 #. Default: Verify
-#: src/chronotope/browser/submitter.py:109
+#: src/chronotope/browser/submitter.py:146
 msgid "verify"
 msgstr "Überprüfen"
 

@@ -17,15 +17,6 @@
         <img src="chronotope-static/images/dfg.png">
       </a>
 
-      <a href="${request.application_url}/about/terms_of_use"
-         class="terms-of-use pull-left"
-         ajax:bind="click"
-         ajax:event="contextchanged:#layout"
-         ajax:target="${request.application_url}/about/terms_of_use"
-         i18n:translate="terms_of_use">
-        Terms of use
-      </a>
-
       <a href="http://www.aesthetische-eigenzeiten.de/"
          class="footer-ae pull-right"
          target="blank">

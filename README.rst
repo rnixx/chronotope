@@ -35,6 +35,12 @@ Contributors
 History
 =======
 
+0.4.2
+-----
+
+- Remove terms of use link from footer.
+  [rnix]
+
 0.4.1
 -----
 

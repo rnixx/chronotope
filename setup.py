@@ -5,7 +5,7 @@ from setuptools import (
 )
 
 
-version = '0.4.1'
+version = '0.4.2'
 shortdesc = 'Poptraces'
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 

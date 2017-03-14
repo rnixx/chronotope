@@ -1,27 +1,19 @@
-import urllib2
+from chronotope.browser.ux import UXMixin
+from chronotope.model import Attachment
+from chronotope.model import Facility
+from chronotope.model import Location
+from chronotope.model import Occasion
+from chronotope.utils import UX_FRONTEND
+from chronotope.utils import UX_IDENT
+from chronotope.utils import get_submitter
+from chronotope.utils import submitter_came_from
+from cone.app.browser.utils import make_query
+from cone.app.browser.utils import make_url
+from cone.tile import Tile
+from cone.tile import tile
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
-from cone.tile import (
-    tile,
-    Tile,
-)
-from cone.app.browser.utils import (
-    make_url,
-    make_query,
-)
-from chronotope.model import (
-    Location,
-    Facility,
-    Occasion,
-    Attachment,
-)
-from chronotope.browser.ux import UXMixin
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
-    get_submitter,
-    submitter_came_from,
-)
+import urllib2
 
 
 _ = TranslationStringFactory('chronotope')

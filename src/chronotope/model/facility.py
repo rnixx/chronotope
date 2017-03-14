@@ -1,47 +1,37 @@
-from sqlalchemy import (
-    Table,
-    Column,
-    String,
-    DateTime,
-    ForeignKey,
-)
-from sqlalchemy.orm import relationship
+from chronotope.model.category import CategoryRecord
+from chronotope.model.location import LocationRecord
+from chronotope.sql import GUID
+from chronotope.sql import SQLBase
+from chronotope.sql import SQLRowNode
+from chronotope.sql import SQLTableNode
+from chronotope.sql import get_session
+from chronotope.utils import ensure_uuid
+from chronotope.utils import html_index_transform
+from cone.app.model import Metadata
+from cone.app.model import Properties
+from cone.app.model import node_info
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
-from cone.app.model import (
-    Properties,
-    Metadata,
-    node_info,
-)
-from chronotope.sql import (
-    GUID,
-    SQLBase,
-    SQLTableNode,
-    SQLRowNode,
-    get_session,
-)
-from chronotope.model import (
-    LocationRecord,
-    CategoryRecord,
-)
-from chronotope.utils import (
-    html_index_transform,
-    ensure_uuid,
-)
+from sqlalchemy import Column
+from sqlalchemy import DateTime
+from sqlalchemy import ForeignKey
+from sqlalchemy import String
+from sqlalchemy import Table
+from sqlalchemy.orm import relationship
 
 
 _ = TranslationStringFactory('chronotope')
 
 
 facility_location_references = Table(
-        'facility_location_references', SQLBase.metadata,
+    'facility_location_references',
+    SQLBase.metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
-
-
 facility_category_references = Table(
-        'facility_category_references', SQLBase.metadata,
+    'facility_category_references',
+    SQLBase.metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('category_uid', GUID, ForeignKey('category.uid'))
 )
@@ -136,8 +126,10 @@ class Facility(SQLRowNode):
 @node_info(
     name='facilities',
     title=_('facilities_label', default='Facilities'),
-    description=_('facilities_description',
-                  default='Container for Facilities'),
+    description=_(
+        'facilities_description',
+        default='Container for Facilities'
+    ),
     icon='glyphicon glyphicon-record',
     addables=['facility'])
 class Facilities(SQLTableNode):
@@ -158,6 +150,8 @@ class Facilities(SQLTableNode):
     def metadata(self):
         md = Metadata()
         md.title = _('facilities_label', default='Facilities')
-        md.description = \
-            _('facilities_description', default='Container for Facilities')
+        md.description = _(
+            'facilities_description',
+            default='Container for Facilities'
+        )
         return md

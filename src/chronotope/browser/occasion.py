@@ -1,42 +1,28 @@
-import uuid
+from chronotope.browser.references import FacilityReferencing
+from chronotope.browser.references import LocationReferencing
+from chronotope.browser.references import json_references
+from chronotope.browser.submitter import SubmitterAccessAddForm
+from chronotope.browser.submitter import SubmitterAccessEditForm
+from chronotope.browser.submitter import SubmitterAccessTile
+from chronotope.browser.ux import UXMixin
+from chronotope.browser.ux import UXMixinProxy
+from chronotope.model.occasion import Occasion
+from chronotope.model.occasion import search_occasions
+from cone.app.browser.authoring import ContentAddForm
+from cone.app.browser.authoring import ContentEditForm
+from cone.app.browser.authoring import OverlayAddForm
+from cone.app.browser.authoring import OverlayEditForm
+from cone.app.browser.form import Form
+from cone.app.browser.form import YAMLForm
+from cone.app.browser.layout import ProtectedContentTile
+from cone.app.browser.utils import format_date
+from cone.app.utils import add_creation_metadata
+from cone.app.utils import update_creation_metadata
+from cone.tile import tile
 from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from pyramid.view import view_config
-from cone.tile import tile
-from cone.app.utils import (
-    add_creation_metadata,
-    update_creation_metadata,
-)
-from cone.app.browser.layout import ProtectedContentTile
-from cone.app.browser.form import (
-    Form,
-    YAMLForm,
-)
-from cone.app.browser.authoring import (
-    ContentAddForm,
-    ContentEditForm,
-    OverlayAddForm,
-    OverlayEditForm,
-)
-from cone.app.browser.utils import format_date
-from chronotope.model.occasion import (
-    Occasion,
-    search_occasions,
-)
-from chronotope.browser.references import (
-    json_references,
-    LocationReferencing,
-    FacilityReferencing,
-)
-from chronotope.browser.submitter import (
-    SubmitterAccessTile,
-    SubmitterAccessAddForm,
-    SubmitterAccessEditForm,
-)
-from chronotope.browser.ux import (
-    UXMixin,
-    UXMixinProxy,
-)
+import uuid
 
 
 _ = TranslationStringFactory('chronotope')

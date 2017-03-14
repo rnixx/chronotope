@@ -9,13 +9,11 @@ Imports::
     >>> import datetime
     >>> from cone.app import get_root
     >>> from chronotope.sql import get_session
-    >>> from chronotope.model import (
-    ...     CategoryRecord,
-    ...     Location,
-    ...     Facility,
-    ...     Occasion,
-    ...     Attachment,
-    ... )
+    >>> from chronotope.model import CategoryRecord
+    >>> from chronotope.model import Location
+    >>> from chronotope.model import Facility
+    >>> from chronotope.model import Occasion
+    >>> from chronotope.model import Attachment
     >>> from chronotope.search import fulltext_search
 
 Dummy content creation::

@@ -1,52 +1,43 @@
-from sqlalchemy import (
-    Table,
-    Column,
-    String,
-    DateTime,
-    LargeBinary,
-    ForeignKey,
-)
-from sqlalchemy.orm import relationship
+from chronotope.model.facility import FacilityRecord
+from chronotope.model.location import LocationRecord
+from chronotope.model.occasion import OccasionRecord
+from chronotope.sql import GUID
+from chronotope.sql import SQLBase
+from chronotope.sql import SQLRowNode
+from chronotope.sql import SQLTableNode
+from chronotope.utils import html_2_text
+from cone.app.model import Metadata
+from cone.app.model import Properties
+from cone.app.model import node_info
 from node.utils import instance_property
 from pyramid.i18n import TranslationStringFactory
-from cone.app.model import (
-    Properties,
-    Metadata,
-    node_info,
-)
-from chronotope.sql import (
-    GUID,
-    SQLBase,
-    SQLTableNode,
-    SQLRowNode,
-)
-from chronotope.model import (
-    LocationRecord,
-    FacilityRecord,
-    OccasionRecord,
-)
-from chronotope.utils import html_2_text
+from sqlalchemy import Column
+from sqlalchemy import DateTime
+from sqlalchemy import ForeignKey
+from sqlalchemy import LargeBinary
+from sqlalchemy import String
+from sqlalchemy import Table
+from sqlalchemy.orm import relationship
 
 
 _ = TranslationStringFactory('chronotope')
 
 
 attachment_location_references = Table(
-        'attachment_location_references', SQLBase.metadata,
+    'attachment_location_references',
+    SQLBase.metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
-
-
 attachment_facility_references = Table(
-        'attachment_facility_references', SQLBase.metadata,
+    'attachment_facility_references',
+    SQLBase.metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )
-
-
 attachment_occasion_references = Table(
-        'attachment_occasion_references', SQLBase.metadata,
+    'attachment_occasion_references',
+    SQLBase.metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('occasion_uid', GUID, ForeignKey('occasion.uid'))
 )
@@ -72,7 +63,7 @@ class AttachmentRecord(SQLBase):
     modified = Column(DateTime)
     state = Column(String)
     title = Column(String)
-    attachment_type = Column(String) # 'text', 'file' or 'image'
+    attachment_type = Column(String)  # 'text', 'file' or 'image'
     payload = Column(LargeBinary)
 
     location = relationship(
@@ -120,8 +111,10 @@ class Attachment(SQLRowNode):
 @node_info(
     name='attachments',
     title=_('attachments_label', default='Attachments'),
-    description=_('attachments_description',
-                  default='Container for Attachments'),
+    description=_(
+        'attachments_description',
+        default='Container for Attachments'
+    ),
     icon='glyphicon glyphicon-folder-open',
     addables=['attachment'])
 class Attachments(SQLTableNode):
@@ -142,6 +135,8 @@ class Attachments(SQLTableNode):
     def metadata(self):
         md = Metadata()
         md.title = _('attachments_label', default='Attachments')
-        md.description = \
-            _('attachments_description', default='Container for Attachments')
+        md.description = _(
+            'attachments_description',
+            default='Container for Attachments'
+        )
         return md

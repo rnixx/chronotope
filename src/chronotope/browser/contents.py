@@ -1,12 +1,10 @@
-from pyramid.i18n import TranslationStringFactory
-from cone.tile import tile
+from chronotope.model import Attachments
+from chronotope.model import Facilities
+from chronotope.model import Locations
+from chronotope.model import Occasions
 from cone.app.browser.contents import ContentsTile
-from chronotope.model import (
-    Locations,
-    Facilities,
-    Occasions,
-    Attachments,
-)
+from cone.tile import tile
+from pyramid.i18n import TranslationStringFactory
 
 
 _ = TranslationStringFactory('chronotope')

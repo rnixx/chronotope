@@ -1,14 +1,12 @@
-import os
-import tempfile
-import shutil
-import pyramid_zcml
+from chronotope.sql import bind_session_listeners
+from chronotope.sql import initialize_sql
+from cone.app.testing import Security
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from cone.app.testing import Security
-from chronotope.sql import (
-    initialize_sql,
-    bind_session_listeners,
-)
+import os
+import pyramid_zcml
+import shutil
+import tempfile
 
 
 class ChronotopeLayer(Security):

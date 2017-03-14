@@ -1,17 +1,13 @@
+from chronotope.security import admin_permissions
+from chronotope.security import authenticated_permissions
+from chronotope.security import editor_permissions
+from chronotope.security import manager_permissions
+from chronotope.security import viewer_permissions
 from pyramid.i18n import TranslationStringFactory
-from pyramid.security import (
-    Everyone,
-    Allow,
-    Deny,
-    ALL_PERMISSIONS,
-)
-from chronotope.security import (
-    authenticated_permissions,
-    viewer_permissions,
-    editor_permissions,
-    admin_permissions,
-    manager_permissions,
-)
+from pyramid.security import ALL_PERMISSIONS
+from pyramid.security import Allow
+from pyramid.security import Deny
+from pyramid.security import Everyone
 
 
 _ = TranslationStringFactory('chronotope')

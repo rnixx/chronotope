@@ -1,9 +1,9 @@
-import pickle
-from whoosh.qparser import QueryParser
-from pyramid.security import authenticated_userid
-from chronotope.sql import get_session
 from chronotope.index import get_index
+from chronotope.sql import get_session
 from chronotope.utils import get_submitter
+from pyramid.security import authenticated_userid
+from whoosh.qparser import QueryParser
+import pickle
 
 
 def results_to_instances(request, results):

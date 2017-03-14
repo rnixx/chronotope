@@ -1,13 +1,9 @@
+from whoosh.fields import ID
+from whoosh.fields import SchemaClass
+from whoosh.fields import TEXT
+from whoosh.index import create_in
+from whoosh.index import open_dir
 import os
-from whoosh.fields import (
-    SchemaClass,
-    TEXT,
-    ID,
-)
-from whoosh.index import (
-    create_in,
-    open_dir,
-)
 
 
 class ChronotopeSchema(SchemaClass):

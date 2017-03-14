@@ -46,14 +46,13 @@ Direct SQLA::
 
 API::
 
-    >>> from chronotope.model.category import (
-    ...     add_category,
-    ...     delete_category,
-    ...     category_by_uid,
-    ...     categories_by_uid,
-    ...     category_by_name,
-    ...     search_categories,
-    ... )
+    >>> from chronotope.model.category import add_category
+    >>> from chronotope.model.category import delete_category
+    >>> from chronotope.model.category import category_by_uid
+    >>> from chronotope.model.category import categories_by_uid
+    >>> from chronotope.model.category import category_by_name
+    >>> from chronotope.model.category import search_categories
+
     >>> cat_1 = add_category(request, 'Cat 1')
     >>> cat_2 = add_category(request, 'Cat 2')
     >>> cat_3 = add_category(request, 'Cat 3')

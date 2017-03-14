@@ -1,50 +1,36 @@
-import uuid
-import pickle
 from StringIO import StringIO
-from plumber import plumbing
-from node.utils import UNSET
-from yafowil.base import ExtractionError
-from pyramid.i18n import TranslationStringFactory
-from pyramid.view import view_config
-from pyramid.response import Response
-from pyramid.security import authenticated_userid
-from cone.tile import tile
-from cone.app.utils import (
-    add_creation_metadata,
-    update_creation_metadata,
-)
-from cone.app.browser.layout import ProtectedContentTile
-from cone.app.browser.form import (
-    Form,
-    YAMLForm,
-)
-from cone.app.browser.authoring import (
-    ContentAddForm,
-    ContentEditForm,
-    OverlayAddForm,
-    OverlayEditForm,
-)
-from cone.app.browser.utils import (
-    make_url,
-    make_query,
-)
+from chronotope.browser.references import FacilityReferencing
+from chronotope.browser.references import LocationReferencing
+from chronotope.browser.references import OccasionReferencing
+from chronotope.browser.submitter import SubmitterAccessAddForm
+from chronotope.browser.submitter import SubmitterAccessEditForm
+from chronotope.browser.submitter import SubmitterAccessTile
+from chronotope.browser.submitter import check_submitter_access
+from chronotope.browser.ux import UXMixin
+from chronotope.browser.ux import UXMixinProxy
 from chronotope.model import Attachment
 from chronotope.utils import html_2_text
-from chronotope.browser.references import (
-    LocationReferencing,
-    FacilityReferencing,
-    OccasionReferencing,
-)
-from chronotope.browser.submitter import (
-    check_submitter_access,
-    SubmitterAccessTile,
-    SubmitterAccessAddForm,
-    SubmitterAccessEditForm,
-)
-from chronotope.browser.ux import (
-    UXMixin,
-    UXMixinProxy,
-)
+from cone.app.browser.authoring import ContentAddForm
+from cone.app.browser.authoring import ContentEditForm
+from cone.app.browser.authoring import OverlayAddForm
+from cone.app.browser.authoring import OverlayEditForm
+from cone.app.browser.form import Form
+from cone.app.browser.form import YAMLForm
+from cone.app.browser.layout import ProtectedContentTile
+from cone.app.browser.utils import make_query
+from cone.app.browser.utils import make_url
+from cone.app.utils import add_creation_metadata
+from cone.app.utils import update_creation_metadata
+from cone.tile import tile
+from node.utils import UNSET
+from plumber import plumbing
+from pyramid.i18n import TranslationStringFactory
+from pyramid.response import Response
+from pyramid.security import authenticated_userid
+from pyramid.view import view_config
+from yafowil.base import ExtractionError
+import pickle
+import uuid
 
 
 _ = TranslationStringFactory('chronotope')

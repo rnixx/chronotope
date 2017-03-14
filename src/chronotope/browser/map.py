@@ -1,8 +1,6 @@
 from pyramid.security import authenticated_userid
-from cone.tile import (
-    Tile,
-    tile,
-)
+from cone.tile import Tile
+from cone.tile import tile
 
 
 @tile('chronotope', 'templates/chronotope.pt',

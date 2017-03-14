@@ -1,47 +1,31 @@
-import uuid
-from plumber import (
-    plumb,
-    default,
-    Behavior,
-)
-from pyramid.security import authenticated_userid
-from cone.tile import (
-    Tile,
-    tile,
-)
-from cone.app.browser.batch import Batch
-from cone.app.browser.utils import (
-    make_url,
-    make_query,
-    nodepath,
-)
-from chronotope.model.location import (
-    location_by_uid,
-    locations_by_uid,
-    location_title,
-)
-from chronotope.model.facility import (
-    facility_by_uid,
-    facilities_by_uid,
-)
-from chronotope.model.occasion import (
-    occasion_by_uid,
-    occasions_by_uid,
-)
-from chronotope.model.category import (
-    add_category,
-    delete_category,
-    category_by_name,
-    category_by_uid,
-    categories_by_uid,
-)
 from chronotope.browser.ux import UXMixin
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
-    get_submitter,
-    submitter_came_from,
-)
+from chronotope.model.category import add_category
+from chronotope.model.category import categories_by_uid
+from chronotope.model.category import category_by_name
+from chronotope.model.category import category_by_uid
+from chronotope.model.category import delete_category
+from chronotope.model.facility import facilities_by_uid
+from chronotope.model.facility import facility_by_uid
+from chronotope.model.location import location_by_uid
+from chronotope.model.location import location_title
+from chronotope.model.location import locations_by_uid
+from chronotope.model.occasion import occasion_by_uid
+from chronotope.model.occasion import occasions_by_uid
+from chronotope.utils import UX_FRONTEND
+from chronotope.utils import UX_IDENT
+from chronotope.utils import get_submitter
+from chronotope.utils import submitter_came_from
+from cone.app.browser.batch import Batch
+from cone.app.browser.utils import make_query
+from cone.app.browser.utils import make_url
+from cone.app.browser.utils import nodepath
+from cone.tile import Tile
+from cone.tile import tile
+from plumber import Behavior
+from plumber import default
+from plumber import plumb
+from pyramid.security import authenticated_userid
+import uuid
 
 
 ###############################################################################

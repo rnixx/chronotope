@@ -1,70 +1,46 @@
-import uuid
-import urllib2
-from plumber import (
-    Behavior,
-    plumbing,
-    plumb,
-    default,
-)
-from node.utils import UNSET
-from pyramid.i18n import TranslationStringFactory
-from pyramid.view import view_config
-from pyramid.security import authenticated_userid
-from pyramid.response import Response
-from yafowil.base import factory
-from cone.tile import (
-    tile,
-    Tile,
-    render_tile,
-)
-from cone.app.utils import (
-    add_creation_metadata,
-    update_creation_metadata,
-)
+from chronotope.browser.references import FacilityReferencing
+from chronotope.browser.references import OccasionReferencing
+from chronotope.browser.references import json_references
+from chronotope.browser.submitter import SubmitterAccessAddForm
+from chronotope.browser.submitter import SubmitterAccessEditForm
+from chronotope.browser.submitter import SubmitterAccessTile
+from chronotope.browser.ux import UXMixin
+from chronotope.browser.ux import UXMixinProxy
+from chronotope.model.location import Location
+from chronotope.model.location import location_title
+from chronotope.model.location import search_locations
+from chronotope.utils import UX_FRONTEND
+from chronotope.utils import UX_IDENT
+from chronotope.utils import get_submitter
+from chronotope.utils import submitter_came_from
+from cone.app.browser.ajax import AjaxEvent
+from cone.app.browser.ajax import AjaxOverlay
+from cone.app.browser.authoring import ContentAddForm
+from cone.app.browser.authoring import ContentEditForm
+from cone.app.browser.authoring import OverlayAddForm
+from cone.app.browser.authoring import OverlayEditForm
+from cone.app.browser.form import Form
+from cone.app.browser.form import YAMLForm
 from cone.app.browser.layout import ProtectedContentTile
-from cone.app.browser.form import (
-    Form,
-    YAMLForm,
-)
-from cone.app.browser.authoring import (
-    ContentAddForm,
-    ContentEditForm,
-    OverlayAddForm,
-    OverlayEditForm,
-)
-from cone.app.browser.ajax import (
-    AjaxOverlay,
-    AjaxEvent,
-)
-from cone.app.browser.utils import (
-    make_url,
-    make_query,
-)
-from chronotope.model.location import (
-    Location,
-    search_locations,
-    location_title,
-)
-from chronotope.browser.references import (
-    json_references,
-    FacilityReferencing,
-    OccasionReferencing,
-)
-from chronotope.browser.submitter import (
-    SubmitterAccessTile,
-    SubmitterAccessAddForm,
-    SubmitterAccessEditForm,
-)
-from chronotope.browser.ux import (
-    UXMixin,
-    UXMixinProxy,
-)
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
-    submitter_came_from,
-    get_submitter,
-)
+from cone.app.browser.utils import make_query
+from cone.app.browser.utils import make_url
+from cone.app.utils import add_creation_metadata
+from cone.app.utils import update_creation_metadata
+from cone.tile import Tile
+from cone.tile import render_tile
+from cone.tile import tile
+from node.utils import UNSET
+from plumber import Behavior
+from plumber import default
+from plumber import plumb
+from plumber import plumbing
+from pyramid.i18n import TranslationStringFactory
+from pyramid.response import Response
+from pyramid.security import authenticated_userid
+from pyramid.view import view_config
+from yafowil.base import factory
+import urllib2
+import uuid
 
 
 _ = TranslationStringFactory('chronotope')

@@ -1,6 +1,6 @@
-from pyramid.view import view_config
-from cone.tile import Tile
 from chronotope.model.category import search_categories
+from cone.tile import Tile
+from pyramid.view import view_config
 
 
 CATEGORY_LIMIT = 100

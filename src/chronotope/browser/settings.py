@@ -1,15 +1,11 @@
+from chronotope.model import Settings
+from cone.app.browser.form import Form
+from cone.app.browser.form import YAMLForm
+from cone.app.browser.settings import SettingsBehavior
+from cone.tile import registerTile
+from cone.tile import tile
 from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
-from cone.tile import (
-    tile,
-    registerTile,
-)
-from cone.app.browser.form import (
-    Form,
-    YAMLForm,
-)
-from cone.app.browser.settings import SettingsBehavior
-from chronotope.model import Settings
 
 
 _ = TranslationStringFactory('chronotope')

@@ -1,9 +1,9 @@
+from chronotope import testing
+from plone.testing import layered
 import doctest
 import interlude
 import pprint
 import unittest2 as unittest
-from plone.testing import layered
-from chronotope import testing
 
 
 optionflags = doctest.NORMALIZE_WHITESPACE | \

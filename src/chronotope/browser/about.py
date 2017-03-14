@@ -1,14 +1,10 @@
-from cone.tile import (
-    tile,
-    Tile,
-)
-from chronotope.model import (
-    AboutProject,
-    AboutMap,
-    AboutImprint,
-    AboutTermsOfUse,
-    AboutPrivacyPolicy,
-)
+from chronotope.model import AboutImprint
+from chronotope.model import AboutMap
+from chronotope.model import AboutPrivacyPolicy
+from chronotope.model import AboutProject
+from chronotope.model import AboutTermsOfUse
+from cone.tile import Tile
+from cone.tile import tile
 
 
 @tile('content', 'templates/about.pt',

@@ -1,12 +1,10 @@
-import os
-from pyramid.i18n import TranslationStringFactory
-from cone.app.model import (
-    BaseNode,
-    XMLProperties,
-    Metadata,
-)
-from cone.app.security import DEFAULT_SETTINGS_ACL
 from chronotope.utils import get_settings_path
+from cone.app.model import BaseNode
+from cone.app.model import Metadata
+from cone.app.model import XMLProperties
+from cone.app.security import DEFAULT_SETTINGS_ACL
+from pyramid.i18n import TranslationStringFactory
+import os
 
 
 _ = TranslationStringFactory('chronotope')
@@ -37,8 +35,10 @@ class Settings(BaseNode):
     @property
     def metadata(self):
         metadata = Metadata()
-        metadata.title = _('poptraces_settings',
-                           default='Poptraces Settings')
+        metadata.title = _(
+            'poptraces_settings',
+            default='Poptraces Settings'
+        )
         return metadata
 
     def __call__(self):

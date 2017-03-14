@@ -1,12 +1,10 @@
-from zope.interface import implementer
-from zope.component import adapter
+from cone.app.interfaces import IApplicationNode
+from cone.app.interfaces import ILayout
+from cone.app.model import AppRoot
 from pyramid.security import authenticated_userid
 from pyramid.threadlocal import get_current_request
-from cone.app.interfaces import (
-    IApplicationNode,
-    ILayout,
-)
-from cone.app.model import AppRoot
+from zope.component import adapter
+from zope.interface import implementer
 
 
 @implementer(ILayout)

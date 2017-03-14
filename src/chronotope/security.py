@@ -1,9 +1,7 @@
-from pyramid.security import (
-    Everyone,
-    Allow,
-    Deny,
-    ALL_PERMISSIONS,
-)
+from pyramid.security import ALL_PERMISSIONS
+from pyramid.security import Allow
+from pyramid.security import Deny
+from pyramid.security import Everyone
 
 
 # permission sets

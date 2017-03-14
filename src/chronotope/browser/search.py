@@ -1,30 +1,22 @@
-import uuid
-from zope.interface import implementer
-from zope.component import adapter
-from pyramid.security import authenticated_userid
-from pyramid.view import view_config
-from cone.app.interfaces import (
-    IApplicationNode,
-    ILiveSearch,
-)
-from cone.app.browser.utils import (
-    make_url,
-    make_query,
-)
-from chronotope.sql import get_session
-from chronotope.model import (
-    LocationRecord,
-    FacilityRecord,
-    OccasionRecord,
-    AttachmentRecord,
-)
+from chronotope.model import AttachmentRecord
+from chronotope.model import FacilityRecord
+from chronotope.model import LocationRecord
+from chronotope.model import OccasionRecord
 from chronotope.model.location import locations_in_bounds
 from chronotope.search import fulltext_search
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
-    get_submitter,
-)
+from chronotope.sql import get_session
+from chronotope.utils import UX_FRONTEND
+from chronotope.utils import UX_IDENT
+from chronotope.utils import get_submitter
+from cone.app.browser.utils import make_query
+from cone.app.browser.utils import make_url
+from cone.app.interfaces import IApplicationNode
+from cone.app.interfaces import ILiveSearch
+from pyramid.security import authenticated_userid
+from pyramid.view import view_config
+from zope.component import adapter
+from zope.interface import implementer
+import uuid
 
 
 SEARCH_LIMIT = 50

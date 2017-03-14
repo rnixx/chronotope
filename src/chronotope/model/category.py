@@ -1,15 +1,11 @@
-import uuid
-from sqlalchemy import (
-    Column,
-    String,
-)
-from pyramid.i18n import TranslationStringFactory
-from chronotope.sql import (
-    GUID,
-    SQLBase,
-    get_session,
-)
+from chronotope.sql import GUID
+from chronotope.sql import SQLBase
+from chronotope.sql import get_session
 from chronotope.utils import ensure_uuid
+from pyramid.i18n import TranslationStringFactory
+from sqlalchemy import Column
+from sqlalchemy import String
+import uuid
 
 
 _ = TranslationStringFactory('chronotope')
@@ -42,7 +38,9 @@ def category_by_uid(request, uid):
 
 def category_by_name(request, name):
     session = get_session(request)
-    res = session.query(CategoryRecord).filter(CategoryRecord.name==name).all()
+    res = session.query(CategoryRecord)\
+                 .filter(CategoryRecord.name == name)\
+                 .all()
     if res:
         return res[0]
 

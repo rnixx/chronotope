@@ -1,12 +1,8 @@
-from plumber import (
-    Behavior,
-    plumb,
-)
+from chronotope.utils import UX_FRONTEND
+from chronotope.utils import UX_IDENT
+from plumber import Behavior
+from plumber import plumb
 from yafowil.base import factory
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
-)
 
 
 class UXMixin(object):

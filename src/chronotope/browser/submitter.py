@@ -1,56 +1,36 @@
-import urllib2
-from plumber import (
-    Behavior,
-    plumb,
-    default,
-)
-from node.utils import (
-    UNSET,
-    instance_property,
-)
-from pyramid.i18n import TranslationStringFactory
-from pyramid.security import authenticated_userid
-from pyramid.exceptions import Forbidden
-from yafowil.base import (
-    factory,
-    ExtractionError,
-)
-from cone.tile import (
-    Tile,
-    tile,
-)
-from cone.app.browser.contents import ContentsTile
+from chronotope.model.attachment import Attachment
+from chronotope.model.attachment import AttachmentRecord
+from chronotope.model.facility import Facility
+from chronotope.model.facility import FacilityRecord
+from chronotope.model.location import Location
+from chronotope.model.location import LocationRecord
+from chronotope.model.occasion import Occasion
+from chronotope.model.occasion import OccasionRecord
+from chronotope.sql import get_session
+from chronotope.utils import UX_FRONTEND
+from chronotope.utils import UX_IDENT
+from chronotope.utils import get_recaptcha_private_key
+from chronotope.utils import get_recaptcha_public_key
+from chronotope.utils import get_submitter
+from chronotope.utils import submitter_came_from
 from cone.app.browser.actions import ViewLink
 from cone.app.browser.ajax import AjaxOverlay
-from cone.app.browser.utils import (
-    make_query,
-    make_url,
-)
-from chronotope.sql import get_session
-from chronotope.model.attachment import (
-    AttachmentRecord,
-    Attachment,
-)
-from chronotope.model.facility import (
-    FacilityRecord,
-    Facility,
-)
-from chronotope.model.location import (
-    LocationRecord,
-    Location,
-)
-from chronotope.model.occasion import (
-    OccasionRecord,
-    Occasion,
-)
-from chronotope.utils import (
-    UX_IDENT,
-    UX_FRONTEND,
-    get_submitter,
-    submitter_came_from,
-    get_recaptcha_public_key,
-    get_recaptcha_private_key,
-)
+from cone.app.browser.contents import ContentsTile
+from cone.app.browser.utils import make_query
+from cone.app.browser.utils import make_url
+from cone.tile import Tile
+from cone.tile import tile
+from node.utils import UNSET
+from node.utils import instance_property
+from plumber import Behavior
+from plumber import default
+from plumber import plumb
+from pyramid.exceptions import Forbidden
+from pyramid.i18n import TranslationStringFactory
+from pyramid.security import authenticated_userid
+from yafowil.base import ExtractionError
+from yafowil.base import factory
+import urllib2
 
 
 _ = TranslationStringFactory('chronotope')

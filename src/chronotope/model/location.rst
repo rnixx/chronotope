@@ -213,11 +213,10 @@ Location workflow state::
 Search and fetch functions::
 
     >>> import uuid
-    >>> from chronotope.model.location import (
-    ...     location_by_uid,
-    ...     locations_by_uid,
-    ...     search_locations,
-    ... )
+    >>> from chronotope.model.location import location_by_uid
+    >>> from chronotope.model.location import locations_by_uid
+    >>> from chronotope.model.location import search_locations
+
     >>> request = layer.new_request()
     >>> location_by_uid(request, 'd7d712ba-7f4c-4eaf-9723-8923e9d9a9ae')
     <chronotope.model.location.LocationRecord object at ...>

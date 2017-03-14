@@ -1,15 +1,13 @@
+from chronotope.security import chronotope_about_acl
+from cone.app.model import BaseNode
+from cone.app.model import FactoryNode
+from cone.app.model import Layout
+from cone.app.model import Metadata
+from cone.app.model import Properties
 from odict import odict
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from pyramid.threadlocal import get_current_request
-from cone.app.model import (
-    BaseNode,
-    FactoryNode,
-    Metadata,
-    Properties,
-    Layout,
-)
-from chronotope.security import chronotope_about_acl
 
 
 _ = TranslationStringFactory('chronotope')
@@ -67,8 +65,10 @@ class AboutTermsOfUse(BaseNode):
     @property
     def metadata(self):
         md = Metadata()
-        md.title = _('about_terms_of_use',
-                     default='Terms of use')
+        md.title = _(
+            'about_terms_of_use',
+            default='Terms of use'
+        )
         return md
 
     @property
@@ -88,8 +88,10 @@ class AboutPrivacyPolicy(BaseNode):
     @property
     def metadata(self):
         md = Metadata()
-        md.title = _('about_privacy_policy',
-                     default='Privacy policy')
+        md.title = _(
+            'about_privacy_policy',
+            default='Privacy policy'
+        )
         return md
 
     @property

@@ -33,52 +33,52 @@
     </state>
 
     <transition
-       name="draft_2_published"
-       callback="cone.app.workflow.persist_state"
-       from_state="draft"
-       to_state="published"
-       permission="change_state"
-       i18n:attributes="name" />
+      name="draft_2_published"
+      callback="cone.app.workflow.persist_state"
+      from_state="draft"
+      to_state="published"
+      permission="change_state"
+      i18n:attributes="name" />
 
     <transition
-       name="draft_2_declined"
-       callback="cone.app.workflow.persist_state"
-       from_state="draft"
-       to_state="declined"
-       permission="change_state"
-       i18n:attributes="name" />
+      name="draft_2_declined"
+      callback="cone.app.workflow.persist_state"
+      from_state="draft"
+      to_state="declined"
+      permission="change_state"
+      i18n:attributes="name" />
 
     <transition
-       name="published_2_draft"
-       callback="cone.app.workflow.persist_state"
-       from_state="published"
-       to_state="draft"
-       permission="change_state"
-       i18n:attributes="name" />
+      name="published_2_draft"
+      callback="cone.app.workflow.persist_state"
+      from_state="published"
+      to_state="draft"
+      permission="change_state"
+      i18n:attributes="name" />
 
     <transition
-       name="published_2_declined"
-       callback="cone.app.workflow.persist_state"
-       from_state="published"
-       to_state="declined"
-       permission="change_state"
-       i18n:attributes="name" />
+      name="published_2_declined"
+      callback="cone.app.workflow.persist_state"
+      from_state="published"
+      to_state="declined"
+      permission="change_state"
+      i18n:attributes="name" />
 
     <transition
-       name="declined_2_draft"
-       callback="cone.app.workflow.persist_state"
-       from_state="declined"
-       to_state="draft"
-       permission="change_state"
-       i18n:attributes="name" />
+      name="declined_2_draft"
+      callback="cone.app.workflow.persist_state"
+      from_state="declined"
+      to_state="draft"
+      permission="change_state"
+      i18n:attributes="name" />
 
     <transition
-       name="declined_2_published"
-       callback="cone.app.workflow.persist_state"
-       from_state="declined"
-       to_state="published"
-       permission="change_state"
-       i18n:attributes="name" />
+      name="declined_2_published"
+      callback="cone.app.workflow.persist_state"
+      from_state="declined"
+      to_state="published"
+      permission="change_state"
+      i18n:attributes="name" />
 
   </workflow>
 

@@ -1,30 +1,22 @@
 # -*- coding: utf-8 -*-
-from sqlalchemy import (
-    Column,
-    Float,
-    String,
-    DateTime,
-    or_,
-)
-from node.utils import instance_property
-from pyramid.i18n import (
-    TranslationStringFactory,
-    get_localizer,
-)
-from pyramid.threadlocal import get_current_request
-from cone.app.model import (
-    Properties,
-    Metadata,
-    node_info,
-)
-from chronotope.sql import (
-    GUID,
-    SQLBase,
-    SQLTableNode,
-    SQLRowNode,
-    get_session,
-)
+from chronotope.sql import GUID
+from chronotope.sql import SQLBase
+from chronotope.sql import SQLRowNode
+from chronotope.sql import SQLTableNode
+from chronotope.sql import get_session
 from chronotope.utils import ensure_uuid
+from cone.app.model import Metadata
+from cone.app.model import Properties
+from cone.app.model import node_info
+from node.utils import instance_property
+from pyramid.i18n import TranslationStringFactory
+from pyramid.i18n import get_localizer
+from pyramid.threadlocal import get_current_request
+from sqlalchemy import Column
+from sqlalchemy import DateTime
+from sqlalchemy import Float
+from sqlalchemy import String
+from sqlalchemy import or_
 
 
 _ = TranslationStringFactory('chronotope')
@@ -150,8 +142,10 @@ class Location(SQLRowNode):
 @node_info(
     name='locations',
     title=_('locations_label', default='Locations'),
-    description=_('locations_description',
-                  default='Container for Locations'),
+    description=_(
+        'locations_description',
+        default='Container for Locations'
+    ),
     icon='glyphicon glyphicon-globe',
     addables=['location'])
 class Locations(SQLTableNode):
@@ -172,6 +166,8 @@ class Locations(SQLTableNode):
     def metadata(self):
         md = Metadata()
         md.title = _('locations_label', default='Locations')
-        md.description = \
-            _('locations_description', default='Container for Locations')
+        md.description = _(
+            'locations_description',
+            default='Container for Locations'
+        )
         return md

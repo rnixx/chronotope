@@ -33,7 +33,6 @@ setup(
         'html2text',
         'Whoosh',
         'lxml',
-        'hurry.filesize',
         'zope.sqlalchemy',
         'node.ext.ugm',
         'repoze.tm2',

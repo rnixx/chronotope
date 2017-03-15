@@ -128,8 +128,10 @@ class CoordinatesProxy(Behavior):
         _next(self)
         if self.is_backend:
             return
+
         def fname(name):
             return '{0}.coordinates.{1}'.format(self.form_name, name)
+
         params = self.request.params
         coordinates = self.form['coordinates'] = factory(
             'field:label:div',

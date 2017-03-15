@@ -40,7 +40,7 @@ def fulltext_search(request, query, limit):
     submitter = get_submitter(request)
     if submitter:
         return limited(
-            [res for res in results if res.state == 'published' \
-                or (res.state == 'draft' and submitter == res.submitter)])
+            [res for res in results if res.state == 'published' or
+                (res.state == 'draft' and submitter == res.submitter)])
     # return only public results
     return limited([res for res in results if res.state == 'published'])

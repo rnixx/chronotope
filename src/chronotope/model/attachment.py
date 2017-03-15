@@ -7,6 +7,7 @@ from chronotope.utils import html_2_text
 from cone.app.model import Metadata
 from cone.app.model import Properties
 from cone.app.model import node_info
+from cone.sql import metadata
 from cone.sql.model import SQLRowNode
 from cone.sql.model import SQLTableNode
 from cone.sql.model import GUID
@@ -27,19 +28,19 @@ _ = TranslationStringFactory('chronotope')
 
 attachment_location_references = Table(
     'attachment_location_references',
-    SQLBase.metadata,
+    metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 attachment_facility_references = Table(
     'attachment_facility_references',
-    SQLBase.metadata,
+    metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )
 attachment_occasion_references = Table(
     'attachment_occasion_references',
-    SQLBase.metadata,
+    metadata,
     Column('attachment_uid', GUID, ForeignKey('attachment.uid')),
     Column('occasion_uid', GUID, ForeignKey('occasion.uid'))
 )

@@ -8,6 +8,7 @@ from cone.app.model import Metadata
 from cone.app.model import Properties
 from cone.app.model import node_info
 from cone.sql import get_session
+from cone.sql import metadata
 from cone.sql.model import GUID
 from cone.sql.model import SQLRowNode
 from cone.sql.model import SQLTableNode
@@ -27,13 +28,13 @@ _ = TranslationStringFactory('chronotope')
 
 occasion_location_references = Table(
     'occasion_location_references',
-    SQLBase.metadata,
+    metadata,
     Column('occasion_uid', GUID, ForeignKey('occasion.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 occasion_facility_references = Table(
     'occasion_facility_references',
-    SQLBase.metadata,
+    metadata,
     Column('occasion_uid', GUID, ForeignKey('occasion.uid')),
     Column('facility_uid', GUID, ForeignKey('facility.uid'))
 )

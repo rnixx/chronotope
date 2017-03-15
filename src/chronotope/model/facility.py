@@ -8,6 +8,7 @@ from cone.app.model import Metadata
 from cone.app.model import Properties
 from cone.app.model import node_info
 from cone.sql import get_session
+from cone.sql import metadata
 from cone.sql.model import GUID
 from cone.sql.model import SQLRowNode
 from cone.sql.model import SQLTableNode
@@ -27,13 +28,13 @@ _ = TranslationStringFactory('chronotope')
 
 facility_location_references = Table(
     'facility_location_references',
-    SQLBase.metadata,
+    metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('location_uid', GUID, ForeignKey('location.uid'))
 )
 facility_category_references = Table(
     'facility_category_references',
-    SQLBase.metadata,
+    metadata,
     Column('facility_uid', GUID, ForeignKey('facility.uid')),
     Column('category_uid', GUID, ForeignKey('category.uid'))
 )

@@ -278,12 +278,16 @@ class SubmitterContentsTile(ContentsTile):
                               .filter(cls.submitter == submitter).all()
         else:
             creator = authenticated
+
             def query(cls):
                 return session.query(cls.uid)\
                               .filter(cls.creator == creator).all()
+
         root = self.model.root
+
         def fetch_node(container, uid):
             return container[str(uid)]
+
         nodes = list()
         session = get_session(self.request)
         attachments = root['attachments']

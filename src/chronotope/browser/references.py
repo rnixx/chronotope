@@ -88,8 +88,6 @@ class ReferencesBatch(Batch):
     def __init__(self, references_tile):
         self.references_tile = references_tile
         self.name = references_tile.references_id + 'batch'
-        self.path = None
-        self.attribute = 'render'
 
     @property
     def display(self):
@@ -268,7 +266,7 @@ class Referencing(Behavior):
         # remove references
         remove_references = list()
         for reference in existing:
-            if not reference in references:
+            if reference not in references:
                 remove_references.append(reference)
         remove_references = references_by_uid(self.request, remove_references)
         for reference in remove_references:
@@ -276,7 +274,7 @@ class Referencing(Behavior):
         # set remaining if necessary
         references = references_by_uid(self.request, references)
         for reference in references:
-            if not reference in self.model.attrs[name]:
+            if reference not in self.model.attrs[name]:
                 self.model.attrs[name].append(reference)
 
 
@@ -464,8 +462,10 @@ class CategoryReferencing(Behavior):
     @plumb
     def save(next_, self, widget, data):
         next_(self, widget, data)
+
         def fetch(name):
             return data.fetch('{0}.{1}'.format(self.form_name, name)).extracted
+
         # existing categories
         existing = self.category_value
         # expect a list of category uids, newly added categories consists of
@@ -495,7 +495,7 @@ class CategoryReferencing(Behavior):
         # remove categories
         remove_categories = list()
         for category in existing:
-            if not category in reduced:
+            if category not in reduced:
                 remove_categories.append(category)
         remove_categories = categories_by_uid(self.request, remove_categories)
         for category in remove_categories:

@@ -49,7 +49,7 @@ setup(
         'yafowil.widget.wysihtml5',
         'yafowil.widget.recaptcha',
     ],
-    extras_require = dict(
+    extras_require=dict(
         test=[
               'interlude',
         ]
@@ -57,9 +57,5 @@ setup(
     tests_require=[
         'interlude',
     ],
-    test_suite = "chronotope.tests.test_suite",
-    entry_points = """\
-    [paste.filter_app_factory]
-    session = chronotope.sql:make_app
-    """
+    test_suite="chronotope.tests.test_suite"
 )

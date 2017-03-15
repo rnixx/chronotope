@@ -44,7 +44,7 @@ Create dummy content::
     >>> from chronotope.model.category import add_category
     >>> cat_1 = add_category(request, 'Cat 1')
 
-    >>> from chronotope.sql import get_session
+    >>> from cone.sql import get_session
     >>> session = get_session(request)
     >>> session.commit()
 

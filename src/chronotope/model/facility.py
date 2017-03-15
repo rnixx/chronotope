@@ -1,16 +1,18 @@
+from chronotope.model.base import PublicationWorkflowBehavior
+from chronotope.model.base import SQLBase
 from chronotope.model.category import CategoryRecord
 from chronotope.model.location import LocationRecord
-from chronotope.sql import GUID
-from chronotope.sql import SQLBase
-from chronotope.sql import SQLRowNode
-from chronotope.sql import SQLTableNode
-from chronotope.sql import get_session
 from chronotope.utils import ensure_uuid
 from chronotope.utils import html_index_transform
 from cone.app.model import Metadata
 from cone.app.model import Properties
 from cone.app.model import node_info
+from cone.sql import get_session
+from cone.sql.model import GUID
+from cone.sql.model import SQLRowNode
+from cone.sql.model import SQLTableNode
 from node.utils import instance_property
+from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from sqlalchemy import Column
 from sqlalchemy import DateTime
@@ -99,8 +101,9 @@ def search_facilities(request, term, state=[], submitter=None, limit=None):
     title=_('facility_label', default='Facility'),
     description=_('facility_description', default='A Facility'),
     icon='glyphicon glyphicon-home')
+@plumbing(PublicationWorkflowBehavior)
 class Facility(SQLRowNode):
-    record_factory = FacilityRecord
+    record_class = FacilityRecord
 
     @instance_property
     def properties(self):

@@ -2,9 +2,9 @@ from chronotope import model
 from chronotope.layout import ChronotopeLayout
 from chronotope.security import chronotope_container_acl
 from chronotope.security import chronotope_root_acl
-from chronotope.sql import initialize_sql
 from cone.app.model import AppRoot
 from cone.app.security import acl_registry
+from cone.sql import initialize_sql
 from sqlalchemy import engine_from_config
 import cone.app
 import logging
@@ -71,8 +71,10 @@ def initialize_chronotope(config, global_config, local_config):
     config.add_translation_dirs('yafowil.widget.recaptcha:locales/')
 
     # static resources
-    config.add_view('chronotope.browser.static_resources',
-                    name='chronotope-static')
+    config.add_view(
+        'chronotope.browser.static_resources',
+        name='chronotope-static'
+    )
 
     # scan browser package
     config.scan('chronotope.browser')
@@ -87,12 +89,5 @@ def initialize_chronotope(config, global_config, local_config):
     # settings path
     os.environ['chronotope.settings.path'] = \
         local_config['chronotope.settings.path']
-
-    # database initialization
-    prefix = 'chronotope.dbinit.'
-    if local_config.get('%surl' % prefix, None) is None:
-        return
-    engine = engine_from_config(local_config, prefix)
-    initialize_sql(engine)
 
 cone.app.register_main_hook(initialize_chronotope)

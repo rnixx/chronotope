@@ -6,7 +6,6 @@ from chronotope.model.location import Location
 from chronotope.model.location import LocationRecord
 from chronotope.model.occasion import Occasion
 from chronotope.model.occasion import OccasionRecord
-from chronotope.sql import get_session
 from chronotope.utils import UX_FRONTEND
 from chronotope.utils import UX_IDENT
 from chronotope.utils import get_recaptcha_private_key
@@ -18,6 +17,7 @@ from cone.app.browser.ajax import AjaxOverlay
 from cone.app.browser.contents import ContentsTile
 from cone.app.browser.utils import make_query
 from cone.app.browser.utils import make_url
+from cone.sql import get_session
 from cone.tile import Tile
 from cone.tile import tile
 from node.utils import UNSET

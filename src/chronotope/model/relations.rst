@@ -6,7 +6,7 @@ Imports::
     >>> import uuid
     >>> import datetime
     >>> from cone.app import get_root
-    >>> from chronotope.sql import get_session
+    >>> from cone.sql import get_session
     >>> from chronotope.model import CategoryRecord
     >>> from chronotope.model import Location
     >>> from chronotope.model import Facility
@@ -260,7 +260,6 @@ Check references and back references of attachment to occasion reference::
 
 Commit::
 
-    >>> from chronotope.sql import get_session
     >>> session = get_session(layer.current_request)
     >>> session.commit()
 

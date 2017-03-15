@@ -1,6 +1,6 @@
 from chronotope.index import get_index
-from chronotope.sql import get_session
 from chronotope.utils import get_submitter
+from cone.sql import get_session
 from pyramid.security import authenticated_userid
 from whoosh.qparser import QueryParser
 import pickle
@@ -24,11 +24,13 @@ def fulltext_search(request, query, limit):
         query = parser.parse(query)
         results = searcher.search(query, limit=limit)
         results = results_to_instances(request, results)
+
     # helper for limit
     def limited(res):
         if limit is not None:
             return res[:limit]
         return res
+
     # if authenticated, return all draft and published results
     authenticated = bool(authenticated_userid(request))
     if authenticated:

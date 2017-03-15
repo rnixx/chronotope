@@ -1,15 +1,17 @@
+from chronotope.model.base import PublicationWorkflowBehavior
+from chronotope.model.base import SQLBase
 from chronotope.model.facility import FacilityRecord
 from chronotope.model.location import LocationRecord
 from chronotope.model.occasion import OccasionRecord
-from chronotope.sql import GUID
-from chronotope.sql import SQLBase
-from chronotope.sql import SQLRowNode
-from chronotope.sql import SQLTableNode
 from chronotope.utils import html_2_text
 from cone.app.model import Metadata
 from cone.app.model import Properties
 from cone.app.model import node_info
+from cone.sql.model import SQLRowNode
+from cone.sql.model import SQLTableNode
+from cone.sql.model import GUID
 from node.utils import instance_property
+from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from sqlalchemy import Column
 from sqlalchemy import DateTime
@@ -85,8 +87,9 @@ class AttachmentRecord(SQLBase):
     title=_('attachment_label', default='Attachment'),
     description=_('attachment_description', default='An attachment'),
     icon='glyphicon glyphicon-file')
+@plumbing(PublicationWorkflowBehavior)
 class Attachment(SQLRowNode):
-    record_factory = AttachmentRecord
+    record_class = AttachmentRecord
 
     @instance_property
     def properties(self):

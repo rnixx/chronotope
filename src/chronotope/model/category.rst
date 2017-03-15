@@ -5,7 +5,7 @@ Direct SQLA::
 
     >>> import uuid
     >>> from chronotope.model import CategoryRecord
-    >>> from chronotope.sql import get_session
+    >>> from cone.sql import get_session
 
     >>> request = layer.new_request()
     >>> session = get_session(request)

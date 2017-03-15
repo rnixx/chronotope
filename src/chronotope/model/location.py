@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
-from chronotope.sql import GUID
-from chronotope.sql import SQLBase
-from chronotope.sql import SQLRowNode
-from chronotope.sql import SQLTableNode
-from chronotope.sql import get_session
+from chronotope.model.base import PublicationWorkflowBehavior
+from chronotope.model.base import SQLBase
 from chronotope.utils import ensure_uuid
 from cone.app.model import Metadata
 from cone.app.model import Properties
 from cone.app.model import node_info
+from cone.sql import get_session
+from cone.sql.model import GUID
+from cone.sql.model import SQLRowNode
+from cone.sql.model import SQLTableNode
 from node.utils import instance_property
+from plumber import plumbing
 from pyramid.i18n import TranslationStringFactory
 from pyramid.i18n import get_localizer
 from pyramid.threadlocal import get_current_request
@@ -110,8 +112,9 @@ def location_title(request, street, zip_, city, lat, lon):
     title=_('location_label', default='Location'),
     description=_('location_description', default='A location'),
     icon='glyphicon glyphicon-map-marker')
+@plumbing(PublicationWorkflowBehavior)
 class Location(SQLRowNode):
-    record_factory = LocationRecord
+    record_class = LocationRecord
 
     @instance_property
     def properties(self):

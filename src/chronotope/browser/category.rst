@@ -4,7 +4,7 @@ chronotope.browser.category
 Imports::
 
     >>> from cone.app import get_root
-    >>> from chronotope.sql import get_session
+    >>> from cone.sql import get_session
     >>> from chronotope.model.category import (
     ...     add_category,
     ...     CategoryRecord,

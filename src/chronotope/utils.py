@@ -7,28 +7,10 @@ UX_IDENT = '__ux'
 UX_FRONTEND = 'fe'
 
 
-# XXX: move to node
-
 def ensure_uuid(val):
     if not isinstance(val, uuid.UUID):
         val = uuid.UUID(val)
     return val
-
-
-def save_encode(val):
-    # XXX: use from node.utils
-    if isinstance(val, unicode):
-        val = val.encode('utf-8')
-    return val
-
-
-def save_decode(val):
-    # XXX: use from node.utils
-    if not isinstance(val, unicode):
-        val = val.decode('utf-8')
-    return val
-
-# /XXX: end move
 
 
 def get_settings_path():

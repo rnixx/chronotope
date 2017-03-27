@@ -584,9 +584,16 @@
                         target: datum.target,
                         overlay: datum.action
                     });
+                    var on_close = function() {
+                        bdajax.path({
+                            path: '/',
+                            overlay: 'CLOSE'
+                        });
+                    }
                     bdajax.overlay({
                         action: datum.action,
-                        target: datum.target
+                        target: datum.target,
+                        on_close: on_close
                     });
                 });
             });

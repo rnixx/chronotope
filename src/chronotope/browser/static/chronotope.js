@@ -17,6 +17,8 @@
             }
             chronotope.resize_main_map(map_elem);
         });
+
+        chronotope.handle_perma_link();
     });
 
     var email_re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -347,6 +349,21 @@
             createCookie(this.default_layer_cookie, index);
         },
 
+        handle_perma_link() {
+            var hash = window.location.hash;
+            if (!hash) {
+                return;
+            }
+            var action = hash.substring(1, hash.indexOf(':'));
+            var path = hash.substring(hash.indexOf(':') + 1, hash.length);
+            var url = window.location.origin + path;
+            bdajax.overlay({
+                action: action,
+                url: url,
+                params: {__ux: 'fe'}
+            });
+        },
+
         binder: function(context) {
             chronotope.livesearch(context);
             chronotope.chronotope_map(context);
@@ -561,6 +578,12 @@
                 marker.addTo(markers);
                 marker.on('click', function(evt) {
                     chronotope.location_control.prevent_pending();
+                    var path = '#location:' + bdajax.parsepath(datum.target);
+                    bdajax.path({
+                        path: path,
+                        target: datum.target,
+                        overlay: datum.action
+                    });
                     bdajax.overlay({
                         action: datum.action,
                         target: datum.target

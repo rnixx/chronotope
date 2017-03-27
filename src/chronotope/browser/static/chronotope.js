@@ -587,6 +587,7 @@
                     var on_close = function() {
                         bdajax.path({
                             path: '/',
+                            event: 'contextchanged:#layout',
                             overlay: 'CLOSE'
                         });
                     }

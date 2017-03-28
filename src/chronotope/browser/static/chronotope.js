@@ -92,6 +92,11 @@ var chronotope;
                         '&locationform.coordinates.lat=' + latlng.lat +
                         '&locationform.coordinates.lon=' + latlng.lng +
                         '&locationform.coordinates.zoom=' + zoom;
+                    bdajax.path({
+                        path: '/',
+                        target: target,
+                        overlay: 'overlayadd'
+                    });
                     bdajax.overlay({
                         action: 'overlayadd',
                         target: target,

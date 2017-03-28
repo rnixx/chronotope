@@ -9,7 +9,8 @@
       <button class="btn btn-sm btn-${action.btn}"
               ajax:bind="click"
               ajax:target="${action.target}"
-              ajax:overlay="${action.overlay}">
+              ajax:overlay="${action.overlay}"
+              ajax:path="target">
         <span class="${action.icon}"></span>
         <span tal:content="action.title">Action Title</span>
       </button>
@@ -21,7 +22,8 @@
       <button class="btn btn-sm btn-${action.btn}"
               ajax:bind="click"
               ajax:target="${action.target}"
-              ajax:overlay="${action.overlay}">
+              ajax:overlay="${action.overlay}"
+              ajax:path="target">
         <span class="${action.icon}"></span>
         <span tal:content="action.title">Action Title</span>
       </button>
@@ -33,7 +35,8 @@
       <button class="btn btn-sm btn-${action.btn}"
               ajax:bind="click"
               ajax:target="${action.target}"
-              ajax:overlay="${action.overlay}">
+              ajax:overlay="${action.overlay}"
+              ajax:path="target">
         <span class="${action.icon}"></span>
         <span tal:content="action.title">Action Title</span>
       </button>

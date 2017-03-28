@@ -46,7 +46,7 @@
         </tal:anon>
 
         <li class="disabled add-location-action">
-          <a href="#">
+          <a href="">
             <span class="glyphicon glyphicon-plus-sign"></span>
             <span i18n:translate="add_new_location">
               Add new location
@@ -55,7 +55,7 @@
         </li>
 
         <li class="set-default-center-action">
-          <a href="#">
+          <a href="">
             <span class="glyphicon glyphicon-screenshot"></span>
             <span i18n:translate="set_default_center">
               Set default center
@@ -64,7 +64,7 @@
         </li>
 
         <li class="set-default-zoom-action">
-          <a href="#">
+          <a href="">
             <span class="glyphicon glyphicon-zoom-in"></span>
             <span i18n:translate="set_zoom_level">
               Set current zoom level as default
@@ -75,7 +75,7 @@
         <li class="show-submitter-contents-action"
             style="display:none;"
             data-target="${context.nodeurl}">
-          <a href="#">
+          <a href="">
             <span class="glyphicon glyphicon-th-list"></span>
             <span i18n:translate="show_my_items">
               Show my Items

@@ -95,7 +95,7 @@ var chronotope;
                     bdajax.overlay({
                         action: 'overlayadd',
                         target: target,
-                        on_close: chronotope.set_path_on_overlay_close
+                        on_close: chronotope.set_root_path
                     });
                 };
                 that.pending_action = handler;
@@ -142,7 +142,7 @@ var chronotope;
             bdajax.overlay({
                 action: 'submitter_contents',
                 target: elem.data('target'),
-                on_close: chronotope.set_path_on_overlay_close
+                on_close: chronotope.set_root_path
             });
         },
 
@@ -173,23 +173,28 @@ var chronotope;
                     'click', function(evt) {
                 var elem = $(this);
                 elem.parents('.dropdown').toggleClass('open');
+                evt.preventDefault();
                 evt.stopPropagation();
             });
             $('#location-controls-dropdown', this.controls).on(
                     'dblclick mousemove', function(evt) {
+                evt.preventDefault();
                 evt.stopPropagation();
             });
             $('.dropdown-menu', this.controls).on(
                     'click dblclick mousemove', function(evt) {
                 if ($(evt.target).hasClass('dropdown-menu')) {
+                    evt.preventDefault();
                     evt.stopPropagation();
                 }
             });
             $('.dropdown-menu li', this.controls).on(
                     'dblclick mousemove', function(evt) {
+                evt.preventDefault();
                 evt.stopPropagation();
             });
             $('.dropdown-menu li', this.controls).on('click', function(evt) {
+                evt.preventDefault();
                 return that.dispatch_action($(this));
             });
         },
@@ -354,23 +359,19 @@ var chronotope;
             createCookie(this.default_layer_cookie, index);
         },
 
-        set_path_on_overlay_close: function() {
+        set_root_path: function(replace) {
             bdajax.path({
                 path: '/',
                 event: 'contextchanged:#layout',
-                overlay: 'CLOSE'
+                overlay: 'CLOSE',
+                replace: replace
             });
         },
 
         handle_perma_link: function() {
             var hash = window.location.hash;
             if (!hash) {
-                bdajax.path({
-                    path: '/',
-                    event: 'contextchanged:#layout',
-                    overlay: 'CLOSE',
-                    replace: true
-                });
+                this.set_root_path(true);
                 return;
             }
             var action = hash.substring(1, hash.indexOf(':'));
@@ -383,7 +384,7 @@ var chronotope;
             bdajax.overlay({
                 action: action,
                 target: target,
-                on_close: this.set_path_on_overlay_close
+                on_close: this.set_root_path
             });
             bdajax.path({
                 path: hash,
@@ -436,7 +437,7 @@ var chronotope;
                 bdajax.overlay({
                     action: suggestion.action,
                     target: suggestion.target,
-                    on_close: chronotope.set_path_on_overlay_close
+                    on_close: chronotope.set_root_path
                 });
             });
 
@@ -617,7 +618,7 @@ var chronotope;
                     bdajax.overlay({
                         action: datum.action,
                         target: datum.target,
-                        on_close: chronotope.set_path_on_overlay_close
+                        on_close: chronotope.set_root_path
                     });
                 });
             });

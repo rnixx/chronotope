@@ -18,6 +18,7 @@
            ajax:action="${reference['action']|nothing}"
            ajax:event="${reference['event']|nothing}"
            ajax:overlay="${reference['overlay']|nothing}"
+           ajax:path="${reference['path']|nothing}"
           ><span class="${reference['icon']}"
                  tal:condition="reference['icon']"></span
           >&nbsp;<span tal:content="reference['title']">Reference</span></a>

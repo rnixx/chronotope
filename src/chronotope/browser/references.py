@@ -186,6 +186,7 @@ class References(Tile, UXMixin):
                     target=make_url(self.request, path=path, query=query),
                     overlay=self.reference_tile,
                     icon=self.icon,
+                    path=self.reference_permalink(record)
                 )
             # case rendered in backend
             else:
@@ -194,6 +195,7 @@ class References(Tile, UXMixin):
                     target=make_url(self.request, path=path),
                     event='contextchanged:#layout',
                     icon=self.icon,
+                    path='target'
                 )
             ret.append(ref)
         return ret
@@ -202,11 +204,16 @@ class References(Tile, UXMixin):
         raise NotImplementedError(u'Anstract ``References`` does not '
                                   u'implement ``reference_path``')
 
+    def reference_permalink(self, record):
+        raise NotImplementedError(u'Anstract ``References`` does not '
+                                  u'implement ``reference_permalink``')
+
     def reference_title(self, record):
         return record.title
 
     def _make_reference(self, title, bind='click', target=None,
-                        action=None, event=None, overlay=None, icon=''):
+                        action=None, event=None, overlay=None,
+                        icon='', path=None):
         return {
             'title': title,
             'bind': bind,
@@ -215,6 +222,7 @@ class References(Tile, UXMixin):
             'event': event,
             'overlay': overlay,
             'icon': icon,
+            'path': path
         }
 
 
@@ -296,6 +304,9 @@ class LocationReferences(References):
     def reference_path(self, record):
         return ['locations', str(record.uid)]
 
+    def reference_permalink(self, record):
+        return '/#location:/{}'.format('/'.join(self.reference_path(record)))
+
     def reference_title(self, record):
         return location_title(
             self.request,
@@ -351,6 +362,9 @@ class FacilityReferences(References):
     def reference_path(self, record):
         return ['facilities', str(record.uid)]
 
+    def reference_permalink(self, record):
+        return '/#facility:/{}'.format('/'.join(self.reference_path(record)))
+
 
 class FacilityReferencing(Referencing):
 
@@ -388,6 +402,9 @@ class OccasionReferences(References):
     def reference_path(self, record):
         return ['occasions', str(record.uid)]
 
+    def reference_permalink(self, record):
+        return '/#occasion:/{}'.format('/'.join(self.reference_path(record)))
+
 
 class OccasionReferencing(Referencing):
 
@@ -424,6 +441,9 @@ class AttachmentReferences(References):
 
     def reference_path(self, record):
         return ['attachments', str(record.uid)]
+
+    def reference_permalink(self, record):
+        return '/#attachment:/{}'.format('/'.join(self.reference_path(record)))
 
 
 ###############################################################################

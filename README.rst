@@ -35,6 +35,21 @@ Contributors
 History
 =======
 
+0.5 (unreleased)
+----------------
+
+- Implement browser history support.
+  [rnix]
+
+- Update ``bdajax`` to ``1.7.0``.
+  [rnix]
+
+- Update ``cone.app`` to ``1.0a4``.
+  [rnix]
+
+- Use ``cone.sql`` as base for model.
+  [rnix]
+
 0.4.2
 -----
 

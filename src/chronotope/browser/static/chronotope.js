@@ -1,4 +1,7 @@
-(function($) {
+var chronotope;
+
+(function($, bdajax, L) {
+    "use strict";
 
     $(document).ready(function() {
 
@@ -44,7 +47,7 @@
             $(this.map.getContainer()).css('cursor', '');
         },
 
-        onAdd: function (map) {
+        onAdd: function(map) {
             this.map = map;
             var controls = $('<div class="leaflet-control-location"></div>');
             this.controls = controls;
@@ -91,7 +94,8 @@
                         '&locationform.coordinates.zoom=' + zoom;
                     bdajax.overlay({
                         action: 'overlayadd',
-                        target: target
+                        target: target,
+                        on_close: chronotope.set_path_on_overlay_close
                     });
                 };
                 that.pending_action = handler;
@@ -137,7 +141,8 @@
             this.prevent_pending();
             bdajax.overlay({
                 action: 'submitter_contents',
-                target: elem.data('target')
+                target: elem.data('target'),
+                on_close: chronotope.set_path_on_overlay_close
             });
         },
 
@@ -349,18 +354,42 @@
             createCookie(this.default_layer_cookie, index);
         },
 
-        handle_perma_link() {
+        set_path_on_overlay_close: function() {
+            bdajax.path({
+                path: '/',
+                event: 'contextchanged:#layout',
+                overlay: 'CLOSE'
+            });
+        },
+
+        handle_perma_link: function() {
             var hash = window.location.hash;
             if (!hash) {
+                bdajax.path({
+                    path: '/',
+                    event: 'contextchanged:#layout',
+                    overlay: 'CLOSE',
+                    replace: true
+                });
                 return;
             }
             var action = hash.substring(1, hash.indexOf(':'));
             var path = hash.substring(hash.indexOf(':') + 1, hash.length);
-            var url = window.location.origin + path;
+            var target = {
+                url: window.location.origin + path,
+                path: path,
+                params: {__ux: 'fe'}
+            };
             bdajax.overlay({
                 action: action,
-                url: url,
-                params: {__ux: 'fe'}
+                target: target,
+                on_close: this.set_path_on_overlay_close
+            });
+            bdajax.path({
+                path: hash,
+                overlay: action,
+                target: target,
+                replace: true
             });
         },
 
@@ -406,7 +435,8 @@
                 });
                 bdajax.overlay({
                     action: suggestion.action,
-                    target: suggestion.target
+                    target: suggestion.target,
+                    on_close: chronotope.set_path_on_overlay_close
                 });
             });
 
@@ -532,7 +562,7 @@
             var layers = [];
             for (var idx in this.available_layers) {
                 var layer_def = this.available_layers[idx];
-                layer = new L.tileLayer(layer_def.tiles, {
+                var layer = new L.tileLayer(layer_def.tiles, {
                     attribution: layer_def.attrib,
                     minZoom: this.min_zoom,
                     maxZoom: this.max_zoom
@@ -584,17 +614,10 @@
                         target: datum.target,
                         overlay: datum.action
                     });
-                    var on_close = function() {
-                        bdajax.path({
-                            path: '/',
-                            event: 'contextchanged:#layout',
-                            overlay: 'CLOSE'
-                        });
-                    }
                     bdajax.overlay({
                         action: datum.action,
                         target: datum.target,
-                        on_close: on_close
+                        on_close: chronotope.set_path_on_overlay_close
                     });
                 });
             });
@@ -720,11 +743,11 @@
                 });
             });
         }
-    }
+    };
 
     // extend livesearch options
     livesearch_options.templates = {
         suggestion: chronotope.render_livesearch_suggestion
     };
 
-})(jQuery);
+})(jQuery, bdajax, L);

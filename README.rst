@@ -35,8 +35,8 @@ Contributors
 History
 =======
 
-0.5 (unreleased)
-----------------
+0.5
+---
 
 - Implement browser history support.
   [rnix]

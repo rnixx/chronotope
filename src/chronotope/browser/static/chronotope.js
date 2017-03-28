@@ -439,6 +439,14 @@ var chronotope;
                     },
                     type: 'json'
                 });
+                var path = '#' + suggestion.action + ':' + bdajax.parsepath(
+                    suggestion.target
+                );
+                bdajax.path({
+                    path: path,
+                    target: suggestion.target,
+                    overlay: suggestion.action
+                });
                 bdajax.overlay({
                     action: suggestion.action,
                     target: suggestion.target,

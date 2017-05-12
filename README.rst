@@ -41,13 +41,16 @@ History
 - Add Intro overlay.
   [rnix]
 
+- Update ``bdajax`` to ``1.8``.
+  [rnix]
+
 0.5
 ---
 
 - Implement browser history support.
   [rnix]
 
-- Update ``bdajax`` to ``1.7.0``.
+- Update ``bdajax`` to ``1.7``.
   [rnix]
 
 - Update ``cone.app`` to ``1.0a4``.

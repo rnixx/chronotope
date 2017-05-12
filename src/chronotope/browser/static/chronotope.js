@@ -21,6 +21,24 @@ var chronotope;
             chronotope.resize_main_map(map_elem);
         });
 
+        var skip_intro = 'false';
+        if (typeof(Storage) !== 'undefined') {
+            skip_intro = sessionStorage.getItem('skip_intro');
+        }
+
+        if (skip_intro !== 'true') {
+            bdajax.overlay({
+                action: 'intro',
+                target: window.location.href,
+                css: 'intro-overlay',
+                on_close: function() {
+                    chronotope.handle_perma_link();
+                }
+            });
+            sessionStorage.setItem('skip_intro', 'true');
+            return;
+        }
+
         chronotope.handle_perma_link();
     });
 

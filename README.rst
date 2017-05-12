@@ -35,6 +35,12 @@ Contributors
 History
 =======
 
+0.6
+---
+
+- Add Intro overlay.
+  [rnix]
+
 0.5
 ---
 

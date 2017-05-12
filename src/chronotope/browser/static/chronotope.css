@@ -172,7 +172,7 @@ input.timepicker {
     line-height:24px;
 }
 .leaflet-control-location .dropdown-menu {
-    min-width: 260px;
+    min-width:260px;
 }
 .leaflet-control-location .submitter_email {
     padding:3px 20px;
@@ -198,6 +198,110 @@ input.timepicker {
 }
 .footer-ae {
     margin:12px 0;
+}
+
+/* intro */
+.intro-overlay {
+    background-color:rgba(0,0,0,0.75);
+}
+.intro-overlay .modal-dialog {
+    width:1000px;
+}
+.intro-overlay .modal-header {
+    border-bottom:none;
+}
+.intro-overlay .modal-body {
+    padding:0px;
+}
+.intro-head {
+    text-align:center;
+}
+.intro-head p {
+    padding:1em;
+}
+.intro-body {
+    background:url('/chronotope-static/images/bg_intro.png') top center no-repeat;
+    height:457px;
+    position:relative;
+}
+/* http://nicolasgallagher.com/pure-css-speech-bubbles */
+.intro-bubble-triangle {
+    position:absolute;
+    padding:15px;
+    margin:1em 0 3em;
+    border:5px solid orange;
+    color:#333;
+    background:#fff;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:16px;
+}
+.intro-bubble-triangle:before {
+    content:"";
+    position:absolute;
+    top:-20px;
+    bottom:auto;
+    border-width:0 20px 20px;
+    border-style:solid;
+    border-color:orange transparent;
+    display:block;
+    width:0;
+}
+.intro-bubble-triangle:after {
+    content:"";
+    position:absolute;
+    top:-12px;
+    bottom:auto;
+    border-width:0 13px 13px;
+    border-style:solid;
+    border-color:#fff transparent;
+    display:block;
+    width:0;
+}
+.intro-search {
+    top:35px;
+    left:740px;
+    width:170px;
+    height:106px;
+}
+.intro-search.intro-bubble-triangle:before {
+    right:40px;
+}
+.intro-search.intro-bubble-triangle:after {
+    right:47px;
+}
+.intro-about {
+    top:45px;
+    left:160px;
+    width:300px;
+    height:152px;
+}
+.intro-about.intro-bubble-triangle:before {
+    right:214px;
+}
+.intro-about.intro-bubble-triangle:after {
+    right:221px;
+}
+.intro-close {
+    position:absolute;
+    top:300px;
+    left:400px;
+    width:200px;
+    height:80px;
+    padding:15px;
+    border:5px solid orange;
+    color:#fff;
+    background:#333;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:18px;
+}
+.intro-close:active {
+    background:#555;
 }
 
 /* live search */

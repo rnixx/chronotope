@@ -1,0 +1,33 @@
+<tal:intro xmlns:tal="http://xml.zope.org/namespaces/tal"
+           xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax"
+           omit-tag="True">
+
+  <div class="intro">
+    <div class="intro-head">
+      <img src="chronotope-static/images/poptraces_intro.svg"
+           width="367"
+           height="67">
+
+      <p>
+        Auf poptraces.de kannst du Orte, Erfahrungen und Erlebnisse der Musik-
+        und Popkultur ab den 60er Jahren finden und ergänzen.
+      </p>
+    </div>
+
+    <div class="intro-body">
+      <div class="intro-search intro-bubble-triangle">
+        Direkt Orte und Erlebnisse finden.
+      </div>
+
+      <div class="intro-about intro-bubble-triangle">
+        Wenn du Einträge hinzufügen oder editieren willst, leg einfach los oder
+        sieh dir mit Click auf "so geht's" die Anleitung und den Screencast an.
+      </div>
+
+      <button class="intro-close"
+              ajax:bind="click"
+              ajax:overlay="CLOSE">Okay, Los geht's!</button>
+    </div>
+  </div>
+
+</tal:intro>

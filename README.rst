@@ -35,6 +35,11 @@ Contributors
 History
 =======
 
+0.7 (unreleased)
+----------------
+
+- Add note that email address not gets published.
+
 0.6
 ---
 

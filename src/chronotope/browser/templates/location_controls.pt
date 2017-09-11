@@ -28,7 +28,8 @@
               <p class="help-block submitter-empty"
                  style="display:none;"
                  i18n:translate="submitter_email_empty">
-                Needs to be filled in order to add contents.
+                Needs to be filled in order to add contents. The email address
+                will not be published.
               </p>
               <p class="help-block submitter-error"
                  style="display:none;"

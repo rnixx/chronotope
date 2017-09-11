@@ -18,6 +18,7 @@ from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import Float
 from sqlalchemy import String
+from sqlalchemy import cast
 from sqlalchemy import or_
 
 
@@ -60,11 +61,13 @@ def locations_by_uid(request, uids):
 def search_locations(request, term, state=[], submitter=None, limit=None):
     session = get_session(request)
     query = session.query(LocationRecord)
-    query = query.filter(or_(LocationRecord.street.like(u'%{0}%'.format(term)),
-                             LocationRecord.zip.like(u'%{0}%'.format(term)),
-                             LocationRecord.city.like(u'%{0}%'.format(term)),
-                             LocationRecord.lat.like(u'%{0}%'.format(term)),
-                             LocationRecord.lon.like(u'%{0}%'.format(term))))
+    query = query.filter(or_(
+        LocationRecord.street.like(u'%{0}%'.format(term)),
+        LocationRecord.zip.like(u'%{0}%'.format(term)),
+        LocationRecord.city.like(u'%{0}%'.format(term)),
+        cast(LocationRecord.lat, String()).like(u'%{0}%'.format(term)),
+        cast(LocationRecord.lon, String()).like(u'%{0}%'.format(term))
+    ))
     if state:
         query = query.filter(LocationRecord.state.in_(state))
     if submitter:

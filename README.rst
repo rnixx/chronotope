@@ -38,6 +38,10 @@ History
 0.7 (unreleased)
 ----------------
 
+- Cast float columns in search_locations in order to make location search work
+  on lat/lon.
+  [rnix]
+
 - Change datatype of facility exists_from and exists_to fields from datetime
   to string. Exact date is not always known so a user may enter just a year.
   [rnix]

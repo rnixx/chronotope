@@ -38,6 +38,9 @@ History
 0.7 (unreleased)
 ----------------
 
+- Customize main menu and add link to tutorial. Add tutorial tile which gets
+  displayed as overlay and tutorial text to settings.
+
 - Cast float columns in search_locations in order to make location search work
   on lat/lon.
   [rnix]

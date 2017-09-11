@@ -7,6 +7,14 @@ from cone.tile import Tile
 from cone.tile import tile
 
 
+@tile('chronotope_tutorial', permission='login')
+class TutorialTile(Tile):
+
+    def render(self):
+        settings = self.model.root['settings']
+        return settings['chronotope'].attrs['tutorial']
+
+
 @tile('content', 'templates/about.pt',
       interface=AboutProject, permission='view')
 class AboutProjectContent(Tile):

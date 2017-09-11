@@ -105,6 +105,23 @@ widgets:
         lists: True
         label.class_add: col-sm-2
         div.class_add: col-sm-10
+- tutorial:
+    factory: field:label:div:error:wysihtml5
+    value: expr:context.model.attrs.get('tutorial')
+    props:
+        label: i18n:tutorial_label:Tutorial
+        required: i18n:tutorial_required:Tutorial is required
+        size: sm
+        color: True
+        emphasis: True
+        font-styles: True
+        html: True
+        image: True
+        justify: True
+        link: True
+        lists: True
+        label.class_add: col-sm-2
+        div.class_add: col-sm-10
 - controls:
     factory: field:div
     props:

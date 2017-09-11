@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2017-09-11 13:36+0200\n"
+"POT-Creation-Date: 2017-09-11 15:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,7 +235,7 @@ msgstr "Wenn bekannt, gib bitte das Enddatum des Ereignisses an."
 
 #. Default: Save
 #: src/chronotope/browser/forms/occasion.yaml:88
-#: src/chronotope/browser/forms/settings.yaml:121
+#: src/chronotope/browser/forms/settings.yaml:138
 #: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/attachment.yaml:105
 #: src/chronotope/browser/forms/facility.yaml:94
@@ -252,7 +252,7 @@ msgstr "Abbrechen"
 
 #. Default: Location
 #: src/chronotope/browser/forms/location_reference.yaml:4
-#: src/chronotope/model/location.py:112
+#: src/chronotope/model/location.py:115
 msgid "location_label"
 msgstr "Ort"
 
@@ -337,6 +337,16 @@ msgstr "Erklärung zum Datenschutz"
 #: src/chronotope/browser/forms/settings.yaml:96
 msgid "privacy_policy_required"
 msgstr "Erklärung zum Datenschutz sind erforderlich"
+
+#. Default: Tutorial
+#: src/chronotope/browser/forms/settings.yaml:112
+msgid "tutorial_label"
+msgstr "Tutorial"
+
+#. Default: Tutorial is required
+#: src/chronotope/browser/forms/settings.yaml:113
+msgid "tutorial_required"
+msgstr "Tutorial ist erforderlich"
 
 #. Default: Description
 #: src/chronotope/browser/forms/location.yaml:17
@@ -735,6 +745,11 @@ msgstr "Meine Einträge anzeigen"
 msgid "view"
 msgstr "Anzeigen"
 
+#. Default: Tutorial
+#: src/chronotope/browser/templates/mainmenu.pt:19
+msgid "chronotope_tutorial"
+msgstr "So geht's"
+
 #. Default: Location
 #: src/chronotope/browser/templates/location.pt:13
 msgid "location"
@@ -781,37 +796,37 @@ msgid "country"
 msgstr "Land"
 
 #. Default: N
-#: src/chronotope/model/location.py:93
+#: src/chronotope/model/location.py:96
 msgid "north"
 msgstr "N"
 
 #. Default: S
-#: src/chronotope/model/location.py:94
+#: src/chronotope/model/location.py:97
 msgid "south"
 msgstr "S"
 
 #. Default: W
-#: src/chronotope/model/location.py:95
+#: src/chronotope/model/location.py:98
 msgid "west"
 msgstr "W"
 
 #. Default: E
-#: src/chronotope/model/location.py:96
+#: src/chronotope/model/location.py:99
 msgid "east"
 msgstr "O"
 
 #. Default: A location
-#: src/chronotope/model/location.py:113
+#: src/chronotope/model/location.py:116
 msgid "location_description"
 msgstr "Ort"
 
 #. Default: Locations
-#: src/chronotope/model/location.py:147 src/chronotope/model/location.py:171
+#: src/chronotope/model/location.py:150 src/chronotope/model/location.py:174
 msgid "locations_label"
 msgstr "Orte"
 
 #. Default: Container for Locations
-#: src/chronotope/model/location.py:148 src/chronotope/model/location.py:172
+#: src/chronotope/model/location.py:151 src/chronotope/model/location.py:175
 msgid "locations_description"
 msgstr "Container für Orte"
 

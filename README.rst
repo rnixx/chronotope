@@ -38,6 +38,10 @@ History
 0.7 (unreleased)
 ----------------
 
+- Publish facility related locations if facility gets published but related
+  locations are not published yet.
+  [rnix]
+
 - Add tooltip for map markers containing facility name and street/city.
   [rnix]
 

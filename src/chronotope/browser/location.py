@@ -11,6 +11,7 @@ from chronotope.model.location import location_title
 from chronotope.model.location import search_locations
 from chronotope.utils import UX_FRONTEND
 from chronotope.utils import UX_IDENT
+from chronotope.utils import authoring_came_from
 from chronotope.utils import get_submitter
 from chronotope.utils import submitter_came_from
 from cone.app.browser.ajax import AjaxEvent
@@ -39,7 +40,6 @@ from pyramid.response import Response
 from pyramid.security import authenticated_userid
 from pyramid.view import view_config
 from yafowil.base import factory
-import urllib2
 import uuid
 
 
@@ -287,7 +287,7 @@ class LocationEditForm(LocationEditing):
 class LocationOverlayAddForm(LocationAdding):
 
     def next(self, request):
-        came_from_url = urllib2.unquote(request.get('authoring_came_from'))
+        came_from_url = authoring_came_from(self.request)
         root_url = make_url(self.request, node=self.model.root)
         if not came_from_url:
             if request.get('action.{0}.cancel'.format(self.form_name)):
@@ -312,7 +312,7 @@ class LocationOverlayAddForm(LocationAdding):
 class LocationOverlayEditForm(LocationEditing):
 
     def next(self, request):
-        came_from_url = urllib2.unquote(request.get('authoring_came_from'))
+        came_from_url = authoring_came_from(self.request)
         came_from_url += make_query(**{
             UX_IDENT: UX_FRONTEND,
             'submitter_came_from': submitter_came_from(self.request),

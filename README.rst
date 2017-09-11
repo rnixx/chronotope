@@ -38,8 +38,14 @@ History
 0.7 (unreleased)
 ----------------
 
+- Fix URL quote/unquote with latest cone.app (1.0a6). Quoting is done in
+  make_url and make_query directly, so unquoting only needs to be done when
+  reading from request parameters.
+  [rnix]
+
 - Customize main menu and add link to tutorial. Add tutorial tile which gets
   displayed as overlay and tutorial text to settings.
+  [rnix]
 
 - Cast float columns in search_locations in order to make location search work
   on lat/lon.

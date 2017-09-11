@@ -13,7 +13,6 @@ from cone.tile import Tile
 from cone.tile import tile
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
-import urllib2
 
 
 _ = TranslationStringFactory('chronotope')
@@ -60,7 +59,7 @@ class OverlayActions(Tile, UXMixin):
 
     @property
     def authoring_came_from(self):
-        return urllib2.quote(make_url(self.request, node=self.model))
+        return make_url(self.request, node=self.model)
 
     @property
     def can_edit(self):
@@ -81,8 +80,6 @@ class OverlayActions(Tile, UXMixin):
         if not url:
             query = make_query(**{UX_IDENT: UX_FRONTEND})
             url = make_url(self.request, node=self.model.root, query=query)
-        else:
-            url = urllib2.unquote(url)
         return {
             'btn': 'default',
             'target': url,

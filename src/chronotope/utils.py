@@ -1,6 +1,7 @@
 import html2text
 import os
 import uuid
+import urllib2
 
 
 UX_IDENT = '__ux'
@@ -31,8 +32,16 @@ def get_submitter(request):
     return request.cookies.get('chronotope.submitter')
 
 
+def authoring_came_from(request):
+    came_from = request.params.get('authoring_came_from')
+    if came_from:
+        return urllib2.unquote(came_from)
+
+
 def submitter_came_from(request):
-    return request.params.get('submitter_came_from')
+    came_from = request.params.get('submitter_came_from')
+    if came_from:
+        return urllib2.unquote(came_from)
 
 
 def get_recaptcha_public_key(model):

@@ -8,6 +8,7 @@ from chronotope.model.occasion import Occasion
 from chronotope.model.occasion import OccasionRecord
 from chronotope.utils import UX_FRONTEND
 from chronotope.utils import UX_IDENT
+from chronotope.utils import authoring_came_from
 from chronotope.utils import get_recaptcha_private_key
 from chronotope.utils import get_recaptcha_public_key
 from chronotope.utils import get_submitter
@@ -30,7 +31,6 @@ from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from yafowil.base import ExtractionError
 from yafowil.base import factory
-import urllib2
 
 
 _ = TranslationStringFactory('chronotope')
@@ -91,7 +91,7 @@ class SubmitterForm(Behavior):
         )
         self.form['authoring_came_from'] = factory(
             'proxy',
-            value=self.request.params.get('authoring_came_from'),
+            value=authoring_came_from(self.request),
         )
         self.form['came_from_tile'] = factory(
             'proxy',
@@ -144,7 +144,7 @@ class SubmitterForm(Behavior):
 
     @default
     def next(self, request):
-        came_from_url = urllib2.unquote(request.get('authoring_came_from'))
+        came_from_url = authoring_came_from(self.request)
         came_from_url += make_query(**{
             UX_IDENT: UX_FRONTEND,
             'submitter_came_from': submitter_came_from(self.request),
@@ -194,7 +194,7 @@ class SubmitterViewLink(ViewLink):
         came_from = make_url(self.request, node=self.model.root, query=query)
         query = make_query(**{
             UX_IDENT: UX_FRONTEND,
-            'submitter_came_from': urllib2.quote(came_from),
+            'submitter_came_from': came_from
         })
         return make_url(self.request, node=self.model, query=query)
 

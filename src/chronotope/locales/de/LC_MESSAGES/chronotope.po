@@ -917,32 +917,32 @@ msgstr "Einrichtungen"
 msgid "facilities_description"
 msgstr "Container für Einrichtungen"
 
-#~ msgid "draft"
-#~ msgstr "Entwurf"
+msgid "draft"
+msgstr "Entwurf"
 
-#~ msgid "published"
-#~ msgstr "Veröffentlicht"
+msgid "published"
+msgstr "Veröffentlicht"
 
-#~ msgid "declined"
-#~ msgstr "Abgelehnt"
+msgid "declined"
+msgstr "Abgelehnt"
 
-#~ msgid "draft_2_published"
-#~ msgstr "Veröffentlichen"
+msgid "draft_2_published"
+msgstr "Veröffentlichen"
 
-#~ msgid "draft_2_declined"
-#~ msgstr "Ablehnen"
+msgid "draft_2_declined"
+msgstr "Ablehnen"
 
-#~ msgid "published_2_draft"
-#~ msgstr "Zurückziehen"
+msgid "published_2_draft"
+msgstr "Zurückziehen"
 
-#~ msgid "published_2_declined"
-#~ msgstr "Ablehnen"
+msgid "published_2_declined"
+msgstr "Ablehnen"
 
-#~ msgid "declined_2_draft"
-#~ msgstr "Zurückziehen"
+msgid "declined_2_draft"
+msgstr "Zurückziehen"
 
-#~ msgid "declined_2_published"
-#~ msgstr "Veröffentlichen"
+msgid "declined_2_published"
+msgstr "Veröffentlichen"
 
-#~ msgid "terms_of_use"
-#~ msgstr "Nutzungsbedingungen"
+msgid "terms_of_use"
+msgstr "Nutzungsbedingungen"

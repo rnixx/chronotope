@@ -113,6 +113,24 @@ class LocationTile(SubmitterAccessTile, UXMixin):
         }
 
 
+@view_config(name='chronotope.location_tooltip')
+def location_tooltip(model, request):
+    return Response(render_tile(model, request, 'location_tooltip'))
+
+
+@tile('location_tooltip', 'templates/location_tooltip.pt',
+      interface=Location, permission='login',
+      strict=False)
+class LocationTooltip(Tile):
+
+    @property
+    def related_facilities(self):
+        facilities = list()
+        for facility in self.model.attrs['facility']:
+            facilities.append(facility.title)
+        return ', '.join(facilities)
+
+
 class CoordinatesProxy(Behavior):
 
     @default

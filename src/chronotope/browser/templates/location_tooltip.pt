@@ -1,0 +1,15 @@
+<tal:tooltip xmlns:tal="http://xml.zope.org/namespaces/tal"
+             xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             i18n:domain="chronotope"
+             omit-tag="True">
+
+  <div class="location-tooltip">
+
+    <strong tal:content="context.related_facilities">Facilities</strong><br />
+    <span tal:content="model.attrs['street']">Street</span><br />
+    <span tal:content="model.attrs['zip']">Zip</span>
+    <span tal:content="model.attrs['city']">City</span>
+
+  </div>
+
+</tal:tooltip>

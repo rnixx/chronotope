@@ -38,7 +38,11 @@ History
 0.7 (unreleased)
 ----------------
 
+- Add tooltip for map markers containing facility name and street/city.
+  [rnix]
+
 - Add note that email address not gets published.
+  [rnix]
 
 0.6
 ---

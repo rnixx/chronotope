@@ -637,6 +637,21 @@ var chronotope;
                         shadowSize: [41, 41]
                     })
                 });
+                marker.bindPopup('');
+                marker.on('mouseover', function(evt) {
+                    var popup = this.getPopup();
+                    if (popup._isOpen) {
+                        return;
+                    }
+                    var target = bdajax.parsetarget(datum.target);
+                    bdajax.request({
+                        success: function(data) {
+                            popup.setContent(data);
+                        },
+                        url: target.url + '/chronotope.location_tooltip'
+                    });
+                    this.openPopup();
+                });
                 marker.addTo(markers);
                 marker.on('click', function(evt) {
                     chronotope.location_control.prevent_pending();

@@ -69,8 +69,8 @@ Create and add Facility Node::
     >>> facility.attrs['modified'] = datetime.datetime(2014, 06, 01, 0, 0)
     >>> facility.attrs['title'] = u'Some facility'
     >>> facility.attrs['description'] = u'Facility description'
-    >>> facility.attrs['exists_from'] = datetime.datetime(2010, 01, 01, 0, 0)
-    >>> facility.attrs['exists_to'] = datetime.datetime(2012, 01, 01, 0, 0)
+    >>> facility.attrs['exists_from'] = '01.01.2010'
+    >>> facility.attrs['exists_to'] = '01.01.2012'
     >>> facilities['1fbc0e0a-94bb-4726-bccb-5d1e17041123'] = facility
 
 Commit::
@@ -128,10 +128,10 @@ Facility node attributes::
     u'Facility description'
 
     >>> facility.attrs['exists_from']
-    datetime.datetime(2010, 1, 1, 0, 0)
+    u'01.01.2010'
 
     >>> facility.attrs['exists_to']
-    datetime.datetime(2012, 1, 1, 0, 0)
+    u'01.01.2012'
 
     >>> facility.attrs['category']
     []

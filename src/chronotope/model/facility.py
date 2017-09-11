@@ -55,8 +55,8 @@ class FacilityRecord(SQLBase):
     state = Column(String)
     title = Column(String)
     description = Column(String)
-    exists_from = Column(DateTime)
-    exists_to = Column(DateTime)
+    exists_from = Column(String)
+    exists_to = Column(String)
 
     category = relationship(
         CategoryRecord,

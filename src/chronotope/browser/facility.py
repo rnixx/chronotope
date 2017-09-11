@@ -17,7 +17,6 @@ from cone.app.browser.authoring import OverlayEditForm
 from cone.app.browser.form import Form
 from cone.app.browser.form import YAMLForm
 from cone.app.browser.layout import ProtectedContentTile
-from cone.app.browser.utils import format_date
 from cone.app.utils import add_creation_metadata
 from cone.app.utils import update_creation_metadata
 from cone.tile import tile
@@ -55,12 +54,12 @@ class FacilityTile(SubmitterAccessTile, CategoriesTile):
     @property
     def exists_from(self):
         exists_from = self.model.attrs['exists_from']
-        return format_date(exists_from, long=False)
+        return exists_from if exists_from else _('unknown', default='Unknown')
 
     @property
     def exists_to(self):
         exists_to = self.model.attrs['exists_to']
-        return format_date(exists_to, long=False)
+        return exists_to if exists_to else _('unknown', default='Unknown')
 
 
 @plumbing(
@@ -83,12 +82,8 @@ class FacilityForm(Form, UXMixin):
         attrs = self.model.attrs
         attrs['title'] = fetch('title')
         attrs['description'] = fetch('description')
-        exists_from = fetch('exists_from')
-        if exists_from:
-            attrs['exists_from'] = exists_from
-        exists_to = fetch('exists_to')
-        if exists_to:
-            attrs['exists_to'] = exists_to
+        attrs['exists_from'] = fetch('exists_from')
+        attrs['exists_to'] = fetch('exists_to')
 
 
 class FacilityAdding(FacilityForm):

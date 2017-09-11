@@ -38,6 +38,10 @@ History
 0.7 (unreleased)
 ----------------
 
+- Change datatype of facility exists_from and exists_to fields from datetime
+  to string. Exact date is not always known so a user may enter just a year.
+  [rnix]
+
 - Publish facility related locations if facility gets published but related
   locations are not published yet.
   [rnix]

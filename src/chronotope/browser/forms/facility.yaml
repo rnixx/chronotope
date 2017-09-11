@@ -44,23 +44,19 @@ widgets:
         class: form-group
     widgets:
     - exists_from:
-        factory: label:div:help:error:datetime
+        factory: label:div:help:error:text
         value: expr:context.model.attrs['exists_from']
         props:
             label: i18n:exists_from_label:Exists From
-            help: i18n:facility_exists_from_help:Enter opening date of facility
-            datepicker: True
-            locale: de
+            help: i18n:facility_exists_from_help:Enter opening date or year of facility
             label.class_add: col-sm-2
             div.class_add: col-sm-4
     - exists_to:
-        factory: label:div:help:error:datetime
+        factory: label:div:help:error:text
         value: expr:context.model.attrs['exists_to']
         props:
             label: i18n:exists_to_label:Exists To
-            help: i18n:facility_exists_to_help:Enter closing date of facility
-            datepicker: True
-            locale: de
+            help: i18n:facility_exists_to_help:Enter closing date or year of facility
             label.class_add: col-sm-2
             div.class_add: col-sm-4
 - category:

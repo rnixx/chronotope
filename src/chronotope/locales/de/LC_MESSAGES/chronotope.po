@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2017-09-11 09:30+0200\n"
+"POT-Creation-Date: 2017-09-11 13:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,29 +11,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. Default: Pick other location
-#: src/chronotope/browser/location.py:122
+#: src/chronotope/browser/location.py:140
 msgid "pick_location"
 msgstr "Wähle andere Koordinaten auf der Karte"
 
 #. Default: Coordinates
-#: src/chronotope/browser/location.py:139
+#: src/chronotope/browser/location.py:157
 #: src/chronotope/browser/forms/location.yaml:28
 msgid "coordinates_label"
 msgstr "Koordinaten"
 
 #. Default: Latitude
-#: src/chronotope/browser/location.py:148
+#: src/chronotope/browser/location.py:166
 msgid "lat"
 msgstr "Breitengrad"
 
 #. Default: Longitude
-#: src/chronotope/browser/location.py:157
+#: src/chronotope/browser/location.py:175
 msgid "lon"
 msgstr "Längengrad"
 
 #. Default: If you know the exact address, please enter it. If not, enter the
 #. information you know. The Captcha is required to avoid spam
-#: src/chronotope/browser/location.py:187
+#: src/chronotope/browser/location.py:205
 msgid "location_form_description_text"
 msgstr ""
 "Wenn du die genaue Adresse weißt, gib sie bitte ein. Falls nicht, gib die "
@@ -41,17 +41,17 @@ msgstr ""
 "Überprüfung dient der Spamvermeidung. Danke!"
 
 #. Default: Germany
-#: src/chronotope/browser/location.py:216
+#: src/chronotope/browser/location.py:234
 msgid "germany"
 msgstr "Deutschland"
 
 #. Default: Austria
-#: src/chronotope/browser/location.py:217
+#: src/chronotope/browser/location.py:235
 msgid "austria"
 msgstr "Österreich"
 
 #. Default: Swizerland
-#: src/chronotope/browser/location.py:218
+#: src/chronotope/browser/location.py:236
 msgid "swizerland"
 msgstr "Schweiz"
 
@@ -173,6 +173,11 @@ msgstr "Datei"
 msgid "attachment_type_image"
 msgstr "Bild"
 
+#. Default: Unknown
+#: src/chronotope/browser/facility.py:57 src/chronotope/browser/facility.py:62
+msgid "unknown"
+msgstr "Unbekannt"
+
 #. Default: Title
 #: src/chronotope/browser/forms/occasion.yaml:18
 msgid "occasion_title"
@@ -233,7 +238,7 @@ msgstr "Wenn bekannt, gib bitte das Enddatum des Ereignisses an."
 #: src/chronotope/browser/forms/settings.yaml:121
 #: src/chronotope/browser/forms/location.yaml:86
 #: src/chronotope/browser/forms/attachment.yaml:105
-#: src/chronotope/browser/forms/facility.yaml:98
+#: src/chronotope/browser/forms/facility.yaml:94
 msgid "save"
 msgstr "Speichern"
 
@@ -241,7 +246,7 @@ msgstr "Speichern"
 #: src/chronotope/browser/forms/occasion.yaml:97
 #: src/chronotope/browser/forms/location.yaml:95
 #: src/chronotope/browser/forms/attachment.yaml:114
-#: src/chronotope/browser/forms/facility.yaml:107
+#: src/chronotope/browser/forms/facility.yaml:103
 msgid "cancel"
 msgstr "Abbrechen"
 
@@ -503,33 +508,33 @@ msgstr ""
 msgid "exists_from_label"
 msgstr "Existiert von"
 
-#. Default: Enter opening date of facility
+#. Default: Enter opening date or year of facility
 #: src/chronotope/browser/forms/facility.yaml:51
 msgid "facility_exists_from_help"
 msgstr ""
-"Wenn bekannt, gib bitte das Datum an, seit dem die Einrichtung existiert "
-"(hat). Format DD.MM.YYYY."
+"Wenn bekannt, gib bitte das Datum oder Jahr an, seit dem die Einrichtung "
+"existiert (hat). Format DD.MM.YYYY oder YYYY."
 
 #. Default: Exists To
-#: src/chronotope/browser/forms/facility.yaml:60
+#: src/chronotope/browser/forms/facility.yaml:58
 msgid "exists_to_label"
 msgstr "Existiert bis"
 
-#. Default: Enter closing date of facility
-#: src/chronotope/browser/forms/facility.yaml:61
+#. Default: Enter closing date or year of facility
+#: src/chronotope/browser/forms/facility.yaml:59
 msgid "facility_exists_to_help"
 msgstr ""
-"Wenn bekannt, gib bitte das Datum an, bis zu dem die Einrichtung existiert "
-"(hat). Sollte die Einrichtung noch immer existieren, kannst du dieses Feld "
-"leer lassen."
+"Wenn bekannt, gib bitte das Datum oder Jahr an, bis zu dem die Einrichtung "
+"existiert (hat). Sollte die Einrichtung noch immer existieren, kannst du "
+"dieses Feld leer lassen."
 
 #. Default: Category
-#: src/chronotope/browser/forms/facility.yaml:70
+#: src/chronotope/browser/forms/facility.yaml:66
 msgid "category_label"
 msgstr "Schlagwörter"
 
 #. Default: Select categories for facility
-#: src/chronotope/browser/forms/facility.yaml:71
+#: src/chronotope/browser/forms/facility.yaml:67
 msgid "facility_category_help"
 msgstr ""
 "Wähle oder setze die Schlagwörter für diese Einrichtung. Du kannst hier nach "
@@ -537,7 +542,7 @@ msgstr ""
 "eingeben."
 
 #. Default: Select or add category
-#: src/chronotope/browser/forms/facility.yaml:76
+#: src/chronotope/browser/forms/facility.yaml:72
 msgid "category_placeholder"
 msgstr "Schlagwörter wählen oder hinzufügen"
 

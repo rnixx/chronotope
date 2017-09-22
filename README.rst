@@ -35,8 +35,8 @@ Contributors
 History
 =======
 
-0.7 (unreleased)
-----------------
+0.7
+---
 
 - Use ``bdajax.register`` function as introduced in ``bdajax`` 1.9.
   [rnix]

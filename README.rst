@@ -38,21 +38,25 @@ History
 0.7 (unreleased)
 ----------------
 
-- Fix URL quote/unquote with latest cone.app (1.0a6). Quoting is done in
-  make_url and make_query directly, so unquoting only needs to be done when
-  reading from request parameters.
+- Use ``bdajax.register`` function as introduced in ``bdajax`` 1.9.
+  [rnix]
+
+- Fix URL quote/unquote with ``cone.app`` 1.0a6. Quoting is done in
+  ``make_url`` and ``make_query`` directly, so unquoting only needs to be done
+  when reading from request parameters.
   [rnix]
 
 - Customize main menu and add link to tutorial. Add tutorial tile which gets
   displayed as overlay and tutorial text to settings.
   [rnix]
 
-- Cast float columns in search_locations in order to make location search work
-  on lat/lon.
+- Cast float columns in ``search_locations`` in order to make location search
+  work on lat/lon.
   [rnix]
 
-- Change datatype of facility exists_from and exists_to fields from datetime
-  to string. Exact date is not always known so a user may enter just a year.
+- Change datatype of facility ``exists_from`` and ``exists_to`` fields from
+  datetime to string. Exact date is not always known so a user may enter just
+  a year.
   [rnix]
 
 - Publish facility related locations if facility gets published but related

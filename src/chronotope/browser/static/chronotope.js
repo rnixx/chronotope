@@ -4,14 +4,7 @@ var chronotope;
     "use strict";
 
     $(document).ready(function() {
-
-        // initial binding
-        chronotope.binder(document);
-
-        // add binders to bdajax binding callbacks
-        $.extend(bdajax.binders, {
-            chronotope_binder: chronotope.binder
-        });
+        bdajax.register(chronotope.binder.bind(chronotope), true);
 
         $(window).on('resize', function() {
             var map_elem = $('#chronotope-map', document);

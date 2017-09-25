@@ -19,6 +19,11 @@ var chronotope;
             skip_intro = sessionStorage.getItem('skip_intro');
         }
 
+        var hash = window.location.hash;
+        if (hash) {
+            skip_intro = 'true';
+        }
+
         if (skip_intro !== 'true') {
             bdajax.overlay({
                 action: 'intro',

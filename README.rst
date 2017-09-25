@@ -35,10 +35,11 @@ Contributors
 History
 =======
 
-0.8 (unreleased)
-----------------
+0.7.1
+-----
 
-- No changes yet.
+- Skip intro if entry URL points to specific dataset.
+  [rnix]
 
 0.7
 ---
